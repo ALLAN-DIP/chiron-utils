@@ -1,0 +1,16 @@
+# For efficiency, avoid all files by default
+*
+
+# Explicitly list allowed files
+!/LICENSE
+!/README.md
+!/pyproject.toml
+!/requirements.txt
+!/requirements-lock.txt
+!/setup.cfg
+!/setup.py
+!/src/
+
+# Block directories that can exist in `src/`
+**/*.egg*/
+**/__pycache__/
