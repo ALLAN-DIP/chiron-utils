@@ -40,7 +40,7 @@ To run a complete game, run the following command:
 python scripts/run_games.py [ARGUMENTS]
 ```
 
-Both the bot and came running commands support a `--help` argument to list available options.
+Both the bot and game running commands support a `--help` argument to list available options.
 
 ## Bots
 
