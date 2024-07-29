@@ -8,7 +8,9 @@ target-version = ["py37"]
 
 [tool.codespell]
 ignore-regex = "\\[nt]" # Do not count escaped newlines or tabs as part of a word
-ignore-words-list = "astroid,ans,hel,opps,ser,vie"  # "HEL", "SER", and "VIE" are from DAIDE
+# `astroid` is a dependency of pylint
+# "HEL", "SER", and "VIE" are from DAIDE
+ignore-words-list = "astroid,hel,ser,vie"
 quiet-level = 0 # Display all warnings
 check-filenames = ""
 check-hidden = ""
@@ -23,6 +25,8 @@ warn_unreachable = true
 [tool.ruff]
 fix = true
 line-length = 100
+# Show full violation messages by setting `RUFF_OUTPUT_FORMAT=full` in environment
+output-format = "concise"
 show-fixes = true
 target-version = "py37"
 
@@ -33,14 +37,13 @@ select = [
   "B", # flake8-bugbear
   "BLE", # flake8-blind-except
   "C4", # flake8-comprehensions
-  # "CPY", # flake8-copyright (will require spdx changes)
-  # "D", # pydocstyle
+  "D", # pydocstyle
   "DTZ", # flake8-datetimez
   "E", # pycodestyle error
   "F", # pyflakes
   "FBT", # flake8-boolean-trap
   "FLY", # flynt
-  # "FURB", # refurb
+  "FURB", # refurb
   "G", # flake8-logging-format
   "I", # isort
   "ICN", # flake8-import-conventions
@@ -50,12 +53,10 @@ select = [
   "LOG", # flake8-logging
   "N", # pep8-naming
   "NPY", # NumPy-specific rules
-  # "PERF", # Perflint
   "PIE", # flake8-pie
   "PT", # flake8-pytest-style
   "PTH", # flake8-use-pathlib
   "PYI", # flake8-pyi
-  # "RET", # flake8-return
   "RSE", # flake8-raise
   "RUF", # Ruff-specific rules
   "S", # flake8-bandit (but very selective, it's very picky!)
@@ -63,9 +64,7 @@ select = [
   "SLF", # flake8-self
   "SLOT", # flake8-slots
   "T10", # flake8-debugger
-  # "TCH", # flake8-type-checking
   "TID", # flake8-tidy-imports
-  # "TRY", # tryceratops
   "UP", # pyupgrade
   "W", # pycodestyle warning
   "YTT", # flake8-2020
