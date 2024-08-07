@@ -234,7 +234,7 @@ class RandomProposerPlayer(LLMProposerBot):
     bot_type: ClassVar[str] = "player"
 
 if __name__ == "__main__":
-    bot = RandomProposerPlayer(
+    bot = LLMProposerBot(
         base_model_name="meta-llama/Llama-2-7b-chat-hf",
         adapter_path="../models/finetuned_llama2_after_CPO/checkpoint-best-recent",
         tokenizer_path="../models/finetuned_llama2_after_CPO/checkpoint-best-recent",
