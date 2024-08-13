@@ -87,7 +87,12 @@ class LlmAdvisor(BaselineBot):
         generated_text = self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
         return generated_text
 
-    def format_prompt(self, agent, own: str, oppo: str) -> str:
+    def get_cicero_order_recommendations(self, own: str) -> List[str]:
+        sender_player = Player(self.agent, own)
+        sender_orders = sender_player.get_orders(self.game)
+        return sender_orders
+
+    def format_prompt(self, own: str, oppo: str) -> str:
         if own in POWER_NAMES_DICT:
             own = POWER_NAMES_DICT[own]
         if oppo in POWER_NAMES_DICT:
@@ -143,8 +148,7 @@ class LlmAdvisor(BaselineBot):
             i += 1
 
         # cicero recommendation format
-        sender_player = Player(agent, own)
-        sender_orders = sender_player.get_orders(self.game)
+        sender_orders = self.get_cicero_order_recommendations(own)
 
         prompt = (
             f"<s>[INST] {system_prompt}\n    \n---\n\n"
@@ -162,7 +166,7 @@ class LlmAdvisor(BaselineBot):
             List of orders to carry out.
         """
         for other_power in get_other_powers([self.power_name], self.game):
-            prompt = self.format_prompt(self.agent, self.power_name, other_power)
+            prompt = self.format_prompt(self.power_name, other_power)
             generate_text = self.generate_text(prompt)
             await self.suggest_message(other_power, generate_text)
 
