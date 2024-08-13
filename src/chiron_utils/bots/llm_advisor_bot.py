@@ -79,11 +79,6 @@ class LlmAdvisor(BaselineBot):
         generated_text = self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
         return generated_text
 
-    def get_cicero_order_recommendations(self, own: str) -> List[str]:
-        sender_player = Player(self.agent, own)
-        sender_orders = sender_player.get_orders(self.game)
-        return sender_orders
-
     def format_prompt(self, own: str, oppo: str) -> str:
         if own in POWER_NAMES_DICT:
             own = POWER_NAMES_DICT[own]
