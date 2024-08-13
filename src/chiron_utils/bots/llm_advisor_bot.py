@@ -1,5 +1,6 @@
 """Bots that carry out random orders and make random order proposals."""
 
+from dataclasses import dataclass
 import random
 from typing import ClassVar, List, Sequence, Tuple
 
@@ -15,6 +16,7 @@ from chiron_utils.bots.baseline_bot import BaselineBot
 from chiron_utils.utils import get_other_powers
 
 
+@dataclass
 class LlmAdvisor(BaselineBot):
     """Bot that carries out random orders and sends random order proposals to other bots.
 
@@ -23,17 +25,14 @@ class LlmAdvisor(BaselineBot):
     """
 
     bot_type: ClassVar[str] = "advisor"
+    base_model_name: str = "meta-llama/Llama-2-7b-chat-hf"
+    adapter_path: str = "../models/finetuned_llama2_after_CPO/checkpoint-best-recent"
+    tokenizer_path: str = "../models/finetuned_llama2_after_CPO/checkpoint-best-recent"
+    device: str = "cuda"
 
-    def __init__(
-        self, base_model_name: str, adapter_path: str, tokenizer_path: str, device: str = "cpu"
-    ):
-        super().__init__()
-        self.base_model_name = base_model_name
-        self.adapter_path = adapter_path
-        self.tokenizer_path = tokenizer_path
-        self.device = device
+    def __post_init__(self):
         self.tokenizer, self.model = self.load_model(
-            base_model_name, adapter_path, tokenizer_path, device
+            self.base_model_name, self.adapter_path, self.tokenizer_path, self.device
         )
         self.load_cicero()
 
@@ -199,19 +198,3 @@ class LlmAdvisor(BaselineBot):
         """
         orders = self.get_random_orders()
         return orders
-
-
-if __name__ == "__main__":
-    bot = LlmAdvisor(
-        base_model_name="meta-llama/Llama-2-7b-chat-hf",
-        adapter_path="../models/finetuned_llama2_after_CPO/checkpoint-best-recent",
-        tokenizer_path="../models/finetuned_llama2_after_CPO/checkpoint-best-recent",
-        device="cuda",
-    )
-
-    # Generate text from a prompt
-    # prompt = "Generate a random suggestion for the game"
-    # generated_text = bot.generate_text(cicero_agent,prompt)
-    orders = bot.get_random_orders()
-    bot.do_messaging_round(orders)
-    # print(generated_text)
