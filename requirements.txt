@@ -1,4 +1,6 @@
 daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@d55a2090c261783e5128fc7c58b5cb137a7653a6
 diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@5b87ffdfb301f63b4a4220176ec14c5326fbb1bc
+peft
 torch<2.3  # `torch` dropped support for Intel Macs in `2.3.0`, which many of us still use
 tornado
+transformers
