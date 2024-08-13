@@ -1,0 +1,3 @@
+# Directories that Python creates in `src/`
+**/*.egg*/
+**/__pycache__/
