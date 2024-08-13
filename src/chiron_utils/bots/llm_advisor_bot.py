@@ -23,8 +23,8 @@ class LlmAdvisor(BaselineBot):
 
     bot_type: ClassVar[str] = "advisor"
     base_model_name: str = "meta-llama/Llama-2-7b-chat-hf"
-    adapter_path: str = "../models/finetuned_llama2_after_CPO/checkpoint-best-recent"
-    tokenizer_path: str = "../models/finetuned_llama2_after_CPO/checkpoint-best-recent"
+    adapter_path: str = "src/chiron_utils/models/finetuned_llama2_after_CPO/checkpoint-best-recent"
+    tokenizer_path: str = "src/chiron_utils/models/finetuned_llama2_after_CPO/checkpoint-best-recent"
     device: str = "cuda"
 
     def __post_init__(self):
