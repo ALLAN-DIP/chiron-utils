@@ -4,9 +4,6 @@ from dataclasses import dataclass
 import random
 from typing import ClassVar, List, Sequence, Tuple
 
-from fairdiplomacy.agents.bqre1p_agent import BQRE1PAgent as PyBQRE1PAgent
-from fairdiplomacy.agents.player import Player
-import heyhi
 from peft import PeftModel
 import torch
 from torch.nn import DataParallel
@@ -34,7 +31,6 @@ class LlmAdvisor(BaselineBot):
         self.tokenizer, self.model = self.load_model(
             self.base_model_name, self.adapter_path, self.tokenizer_path, self.device
         )
-        self.agent = self.load_cicero()
 
     @staticmethod
     def load_model(
@@ -59,12 +55,6 @@ class LlmAdvisor(BaselineBot):
         model.to(device)
 
         return tokenizer, model
-
-    @staticmethod
-    def load_cicero():
-        """Load Cicero agent"""
-        agent_config = heyhi.load_config("/diplomacy_cicero/conf/common/agents/cicero.prototxt")
-        return PyBQRE1PAgent(agent_config.bqre1p)
 
     def generate_text(self, prompt: str) -> str:
         """Generate text based on a given prompt.
@@ -148,7 +138,7 @@ class LlmAdvisor(BaselineBot):
             i += 1
 
         # cicero recommendation format
-        sender_orders = self.get_cicero_order_recommendations(own)
+        sender_orders = self.get_random_orders()
 
         prompt = (
             f"<s>[INST] {system_prompt}\n    \n---\n\n"
