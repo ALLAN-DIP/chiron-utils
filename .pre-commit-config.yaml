@@ -5,6 +5,7 @@
 default_language_version:
   # Use latest LTS release
   node: 20.16.0
+exclude: ^src/chiron_utils/models/.*$
 repos:
   - repo: meta
     hooks:
