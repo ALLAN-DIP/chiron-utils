@@ -14,6 +14,8 @@ RUN apt-get -y update \
 
 RUN pip install --no-cache-dir --upgrade pip==24.0
 
+COPY models/ models/
+
 COPY requirements-lock.txt .
 RUN pip install --no-cache-dir -r requirements-lock.txt
 
