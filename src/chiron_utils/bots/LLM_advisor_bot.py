@@ -5,18 +5,17 @@ import random
 from typing import ClassVar, Dict, List, Sequence, Tuple
 
 from daidepp import AND, PRP, XDO
+from fairdiplomacy.agents.bqre1p_agent import BQRE1PAgent as PyBQRE1PAgent
+from fairdiplomacy.agents.player import Player
+import heyhi
+from peft import PeftModel
+import torch
+from torch.nn import DataParallel
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from chiron_utils.bots.baseline_bot import BaselineBot
 from chiron_utils.parsing_utils import dipnet_to_daide_parsing
 from chiron_utils.utils import get_other_powers
-from fairdiplomacy.agents.bqre1p_agent import BQRE1PAgent as PyBQRE1PAgent
-from fairdiplomacy.agents.player import Player
-import heyhi
-import torch
-import pandas as pd
-from transformers import AutoTokenizer, AutoModelForCausalLM
-from peft import PeftConfig, PeftModel
-from torch.nn import DataParallel
 
 
 class LLMProposerBot(BaselineBot, ABC):
@@ -101,9 +100,9 @@ class LLMProposerBot(BaselineBot, ABC):
             "GER": "GERMANY",
             "TUR": "TURKEY",
         }
-        if own in MAPPING.keys():
+        if own in MAPPING:
             own = MAPPING[own]
-        if oppo in MAPPING.keys():
+        if oppo in MAPPING:
             oppo = MAPPING[oppo]
         SYS_PROMPT = """You are an AI assistant tasked with understanding and analyzing the board status of a Diplomacy game, the message history between two players, and the recommended orders by Cicero for the current phase.
 Your goal is to provide feedback on whether to trust the last message, based on the context provided.
