@@ -1,10 +1,8 @@
 """Bots that carry out random orders and make random order proposals."""
 
-from abc import ABC
 import random
-from typing import ClassVar, Dict, List, Sequence, Tuple
+from typing import ClassVar, List, Sequence, Tuple
 
-from daidepp import AND, PRP, XDO
 from fairdiplomacy.agents.bqre1p_agent import BQRE1PAgent as PyBQRE1PAgent
 from fairdiplomacy.agents.player import Player
 import heyhi
@@ -14,18 +12,17 @@ from torch.nn import DataParallel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from chiron_utils.bots.baseline_bot import BaselineBot
-from chiron_utils.parsing_utils import dipnet_to_daide_parsing
 from chiron_utils.utils import get_other_powers
 
 
-class LLMProposerBot(BaselineBot, ABC):
+class LlmAdvisor(BaselineBot):
     """Bot that carries out random orders and sends random order proposals to other bots.
 
     Because of the similarity between the advisor and player versions of this bot,
     both of their behaviors are abstracted into this single abstract base class.
     """
 
-    is_first_messaging_round = False
+    bot_type: ClassVar[str] = "advisor"
 
     def __init__(
         self, base_model_name: str, adapter_path: str, tokenizer_path: str, device: str = "cpu"
@@ -38,6 +35,7 @@ class LLMProposerBot(BaselineBot, ABC):
         self.tokenizer, self.model = self.load_model(
             base_model_name, adapter_path, tokenizer_path, device
         )
+        self.load_cicero()
 
     @staticmethod
     def load_model(
@@ -88,7 +86,6 @@ class LLMProposerBot(BaselineBot, ABC):
         """Load Cicero agent"""
         agent_config = heyhi.load_config("/diplomacy_cicero/conf/common/agents/cicero.prototxt")
         self.agent = PyBQRE1PAgent(agent_config.bqre1p)
-        return self.agent
 
     def format_prompt(self, agent, own, oppo) -> str:
         MAPPING = {
@@ -157,67 +154,16 @@ Your goal is to provide feedback on whether to trust the last message, based on 
         prompt = f"<s>[INST] {system_prompt}\n    \n---\n\nBoard Status: {sorted_board_states}\n\nCicero Recommendation for {own}: {sender_orders}\n\nMessage History: {my_message}\n    \n---\n\nQuestion:As the advisor of {own}, Should we trust last message from {oppo}? [/INST]"
         return prompt
 
-    async def start_phase(self) -> None:
-        """Execute actions at the start of the phase."""
-        self.is_first_messaging_round = True
-
-    def get_random_proposal_orders(self) -> Dict[str, str]:
-        """Generate random order proposals for other powers.
-
-        Returns:
-            Mapping from powers to random order proposals.
-        """
-        # Getting the list of possible orders for all locations
-        possible_orders = self.game.get_all_possible_orders()
-
-        proposals = {}
-
-        # For each power, randomly sample a valid order
-        for other_power in get_other_powers([self.power_name], self.game):
-            suggested_random_orders = [
-                random.choice(possible_orders[loc])
-                for loc in self.game.get_orderable_locations(other_power)
-                if possible_orders[loc]
-            ]
-            suggested_random_orders = list(
-                filter(
-                    lambda x: x != "WAIVE" and not x.endswith("VIA"),
-                    suggested_random_orders,
-                )
-            )
-            if len(suggested_random_orders) > 0:
-                commands = dipnet_to_daide_parsing(suggested_random_orders, self.game)
-                random_orders = [XDO(command) for command in commands]
-                if len(random_orders) > 1:
-                    suggested_random_orders = PRP(AND(*random_orders))
-                else:
-                    suggested_random_orders = PRP(*random_orders)
-
-                proposals[other_power] = str(suggested_random_orders)
-
-        return proposals
-
-    async def do_messaging_round(self, agent, orders: Sequence[str]) -> List[str]:
+    async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
         """Carry out one round of messaging, along with related tasks.
 
         Returns:
             List of orders to carry out.
         """
-        if not self.is_first_messaging_round:
-            return list(orders)
-
-        random_order_proposals = self.get_random_proposal_orders()
-
-        for other_power, suggested_random_orders in random_order_proposals.items():
-            if self.bot_type == "advisor":
-                prompt = self.format_prompt(agent, self.power_name, other_power)
-                generate_text = self.generate_text(prompt)
-                await self.suggest_message(other_power, (generate_text))
-                await self.suggest_message(other_power, (suggested_random_orders))
-            elif self.bot_type == "player":
-                await self.send_message(other_power, (suggested_random_orders))
-
-        self.is_first_messaging_round = False
+        for other_power in get_other_powers([self.power_name], self.game):
+            prompt = self.format_prompt(self.agent, self.power_name, other_power)
+            generate_text = self.generate_text(prompt)
+            await self.suggest_message(other_power, generate_text)
 
         return list(orders)
 
@@ -242,35 +188,20 @@ Your goal is to provide feedback on whether to trust the last message, based on 
             List of orders to carry out.
         """
         orders = self.get_random_orders()
-        if self.bot_type == "advisor":
-            await self.suggest_orders(orders)
         return orders
 
 
-class RandomProposerAdvisor(LLMProposerBot):
-    """Advisor form of `RandomProposerBot`."""
-
-    bot_type: ClassVar[str] = "advisor"
-
-
-class RandomProposerPlayer(LLMProposerBot):
-    """Player form of `RandomProposerBot`."""
-
-    bot_type: ClassVar[str] = "player"
-
-
 if __name__ == "__main__":
-    bot = LLMProposerBot(
+    bot = LlmAdvisor(
         base_model_name="meta-llama/Llama-2-7b-chat-hf",
         adapter_path="../models/finetuned_llama2_after_CPO/checkpoint-best-recent",
         tokenizer_path="../models/finetuned_llama2_after_CPO/checkpoint-best-recent",
         device="cuda",
     )
 
-    cicero_agent = bot.load_cicero()
     # Generate text from a prompt
     # prompt = "Generate a random suggestion for the game"
     # generated_text = bot.generate_text(cicero_agent,prompt)
     orders = bot.get_random_orders()
-    bot.do_messaging_round(cicero_agent, orders)
+    bot.do_messaging_round(orders)
     # print(generated_text)
