@@ -13,7 +13,7 @@ from torch.nn import DataParallel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 from chiron_utils.bots.baseline_bot import BaselineBot
-from chiron_utils.utils import get_other_powers
+from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
 
 
 @dataclass
@@ -88,19 +88,10 @@ class LlmAdvisor(BaselineBot):
         return generated_text
 
     def format_prompt(self, agent, own: str, oppo: str) -> str:
-        MAPPING = {
-            "AUS": "AUSTRIA",
-            "ENG": "ENGLAND",
-            "FRA": "FRANCE",
-            "ITA": "ITALY",
-            "RUS": "RUSSIA",
-            "GER": "GERMANY",
-            "TUR": "TURKEY",
-        }
-        if own in MAPPING:
-            own = MAPPING[own]
-        if oppo in MAPPING:
-            oppo = MAPPING[oppo]
+        if own in POWER_NAMES_DICT:
+            own = POWER_NAMES_DICT[own]
+        if oppo in POWER_NAMES_DICT:
+            oppo = POWER_NAMES_DICT[oppo]
         SYS_PROMPT = (
             "You are an AI assistant tasked with understanding and analyzing the board status "
             "of a Diplomacy game, the message history between two players, and "
