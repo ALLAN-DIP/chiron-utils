@@ -101,9 +101,13 @@ class LlmAdvisor(BaselineBot):
             own = MAPPING[own]
         if oppo in MAPPING:
             oppo = MAPPING[oppo]
-        SYS_PROMPT = """You are an AI assistant tasked with understanding and analyzing the board status of a Diplomacy game, the message history between two players, and the recommended orders by Cicero for the current phase.
-Your goal is to provide feedback on whether to trust the last message, based on the context provided.
-"""
+        SYS_PROMPT = (
+            "You are an AI assistant tasked with understanding and analyzing the board status "
+            "of a Diplomacy game, the message history between two players, and "
+            "the recommended orders by Cicero for the current phase.\n"
+            "Your goal is to provide feedback on whether to trust the last message, "
+            "based on the context provided.\n"
+        )
         # system prompt format
         system_prompt = f"<<SYS>>\n{SYS_PROMPT}\n<</SYS>>" if SYS_PROMPT is not None else ""
         # board states format
@@ -151,7 +155,13 @@ Your goal is to provide feedback on whether to trust the last message, based on 
         sender_player = Player(agent, own)
         sender_orders = sender_player.get_orders(self.game)
 
-        prompt = f"<s>[INST] {system_prompt}\n    \n---\n\nBoard Status: {sorted_board_states}\n\nCicero Recommendation for {own}: {sender_orders}\n\nMessage History: {my_message}\n    \n---\n\nQuestion:As the advisor of {own}, Should we trust last message from {oppo}? [/INST]"
+        prompt = (
+            f"<s>[INST] {system_prompt}\n    \n---\n\n"
+            f"Board Status: {sorted_board_states}\n\n"
+            f"Cicero Recommendation for {own}: {sender_orders}\n\n"
+            f"Message History: {my_message}\n    \n---\n\n"
+            f"Question:As the advisor of {own}, Should we trust last message from {oppo}? [/INST]"
+        )
         return prompt
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
