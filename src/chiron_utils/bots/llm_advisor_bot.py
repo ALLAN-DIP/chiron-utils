@@ -7,7 +7,7 @@ from typing import ClassVar, List, Sequence, Tuple
 from peft import PeftModel
 import torch
 from torch.nn import DataParallel
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizer
 
 from chiron_utils.bots.baseline_bot import BaselineBot
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
@@ -35,7 +35,7 @@ class LlmAdvisor(BaselineBot):
     @staticmethod
     def load_model(
         base_model_name: str, adapter_path: str, tokenizer_path: str, device: str = "cpu"
-    ) -> Tuple[AutoTokenizer, PeftModel]:
+    ) -> Tuple[PreTrainedTokenizer, PeftModel]:
         """Load the model and tokenizer.
 
         Args:
