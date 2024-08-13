@@ -34,7 +34,7 @@ class LlmAdvisor(BaselineBot):
         self.tokenizer, self.model = self.load_model(
             self.base_model_name, self.adapter_path, self.tokenizer_path, self.device
         )
-        self.load_cicero()
+        self.agent = self.load_cicero()
 
     @staticmethod
     def load_model(
@@ -60,6 +60,12 @@ class LlmAdvisor(BaselineBot):
 
         return tokenizer, model
 
+    @staticmethod
+    def load_cicero():
+        """Load Cicero agent"""
+        agent_config = heyhi.load_config("/diplomacy_cicero/conf/common/agents/cicero.prototxt")
+        return PyBQRE1PAgent(agent_config.bqre1p)
+
     def generate_text(self, prompt: str) -> str:
         """Generate text based on a given prompt.
 
@@ -80,11 +86,6 @@ class LlmAdvisor(BaselineBot):
 
         generated_text = self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
         return generated_text
-
-    def load_cicero(self):
-        """Load Cicero agent"""
-        agent_config = heyhi.load_config("/diplomacy_cicero/conf/common/agents/cicero.prototxt")
-        self.agent = PyBQRE1PAgent(agent_config.bqre1p)
 
     def format_prompt(self, agent, own: str, oppo: str) -> str:
         MAPPING = {
