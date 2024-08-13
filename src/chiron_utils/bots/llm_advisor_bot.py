@@ -43,13 +43,13 @@ class LlmAdvisor(BaselineBot):
         """Load the model and tokenizer.
 
         Args:
-            base_model_name (str): The base model name.
-            adapter_path (str): The path to the adapter.
-            tokenizer_path (str): The path to the tokenizer.
-            device (str): The device to load the model onto.
+            base_model_name: The base model name.
+            adapter_path: The path to the adapter.
+            tokenizer_path: The path to the tokenizer.
+            device: The device to load the model onto.
 
         Returns:
-            Tuple[AutoTokenizer, PeftModel]: The loaded tokenizer and model.
+            The loaded tokenizer and model.
         """
         tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
         model = AutoModelForCausalLM.from_pretrained(base_model_name)
@@ -64,10 +64,10 @@ class LlmAdvisor(BaselineBot):
         """Generate text based on a given prompt.
 
         Args:
-            prompt (str): The prompt to generate text from.
+            prompt: The prompt to generate text from.
 
         Returns:
-            str: The generated text.
+            The generated text.
         """
         input_ids = self.tokenizer.encode(prompt, return_tensors="pt").to(self.device)
 
@@ -86,7 +86,7 @@ class LlmAdvisor(BaselineBot):
         agent_config = heyhi.load_config("/diplomacy_cicero/conf/common/agents/cicero.prototxt")
         self.agent = PyBQRE1PAgent(agent_config.bqre1p)
 
-    def format_prompt(self, agent, own, oppo) -> str:
+    def format_prompt(self, agent, own: str, oppo: str) -> str:
         MAPPING = {
             "AUS": "AUSTRIA",
             "ENG": "ENGLAND",
