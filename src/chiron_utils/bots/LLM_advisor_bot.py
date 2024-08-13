@@ -2,7 +2,7 @@
 
 from abc import ABC
 import random
-from typing import ClassVar, Dict, List, Sequence,Tuple
+from typing import ClassVar, Dict, List, Sequence, Tuple
 
 from daidepp import AND, PRP, XDO
 
@@ -28,16 +28,22 @@ class LLMProposerBot(BaselineBot, ABC):
 
     is_first_messaging_round = False
 
-    def __init__(self, base_model_name: str, adapter_path: str, tokenizer_path: str, device: str = 'cpu'):
+    def __init__(
+        self, base_model_name: str, adapter_path: str, tokenizer_path: str, device: str = "cpu"
+    ):
         super().__init__()
         self.base_model_name = base_model_name
         self.adapter_path = adapter_path
         self.tokenizer_path = tokenizer_path
         self.device = device
-        self.tokenizer, self.model = self.load_model(base_model_name, adapter_path, tokenizer_path, device)
+        self.tokenizer, self.model = self.load_model(
+            base_model_name, adapter_path, tokenizer_path, device
+        )
 
     @staticmethod
-    def load_model(base_model_name: str, adapter_path: str, tokenizer_path: str, device: str = 'cpu') -> Tuple[AutoTokenizer, PeftModel]:
+    def load_model(
+        base_model_name: str, adapter_path: str, tokenizer_path: str, device: str = "cpu"
+    ) -> Tuple[AutoTokenizer, PeftModel]:
         """Load the model and tokenizer.
 
         Args:
@@ -55,7 +61,7 @@ class LLMProposerBot(BaselineBot, ABC):
         if torch.cuda.device_count() > 1:
             model = DataParallel(model)
         model.to(device)
-        
+
         return tokenizer, model
 
     def generate_text(self, prompt: str) -> str:
@@ -67,8 +73,8 @@ class LLMProposerBot(BaselineBot, ABC):
         Returns:
             str: The generated text.
         """
-        input_ids = self.tokenizer.encode(prompt, return_tensors='pt').to(self.device)
-        
+        input_ids = self.tokenizer.encode(prompt, return_tensors="pt").to(self.device)
+
         self.model.eval()
         with torch.no_grad():
             if isinstance(self.model, DataParallel):
@@ -78,63 +84,83 @@ class LLMProposerBot(BaselineBot, ABC):
 
         generated_text = self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
         return generated_text
-    
+
     def load_cicero(self):
-        """Load Cicero agent
-        """
-        agent_config = heyhi.load_config('/diplomacy_cicero/conf/common/agents/cicero.prototxt')
+        """Load Cicero agent"""
+        agent_config = heyhi.load_config("/diplomacy_cicero/conf/common/agents/cicero.prototxt")
         self.agent = PyBQRE1PAgent(agent_config.bqre1p)
         return self.agent
-    
-    def format_prompt(self,agent,own,oppo) -> str:
-        MAPPING = {'AUS': 'AUSTRIA', 'ENG': 'ENGLAND', 'FRA': 'FRANCE', 'ITA': 'ITALY', 'RUS': 'RUSSIA', 'GER': 'GERMANY',
-           'TUR': 'TURKEY'}
+
+    def format_prompt(self, agent, own, oppo) -> str:
+        MAPPING = {
+            "AUS": "AUSTRIA",
+            "ENG": "ENGLAND",
+            "FRA": "FRANCE",
+            "ITA": "ITALY",
+            "RUS": "RUSSIA",
+            "GER": "GERMANY",
+            "TUR": "TURKEY",
+        }
         if own in MAPPING.keys():
             own = MAPPING[own]
         if oppo in MAPPING.keys():
             oppo = MAPPING[oppo]
         SYS_PROMPT = """You are an AI assistant tasked with understanding and analyzing the board status of a Diplomacy game, the message history between two players, and the recommended orders by Cicero for the current phase.
 Your goal is to provide feedback on whether to trust the last message, based on the context provided.
-"""     
+"""
         # system prompt format
-        system_prompt = f'<<SYS>>\n{SYS_PROMPT}\n<</SYS>>' if SYS_PROMPT is not None else ''
+        system_prompt = f"<<SYS>>\n{SYS_PROMPT}\n<</SYS>>" if SYS_PROMPT is not None else ""
         # board states format
-        board_states = self.game.get_state()['units']
+        board_states = self.game.get_state()["units"]
         for key, value in board_states.items():
-            board_states[key] = [string.replace('STP/NC', 'STP').replace('STP/SC','STP').replace('SPA/SC','SPA').replace('SPA/NC','SPA').replace('BUL/EC','BUL').replace('BUL/SC','BUL') for string in value]
+            board_states[key] = [
+                string.replace("STP/NC", "STP")
+                .replace("STP/SC", "STP")
+                .replace("SPA/SC", "SPA")
+                .replace("SPA/NC", "SPA")
+                .replace("BUL/EC", "BUL")
+                .replace("BUL/SC", "BUL")
+                for string in value
+            ]
         sorted_board_states = {key: sorted(value) for key, value in board_states.items()}
 
         # message format
         messages = self.game.messages
         filtered_messages = [
-            message for message in messages.values()
-            if (message.sender == own and message.recipient == oppo) or 
-            (message.sender == oppo and message.recipient == own)
+            message
+            for message in messages.values()
+            if (message.sender == own and message.recipient == oppo)
+            or (message.sender == oppo and message.recipient == own)
         ]
         sorted_messages = sorted(filtered_messages, key=lambda x: x.time_sent, reverse=True)
         closest_8_messages = sorted_messages[:8]
         reversed_closest_8_messages = list(reversed(closest_8_messages))
-        my_message = ''
+        my_message = ""
         i = 0
         while i < len(reversed_closest_8_messages):
             my_message += f"Message from {reversed_closest_8_messages[i].sender}:'{reversed_closest_8_messages[i].message}' "
-            if i == len(reversed_closest_8_messages) - 1 and reversed_closest_8_messages[i].sender != oppo:
-                my_message = my_message.rsplit(f"Message from {reversed_closest_8_messages[i].sender}:'{reversed_closest_8_messages[i].message}' ", 1)[0]
+            if (
+                i == len(reversed_closest_8_messages) - 1
+                and reversed_closest_8_messages[i].sender != oppo
+            ):
+                my_message = my_message.rsplit(
+                    f"Message from {reversed_closest_8_messages[i].sender}:'{reversed_closest_8_messages[i].message}' ",
+                    1,
+                )[0]
                 reversed_closest_8_messages.pop()
                 i -= 1
             i += 1
 
-        #cicero recommendation format
+        # cicero recommendation format
         sender_player = Player(agent, own)
         sender_orders = sender_player.get_orders(self.game)
 
-        prompt = f'<s>[INST] {system_prompt}\n    \n---\n\nBoard Status: {sorted_board_states}\n\nCicero Recommendation for {own}: {sender_orders}\n\nMessage History: {my_message}\n    \n---\n\nQuestion:As the advisor of {own}, Should we trust last message from {oppo}? [/INST]'
+        prompt = f"<s>[INST] {system_prompt}\n    \n---\n\nBoard Status: {sorted_board_states}\n\nCicero Recommendation for {own}: {sender_orders}\n\nMessage History: {my_message}\n    \n---\n\nQuestion:As the advisor of {own}, Should we trust last message from {oppo}? [/INST]"
         return prompt
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
-    
 
     def get_random_proposal_orders(self) -> Dict[str, str]:
         """Generate random order proposals for other powers.
@@ -172,7 +198,7 @@ Your goal is to provide feedback on whether to trust the last message, based on 
 
         return proposals
 
-    async def do_messaging_round(self, agent,orders: Sequence[str]) -> List[str]:
+    async def do_messaging_round(self, agent, orders: Sequence[str]) -> List[str]:
         """Carry out one round of messaging, along with related tasks.
 
         Returns:
@@ -185,7 +211,7 @@ Your goal is to provide feedback on whether to trust the last message, based on 
 
         for other_power, suggested_random_orders in random_order_proposals.items():
             if self.bot_type == "advisor":
-                prompt = self.format_prompt(agent,self.power_name,other_power)
+                prompt = self.format_prompt(agent, self.power_name, other_power)
                 generate_text = self.generate_text(prompt)
                 await self.suggest_message(other_power, (generate_text))
                 await self.suggest_message(other_power, (suggested_random_orders))
@@ -233,12 +259,13 @@ class RandomProposerPlayer(LLMProposerBot):
 
     bot_type: ClassVar[str] = "player"
 
+
 if __name__ == "__main__":
     bot = LLMProposerBot(
         base_model_name="meta-llama/Llama-2-7b-chat-hf",
         adapter_path="../models/finetuned_llama2_after_CPO/checkpoint-best-recent",
         tokenizer_path="../models/finetuned_llama2_after_CPO/checkpoint-best-recent",
-        device="cuda"
+        device="cuda",
     )
 
     cicero_agent = bot.load_cicero()
@@ -246,5 +273,5 @@ if __name__ == "__main__":
     # prompt = "Generate a random suggestion for the game"
     # generated_text = bot.generate_text(cicero_agent,prompt)
     orders = bot.get_random_orders()
-    bot.do_messaging_round(cicero_agent,orders)
+    bot.do_messaging_round(cicero_agent, orders)
     # print(generated_text)
