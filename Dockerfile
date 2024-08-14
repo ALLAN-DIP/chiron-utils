@@ -2,7 +2,7 @@
 # Use the command `hadolint Dockerfile` to test
 # Adding Hadolint to `pre-commit` is non-trivial, so the command must be run manually
 
-FROM python:3.7.17-slim-bookworm AS achilles
+FROM python:3.11.9-slim-bookworm AS achilles
 
 WORKDIR /bot
 
@@ -12,7 +12,7 @@ RUN apt-get -y update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --upgrade pip==24.0
+RUN pip install --no-cache-dir --upgrade pip==24.2
 
 COPY requirements-lock.txt .
 RUN pip install --no-cache-dir -r requirements-lock.txt
