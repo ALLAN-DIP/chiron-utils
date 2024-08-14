@@ -39,7 +39,6 @@ dev = { file = "requirements-dev.txt" }
 
 [tool.black]
 line-length = 100
-target-version = ["py37"]
 
 [tool.codespell]
 ignore-regex = "\\[nt]" # Do not count escaped newlines or tabs as part of a word
@@ -63,7 +62,6 @@ line-length = 100
 # Show full violation messages by setting `RUFF_OUTPUT_FORMAT=full` in environment
 output-format = "concise"
 show-fixes = true
-target-version = "py37"
 
 [tool.ruff.lint]
 select = [
