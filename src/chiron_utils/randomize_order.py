@@ -269,7 +269,7 @@ def random_support(order: SUP) -> SUP:
         dest_choices = COMBOS[supporter_type][supported_type]  # Set of possible destinations
         adj_to_both = [
             daidefy_location(adjacency).province
-            for adjacency in supporter_adjacent  # this finds all provinces adjacent to the supportee and suporter locations
+            for adjacency in supporter_adjacent  # this finds all provinces adjacent to the supportee and supporter locations
             if adjacency in supported_adjacent
             and (not dest_choices or TYPES[adjacency] in dest_choices)
         ]
