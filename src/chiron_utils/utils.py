@@ -70,7 +70,7 @@ def is_valid_daide_message(string: str, grammar: Optional[DAIDEGrammar] = None) 
     try:
         parse_tree = grammar.parse(string)
         daide_visitor.visit(parse_tree)
-    except asyncio.CancelledError:
+    except asyncio.CancelledError:  # pylint: disable=try-except-raise
         raise
     except Exception:  # noqa: BLE001
         return False
@@ -92,7 +92,7 @@ def parse_daide(string: str) -> AnyDAIDEToken:
     try:
         parse_tree = ALL_GRAMMAR.parse(string)
         return daide_visitor.visit(parse_tree)
-    except asyncio.CancelledError:
+    except asyncio.CancelledError:  # pylint: disable=try-except-raise
         raise
     except Exception as ex:
         raise ValueError(f"Failed to parse DAIDE string: {string!r}") from ex

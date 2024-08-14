@@ -208,7 +208,7 @@ def dipnet_to_daide_parsing(
                         "because it has more than 2 tokens"
                     )
                 daide_orders.append(move_order)
-        except asyncio.CancelledError:
+        except asyncio.CancelledError:  # pylint: disable=try-except-raise
             raise
         except Exception as ex:
             logger.exception(
@@ -303,7 +303,7 @@ def daide_to_dipnet_parsing(daide_order: Command) -> Optional[Tuple[str, str]]:
             )
 
         return dipnet_order, unit_power
-    except asyncio.CancelledError:
+    except asyncio.CancelledError:  # pylint: disable=try-except-raise
         raise
     except Exception as ex:
         logger.exception(
