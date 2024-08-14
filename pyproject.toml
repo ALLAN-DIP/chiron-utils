@@ -56,6 +56,11 @@ python_version = "3.7"
 strict = true
 warn_unreachable = true
 
+[[tool.mypy.overrides]]
+# Needed to prevent `.../site-packages/_pytest/mark/__init__.py:187: error: Positional-only parameters are only supported in Python 3.8 and greater  [syntax]`
+module = "pytest"
+follow_imports = "skip"
+
 [tool.ruff]
 fix = true
 line-length = 100

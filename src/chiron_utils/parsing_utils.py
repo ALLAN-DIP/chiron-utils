@@ -242,7 +242,7 @@ def dipnetify_location(loc: Location) -> str:
     prov = daide2dipnet_loc.get(loc.province, loc.province)
     if loc.coast is not None:
         prov += "/" + loc.coast[:-1]
-    return prov
+    return prov  # type: ignore[no-any-return]
 
 
 def dipnetify_unit(unit: Unit) -> str:
