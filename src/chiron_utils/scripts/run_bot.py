@@ -1,6 +1,5 @@
 """Run any implemented Diplomacy agent."""
 
-
 import argparse
 import asyncio
 import time
@@ -46,9 +45,11 @@ async def play(
     logger.info("%s joining game %r as %s", bot_class.__name__, (game_id), power_name)
     connection = await connect(hostname, port, use_ssl=use_ssl)
     channel = await connection.authenticate(
-        f"allan_{bot_class.__name__.lower()}_{power_name}"
-        if bot_class.bot_type == "player"
-        else "admin",
+        (
+            f"allan_{bot_class.__name__.lower()}_{power_name}"
+            if bot_class.bot_type == "player"
+            else "admin"
+        ),
         "password",
     )
     game: NetworkGame = await channel.join_game(

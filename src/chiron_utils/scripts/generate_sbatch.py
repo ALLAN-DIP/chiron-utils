@@ -1,4 +1,5 @@
 """Generates file to run a game with Slurm's `sbatch`."""
+
 import argparse
 import datetime
 import json

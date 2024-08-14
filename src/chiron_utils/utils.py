@@ -1,6 +1,5 @@
 """A collection of various utilities useful for building bots."""
 
-
 import asyncio
 import logging
 import os

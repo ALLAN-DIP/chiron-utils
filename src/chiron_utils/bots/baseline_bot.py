@@ -1,6 +1,5 @@
 """Abstract base classes for bots."""
 
-
 from abc import ABC, abstractmethod
 import asyncio
 from dataclasses import dataclass
