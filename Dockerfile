@@ -22,8 +22,6 @@ COPY LICENSE .
 COPY README.md .
 COPY pyproject.toml .
 COPY requirements.txt .
-COPY setup.cfg .
-COPY setup.py .
 RUN pip install --no-cache-dir -e .
 
 # Copy package code into the Docker image

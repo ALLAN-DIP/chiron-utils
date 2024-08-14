@@ -2,6 +2,35 @@
 requires = ["setuptools>=62.6"] # Minimum version required to use `file:` with `install_requires`
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "chiron_utils"
+version = "0.0.1"
+description = "CHIRON advisors and library for CHIRON utilities"
+readme = "README.md"
+authors = [
+  { name = "ALLAN" },
+]
+classifiers = [
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Games/Entertainment",
+  "Topic :: Games/Entertainment :: Board Games",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+requires-python = ">=3.7"
+license = { text = "MIT" }
+dynamic = ["dependencies"]
+
+[project.urls]
+Homepage = "https://github.com/ALLAN-DIP/chiron-utils"
+
+[tool.setuptools.dynamic]
+dependencies = { file = "requirements.txt" }
+
 [tool.black]
 line-length = 100
 target-version = ["py37"]
