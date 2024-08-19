@@ -91,7 +91,7 @@ async def play(
             "Time taken for phase %s: %0.4fs", current_phase, phase_end_time - phase_start_time
         )
 
-        while current_phase == game.get_current_phase():
+        while current_phase == game.get_current_phase():  # noqa: ASYNC110
             await asyncio.sleep(2)
 
     game_end_time = time.perf_counter()

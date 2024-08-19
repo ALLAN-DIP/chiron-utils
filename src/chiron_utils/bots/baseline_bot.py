@@ -47,7 +47,7 @@ class BaselineBot(ABC):
         else:
             self.game.set_comm_status(power_name=self.power_name, comm_status=strings.READY)
 
-        while not all(
+        while not all(  # noqa: ASYNC110
             power.comm_status == strings.READY
             for power in self.game.powers.values()
             if power.player_type == strings.PRESS_BOT and not power.is_eliminated()
