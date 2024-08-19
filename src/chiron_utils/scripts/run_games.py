@@ -74,7 +74,7 @@ async def run_all_cmds(
         coroutines.append(run_cmd(cmd))
         if delay_seconds is not None:
             await asyncio.sleep(delay_seconds)
-    return await asyncio.gather(*coroutines)  # type: ignore[no-any-return]
+    return await asyncio.gather(*coroutines)  # type: ignore[return-value]
 
 
 def main() -> None:

@@ -1,4 +1,5 @@
 """Test functions from the `randomize_order` module."""
+
 import random
 
 from chiron_utils.randomize_order import random_list_orders
