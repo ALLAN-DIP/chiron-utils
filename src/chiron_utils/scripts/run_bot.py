@@ -3,19 +3,20 @@
 import argparse
 import asyncio
 import time
-from typing import Type
+from typing import List, Type
 
 from diplomacy import connect
 from diplomacy.client.network_game import NetworkGame
 
-from chiron_utils.bots import BaselineBot, RandomProposerAdvisor, RandomProposerPlayer
+from chiron_utils.bots import BaselineBot, LlmAdvisor, RandomProposerAdvisor, RandomProposerPlayer
 from chiron_utils.game_utils import DEFAULT_HOST, DEFAULT_PORT
 from chiron_utils.utils import POWER_NAMES_DICT, return_logger
 
 logger = return_logger(__name__)
 
 POWERS = sorted(POWER_NAMES_DICT.values())
-BOTS = [
+BOTS: List[Type[BaselineBot]] = [
+    LlmAdvisor,
     RandomProposerAdvisor,
     RandomProposerPlayer,
 ]
