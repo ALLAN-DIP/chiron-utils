@@ -32,6 +32,8 @@ RUN pip install --no-cache-dir -e .
 # Copy package code into the Docker image
 COPY src/ src/
 
+ENV COMM_STAGE_LENGTH=30
+
 # Script executors
 ENTRYPOINT ["python", "-m", "chiron_utils.scripts.run_bot"]
 
