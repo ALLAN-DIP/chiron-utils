@@ -183,6 +183,7 @@ def main() -> None:
             f"--game_id {quote(game_id)} "
             f"--power {power} "
             f"{bot_args}"
+            f"{'--bot_type RandomProposerAdvisor ' if power == 'AUSTRIA' else ''}"
             f"|& tee {quote(log_file)}"
         )
     print(run_cmds)
