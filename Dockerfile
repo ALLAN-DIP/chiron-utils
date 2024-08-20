@@ -32,6 +32,8 @@ COPY src/ src/
 # Re-install so `pip` stores all metadata properly
 RUN pip install --no-cache-dir --no-deps -e .[$TARGET]
 
+ENV COMM_STAGE_LENGTH=30
+
 # Script executors
 ENTRYPOINT ["python", "-m", "chiron_utils.scripts.run_bot"]
 
