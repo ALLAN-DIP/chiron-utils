@@ -131,8 +131,8 @@ TYPES = {
 # This nested dict represents the areas that certain types of units can support others into. The format is
 # as follows: COMBOS[ SUPPORTING_UNIT_TYPE ] [ SUPPORTED_UNIT_TYPE ] = {SET OF ALL PROVINCE TYPES THAT SUPPORT CAN OCCUR INTO}
 COMBOS = {
-    "FLT": {"FLT": {"WATER", "COAST"}, "AMY": {"COAST"}},
-    "AMY": {"FLT": {"COAST"}, "AMY": {"LAND", "COAST"}},
+    "AMY": {"AMY": {"COAST", "LAND"}, "FLT": {"COAST"}},
+    "FLT": {"AMY": {"COAST"}, "FLT": {"COAST", "WATER"}},
 }
 
 # This represents the DAIDE commands that join orders which are handled in this file
