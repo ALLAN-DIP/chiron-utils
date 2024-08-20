@@ -20,9 +20,6 @@ from daidepp import (
 
 from chiron_utils.parsing_utils import daidefy_location, dipnetify_location
 
-# The comments below signal the formatter not to expand these dicts to multiple lines
-# fmt: off
-
 # This dictionary represents every adjacent province and coast from any given province or coast
 ADJACENCY = {
     "ADR": ["ALB", "APU", "ION", "TRI", "VEN"],
@@ -107,6 +104,9 @@ ADJACENCY = {
     "WES": ["MAO", "LYO", "NAF", "SPA/SC", "TUN", "TYS"],
     "YOR": ["EDI", "LON", "LVP", "NTH", "WAL"],
 }
+
+# The comments below signal the formatter not to expand these dicts to multiple lines
+# fmt: off
 
 # This dict defines the type of every province. Every province is either "COAST", "WATER", or "LAND"
 TYPES = {
