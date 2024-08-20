@@ -160,6 +160,8 @@ def main() -> None:
     bot_args = ""
     if extra_bot_args is not None:
         bot_args += f" {extra_bot_args}"
+    if bot_args:
+        bot_args += " "
     log_dir = output_dir / "logs" / game_id
     log_dir.mkdir(parents=True, exist_ok=True)
     data_dir = output_dir / "data"
@@ -180,7 +182,7 @@ def main() -> None:
             f"{'--use-ssl ' if use_ssl else ''}"
             f"--game_id {quote(game_id)} "
             f"--power {power} "
-            f"{bot_args} "
+            f"{bot_args}"
             f"|& tee {quote(log_file)}"
         )
     print(run_cmds)
