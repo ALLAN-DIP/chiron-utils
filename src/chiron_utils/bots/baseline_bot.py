@@ -63,6 +63,14 @@ class BaselineBot(ABC):
         ):
             await asyncio.sleep(1)
 
+        if self.bot_type == BotType.ADVISOR:
+            await self.send_message(
+                "GLOBAL",
+                f"{self.power_name}: {3}",
+                sender="omniscient_type",
+                msg_type="has_suggestions",
+            )
+
     def read_messages(self) -> List[Message]:
         """Retrieves all valid messages for the current phase sent to the bot.
 
@@ -116,9 +124,9 @@ class BaselineBot(ABC):
         """
         await self.send_message(
             "GLOBAL",
-            f"{self.power_name} Cicero suggests move: {', '.join(orders)}",
+            f"{self.power_name}: {', '.join(orders)}",
             sender="omniscient_type",
-            msg_type="suggested_move",
+            msg_type="suggested_move_full",
         )
 
     async def suggest_message(self, recipient: str, message: str) -> None:
@@ -130,7 +138,7 @@ class BaselineBot(ABC):
         """
         await self.send_message(
             "GLOBAL",
-            f"{self.power_name} Cicero suggests a message to {recipient}: {message}",
+            f"{self.power_name}-{recipient}: {message}",
             sender="omniscient_type",
             msg_type="suggested_message",
         )
