@@ -3,6 +3,7 @@
 from abc import ABC, abstractmethod
 import asyncio
 from dataclasses import dataclass
+from enum import Enum, auto
 import os
 import random
 from typing import ClassVar, List, Optional, Sequence
@@ -15,6 +16,14 @@ from chiron_utils.utils import return_logger
 
 logger = return_logger(__name__)
 
+
+class BotType(str, Enum):
+    """Type of bot being defined."""
+
+    ADVISOR = auto()
+    PLAYER = auto()
+
+
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
 
@@ -24,7 +33,7 @@ class BaselineBot(ABC):
     """Abstract base class for bots."""
 
     player_type: ClassVar[str] = strings.PRESS_BOT
-    bot_type: ClassVar[str]
+    bot_type: ClassVar[BotType]
     power_name: str
     game: Game
     num_message_rounds: Optional[int] = None
@@ -195,7 +204,7 @@ class BaselineBot(ABC):
         if not self.game.get_current_phase().endswith("M"):
             return orders
 
-        if self.bot_type == "player":
+        if self.bot_type == BotType.PLAYER:
             await self.send_intent_log(f"Initial orders (before communication): {orders}")
 
         await self.wait_for_comm_stage()
