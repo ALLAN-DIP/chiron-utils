@@ -10,6 +10,7 @@ from diplomacy import connect
 from diplomacy.client.network_game import NetworkGame
 
 from chiron_utils.bots import BaselineBot, RandomProposerAdvisor, RandomProposerPlayer
+from chiron_utils.bots import KnnBot
 from chiron_utils.game_utils import DEFAULT_HOST, DEFAULT_PORT
 from chiron_utils.utils import POWER_NAMES_DICT, return_logger
 
@@ -19,6 +20,7 @@ POWERS = sorted(POWER_NAMES_DICT.values())
 BOTS = [
     RandomProposerAdvisor,
     RandomProposerPlayer,
+    KnnBot
 ]
 NAMES_TO_BOTS = {bot.__name__: bot for bot in BOTS}
 
