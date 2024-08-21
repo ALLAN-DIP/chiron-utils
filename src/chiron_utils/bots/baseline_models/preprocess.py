@@ -1,5 +1,5 @@
 import numpy as np
-from constants import *
+from chiron_utils.bots.baseline_models.constants import *
 import json
 
 def encode_class(orders):

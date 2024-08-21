@@ -2,8 +2,8 @@ from sklearn.linear_model import SGDClassifier
 from time import time
 import os
 import json
-from preprocess import decode_class, entry_to_vectors
-from constants import *
+from chiron_utils.bots.baseline_models.preprocess import decode_class, entry_to_vectors
+from chiron_utils.bots.baseline_models.constants import *
 
 def order_accuracy(predicted, true):
     # print(f"Predicted: {predicted}\nTrue: {true}\n")

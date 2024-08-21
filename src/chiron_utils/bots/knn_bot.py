@@ -14,9 +14,9 @@ from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
 from diplomacy.utils import strings
 
-from baseline_bot import BaselineBot
-from baseline_models.evaluation import infer
-from baseline_models.preprocess import entry_to_vectors
+from chiron_utils.bots.baseline_bot import BaselineBot
+from chiron_utils.bots.baseline_models.evaluation import infer
+from chiron_utils.bots.baseline_models.preprocess import entry_to_vectors
 
 from chiron_utils.utils import return_logger
 
