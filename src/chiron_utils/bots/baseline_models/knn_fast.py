@@ -2,10 +2,10 @@ from sklearn.neighbors import KNeighborsClassifier
 import os
 import json
 import numpy as np
-from constants import *
-from preprocess import generate_x_y
+from chiron_utils.bots.baseline_models.constants import *
+from chiron_utils.bots.baseline_models.preprocess import generate_x_y
 from time import time
-from evaluation import evaluate_model
+from chiron_utils.bots.baseline_models.evaluation import evaluate_model
 
 def run_knn(train_path, test_path):
     train_dict = dict()
