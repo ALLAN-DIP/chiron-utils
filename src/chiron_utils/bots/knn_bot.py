@@ -26,6 +26,16 @@ DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
 MODEL_PATH = os.path.join(os.getcwd(), "model")
 
+POWER_TO_INDEX = {
+    "AUSTRIA" : 0,
+    "ENGLAND" : 1,
+    'FRANCE' : 2,
+    'GERMANY' : 3,
+    'ITALY' : 4,
+    'RUSSIA' : 5,
+    'TURKEY' : 6
+}
+
 @dataclass
 class KnnBot(BaselineBot):
 
@@ -37,7 +47,13 @@ class KnnBot(BaselineBot):
     with open(MODEL_PATH, 'rb') as model_file:
         models = pickle.load(model_file)
 
-    async def gen_orders(self) -> List[str]:
+    is_first_messaging_round = False
+
+    async def start_phase(self) -> None:
+        """Execute actions at the start of the phase."""
+        self.is_first_messaging_round = True
+
+    def get_orders(self) -> List[str]:
         map = self.game.map
         powers = self.game.powers
 
@@ -52,14 +68,39 @@ class KnnBot(BaselineBot):
             influences[power] = power_class.influence
 
         vector, _, season = entry_to_vectors(None, False, name_data=name, units_data=units, centers_data=centers, homes_data=homes, influences_data=influences)
-        print(vector)
-        orders = infer(self.models[season], vector)
+        orders = infer(self.models[season], vector.reshape(1, -1))
         print(orders)
-        
-        return orders[self.power_name]
+
+        return orders
+
+    async def gen_orders(self) -> List[str]:
+        orders = self.get_orders()
+        power_orders = orders[POWER_TO_INDEX[self.power_name]]
+        if self.bot_type == "advisor":
+            await self.suggest_orders(power_orders)
+        print(f"Sending orders!!!\n{power_orders}")
+        return power_orders
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
-        return self.gen_orders()
+        
+        if not self.is_first_messaging_round:
+            return list(orders)
+
+        order_proposal = str(self.get_orders())
+
+        for power in POWER_TO_INDEX.keys():
+            print(f"Other power: {power}")
+            print(f"Suggested order: {order_proposal}")
+            if power == self.power_name:
+                continue
+            elif self.bot_type == "advisor":
+                await self.suggest_message(power, (order_proposal))
+            elif self.bot_type == "player":
+                await self.send_message(power, (order_proposal))
+
+        self.is_first_messaging_round = False
+
+        return list(orders)
 
 
 class KnnAdvisor(KnnBot):
