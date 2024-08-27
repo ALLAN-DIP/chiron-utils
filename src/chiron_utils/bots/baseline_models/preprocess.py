@@ -26,10 +26,10 @@ def decode_class(encoding):
 
 def entry_to_vectors(phase, include_orders=True, name_data=None, units_data=None, centers_data=None, homes_data=None, influences_data=None):
 
-    state = phase["state"]
 
     # If the entire phase is available in dipnet format, pass phase directly in.
     if phase:
+        state = phase["state"]
         name_data = state["name"]
         units_data = state["units"]
         centers_data = state["centers"]

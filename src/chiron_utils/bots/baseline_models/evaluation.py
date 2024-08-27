@@ -64,8 +64,8 @@ def evaluate_model(test_dict, models, split_phase_types=False):
     results.evaluate(test_dict)
     return results
 
-def infer(model, entry):
-    entry_vector = entry_to_vectors(encode_class(entry))
+def infer(model, entry_vector):
+    print(entry_vector)
     pred_label = model.predict(entry_vector)
     pred_orders = decode_class(pred_label)
     return pred_orders

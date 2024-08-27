@@ -5,4 +5,7 @@ from chiron_utils.bots.random_proposer_bot import (
     RandomProposerAdvisor as RandomProposerAdvisor,
     RandomProposerPlayer as RandomProposerPlayer,
 )
-from chiron_utils.bots.knn_bot import KnnBot
+from chiron_utils.bots.knn_bot import (
+    KnnPlayer as KnnPlayer,
+    KnnAdvisor as KnnAdvisor,
+)
