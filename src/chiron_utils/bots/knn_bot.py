@@ -24,7 +24,7 @@ logger = return_logger(__name__)
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
-
+MODEL_PATH = os.path.join(os.getcwd(), "model")
 
 @dataclass
 class KnnBot(BaselineBot):
@@ -34,31 +34,41 @@ class KnnBot(BaselineBot):
     Phase types are 'SM', 'FM', 'WA, 'SR', 'FR', 'CD'
     """ 
     models = dict()
-
-    def __init__(model_path : str) -> None:
-        with open(model_path, 'rb') as model_file:
-            models = pickle.load(model_file)
+    with open(MODEL_PATH, 'rb') as model_file:
+        models = pickle.load(model_file)
 
     async def gen_orders(self) -> List[str]:
         map = self.game.map
         powers = self.game.powers
 
         name = self.game.phase
-        split = name.split()
-        season_phase = split[0][0] + split[2][0]
 
         units = map.units
         centers = map.centers
         homes = map.homes
         influences = dict()
 
-        for power, power_class in powers.item():
+        for power, power_class in powers.items():
             influences[power] = power_class.influence
 
-        vector = entry_to_vectors(None, False, name_data=name, units_data=units, centers_data=centers, homes_data=homes, influences_data=influences)
-        orders = infer(self.model[season_phase], vector)
+        vector, _, season = entry_to_vectors(None, False, name_data=name, units_data=units, centers_data=centers, homes_data=homes, influences_data=influences)
+        print(vector)
+        orders = infer(self.models[season], vector)
+        print(orders)
         
         return orders[self.power_name]
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
         return self.gen_orders()
+
+
+class KnnAdvisor(KnnBot):
+    """Advisor form of `RandomProposerBot`."""
+
+    bot_type: ClassVar[str] = "advisor"
+
+
+class KnnPlayer(KnnBot):
+    """Player form of `RandomProposerBot`."""
+
+    bot_type: ClassVar[str] = "player"
