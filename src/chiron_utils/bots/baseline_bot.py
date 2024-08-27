@@ -10,7 +10,7 @@ from typing import ClassVar, List, Optional, Sequence
 
 from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
-from diplomacy.utils import strings
+from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
 from chiron_utils.utils import return_logger
@@ -33,7 +33,7 @@ COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_L
 class BaselineBot(ABC):
     """Abstract base class for bots."""
 
-    player_type: ClassVar[str] = strings.PRESS_BOT
+    player_type: ClassVar[str] = diplomacy_strings.PRESS_BOT
     bot_type: ClassVar[BotType]
     suggestion_type: ClassVar[Optional[SuggestionType]] = None
     power_name: str
@@ -54,25 +54,29 @@ class BaselineBot(ABC):
         """
         # Comm status should not be sent in local games, only set
         if isinstance(self.game, NetworkGame):
-            await self.game.set_comm_status(power_name=self.power_name, comm_status=strings.READY)
+            await self.game.set_comm_status(
+                power_name=self.power_name, comm_status=diplomacy_strings.READY
+            )
         else:
-            self.game.set_comm_status(power_name=self.power_name, comm_status=strings.READY)
+            self.game.set_comm_status(
+                power_name=self.power_name, comm_status=diplomacy_strings.READY
+            )
 
         while not all(  # noqa: ASYNC110
-            power.comm_status == strings.READY
+            power.comm_status == diplomacy_strings.READY
             for power in self.game.powers.values()
-            if power.player_type == strings.PRESS_BOT and not power.is_eliminated()
+            if power.player_type == diplomacy_strings.PRESS_BOT and not power.is_eliminated()
         ):
             await asyncio.sleep(1)
 
         if self.bot_type == BotType.ADVISOR:
             assert self.suggestion_type is not None
             await self.send_message(
-                "GLOBAL",
+                diplomacy_strings.GLOBAL,
                 # Explicit `int` cast is needed before Python 3.11
                 f"{self.power_name}: {int(self.suggestion_type)}",
-                sender="omniscient_type",
-                msg_type="has_suggestions",
+                sender=diplomacy_strings.OMNISCIENT_TYPE,
+                msg_type=diplomacy_strings.HAS_SUGGESTIONS,
             )
 
     def read_messages(self) -> List[Message]:
@@ -127,10 +131,10 @@ class BaselineBot(ABC):
             orders: Orders to suggest.
         """
         await self.send_message(
-            "GLOBAL",
+            diplomacy_strings.GLOBAL,
             f"{self.power_name}: {', '.join(orders)}",
-            sender="omniscient_type",
-            msg_type="suggested_move_full",
+            sender=diplomacy_strings.OMNISCIENT_TYPE,
+            msg_type=diplomacy_strings.SUGGESTED_MOVE_FULL,
         )
 
     async def suggest_message(self, recipient: str, message: str) -> None:
@@ -141,10 +145,10 @@ class BaselineBot(ABC):
             message: Text of the recommended message.
         """
         await self.send_message(
-            "GLOBAL",
+            diplomacy_strings.GLOBAL,
             f"{self.power_name}-{recipient}: {message}",
-            sender="omniscient_type",
-            msg_type="suggested_message",
+            sender=diplomacy_strings.OMNISCIENT_TYPE,
+            msg_type=diplomacy_strings.SUGGESTED_MESSAGE,
         )
 
     async def send_intent_log(self, log_msg: str) -> None:

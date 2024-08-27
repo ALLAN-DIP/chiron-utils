@@ -5,6 +5,7 @@ import random
 from typing import Dict, List, Sequence
 
 from daidepp import AND, PRP, XDO
+from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
@@ -45,7 +46,8 @@ class RandomProposerBot(BaselineBot, ABC):
             ]
             suggested_random_orders = list(
                 filter(
-                    lambda x: x != "WAIVE" and not x.endswith("VIA"),
+                    lambda x: x != diplomacy_strings.WAIVE
+                    and not x.endswith(diplomacy_strings.VIA),
                     suggested_random_orders,
                 )
             )
