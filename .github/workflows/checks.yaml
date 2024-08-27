@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-22.04
     name: Run checks
     env:
-      PYTHON_VERSION: 3.7.17
+      PYTHON_VERSION: 3.11.9
     defaults:
       run:
         shell: bash -leo pipefail {0}
@@ -46,4 +46,4 @@ jobs:
           key: precommit--${{ runner.os }}--${{ runner.arch }}--${{ env.PYTHON_VERSION }}--${{ hashFiles('.pre-commit-config.yaml') }}
       - name: Run all checks
         run: |
-          SKIP=actionlint,no-commit-to-branch make check
+          SKIP=no-commit-to-branch make check

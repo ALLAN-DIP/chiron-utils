@@ -1,4 +1,5 @@
 """Unit tests for `RandomProposerPlayer`."""
+
 import asyncio
 import datetime
 import os
