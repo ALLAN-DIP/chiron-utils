@@ -3,17 +3,27 @@
 from abc import ABC, abstractmethod
 import asyncio
 from dataclasses import dataclass
+from enum import Enum, auto
 import os
 import random
 from typing import ClassVar, List, Optional, Sequence
 
 from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
-from diplomacy.utils import strings
+from diplomacy.utils import strings as diplomacy_strings
+from diplomacy.utils.constants import SuggestionType
 
 from chiron_utils.utils import return_logger
 
 logger = return_logger(__name__)
+
+
+class BotType(str, Enum):
+    """Type of bot being defined."""
+
+    ADVISOR = auto()
+    PLAYER = auto()
+
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
@@ -23,8 +33,9 @@ COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_L
 class BaselineBot(ABC):
     """Abstract base class for bots."""
 
-    player_type: ClassVar[str] = strings.PRESS_BOT
-    bot_type: ClassVar[str]
+    player_type: ClassVar[str] = diplomacy_strings.PRESS_BOT
+    bot_type: ClassVar[BotType]
+    suggestion_type: ClassVar[Optional[SuggestionType]] = None
     power_name: str
     game: Game
     num_message_rounds: Optional[int] = None
@@ -43,16 +54,30 @@ class BaselineBot(ABC):
         """
         # Comm status should not be sent in local games, only set
         if isinstance(self.game, NetworkGame):
-            await self.game.set_comm_status(power_name=self.power_name, comm_status=strings.READY)
+            await self.game.set_comm_status(
+                power_name=self.power_name, comm_status=diplomacy_strings.READY
+            )
         else:
-            self.game.set_comm_status(power_name=self.power_name, comm_status=strings.READY)
+            self.game.set_comm_status(
+                power_name=self.power_name, comm_status=diplomacy_strings.READY
+            )
 
         while not all(  # noqa: ASYNC110
-            power.comm_status == strings.READY
+            power.comm_status == diplomacy_strings.READY
             for power in self.game.powers.values()
-            if power.player_type == strings.PRESS_BOT and not power.is_eliminated()
+            if power.player_type == diplomacy_strings.PRESS_BOT and not power.is_eliminated()
         ):
             await asyncio.sleep(1)
+
+        if self.bot_type == BotType.ADVISOR:
+            assert self.suggestion_type is not None
+            await self.send_message(
+                diplomacy_strings.GLOBAL,
+                # Explicit `int` cast is needed before Python 3.11
+                f"{self.power_name}: {int(self.suggestion_type)}",
+                sender=diplomacy_strings.OMNISCIENT_TYPE,
+                msg_type=diplomacy_strings.HAS_SUGGESTIONS,
+            )
 
     def read_messages(self) -> List[Message]:
         """Retrieves all valid messages for the current phase sent to the bot.
@@ -106,10 +131,10 @@ class BaselineBot(ABC):
             orders: Orders to suggest.
         """
         await self.send_message(
-            "GLOBAL",
-            f"{self.power_name} Cicero suggests move: {', '.join(orders)}",
-            sender="omniscient_type",
-            msg_type="suggested_move",
+            diplomacy_strings.GLOBAL,
+            f"{self.power_name}: {', '.join(orders)}",
+            sender=diplomacy_strings.OMNISCIENT_TYPE,
+            msg_type=diplomacy_strings.SUGGESTED_MOVE_FULL,
         )
 
     async def suggest_message(self, recipient: str, message: str) -> None:
@@ -120,10 +145,10 @@ class BaselineBot(ABC):
             message: Text of the recommended message.
         """
         await self.send_message(
-            "GLOBAL",
-            f"{self.power_name} Cicero suggests a message to {recipient}: {message}",
-            sender="omniscient_type",
-            msg_type="suggested_message",
+            diplomacy_strings.GLOBAL,
+            f"{self.power_name}-{recipient}: {message}",
+            sender=diplomacy_strings.OMNISCIENT_TYPE,
+            msg_type=diplomacy_strings.SUGGESTED_MESSAGE,
         )
 
     async def send_intent_log(self, log_msg: str) -> None:
@@ -195,7 +220,7 @@ class BaselineBot(ABC):
         if not self.game.get_current_phase().endswith("M"):
             return orders
 
-        if self.bot_type == "player":
+        if self.bot_type == BotType.PLAYER:
             await self.send_intent_log(f"Initial orders (before communication): {orders}")
 
         await self.wait_for_comm_stage()

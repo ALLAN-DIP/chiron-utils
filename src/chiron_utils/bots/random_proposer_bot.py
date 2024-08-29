@@ -2,11 +2,13 @@
 
 from abc import ABC
 import random
-from typing import ClassVar, Dict, List, Sequence
+from typing import Dict, List, Sequence
 
 from daidepp import AND, PRP, XDO
+from diplomacy.utils import strings as diplomacy_strings
+from diplomacy.utils.constants import SuggestionType
 
-from chiron_utils.bots.baseline_bot import BaselineBot
+from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.parsing_utils import dipnet_to_daide_parsing
 from chiron_utils.utils import get_other_powers
 
@@ -44,7 +46,8 @@ class RandomProposerBot(BaselineBot, ABC):
             ]
             suggested_random_orders = list(
                 filter(
-                    lambda x: x != "WAIVE" and not x.endswith("VIA"),
+                    lambda x: x != diplomacy_strings.WAIVE
+                    and not x.endswith(diplomacy_strings.VIA),
                     suggested_random_orders,
                 )
             )
@@ -72,9 +75,9 @@ class RandomProposerBot(BaselineBot, ABC):
         random_order_proposals = self.get_random_proposal_orders()
 
         for other_power, suggested_random_orders in random_order_proposals.items():
-            if self.bot_type == "advisor":
+            if self.bot_type == BotType.ADVISOR:
                 await self.suggest_message(other_power, (suggested_random_orders))
-            elif self.bot_type == "player":
+            elif self.bot_type == BotType.PLAYER:
                 await self.send_message(other_power, (suggested_random_orders))
 
         self.is_first_messaging_round = False
@@ -102,7 +105,7 @@ class RandomProposerBot(BaselineBot, ABC):
             List of orders to carry out.
         """
         orders = self.get_random_orders()
-        if self.bot_type == "advisor":
+        if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(orders)
         return orders
 
@@ -110,10 +113,11 @@ class RandomProposerBot(BaselineBot, ABC):
 class RandomProposerAdvisor(RandomProposerBot):
     """Advisor form of `RandomProposerBot`."""
 
-    bot_type: ClassVar[str] = "advisor"
+    bot_type = BotType.ADVISOR
+    suggestion_type = SuggestionType.MESSAGE_AND_MOVE
 
 
 class RandomProposerPlayer(RandomProposerBot):
     """Player form of `RandomProposerBot`."""
 
-    bot_type: ClassVar[str] = "player"
+    bot_type = BotType.PLAYER
