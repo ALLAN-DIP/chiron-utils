@@ -5,6 +5,7 @@ import random
 from typing import Dict, List, Sequence
 
 from daidepp import AND, PRP, XDO
+from diplomacy.utils.constants import SuggestionType
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.parsing_utils import dipnet_to_daide_parsing
@@ -111,6 +112,7 @@ class RandomProposerAdvisor(RandomProposerBot):
     """Advisor form of `RandomProposerBot`."""
 
     bot_type = BotType.ADVISOR
+    suggestion_type = SuggestionType.MESSAGE_AND_MOVE
 
 
 class RandomProposerPlayer(RandomProposerBot):

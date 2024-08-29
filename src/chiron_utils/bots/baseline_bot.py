@@ -11,6 +11,7 @@ from typing import ClassVar, List, Optional, Sequence
 from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
 from diplomacy.utils import strings
+from diplomacy.utils.constants import SuggestionType
 
 from chiron_utils.utils import return_logger
 
@@ -34,6 +35,7 @@ class BaselineBot(ABC):
 
     player_type: ClassVar[str] = strings.PRESS_BOT
     bot_type: ClassVar[BotType]
+    suggestion_type: ClassVar[Optional[SuggestionType]] = None
     power_name: str
     game: Game
     num_message_rounds: Optional[int] = None
@@ -64,9 +66,11 @@ class BaselineBot(ABC):
             await asyncio.sleep(1)
 
         if self.bot_type == BotType.ADVISOR:
+            assert self.suggestion_type is not None
             await self.send_message(
                 "GLOBAL",
-                f"{self.power_name}: {3}",
+                # Explicit `int` cast is needed before Python 3.11
+                f"{self.power_name}: {int(self.suggestion_type)}",
                 sender="omniscient_type",
                 msg_type="has_suggestions",
             )
