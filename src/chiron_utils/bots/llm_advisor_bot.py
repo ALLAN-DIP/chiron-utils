@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 import random
 from typing import ClassVar, List, Sequence, Tuple
-
+import sys
 from peft import PeftModel
 import torch
 from torch.nn import DataParallel
@@ -29,36 +29,44 @@ class LlmAdvisor(BaselineBot):
     Because of the similarity between the advisor and player versions of this bot,
     both of their behaviors are abstracted into this single abstract base class.
     """
-
     bot_type: ClassVar[str] = "advisor"
-    model_name: str = "usc-isi/Llama2-Advisor"
+    base_model_name = "meta-llama/Llama-2-7b-chat-hf"
+    adapter_path: str = "usc-isi/Llama2-Advisor"
+    tokenizer_path: str = "usc-isi/Llama2-Advisor"
     device: str = "cuda"
 
-    def __post_init__(self) -> None:
+    def __post_init__(self):
         """Initialize models."""
-        self.tokenizer, self.model = self.load_model(self.model_name, self.device)
+        self.tokenizer, self.model = self.load_model(
+            self.base_model_name, self.adapter_path, self.tokenizer_path, self.device
+        )
         if USE_CICERO:
             self.agent = self.load_cicero()
 
     @staticmethod
-    def load_model(model_name: str, device: str = "cpu") -> Tuple[PreTrainedTokenizer, PeftModel]:
+    def load_model(
+        base_model_name: str, adapter_path: str, tokenizer_path: str, device: str = "cpu"
+    ) -> Tuple[PreTrainedTokenizer, PeftModel]:
         """Load the model and tokenizer.
 
         Args:
-            model_name: The name of the model hosted on the Hugging Face Hub.
+            base_model_name: The base model name.
+            adapter_path: The path to the adapter.
+            tokenizer_path: The path to the tokenizer.
             device: The device to load the model onto.
 
         Returns:
             The loaded tokenizer and model.
         """
-        tokenizer = AutoTokenizer.from_pretrained(model_name)
-        model = AutoModelForCausalLM.from_pretrained(model_name)
-        model = PeftModel.from_pretrained(model, model_name)
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+        model = AutoModelForCausalLM.from_pretrained(base_model_name)
+        model = PeftModel.from_pretrained(model, adapter_path)
         if torch.cuda.device_count() > 1:
             model = DataParallel(model)
         model.to(device)
 
         return tokenizer, model
+
 
     @staticmethod
     def load_cicero() -> "PyBQRE1PAgent":
@@ -80,9 +88,9 @@ class LlmAdvisor(BaselineBot):
         self.model.eval()
         with torch.no_grad():
             if isinstance(self.model, DataParallel):
-                output_ids = self.model.module.generate(input_ids, max_new_tokens=1024)
+                output_ids = self.model.module.generate(input_ids = input_ids)
             else:
-                output_ids = self.model.generate(input_ids, max_new_tokens=1024)
+                output_ids = self.model.generate(input_ids=input_ids)
 
         generated_text = self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
         return generated_text  # type: ignore[no-any-return]
@@ -103,9 +111,9 @@ class LlmAdvisor(BaselineBot):
         system_prompt = (
             "<<SYS>>\n"
             "You are an AI assistant tasked with understanding and analyzing the board status "
-            "of a Diplomacy game, the message history between two players, and "
+            "of a Diplomacy game, the message history between two players."
             "the recommended orders by Cicero for the current phase.\n"
-            "Your goal is to provide feedback on whether to trust the last message, "
+            "Your goal is to help respond to the last message from another player, "
             "based on the context provided.\n"
             "\n<</SYS>>"
         )
@@ -161,9 +169,10 @@ class LlmAdvisor(BaselineBot):
             f"Board Status: {sorted_board_states}\n\n"
             f"Cicero Recommendation for {own}: {sender_orders}\n\n"
             f"Message History: {my_message}\n    \n---\n\n"
-            f"Question:As the advisor of {own}, Should we trust last message from {oppo}? [/INST]"
+            f"Question: I({own}) decide to trust {oppo}. As the advisor of {own}, just give me one short but not general(specific to the last message) message which I can use directly to respond to {oppo}'s last message. [/INST]"
         )
         return prompt
+
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
         """Carry out one round of messaging, along with related tasks.
@@ -174,7 +183,9 @@ class LlmAdvisor(BaselineBot):
         for other_power in get_other_powers([self.power_name], self.game):
             prompt = self.format_prompt(self.power_name, other_power)
             generate_text = self.generate_text(prompt)
-            await self.suggest_message(other_power, generate_text)
+            index = generate_text.find('[/INST] ')
+            model_output = generate_text[index+8:]
+            await self.suggest_message(other_power, model_output)
 
         return list(orders)
 
@@ -200,3 +211,13 @@ class LlmAdvisor(BaselineBot):
         """
         orders = self.get_random_orders()
         return orders
+
+
+# advisor = LlmAdvisor()
+# prompt = advisor.format_prompt_test()
+# print(prompt)
+# print('-------------------------------------------')
+# generate_text = advisor.generate_text(prompt)
+# index = generate_text.find('[/INST] ')
+# model_output = generate_text[index+8:]
+# print(model_output)
