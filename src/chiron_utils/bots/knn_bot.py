@@ -1,5 +1,5 @@
 """Abstract base classes for bots."""
-
+from abc import ABC
 from dataclasses import dataclass
 import os
 from pathlib import Path
@@ -30,8 +30,7 @@ POWER_TO_INDEX = {
 }
 
 
-@dataclass
-class KnnBot(BaselineBot):
+class KnnBot(BaselineBot, ABC):
     """Currently a dictionary mapping phase type to a model
 
     Phase types are 'SM', 'FM', 'WA, 'SR', 'FR', 'CD'
