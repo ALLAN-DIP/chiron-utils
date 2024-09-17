@@ -1,6 +1,6 @@
 powers=("AUSTRIA" "FRANCE" "GERMANY" "RUSSIA" "TURKEY" "ITALY")
 for power in "${powers[@]}"; do
-    python scripts/run_bot.py --host diplomacy.alexhedges.dev \
+  python scripts/run_bot.py --host diplomacy.alexhedges.dev \
     --port 8433 \
     --use-ssl \
     --game_id knn_test \
