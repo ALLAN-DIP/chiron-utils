@@ -17,7 +17,7 @@ logger = return_logger(__name__)
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
-MODEL_PATH = Path() / "model"
+MODEL_PATH = Path() / "baseline_knn_model.pkl"
 
 POWER_TO_INDEX = {
     "AUSTRIA": 0,
