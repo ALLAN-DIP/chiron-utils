@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 import os
+from pathlib import Path
 import pickle
 from typing import Any, Dict, List, Sequence
 
@@ -16,7 +17,7 @@ logger = return_logger(__name__)
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
-MODEL_PATH = os.path.join(os.getcwd(), "model")
+MODEL_PATH = Path() / "model"
 
 POWER_TO_INDEX = {
     "AUSTRIA": 0,
@@ -32,6 +33,7 @@ POWER_TO_INDEX = {
 @dataclass
 class KnnBot(BaselineBot):
     """Currently a dictionary mapping phase type to a model
+
     Phase types are 'SM', 'FM', 'WA, 'SR', 'FR', 'CD'
     """
 
@@ -47,18 +49,17 @@ class KnnBot(BaselineBot):
 
     def get_orders(self) -> List[str]:
         name = self.game.phase
-
         units = self.game.map.units
         centers = self.game.map.centers
         homes = self.game.map.homes
-        influences = dict()
 
+        influences = {}
         for power, power_class in self.game.powers.items():
             influences[power] = power_class.influence
 
         vector, _, season = entry_to_vectors(
             None,
-            False,
+            include_orders=False,
             name_data=name,
             units_data=units,
             centers_data=centers,
