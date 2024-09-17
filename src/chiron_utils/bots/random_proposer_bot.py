@@ -76,9 +76,9 @@ class RandomProposerBot(BaselineBot, ABC):
 
         for other_power, suggested_random_orders in random_order_proposals.items():
             if self.bot_type == BotType.ADVISOR:
-                await self.suggest_message(other_power, (suggested_random_orders))
+                await self.suggest_message(other_power, suggested_random_orders)
             elif self.bot_type == BotType.PLAYER:
-                await self.send_message(other_power, (suggested_random_orders))
+                await self.send_message(other_power, suggested_random_orders)
 
         self.is_first_messaging_round = False
 
