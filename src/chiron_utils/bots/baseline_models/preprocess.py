@@ -1,11 +1,18 @@
 import json
+from typing import Any, Dict, Optional, Tuple
 
 import numpy as np
 
-from chiron_utils.bots.baseline_models.constants import *
+from chiron_utils.bots.baseline_models.constants import (
+    CENTERS,
+    HOMES,
+    INFLUENCES,
+    POWERS,
+    TERRITORIES,
+)
 
 
-def encode_class(orders):
+def encode_class(orders) -> str:
     classes = np.ndarray([len(POWERS)], dtype=object)
     for i, power in enumerate(POWERS):
         if power in orders:
@@ -29,14 +36,14 @@ def decode_class(encoding):
 
 
 def entry_to_vectors(
-    phase,
-    include_orders=True,
-    name_data=None,
-    units_data=None,
-    centers_data=None,
-    homes_data=None,
-    influences_data=None,
-):
+    phase: Optional[Dict[str, Any]],
+    include_orders: bool = True,
+    name_data: Optional[Dict[str, Any]] = None,
+    units_data: Optional[Dict[str, Any]] = None,
+    centers_data: Optional[Dict[str, Any]] = None,
+    homes_data: Optional[Dict[str, Any]] = None,
+    influences_data: Optional[Dict[str, Any]] = None,
+) -> Tuple[Any, Any, Any]:
 
     # If the entire phase is available in dipnet format, pass phase directly in.
     if phase:

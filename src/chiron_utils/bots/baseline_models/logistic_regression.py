@@ -3,7 +3,7 @@ from time import time
 
 from sklearn.linear_model import LogisticRegression
 
-from chiron_utils.bots.baseline_models.constants import *
+from chiron_utils.bots.baseline_models.constants import POWERS
 from chiron_utils.bots.baseline_models.evaluation import evaluate_model
 from chiron_utils.bots.baseline_models.preprocess import generate_x_y
 

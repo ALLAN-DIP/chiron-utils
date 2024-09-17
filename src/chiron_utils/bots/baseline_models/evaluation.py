@@ -1,7 +1,5 @@
-from chiron_utils.bots.baseline_models.constants import *
-from chiron_utils.bots.baseline_models.preprocess import (
-    decode_class,
-)
+from chiron_utils.bots.baseline_models.constants import POWERS
+from chiron_utils.bots.baseline_models.preprocess import decode_class
 
 
 class Results:
