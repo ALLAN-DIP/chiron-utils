@@ -158,10 +158,10 @@ def main() -> None:
         )
         print(json.dumps(create_game_data, ensure_ascii=False, indent=2))
     bot_args = ""
-    if extra_bot_args is not None:
-        bot_args += f" {extra_bot_args}"
     if bot_args:
         bot_args += " "
+    if extra_bot_args is not None:
+        bot_args += f"{extra_bot_args} "
     log_dir = output_dir / "logs" / game_id
     log_dir.mkdir(parents=True, exist_ok=True)
     data_dir = output_dir / "data"
