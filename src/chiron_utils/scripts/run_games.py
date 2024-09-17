@@ -159,7 +159,7 @@ def main() -> None:
         print(json.dumps(create_game_data, ensure_ascii=False, indent=2))
     bot_args = ""
     if extra_bot_args is not None:
-        bot_args += f" {extra_bot_args}"
+        bot_args += f"{extra_bot_args}"
     if bot_args:
         bot_args += " "
     log_dir = output_dir / "logs" / game_id
