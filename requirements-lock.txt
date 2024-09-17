@@ -14,10 +14,12 @@ identify==2.6.0
 idna==3.7
 iniconfig==2.0.0
 isort==5.13.2
+joblib==1.4.2
 mccabe==0.7.0
 mypy==1.8.0
 mypy-extensions==1.0.0
 nodeenv==1.9.1
+numpy==1.26.4
 packaging==24.1
 parsimonious==0.9.0
 platformdirs==4.2.2
@@ -31,8 +33,10 @@ PyYAML==6.0.2
 regex==2024.7.24
 requests==2.32.3
 scikit-learn==1.4.1.post1
+scipy==1.14.1
 setuptools==72.2.0
 six==1.16.0
+threadpoolctl==3.5.0
 tomlkit==0.13.2
 tornado==6.4.1
 tqdm==4.66.5
