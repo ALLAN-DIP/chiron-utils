@@ -94,9 +94,9 @@ class KnnBot(BaselineBot):
             if power == self.power_name:
                 continue
             elif self.bot_type == BotType.ADVISOR:
-                await self.suggest_message(power, (order_proposal))
+                await self.suggest_message(power, order_proposal)
             elif self.bot_type == BotType.PLAYER:
-                await self.send_message(power, (order_proposal))
+                await self.send_message(power, order_proposal)
 
         self.is_first_messaging_round = False
 
