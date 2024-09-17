@@ -1,6 +1,7 @@
 """Bots that carry out random orders and make random order proposals."""
 
 from abc import ABC
+from dataclasses import dataclass
 import random
 from typing import Dict, List, Sequence
 
@@ -13,6 +14,7 @@ from chiron_utils.parsing_utils import dipnet_to_daide_parsing
 from chiron_utils.utils import get_other_powers
 
 
+@dataclass
 class RandomProposerBot(BaselineBot, ABC):
     """Bot that carries out random orders and sends random order proposals to other bots.
 
