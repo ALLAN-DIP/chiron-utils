@@ -1,22 +1,13 @@
 """Abstract base classes for bots."""
 
-from abc import ABC, abstractmethod
-import asyncio
 from dataclasses import dataclass
 import os
-import random
-from typing import ClassVar, List, Optional, Sequence
 import pickle
-from sklearn.neighbors import KNeighborsClassifier
-
-from diplomacy import Game, Message
-from diplomacy.client.network_game import NetworkGame
-from diplomacy.utils import strings
+from typing import ClassVar, List, Sequence
 
 from chiron_utils.bots.baseline_bot import BaselineBot
 from chiron_utils.bots.baseline_models.evaluation import infer
 from chiron_utils.bots.baseline_models.preprocess import entry_to_vectors
-
 from chiron_utils.utils import return_logger
 
 logger = return_logger(__name__)
@@ -38,8 +29,7 @@ POWER_TO_INDEX = {
 
 @dataclass
 class KnnBot(BaselineBot):
-    """
-    Currently a dictionary mapping phase type to a model
+    """Currently a dictionary mapping phase type to a model
     Phase types are 'SM', 'FM', 'WA, 'SR', 'FR', 'CD'
     """
 
@@ -96,7 +86,7 @@ class KnnBot(BaselineBot):
 
         order_proposal = str(self.get_orders())
 
-        for power in POWER_TO_INDEX.keys():
+        for power in POWER_TO_INDEX:
             print(f"Other power: {power}")
             print(f"Suggested order: {order_proposal}")
             if power == self.power_name:
