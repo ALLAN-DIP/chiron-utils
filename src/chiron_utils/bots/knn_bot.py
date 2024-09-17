@@ -5,7 +5,9 @@ import os
 import pickle
 from typing import ClassVar, List, Sequence
 
-from chiron_utils.bots.baseline_bot import BaselineBot
+from diplomacy.utils.constants import SuggestionType
+
+from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.bots.baseline_models.evaluation import infer
 from chiron_utils.bots.baseline_models.preprocess import entry_to_vectors
 from chiron_utils.utils import return_logger
@@ -33,11 +35,11 @@ class KnnBot(BaselineBot):
     Phase types are 'SM', 'FM', 'WA, 'SR', 'FR', 'CD'
     """
 
-    models = dict()
-    with open(MODEL_PATH, "rb") as model_file:
-        models = pickle.load(model_file)
-
     is_first_messaging_round = False
+
+    def __post_init__(self) -> None:
+        with open(MODEL_PATH, "rb") as model_file:
+            self.models = pickle.load(model_file)
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
@@ -74,7 +76,7 @@ class KnnBot(BaselineBot):
     async def gen_orders(self) -> List[str]:
         orders = self.get_orders()
         power_orders = orders[POWER_TO_INDEX[self.power_name]]
-        if self.bot_type == "advisor":
+        if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(power_orders)
         print(f"Sending orders!!!\n{power_orders}")
         return power_orders
@@ -91,9 +93,9 @@ class KnnBot(BaselineBot):
             print(f"Suggested order: {order_proposal}")
             if power == self.power_name:
                 continue
-            elif self.bot_type == "advisor":
+            elif self.bot_type == BotType.ADVISOR:
                 await self.suggest_message(power, (order_proposal))
-            elif self.bot_type == "player":
+            elif self.bot_type == BotType.PLAYER:
                 await self.send_message(power, (order_proposal))
 
         self.is_first_messaging_round = False
@@ -104,10 +106,11 @@ class KnnBot(BaselineBot):
 class KnnAdvisor(KnnBot):
     """Advisor form of `RandomProposerBot`."""
 
-    bot_type: ClassVar[str] = "advisor"
+    bot_type = BotType.ADVISOR
+    suggestion_type = SuggestionType.MOVE_ONLY
 
 
 class KnnPlayer(KnnBot):
     """Player form of `RandomProposerBot`."""
 
-    bot_type: ClassVar[str] = "player"
+    bot_type = BotType.PLAYER
