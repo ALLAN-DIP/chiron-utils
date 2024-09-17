@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 import os
 import pickle
-from typing import ClassVar, List, Sequence
+from typing import Any, Dict, List, Sequence
 
 from diplomacy.utils.constants import SuggestionType
 
@@ -39,24 +39,21 @@ class KnnBot(BaselineBot):
 
     def __post_init__(self) -> None:
         with open(MODEL_PATH, "rb") as model_file:
-            self.models = pickle.load(model_file)
+            self.models: Dict[str, Any] = pickle.load(model_file)
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
 
     def get_orders(self) -> List[str]:
-        map = self.game.map
-        powers = self.game.powers
-
         name = self.game.phase
 
-        units = map.units
-        centers = map.centers
-        homes = map.homes
+        units = self.game.map.units
+        centers = self.game.map.centers
+        homes = self.game.map.homes
         influences = dict()
 
-        for power, power_class in powers.items():
+        for power, power_class in self.game.powers.items():
             influences[power] = power_class.influence
 
         vector, _, season = entry_to_vectors(
