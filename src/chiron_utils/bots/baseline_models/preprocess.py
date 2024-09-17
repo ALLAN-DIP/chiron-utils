@@ -27,7 +27,7 @@ def encode_class(orders) -> str:
     return encoding
 
 
-def decode_class(encoding):
+def decode_class(encoding: str):
     classes = np.array(encoding.split("&"))
     decoding = np.ndarray([len(POWERS)], dtype=object)
     for i, power in enumerate(POWERS):
@@ -76,31 +76,27 @@ def entry_to_vectors(
 
     for j, power in enumerate(POWERS):
         # Units
-        if power in units_data:
-            if units_data[power] is not None:
-                for i, region in enumerate(TERRITORIES):
-                    if f"A {region}" in units_data[power] or f"*A {region}" in units_data[power]:
-                        units_atr[2 * i * n_powers + j] = 1
-                    elif f"F {region}" in units_data[power] or f"*F {region}" in units_data[power]:
-                        units_atr[i * 2 * n_powers + j + 1] = 1
+        if power in units_data and units_data[power] is not None:
+            for i, region in enumerate(TERRITORIES):
+                if f"A {region}" in units_data[power] or f"*A {region}" in units_data[power]:
+                    units_atr[2 * i * n_powers + j] = 1
+                elif f"F {region}" in units_data[power] or f"*F {region}" in units_data[power]:
+                    units_atr[i * 2 * n_powers + j + 1] = 1
         # Centers
-        if power in centers_data:
-            if centers_data[power] is not None:
-                for i, center in enumerate(CENTERS):
-                    if center in centers_data[power]:
-                        centers_atr[i * n_powers + j] = power
+        if power in centers_data and centers_data[power] is not None:
+            for i, center in enumerate(CENTERS):
+                if center in centers_data[power]:
+                    centers_atr[i * n_powers + j] = power
         # Homes
-        if power in homes_data:
-            if homes_data[power] is not None:
-                for i, home in enumerate(HOMES):
-                    if home in homes_data[power]:
-                        homes_atr[i * n_powers + j] = power
+        if power in homes_data and homes_data[power] is not None:
+            for i, home in enumerate(HOMES):
+                if home in homes_data[power]:
+                    homes_atr[i * n_powers + j] = power
         # Influence
-        if power in influences_data:
-            if influences_data[power] is not None:
-                for i, inf in enumerate(TERRITORIES):
-                    if inf in influences_data[power]:
-                        influences_atr[i * n_powers + j] = power
+        if power in influences_data and influences_data[power] is not None:
+            for i, inf in enumerate(TERRITORIES):
+                if inf in influences_data[power]:
+                    influences_atr[i * n_powers + j] = power
 
     attributes = np.concatenate((phase_atr, units_atr, centers_atr, homes_atr, influences_atr))
 
@@ -113,18 +109,18 @@ def entry_to_vectors(
     return attributes, classes, season_phase
 
 
-def generate_x_y(groups, src, split_phase_types=False):
+def generate_x_y(groups, src, split_phase_types: bool = False):
     if split_phase_types:
         for line in src:
             game = json.loads(line)
             for phase in game["phases"]:
                 vectors = entry_to_vectors(phase)
                 if vectors[2] not in groups.keys():
-                    groups[vectors[2]] = (list(), list())
+                    groups[vectors[2]] = ([], [])
                 groups[vectors[2]][0].append(vectors[0])
                 groups[vectors[2]][1].append(vectors[1])
     else:
-        groups["all"] = (list(), list())
+        groups["all"] = ([], [])
         for line in src:
             game = json.loads(line)
             for phase in game["phases"]:
