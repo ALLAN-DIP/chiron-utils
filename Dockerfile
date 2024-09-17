@@ -2,7 +2,7 @@
 # Use the command `hadolint Dockerfile` to test
 # Adding Hadolint to `pre-commit` is non-trivial, so the command must be run manually
 
-FROM ghcr.io/allan-dip/chiron-utils:baseline-knn-model as baseline-knn-model
+FROM ghcr.io/allan-dip/chiron-utils:baseline-knn-model AS baseline-knn-model
 
 FROM python:3.11.9-slim-bookworm AS achilles
 
