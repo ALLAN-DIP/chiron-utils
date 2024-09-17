@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
 powers=("AUSTRIA" "FRANCE" "GERMANY" "RUSSIA" "TURKEY" "ITALY")
 for power in "${powers[@]}"; do
   python scripts/run_bot.py --host diplomacy.alexhedges.dev \
