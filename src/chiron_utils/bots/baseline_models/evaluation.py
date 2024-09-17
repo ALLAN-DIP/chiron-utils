@@ -1,7 +1,12 @@
 from chiron_utils.bots.baseline_models.constants import *
-from chiron_utils.bots.baseline_models.preprocess import encode_class, decode_class, entry_to_vectors
+from chiron_utils.bots.baseline_models.preprocess import (
+    encode_class,
+    decode_class,
+    entry_to_vectors,
+)
 
-class Results():
+
+class Results:
     def __init__(self, models, split_phase_types):
         self.models = models
         self.split_phase_types = split_phase_types
@@ -46,6 +51,7 @@ class Results():
 
         self.all_accuracy = self.all_correct / self.all_total
 
+
 def order_accuracy(predicted, true):
     correct = 0
     total = 0
@@ -59,10 +65,12 @@ def order_accuracy(predicted, true):
             total += 1
     return correct, total
 
+
 def evaluate_model(test_dict, models, split_phase_types=False):
     results = Results(models, split_phase_types)
     results.evaluate(test_dict)
     return results
+
 
 def infer(model, entry_vector):
     print(entry_vector)

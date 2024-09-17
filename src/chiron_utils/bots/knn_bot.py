@@ -1,6 +1,5 @@
 """Abstract base classes for bots."""
 
-
 from abc import ABC, abstractmethod
 import asyncio
 from dataclasses import dataclass
@@ -27,24 +26,25 @@ COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_L
 MODEL_PATH = os.path.join(os.getcwd(), "model")
 
 POWER_TO_INDEX = {
-    "AUSTRIA" : 0,
-    "ENGLAND" : 1,
-    'FRANCE' : 2,
-    'GERMANY' : 3,
-    'ITALY' : 4,
-    'RUSSIA' : 5,
-    'TURKEY' : 6
+    "AUSTRIA": 0,
+    "ENGLAND": 1,
+    "FRANCE": 2,
+    "GERMANY": 3,
+    "ITALY": 4,
+    "RUSSIA": 5,
+    "TURKEY": 6,
 }
+
 
 @dataclass
 class KnnBot(BaselineBot):
-
     """
     Currently a dictionary mapping phase type to a model
     Phase types are 'SM', 'FM', 'WA, 'SR', 'FR', 'CD'
-    """ 
+    """
+
     models = dict()
-    with open(MODEL_PATH, 'rb') as model_file:
+    with open(MODEL_PATH, "rb") as model_file:
         models = pickle.load(model_file)
 
     is_first_messaging_round = False
@@ -67,7 +67,15 @@ class KnnBot(BaselineBot):
         for power, power_class in powers.items():
             influences[power] = power_class.influence
 
-        vector, _, season = entry_to_vectors(None, False, name_data=name, units_data=units, centers_data=centers, homes_data=homes, influences_data=influences)
+        vector, _, season = entry_to_vectors(
+            None,
+            False,
+            name_data=name,
+            units_data=units,
+            centers_data=centers,
+            homes_data=homes,
+            influences_data=influences,
+        )
         orders = infer(self.models[season], vector.reshape(1, -1))
         print(orders)
 
@@ -82,7 +90,7 @@ class KnnBot(BaselineBot):
         return power_orders
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
-        
+
         if not self.is_first_messaging_round:
             return list(orders)
 

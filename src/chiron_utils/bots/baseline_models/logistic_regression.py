@@ -6,6 +6,7 @@ from chiron_utils.bots.baseline_models.preprocess import generate_x_y
 from chiron_utils.bots.baseline_models.constants import *
 from chiron_utils.bots.baseline_models.evaluation import evaluate_model
 
+
 def order_accuracy(predicted, true):
     # print(f"Predicted: {predicted}\nTrue: {true}\n")
     macro_correct = 0
@@ -23,12 +24,13 @@ def order_accuracy(predicted, true):
             micro_total += 1
     return macro_correct, micro_correct, macro_total, micro_total
 
+
 def run_lr(train_path, test_path):
     train_dict = dict()
     split_phases = False
 
     print("Preprocessing training data")
-    with open(train_path, 'r') as train:
+    with open(train_path, "r") as train:
         generate_x_y(train_dict, train, split_phase_types=split_phases)
 
     models = dict()
@@ -36,15 +38,16 @@ def run_lr(train_path, test_path):
     for phase_type, data in train_dict.items():
         models[phase_type] = LogisticRegression(random_state=1)
         models[phase_type].fit(data[0], data[1])
-    
+
     print("Preprocessing testing data")
     test_dict = dict()
-    with open(test_path, 'r') as test:
+    with open(test_path, "r") as test:
         generate_x_y(test_dict, test, split_phase_types=split_phases)
-    
+
     print("Evaluating model")
     results = evaluate_model(test_dict, models, split_phase_types=split_phases)
     print(results)
+
 
 def main():
     data_path = os.path.join("D:", os.sep, "Downloads", "dipnet-data-diplomacy-v1-27k-msgs", "test")
@@ -52,6 +55,7 @@ def main():
     test_path = os.path.join(data_path, "test.jsonl")
 
     run_lr(train_path, test_path)
+
 
 if __name__ == "__main__":
     start_time = time()

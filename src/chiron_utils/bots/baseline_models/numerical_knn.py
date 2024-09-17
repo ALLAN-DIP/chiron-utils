@@ -4,14 +4,15 @@ import random
 from time import time
 from heapq import nsmallest
 
+
 class Knn_Model:
     def __init__(self, k=1):
         self.data = list()
         self.k = k
-        
+
     def get_state_dist(self, state, other):
         dist = 0
-        
+
         """
         Units, Centers, Homes, Influence:
         Using naive Hamming distance metric
@@ -41,7 +42,7 @@ class Knn_Model:
                     for unit in other_info[nation]:
                         dist += not unit in info[nation]
         return dist
-    
+
     def get_order_dist(self, orders, other):
         dist = 0
         correct = 0
@@ -82,26 +83,26 @@ class Knn_Model:
 
     def train(self, train_path):
         print(f"Training kNN for k = {self.k}")
-        with open(train_path, 'r') as src:
+        with open(train_path, "r") as src:
             for line in src:
                 game = json.loads(line)
                 for phase in game["phases"]:
                     self.data.append((phase["state"], phase["orders"]))
 
     def infer_sort(self, state):
-        choices = sorted(self.data, key=lambda x : self.get_state_dist(state, x[0])) 
-        chosen = random.sample(choices[:self.k], 1)[0]
+        choices = sorted(self.data, key=lambda x: self.get_state_dist(state, x[0]))
+        chosen = random.sample(choices[: self.k], 1)[0]
         return chosen
-    
+
     def infer(self, state):
-        choices = nsmallest(self.k, self.data, key=lambda x : self.get_state_dist(state, x[0])) 
-        chosen = random.sample(choices[:self.k], 1)[0]
+        choices = nsmallest(self.k, self.data, key=lambda x: self.get_state_dist(state, x[0]))
+        chosen = random.sample(choices[: self.k], 1)[0]
         return chosen
 
     def eval(self, test_path):
         print(f"Evaluating kNN for k = {self.k}")
         pairs = list()
-        with open(test_path, 'r') as src:
+        with open(test_path, "r") as src:
             for i, line in enumerate(src):
                 game = json.loads(line)
                 for phase in game["phases"]:
@@ -117,6 +118,7 @@ class Knn_Model:
                     print(f"Completed first {i + 1} inferences")
 
         return pairs
+
 
 def main():
     data_path = os.path.join("D:", os.sep, "Downloads", "dipnet-data-diplomacy-v1-27k-msgs", "test")
@@ -134,7 +136,7 @@ def main():
         # print(f"True choice:\n{true[1]}\n\nChosen choice:\n{chosen[1]}\n\nState score: {state_score}\nOrders score: {orders_score}\nOrders accuracy {correct:.0f}/{total}")
     accuracy = overall_correct / overall_total
     print(f"Order accuracy: {(100 * accuracy):.2f}%")
-    
+
 
 if __name__ == "__main__":
     start_time = time()

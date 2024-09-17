@@ -5,6 +5,7 @@ import json
 from chiron_utils.bots.baseline_models.preprocess import decode_class, entry_to_vectors
 from chiron_utils.bots.baseline_models.constants import *
 
+
 def order_accuracy(predicted, true):
     # print(f"Predicted: {predicted}\nTrue: {true}\n")
     macro_correct = 0
@@ -22,13 +23,14 @@ def order_accuracy(predicted, true):
             micro_total += 1
     return macro_correct, micro_correct, macro_total, micro_total
 
+
 def run_lr(train_path, test_path, batch_size=100):
     x_batches = list()
     y_batches = list()
     classes = set()
 
     print("Preprocessing training data")
-    with open(train_path, 'r') as train:
+    with open(train_path, "r") as train:
         for i, line in enumerate(train):
             game = json.loads(line)
 
@@ -49,22 +51,22 @@ def run_lr(train_path, test_path, batch_size=100):
         classes = classes.union(set(y))
 
     print("Training model")
-    model = SGDClassifier(loss='log_loss')
+    model = SGDClassifier(loss="log_loss")
     for i, (x, y) in enumerate(zip(x_batches, y_batches)):
         print(f"Training on batch {i + 1}")
         model.partial_fit(x, y, classes=list(classes))
-    
+
     print("Preprocessing testing data")
     test_data = list()
     true_labels = list()
-    with open(test_path, 'r') as test:
+    with open(test_path, "r") as test:
         for line in test:
             game = json.loads(line)
             for phase in game["phases"]:
                 vectors = entry_to_vectors(phase)
                 test_data.append(vectors[0])
                 true_labels.append(vectors[1])
-    
+
     print("Evaluating model")
     pred_labels = model.predict(test_data)
     pred_orders = map(decode_class, pred_labels)
@@ -83,8 +85,11 @@ def run_lr(train_path, test_path, batch_size=100):
     print(f"Macro Accuracy: {(100 * overall_macro_correct / overall_macro_total):.2f}%")
     print(f"Micro Accuracy: {(100 * overall_micro_correct / overall_micro_total):.2f}%")
 
+
 def main():
-    data_path = os.path.join("D:", os.sep, "Downloads", "dipnet-data-diplomacy-v1-27k-msgs", "medium")
+    data_path = os.path.join(
+        "D:", os.sep, "Downloads", "dipnet-data-diplomacy-v1-27k-msgs", "medium"
+    )
     train_path = os.path.join(data_path, "train.jsonl")
     test_path = os.path.join(data_path, "test.jsonl")
 

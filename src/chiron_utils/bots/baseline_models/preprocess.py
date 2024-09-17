@@ -2,6 +2,7 @@ import numpy as np
 from chiron_utils.bots.baseline_models.constants import *
 import json
 
+
 def encode_class(orders):
     classes = np.ndarray([len(POWERS)], dtype=object)
     for i, power in enumerate(POWERS):
@@ -13,9 +14,9 @@ def encode_class(orders):
         else:
             classes[i] = ""
 
-
     encoding = "&".join(classes)
     return encoding
+
 
 def decode_class(encoding):
     classes = np.array(encoding.split("&"))
@@ -24,8 +25,16 @@ def decode_class(encoding):
         decoding[i] = classes[i].split("^")
     return decoding
 
-def entry_to_vectors(phase, include_orders=True, name_data=None, units_data=None, centers_data=None, homes_data=None, influences_data=None):
 
+def entry_to_vectors(
+    phase,
+    include_orders=True,
+    name_data=None,
+    units_data=None,
+    centers_data=None,
+    homes_data=None,
+    influences_data=None,
+):
 
     # If the entire phase is available in dipnet format, pass phase directly in.
     if phase:
@@ -39,14 +48,7 @@ def entry_to_vectors(phase, include_orders=True, name_data=None, units_data=None
     # Otherwise set phase to None and pass other fields.
 
     FIELDS = ["powers", "centers", "homes", "influence"]
-    phases = {
-        'SM' : 0,
-        'FM' : 1,
-        'WA' : 2,
-        'SR' : 3,
-        'FR' : 4,
-        'CD' : 5
-    }
+    phases = {"SM": 0, "FM": 1, "WA": 2, "SR": 3, "FR": 4, "CD": 5}
 
     n_powers = len(POWERS)
 
@@ -98,11 +100,12 @@ def entry_to_vectors(phase, include_orders=True, name_data=None, units_data=None
     if include_orders:
         orders = phase["orders"]
         classes = encode_class(orders)
-        
+
     return attributes, classes, season_phase
 
+
 def generate_x_y(groups, src, split_phase_types=False):
-    if split_phase_types:    
+    if split_phase_types:
         for line in src:
             game = json.loads(line)
             for phase in game["phases"]:
@@ -112,7 +115,7 @@ def generate_x_y(groups, src, split_phase_types=False):
                 groups[vectors[2]][0].append(vectors[0])
                 groups[vectors[2]][1].append(vectors[1])
     else:
-        groups["all"] = (list(), list())    
+        groups["all"] = (list(), list())
         for line in src:
             game = json.loads(line)
             for phase in game["phases"]:
