@@ -1,9 +1,11 @@
+from typing import Tuple
+
 from chiron_utils.bots.baseline_models.constants import POWERS
 from chiron_utils.bots.baseline_models.preprocess import decode_class
 
 
 class Results:
-    def __init__(self, models, split_phase_types):
+    def __init__(self, models, split_phase_types) -> None:
         self.models = models
         self.split_phase_types = split_phase_types
 
@@ -15,7 +17,7 @@ class Results:
         self.all_total = 0
         self.all_accuracy = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         output = f"Complete Correct: {self.all_correct}\nComplete Total: {self.all_total}\nComplete Accuracy: {(100 * self.all_accuracy):.2f}%"
         if self.split_phase_types:
             for phase_type in self.class_accuracies.keys():
@@ -24,7 +26,7 @@ class Results:
                 output += f"Class Accuracy ({phase_type}): {(100 * self.class_accuracies[phase_type]):.2f}%\n"
         return output
 
-    def evaluate(self, test_dict):
+    def evaluate(self, test_dict) -> None:
         for phase_type, data in test_dict.items():
             print(f"Predicting for phases {phase_type}")
             pred_labels = self.models[phase_type].predict(data[0])
@@ -48,7 +50,7 @@ class Results:
         self.all_accuracy = self.all_correct / self.all_total
 
 
-def order_accuracy(predicted, true):
+def order_accuracy(predicted, true) -> Tuple[int, int]:
     correct = 0
     total = 0
 
@@ -62,7 +64,7 @@ def order_accuracy(predicted, true):
     return correct, total
 
 
-def evaluate_model(test_dict, models, split_phase_types=False):
+def evaluate_model(test_dict, models, split_phase_types: bool = False):
     results = Results(models, split_phase_types)
     results.evaluate(test_dict)
     return results
