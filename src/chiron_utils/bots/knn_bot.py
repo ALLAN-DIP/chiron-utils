@@ -30,6 +30,7 @@ POWER_TO_INDEX = {
 }
 
 
+@dataclass
 class KnnBot(BaselineBot, ABC):
     """Currently a dictionary mapping phase type to a model
 
