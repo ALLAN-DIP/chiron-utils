@@ -104,13 +104,13 @@ class KnnBot(BaselineBot):
 
 
 class KnnAdvisor(KnnBot):
-    """Advisor form of `RandomProposerBot`."""
+    """Advisor form of `KnnBot`."""
 
     bot_type = BotType.ADVISOR
     suggestion_type = SuggestionType.MOVE_ONLY
 
 
 class KnnPlayer(KnnBot):
-    """Player form of `RandomProposerBot`."""
+    """Player form of `KnnBot`."""
 
     bot_type = BotType.PLAYER
