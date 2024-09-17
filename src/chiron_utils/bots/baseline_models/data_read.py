@@ -1,5 +1,5 @@
-import os
 import json
+import os
 
 
 def main():
@@ -7,7 +7,7 @@ def main():
     filepath = os.path.join(path, "standard_no_press.jsonl")
     messages_count = 0
 
-    with open(filepath, "r") as file:
+    with open(filepath) as file:
         codes = set()
         for i, line in enumerate(file):
             entry = json.loads(line)

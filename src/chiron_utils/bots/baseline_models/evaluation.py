@@ -1,8 +1,6 @@
 from chiron_utils.bots.baseline_models.constants import *
 from chiron_utils.bots.baseline_models.preprocess import (
-    encode_class,
     decode_class,
-    entry_to_vectors,
 )
 
 

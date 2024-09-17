@@ -28,7 +28,7 @@ class Splitter:
             filename = os.path.join(self.dest_path, name)
             write_files.append(open(filename, "w"))
 
-        with open(self.src_path, "r") as src:
+        with open(self.src_path) as src:
             for n, line in enumerate(src):
                 for s, split in enumerate(self.split_points):
                     if n < split:

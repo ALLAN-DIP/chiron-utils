@@ -1,11 +1,11 @@
-from sklearn.neighbors import KNeighborsClassifier
 import os
-import json
-import numpy as np
-from chiron_utils.bots.baseline_models.constants import *
-from chiron_utils.bots.baseline_models.preprocess import generate_x_y
 from time import time
+
+from sklearn.neighbors import KNeighborsClassifier
+
+from chiron_utils.bots.baseline_models.constants import *
 from chiron_utils.bots.baseline_models.evaluation import evaluate_model
+from chiron_utils.bots.baseline_models.preprocess import generate_x_y
 
 
 def run_knn(train_path, test_path):
@@ -14,7 +14,7 @@ def run_knn(train_path, test_path):
     split_phases = True
 
     print("Preprocessing training data")
-    with open(train_path, "r") as train:
+    with open(train_path) as train:
         generate_x_y(train_dict, train, split_phase_types=split_phases)
 
     models = dict()
@@ -27,7 +27,7 @@ def run_knn(train_path, test_path):
 
     print("Preprocessing testing data")
     test_dict = dict()
-    with open(test_path, "r") as test:
+    with open(test_path) as test:
         generate_x_y(test_dict, test, split_phase_types=split_phases)
 
     print("Evaluating model")

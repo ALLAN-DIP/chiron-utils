@@ -2,8 +2,8 @@
 
 from chiron_utils.bots.baseline_bot import BaselineBot as BaselineBot
 from chiron_utils.bots.knn_bot import (
-    KnnPlayer as KnnPlayer,
     KnnAdvisor as KnnAdvisor,
+    KnnPlayer as KnnPlayer,
 )
 from chiron_utils.bots.random_proposer_bot import (
     RandomProposerAdvisor as RandomProposerAdvisor,

@@ -1,8 +1,8 @@
-import os
+from heapq import nsmallest
 import json
+import os
 import random
 from time import time
-from heapq import nsmallest
 
 
 class Knn_Model:
@@ -30,17 +30,17 @@ class Knn_Model:
             info = state[field]
             other_info = other[field]
             for nation in info.keys():
-                if not nation in other_info.keys():
+                if nation not in other_info.keys():
                     dist += len(info[nation])
                 else:
                     for unit in info[nation]:
-                        dist += not unit in other_info[nation]
+                        dist += unit not in other_info[nation]
             for nation in other_info.keys():
-                if not nation in info.keys():
+                if nation not in info.keys():
                     dist += len(other_info[nation])
                 else:
                     for unit in other_info[nation]:
-                        dist += not unit in info[nation]
+                        dist += unit not in info[nation]
         return dist
 
     def get_order_dist(self, orders, other):
@@ -55,27 +55,23 @@ class Knn_Model:
         for nation in orders.keys():
             if orders[nation] == None:
                 continue
-            elif not nation in other.keys():
-                dist += len(orders[nation])
-            elif other[nation] == None:
+            elif nation not in other.keys() or other[nation] == None:
                 dist += len(orders[nation])
             else:
                 equality = True
                 for unit in orders[nation]:
-                    dist += not unit in other[nation]
+                    dist += unit not in other[nation]
                     equality = False
                 correct += 0.5 * equality
         for nation in other.keys():
             if other[nation] == None:
                 continue
-            elif not nation in orders.keys():
-                dist += len(other[nation])
-            elif orders[nation] == None:
+            elif nation not in orders.keys() or orders[nation] == None:
                 dist += len(other[nation])
             else:
                 equality = True
                 for unit in other[nation]:
-                    dist += not unit in orders[nation]
+                    dist += unit not in orders[nation]
                     equality = False
                 correct += 0.5 * equality
 
@@ -83,7 +79,7 @@ class Knn_Model:
 
     def train(self, train_path):
         print(f"Training kNN for k = {self.k}")
-        with open(train_path, "r") as src:
+        with open(train_path) as src:
             for line in src:
                 game = json.loads(line)
                 for phase in game["phases"]:
@@ -102,7 +98,7 @@ class Knn_Model:
     def eval(self, test_path):
         print(f"Evaluating kNN for k = {self.k}")
         pairs = list()
-        with open(test_path, "r") as src:
+        with open(test_path) as src:
             for i, line in enumerate(src):
                 game = json.loads(line)
                 for phase in game["phases"]:

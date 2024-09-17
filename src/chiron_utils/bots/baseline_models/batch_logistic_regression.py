@@ -1,9 +1,11 @@
-from sklearn.linear_model import SGDClassifier
-from time import time
-import os
 import json
-from chiron_utils.bots.baseline_models.preprocess import decode_class, entry_to_vectors
+import os
+from time import time
+
+from sklearn.linear_model import SGDClassifier
+
 from chiron_utils.bots.baseline_models.constants import *
+from chiron_utils.bots.baseline_models.preprocess import decode_class, entry_to_vectors
 
 
 def order_accuracy(predicted, true):
@@ -30,7 +32,7 @@ def run_lr(train_path, test_path, batch_size=100):
     classes = set()
 
     print("Preprocessing training data")
-    with open(train_path, "r") as train:
+    with open(train_path) as train:
         for i, line in enumerate(train):
             game = json.loads(line)
 
@@ -59,7 +61,7 @@ def run_lr(train_path, test_path, batch_size=100):
     print("Preprocessing testing data")
     test_data = list()
     true_labels = list()
-    with open(test_path, "r") as test:
+    with open(test_path) as test:
         for line in test:
             game = json.loads(line)
             for phase in game["phases"]:
