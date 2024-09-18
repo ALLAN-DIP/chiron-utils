@@ -14,6 +14,7 @@ GAME_COMMAND=(
   python fairdiplomacy_external/mila_api.py
   --game_id "$GAME_ID"
   --host "$HOST"
+  --use-ssl
   --power "$POWER"
   --game_type 2
 )
