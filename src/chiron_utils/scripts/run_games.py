@@ -166,7 +166,7 @@ def main() -> None:
     log_dir.mkdir(parents=True, exist_ok=True)
     data_dir = output_dir / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
-    powers = sorted(POWER_NAMES_DICT.values())
+    powers = sorted(POWER_NAMES_DICT.values())[1:]
     run_cmds = []
     for power in powers:
         container_name = f"--name {power}-{game_id} " if runner == DOCKER else ""
