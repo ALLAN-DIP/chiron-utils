@@ -109,6 +109,8 @@ class RandomProposerBot(BaselineBot, ABC):
         orders = self.get_random_orders()
         if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(orders)
+        elif self.bot_type == BotType.PLAYER:
+            await self.send_orders(orders, wait=True)
         return orders
 
 
