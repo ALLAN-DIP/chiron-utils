@@ -22,8 +22,8 @@ time docker run \
   --rm \
   --gpus all \
   --volume "$CICERO_DIR"/agents:/diplomacy_cicero/conf/common/agents:ro \
-  --volume "$CICERO_DIR"/models:/diplomacy_cicero/models:ro \
   --volume "$CICERO_DIR"/gpt2:/usr/local/lib/python3.7/site-packages/data/gpt2:ro \
+  --volume "$CICERO_DIR"/models:/diplomacy_cicero/models:ro \
   --workdir /diplomacy_cicero \
   ghcr.io/allan-dip/diplomacy_cicero:human_experiments-alex \
   "${GAME_COMMAND[@]}" "$@"
