@@ -52,6 +52,8 @@ class BaselineBot(ABC):
         The bot marks itself as ready and then polls the other press bots until they are all ready.
         Once they all, the bot can start communicating.
         """
+        logger.info("Waiting for communication stage to start")
+
         # Comm status should not be sent in local games, only set
         if isinstance(self.game, NetworkGame):
             await self.game.set_comm_status(
@@ -62,12 +64,13 @@ class BaselineBot(ABC):
                 power_name=self.power_name, comm_status=diplomacy_strings.READY
             )
 
-        while not all(  # noqa: ASYNC110
+        while not all(
             power.comm_status == diplomacy_strings.READY
             for power in self.game.powers.values()
             if power.player_type == diplomacy_strings.PRESS_BOT and not power.is_eliminated()
         ):
             await asyncio.sleep(1)
+            logger.info("Still waiting")
 
         if self.bot_type == BotType.ADVISOR:
             assert self.suggestion_type is not None
