@@ -11,7 +11,7 @@ import socket
 import sys
 from typing import Any, Dict, Optional, Sequence, Tuple
 
-from chiron_utils.game_utils import DEFAULT_PORT, create_game, download_game
+from chiron_utils.game_utils import DEFAULT_HOST, DEFAULT_PORT, create_game, download_game
 from chiron_utils.utils import POWER_NAMES_DICT
 
 REPO_DIR = Path(__file__).resolve().parent.parent.parent.parent
@@ -29,8 +29,6 @@ elif IS_ON_TACC:
     DEFAULT_RUNNER = APPTAINER
 else:
     DEFAULT_RUNNER = DOCKER
-
-DEFAULT_HOST = "shade.tacc.utexas.edu"
 
 
 async def run_cmd(cmd: str) -> Dict[str, Any]:
