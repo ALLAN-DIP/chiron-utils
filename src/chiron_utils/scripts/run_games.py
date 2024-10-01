@@ -7,7 +7,6 @@ import getpass
 import json
 from pathlib import Path
 from shlex import quote
-import socket
 import sys
 from typing import Any, Dict, Optional, Sequence, Tuple
 
@@ -16,19 +15,9 @@ from chiron_utils.utils import POWER_NAMES_DICT
 
 REPO_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
-APPTAINER = "apptainer"
 DOCKER = "docker"
-SINGULARITY = "singularity"
 
-IS_ON_CARC = socket.getfqdn().endswith(".usc.edu")
-IS_ON_TACC = socket.getfqdn().endswith(".tacc.utexas.edu")
-
-if IS_ON_CARC:
-    DEFAULT_RUNNER = SINGULARITY
-elif IS_ON_TACC:
-    DEFAULT_RUNNER = APPTAINER
-else:
-    DEFAULT_RUNNER = DOCKER
+DEFAULT_RUNNER = DOCKER
 
 
 async def run_cmd(cmd: str) -> Dict[str, Any]:
@@ -82,21 +71,15 @@ def main() -> None:
         "--runner",
         default=DEFAULT_RUNNER,
         type=str,
-        choices=(APPTAINER, DOCKER, SINGULARITY),
-        help=f"Container runtime. Defaults to {SINGULARITY!r} on CARC, {APPTAINER!r} on TACC, and "
-        f"{DOCKER!r} everywhere else. (current default: %(default)s)",
+        choices=(DOCKER,),
+        help="Container runtime. (default: %(default)s)",
     )
     parser.add_argument(
         "--game-id",
         help="Game ID. If one is not provided, then one will be generated automatically. "
         "Defaults to `$USER_$(date -u +'%%Y_%%m_%%d_%%H_%%M_%%S_%%f')`.",
     )
-    parser.add_argument(
-        "--agent",
-        default=None if IS_ON_CARC or IS_ON_TACC else "achilles",
-        type=str,
-        help="Bot to run. (current default: %(default)s)",
-    )
+    parser.add_argument("--agent", type=str, help="Bot to run.")
     parser.add_argument("--bot_args", type=str, help="Extra arguments to pass to bot.")
     parser.add_argument(
         "--host",
@@ -130,20 +113,8 @@ def main() -> None:
     use_ssl: bool = args.use_ssl
     output_dir: Path = args.output_dir
     extra_bot_args: Optional[str] = args.bot_args
-    if runner == APPTAINER:  # For TACC
-        # Flags based on following docs:
-        # - https://apptainer.org/docs/user/1.1/cli/apptainer_run.html
-        # - https://apptainer.org/docs/user/1.1/docker_and_oci.html#docker-like-compat-flag
-        runner_command = (
-            "apptainer run --cleanenv --ipc --no-eval --no-home --no-init --no-umask --pid"
-        )
-    elif runner == DOCKER:  # For local development
+    if runner == DOCKER:  # For local development
         runner_command = "docker run --rm"
-    elif runner == SINGULARITY:  # For CARC
-        # Flags based on following docs:
-        # - https://docs.sylabs.io/guides/3.11/user-guide/cli/singularity_run.html
-        # - https://docs.sylabs.io/guides/3.11/user-guide/singularity_and_docker.html#docker-like-compat-flag
-        runner_command = "singularity run --compat"
     else:
         # Should never happen
         raise ValueError(f"Provided container runtime {runner!r} not recognized.")
