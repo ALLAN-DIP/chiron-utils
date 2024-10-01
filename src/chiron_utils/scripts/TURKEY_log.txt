@@ -1,0 +1,110 @@
+[2024-10-01 20:35:25.069] [INFO] [__main__] RandomProposerPlayer joining game 'test_chiron_12' as TURKEY
+[2024-10-01 20:35:25.069] [INFO] [diplomacy.client.connection[337625]] Trying to connect.
+[2024-10-01 20:35:25.290] [INFO] [diplomacy.client.connection[337625]] Connection succeeds.
+[2024-10-01 20:35:31.137] [INFO] [__main__] Waiting for game to start
+[2024-10-01 20:35:33.140] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:35.141] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:37.144] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:39.146] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:41.148] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:43.150] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:45.153] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:47.155] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:49.157] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:51.160] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:53.162] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:55.164] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:57.167] [INFO] [__main__] Still waiting
+[2024-10-01 20:35:59.169] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:01.172] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:03.174] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:05.176] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:07.178] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:09.181] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:11.183] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:13.185] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:15.188] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:17.190] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:19.192] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:21.194] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:23.197] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:25.199] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:27.201] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:29.204] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:31.206] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:33.208] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:35.210] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:37.213] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:39.215] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:41.217] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:43.219] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:45.222] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:47.225] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:49.227] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:51.230] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:53.232] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:55.234] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:57.237] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:59.239] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:01.241] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:03.244] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:05.246] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:07.248] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:09.251] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:11.252] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:11.252] [INFO] [__main__] Started playing
+[2024-10-01 20:37:11.252] [INFO] [__main__] Starting phase: S1901M
+[2024-10-01 20:37:11.254] [INFO] [chiron_utils.bots.baseline_bot] Intent log: "Initial orders (before communication): ['F ANK - BLA', 'A CON H', 'A SMY S F ANK']"
+[2024-10-01 20:37:11.324] [INFO] [diplomacy.engine.game[337625]] ITALY	comm_status: ready
+[2024-10-01 20:37:11.351] [INFO] [diplomacy.engine.game[337625]] TURKEY	comm_status: ready
+[2024-10-01 20:37:11.371] [INFO] [diplomacy.engine.game[337625]] GERMANY	comm_status: ready
+[2024-10-01 20:37:11.371] [INFO] [diplomacy.engine.game[337625]] AUSTRIA	comm_status: ready
+[2024-10-01 20:37:11.372] [INFO] [diplomacy.engine.game[337625]] RUSSIA	comm_status: ready
+[2024-10-01 20:37:11.372] [INFO] [diplomacy.engine.game[337625]] FRANCE	comm_status: ready
+[2024-10-01 20:37:11.714] [INFO] [diplomacy.engine.game[337625]] ENGLAND	comm_status: ready
+[2024-10-01 20:37:12.101] [INFO] [diplomacy.engine.game[337625]] ENGLAND	comm_status: ready
+[2024-10-01 20:37:13.728] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1901M/TURKEY->ITALY](PRP ( AND ( XDO ( ( ITA AMY ROM ) SUP ( ITA AMY VEN ) MTO APU ) ) ( XDO ( ( ITA AMY VEN ) MTO APU ) ) ( XDO ( ( ITA FLT NAP ) HLD ) ) ))
+[2024-10-01 20:37:14.005] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1901M/TURKEY->FRANCE](PRP ( AND ( XDO ( ( FRA AMY MAR ) HLD ) ) ( XDO ( ( FRA AMY PAR ) SUP ( FRA AMY MAR ) MTO BUR ) ) ( XDO ( ( FRA FLT BRE ) MTO GAS ) ) ))
+[2024-10-01 20:37:14.288] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1901M/TURKEY->RUSSIA](PRP ( AND ( XDO ( ( RUS AMY MOS ) MTO SEV ) ) ( XDO ( ( RUS AMY WAR ) SUP ( GER AMY BER ) MTO SIL ) ) ( XDO ( ( RUS FLT (STP SCS) ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) HLD ) ) ))
+[2024-10-01 20:37:14.505] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1901M/TURKEY->AUSTRIA](PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS AMY VIE ) MTO GAL ) ) ( XDO ( ( AUS AMY VIE ) MTO TYR ) ) ( XDO ( ( AUS FLT TRI ) SUP ( ITA AMY VEN ) ) ) ))
+[2024-10-01 20:37:14.719] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1901M/TURKEY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ))
+[2024-10-01 20:37:14.931] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1901M/TURKEY->GERMANY](PRP ( AND ( XDO ( ( GER AMY BER ) HLD ) ) ( XDO ( ( GER AMY MUN ) SUP ( AUS AMY VIE ) MTO TYR ) ) ( XDO ( ( GER FLT KIE ) MTO BAL ) ) ))
+[2024-10-01 20:41:42.354] [INFO] [chiron_utils.bots.baseline_bot] Exiting communication phase because out of time
+[2024-10-01 20:41:42.354] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F ANK - BLA', 'A CON H', 'A SMY S F ANK']
+[2024-10-01 20:41:42.405] [INFO] [__main__] Time taken for phase S1901M: 271.1525s
+[2024-10-01 20:41:43.552] [INFO] [diplomacy.engine.game[337625]] AUSTRIA	comm_status: ready
+[2024-10-01 20:41:43.559] [INFO] [diplomacy.engine.game[337625]] FRANCE	comm_status: ready
+[2024-10-01 20:41:44.127] [INFO] [diplomacy.engine.game[337625]] ENGLAND	comm_status: ready
+[2024-10-01 20:41:44.406] [INFO] [__main__] Starting phase: F1901M
+[2024-10-01 20:41:44.407] [INFO] [chiron_utils.bots.baseline_bot] Intent log: "Initial orders (before communication): ['F BLA H', 'A CON - BUL VIA', 'A SMY - SYR']"
+[2024-10-01 20:41:44.510] [INFO] [diplomacy.engine.game[337625]] GERMANY	comm_status: ready
+[2024-10-01 20:41:44.516] [INFO] [diplomacy.engine.game[337625]] TURKEY	comm_status: ready
+[2024-10-01 20:41:44.555] [INFO] [diplomacy.engine.game[337625]] ITALY	comm_status: ready
+[2024-10-01 20:41:44.555] [INFO] [diplomacy.engine.game[337625]] RUSSIA	comm_status: ready
+[2024-10-01 20:41:46.047] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/F1901M/TURKEY->ITALY](PRP ( AND ( XDO ( ( ITA AMY ROM ) MTO APU ) ) ( XDO ( ( ITA AMY VEN ) MTO TRI ) ) ( XDO ( ( ITA FLT NAP ) HLD ) ) ))
+[2024-10-01 20:41:46.251] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/F1901M/TURKEY->FRANCE](PRP ( AND ( XDO ( ( FRA AMY BUR ) MTO PAR ) ) ( XDO ( ( FRA AMY PAR ) SUP ( FRA AMY BUR ) MTO PIC ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY BUR ) MTO PIC ) ) ))
+[2024-10-01 20:41:46.463] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/F1901M/TURKEY->RUSSIA](PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( TUR AMY CON ) MTO SEV ) ) ( XDO ( ( RUS AMY WAR ) MTO SIL ) ) ( XDO ( ( RUS FLT ARM ) MTO ANK ) ) ( XDO ( ( RUS FLT LVN ) MTO BAL ) ) ))
+[2024-10-01 20:41:46.676] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/F1901M/TURKEY->AUSTRIA](PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS FLT ALB ) MTO TRI ) ) ( XDO ( ( AUS AMY GAL ) SUP ( RUS AMY WAR ) MTO UKR ) ) ( XDO ( ( AUS FLT ALB ) MTO ADR ) ) ))
+[2024-10-01 20:41:46.907] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/F1901M/TURKEY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY EDI ) SUP ( ENG FLT CLY ) MTO LVP ) ) ( XDO ( ( ENG FLT CLY ) SUP ( ENG AMY EDI ) MTO LVP ) ) ( XDO ( ( ENG FLT LON ) MTO ECH ) ) ))
+[2024-10-01 20:41:47.268] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/F1901M/TURKEY->GERMANY](PRP ( AND ( XDO ( ( GER AMY MUN ) SUP ( GER AMY SIL ) ) ) ( XDO ( ( GER AMY SIL ) MTO MUN ) ) ( XDO ( ( GER FLT KIE ) MTO BAL ) ) ))
+[2024-10-01 20:46:15.517] [INFO] [chiron_utils.bots.baseline_bot] Exiting communication phase because out of time
+[2024-10-01 20:46:15.518] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F BLA H', 'A CON - BUL VIA', 'A SMY - SYR']
+[2024-10-01 20:46:15.599] [INFO] [__main__] Time taken for phase F1901M: 271.1932s
+[2024-10-01 20:46:17.600] [INFO] [__main__] Starting phase: W1901A
+[2024-10-01 20:46:17.601] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['WAIVE', 'WAIVE', 'F SMY B']
+[2024-10-01 20:46:17.649] [INFO] [__main__] Time taken for phase W1901A: 0.0482s
+[2024-10-01 20:46:18.682] [INFO] [diplomacy.engine.game[337625]] RUSSIA	comm_status: ready
+[2024-10-01 20:46:18.705] [INFO] [diplomacy.engine.game[337625]] AUSTRIA	comm_status: ready
+[2024-10-01 20:46:18.831] [INFO] [diplomacy.engine.game[337625]] FRANCE	comm_status: ready
+[2024-10-01 20:46:19.477] [INFO] [diplomacy.engine.game[337625]] ENGLAND	comm_status: ready
+[2024-10-01 20:46:19.650] [INFO] [__main__] Starting phase: S1902M
+[2024-10-01 20:46:19.652] [INFO] [chiron_utils.bots.baseline_bot] Intent log: "Initial orders (before communication): ['F BLA - ARM', 'A BUL - CON VIA', 'F SMY - SYR', 'A SYR S F ARM']"
+[2024-10-01 20:46:19.704] [INFO] [diplomacy.engine.game[337625]] GERMANY	comm_status: ready
+[2024-10-01 20:46:19.711] [INFO] [diplomacy.engine.game[337625]] ITALY	comm_status: ready
+[2024-10-01 20:46:19.763] [INFO] [diplomacy.engine.game[337625]] TURKEY	comm_status: ready
+[2024-10-01 20:46:20.406] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1902M/TURKEY->ITALY](PRP ( AND ( XDO ( ( ITA AMY NAP ) HLD ) ) ( XDO ( ( ITA AMY VEN ) MTO ROM ) ) ( XDO ( ( ITA FLT APU ) SUP ( AUS FLT ADR ) ) ) ))
+[2024-10-01 20:46:20.544] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1902M/TURKEY->FRANCE](PRP ( AND ( XDO ( ( FRA AMY BEL ) SUP ( GER AMY MUN ) MTO BUR ) ) ( XDO ( ( FRA AMY BUR ) MTO PAR ) ) ( XDO ( ( FRA FLT BRE ) MTO PIC ) ) ( XDO ( ( FRA FLT MAR ) MTO (SPA SCS) ) ) ))
+[2024-10-01 20:46:20.691] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1902M/TURKEY->RUSSIA](PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( TUR FLT BLA ) MTO SEV ) ) ( XDO ( ( RUS AMY WAR ) SUP ( RUS AMY MOS ) MTO UKR ) ) ( XDO ( ( RUS FLT ARM ) SUP ( RUS AMY MOS ) MTO SEV ) ) ( XDO ( ( RUS FLT LVN ) MTO BAL ) ) ))
+[2024-10-01 20:46:20.809] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1902M/TURKEY->AUSTRIA](PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS AMY GAL ) MTO RUM ) ) ( XDO ( ( AUS AMY GAL ) SUP ( GER AMY MUN ) MTO SIL ) ) ( XDO ( ( AUS FLT ADR ) SUP ( ITA FLT APU ) MTO ION ) ) ))
+[2024-10-01 20:46:20.929] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1902M/TURKEY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT CLY ) MTO EDI ) ) ( XDO ( ( ENG FLT LON ) MTO WAL ) ) ))
+[2024-10-01 20:46:21.077] [INFO] [chiron_utils.bots.baseline_bot] TURKEY (RandomProposerPlayer) sent message: [0/S1902M/TURKEY->GERMANY](PRP ( AND ( XDO ( ( GER AMY MUN ) MTO RUH ) ) ( XDO ( ( GER AMY SIL ) MTO WAR ) ) ( XDO ( ( GER FLT BAL ) SUP ( RUS FLT LVN ) ) ) ))

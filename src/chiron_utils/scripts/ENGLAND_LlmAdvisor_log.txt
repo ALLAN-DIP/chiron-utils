@@ -1,0 +1,993 @@
+[2024-10-01 20:35:25.196] [INFO] [__main__] LlmAdvisor joining game 'test_chiron_12' as ENGLAND
+[2024-10-01 20:35:25.196] [INFO] [diplomacy.client.connection[337629]] Trying to connect.
+[2024-10-01 20:35:30.203] [WARNING] [diplomacy.client.connection[337629]] Connection failing (attempt 1), retrying.
+[2024-10-01 20:35:35.355] [INFO] [diplomacy.client.connection[337629]] Connection succeeds.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  7.14it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  9.69it/s]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.09it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.10it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.07it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.40it/s]
+Some weights of LlamaForSequenceClassification were not initialized from the model checkpoint at meta-llama/Meta-Llama-3.1-8B and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[2024-10-01 20:36:53.999] [INFO] [__main__] Waiting for game to start
+[2024-10-01 20:36:54.000] [ERROR] [diplomacy.client.connection[337629]] Disconnected.
+[2024-10-01 20:36:54.000] [INFO] [diplomacy.client.connection[337629]] Trying to reconnect.
+[2024-10-01 20:36:54.229] [INFO] [diplomacy.client.connection[337629]] Connection succeeds.
+[2024-10-01 20:36:54.272] [DEBUG] [diplomacy.client.connection[337629]] Keep 0/0 old requests to send.
+[2024-10-01 20:36:54.272] [INFO] [diplomacy.client.connection[337629]] Done reconnection work.
+[2024-10-01 20:36:56.002] [INFO] [__main__] Still waiting
+[2024-10-01 20:36:58.004] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:00.006] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:02.009] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:04.011] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:06.013] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:08.016] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:10.018] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:11.324] [INFO] [diplomacy.engine.game[337629]] ITALY	comm_status: ready
+[2024-10-01 20:37:11.364] [INFO] [diplomacy.engine.game[337629]] GERMANY	comm_status: ready
+[2024-10-01 20:37:11.370] [INFO] [diplomacy.engine.game[337629]] TURKEY	comm_status: ready
+[2024-10-01 20:37:11.370] [INFO] [diplomacy.engine.game[337629]] AUSTRIA	comm_status: ready
+[2024-10-01 20:37:11.370] [INFO] [diplomacy.engine.game[337629]] RUSSIA	comm_status: ready
+[2024-10-01 20:37:11.375] [INFO] [diplomacy.engine.game[337629]] FRANCE	comm_status: ready
+[2024-10-01 20:37:11.714] [INFO] [diplomacy.engine.game[337629]] ENGLAND	comm_status: ready
+[2024-10-01 20:37:12.019] [INFO] [__main__] Still waiting
+[2024-10-01 20:37:12.019] [INFO] [__main__] Started playing
+[2024-10-01 20:37:12.019] [INFO] [__main__] Starting phase: S1901M
+[2024-10-01 20:37:12.100] [INFO] [diplomacy.engine.game[337629]] ENGLAND	comm_status: ready
+[2024-10-01 20:37:12.101] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:37:13.166] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031558395/S1901M/omniscient_type->GLOBAL](ENGLAND: F EDI - CLY, F LON S F EDI - NTH, A LVP - EDI)
+[2024-10-01 20:37:13.166] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031740181/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:37:13.166] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032211878/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:37:13.706] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031558395/S1901M/omniscient_type->GLOBAL](ENGLAND: F EDI - CLY, F LON S F EDI - NTH, A LVP - EDI)
+[2024-10-01 20:37:13.706] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031740181/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:37:13.706] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032211878/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:37:13.706] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032569283/S1901M/FRANCE->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG AMY LVP ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO WAL ) ) ))
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+[2024-10-01 20:37:20.849] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to FRANCE:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that the message history indicates that FRANCE is trying to create a double support for ENG on LVP and FLT, which would allow ENG to move its fleet from LVP to FLT uncontested. By sending the message, ENG can help to solidify this support and make it more difficult for FRANCE to change its mind. Additionally, by supporting FRANCE's move, ENG can maintain a strong position in the north and prevent FRANCE from gaining an advantage.)
+[2024-10-01 20:37:27.536] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by saying:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) )"
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting TURKEY's moves in the North and South, and TURKEY's last message aligns with these recommendations. By trusting TURKEY's message and following Cicero's recommendations, ENGLAND can further its strategic goals and increase its chances of success in the game.)
+[2024-10-01 20:37:34.374] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this decision is that Cicero's recommendation for ENGLAND includes supporting the move to F EDI, which is the same move recommended by GERMANY in their last message. By sending the same message as GERMANY, ENGLAND can appear cooperative and build a relationship with GERMANY, which could be beneficial in the long run. Additionally, supporting the move to F EDI will also help to secure ENGLAND's flank and prevent GERMANY from attacking it.)
+[2024-10-01 20:37:44.563] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to AUSTRIA's last message by sending the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) )"
+
+The reason for this decision is that AUSTRIA's last message is a PRP (Preferred Response) message, which indicates that they prefer you to fulfill the orders listed in their message. By sending the same orders back to them, you are showing that you are willing to cooperate and work together. Additionally, by sending the same orders, you are also demonstrating that you have understood and are willing to follow their recommendations.
+
+It is also worth noting that by sending the same orders, you are also making it clear that you do not have any other orders that you would prefer to send at this time. This can help to maintain a positive relationship with AUSTRIA and encourage them to continue providing you with recommendations in the future.)
+[2024-10-01 20:37:50.229] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend sending the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this recommendation is that ITALY has explicitly expressed their intention to support England in attacking Austria's Munich, and England's army is currently in a favorable position to do so. By sending this message, England can secure Italy's support and increase the likelihood of successfully attacking Munich. Additionally, this message aligns with Cicero's recommendation for England to focus on supporting Italy in attacking Austria's Munich, which is a key strategic goal for both England and Italy.)
+[2024-10-01 20:37:57.003] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to RUSSIA in response to their last message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this decision is that RUSSIA has recently been aiding you in the Mediterranean, and by sending this message, you are showing your appreciation for their support and reinforcing your relationship with them. Additionally, by keeping RUSSIA's fleet in the Mediterranean, you are able to maintain a strong presence in the region and potentially threaten Austria or Italy if necessary.
+
+By sending this message, you are also demonstrating your willingness to cooperate with RUSSIA and maintain a positive relationship, which could be beneficial in the long term.)
+[2024-10-01 20:37:58.446] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031558395/S1901M/omniscient_type->GLOBAL](ENGLAND: F EDI - CLY, F LON S F EDI - NTH, A LVP - EDI)
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031740181/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032211878/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032569283/S1901M/FRANCE->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG AMY LVP ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO WAL ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032849225/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: PRP ( AND ( XDO ( ( FRA AMY MAR ) MTO GAS ) ) ( XDO ( ( FRA AMY PAR ) MTO BRE ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY PAR ) MTO PIC ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033005818/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: PRP ( AND ( XDO ( ( TUR AMY CON ) SUP ( TUR FLT ANK ) ) ) ( XDO ( ( TUR AMY SMY ) MTO SYR ) ) ( XDO ( ( TUR FLT ANK ) SUP ( RUS FLT SEV ) MTO ARM ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033216345/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: PRP ( AND ( XDO ( ( ITA AMY ROM ) MTO TUS ) ) ( XDO ( ( ITA AMY VEN ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( ITA FLT NAP ) SUP ( ITA AMY VEN ) MTO APU ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033354580/S1901M/AUSTRIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033423864/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS AMY WAR ) ) ) ( XDO ( ( RUS AMY WAR ) MTO UKR ) ) ( XDO ( ( RUS FLT (STP SCS) ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) SUP ( AUS AMY BUD ) MTO RUM ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033561339/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS FLT TRI ) MTO VEN ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033782194/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: PRP ( AND ( XDO ( ( GER AMY BER ) MTO KIE ) ) ( XDO ( ( GER AMY MUN ) SUP ( FRA AMY MAR ) MTO BUR ) ) ( XDO ( ( GER FLT KIE ) SUP ( GER AMY BER ) ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033851177/S1901M/ITALY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO ECH ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033989381/S1901M/RUSSIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) ) ( XDO ( ( ENG FLT EDI ) HLD ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034341724/S1901M/GERMANY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034844509/S1901M/TURKEY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ))
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815040876250/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to FRANCE:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that the message history indicates that FRANCE is trying to create a double support for ENG on LVP and FLT, which would allow ENG to move its fleet from LVP to FLT uncontested. By sending the message, ENG can help to solidify this support and make it more difficult for FRANCE to change its mind. Additionally, by supporting FRANCE's move, ENG can maintain a strong position in the north and prevent FRANCE from gaining an advantage.)
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815047560906/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by saying:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) )"
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting TURKEY's moves in the North and South, and TURKEY's last message aligns with these recommendations. By trusting TURKEY's message and following Cicero's recommendations, ENGLAND can further its strategic goals and increase its chances of success in the game.)
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815054401865/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this decision is that Cicero's recommendation for ENGLAND includes supporting the move to F EDI, which is the same move recommended by GERMANY in their last message. By sending the same message as GERMANY, ENGLAND can appear cooperative and build a relationship with GERMANY, which could be beneficial in the long run. Additionally, supporting the move to F EDI will also help to secure ENGLAND's flank and prevent GERMANY from attacking it.)
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815064590812/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to AUSTRIA's last message by sending the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) )"
+
+The reason for this decision is that AUSTRIA's last message is a PRP (Preferred Response) message, which indicates that they prefer you to fulfill the orders listed in their message. By sending the same orders back to them, you are showing that you are willing to cooperate and work together. Additionally, by sending the same orders, you are also demonstrating that you have understood and are willing to follow their recommendations.
+
+It is also worth noting that by sending the same orders, you are also making it clear that you do not have any other orders that you would prefer to send at this time. This can help to maintain a positive relationship with AUSTRIA and encourage them to continue providing you with recommendations in the future.)
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815070256336/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend sending the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this recommendation is that ITALY has explicitly expressed their intention to support England in attacking Austria's Munich, and England's army is currently in a favorable position to do so. By sending this message, England can secure Italy's support and increase the likelihood of successfully attacking Munich. Additionally, this message aligns with Cicero's recommendation for England to focus on supporting Italy in attacking Austria's Munich, which is a key strategic goal for both England and Italy.)
+[2024-10-01 20:37:58.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815077030690/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to RUSSIA in response to their last message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this decision is that RUSSIA has recently been aiding you in the Mediterranean, and by sending this message, you are showing your appreciation for their support and reinforcing your relationship with them. Additionally, by keeping RUSSIA's fleet in the Mediterranean, you are able to maintain a strong presence in the region and potentially threaten Austria or Italy if necessary.
+
+By sending this message, you are also demonstrating your willingness to cooperate with RUSSIA and maintain a positive relationship, which could be beneficial in the long term.)
+[2024-10-01 20:38:05.074] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided context, I would recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that FRANCE has shown a willingness to coordinate with you in the past, as evidenced by their previous messages, and this move will allow you to maintain a strong position in the North while also supporting their efforts in the South. Additionally, by supporting their move, you can further build trust and cooperation between the two of you, which could lead to more beneficial collaborations in the future.
+
+By sending this message, you are demonstrating your commitment to the board and your willingness to work together with FRANCE, while also positioning yourself to potentially gain an advantage in the game.)
+[2024-10-01 20:38:17.959] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) )"
+
+Reason:
+
+The message history shows that TURKEY has a strong interest in supporting England in the north, as evidenced by their multiple mentions of supporting England's moves in the Baltic and North Sea. Additionally, TURKEY's last message includes several orders that align with England's interests, such as supporting England's moves in the North Sea and opposing Russia's moves in the Baltic. By sending a message that confirms and reinforces these interests, England can strengthen their relationship with TURKEY and increase the likelihood of success in the current phase.
+
+By sending this message, England can demonstrate their commitment to the partnership and create a stronger bond with TURKEY, which can be beneficial in the long term. Additionally, this message aligns with Cicero's recommendation for England, which suggests that supporting TURKEY in the north is a strategic move that can help England achieve their goals.
+
+Overall, sending this message is a good idea for England because it aligns with their interests, reinforces their partnership with TURKEY, and supports their strategic goals.)
+[2024-10-01 20:38:24.459] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )'
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting GERMANY's move of attacking EDI with FLT, which is consistent with the message history provided. By sending this message, ENGLAND can maintain a good relationship with GERMANY and avoid any potential conflicts. Additionally, this message aligns with Cicero's recommendation, which suggests that ENGLAND should focus on supporting GERMANY's moves in the current phase.)
+[2024-10-01 20:38:30.119] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to AUSTRIA in response to their last message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that AUSTRIA has provided a detailed plan of action, including the moves they will make and the supporting orders they have, which aligns with Cicero's recommendations. By sending this message, you are able to take advantage of their offered support and ensure that your moves are coordinated with theirs. Additionally, by confirming their plans, you are able to demonstrate your trust in their intentions and build a stronger alliance between the two of you.)
+[2024-10-01 20:38:37.854] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to ITALY's last message by approving their proposal to attack ENG AMY.
+
+The reason for this decision is that ITALY has shown a willingness to coordinate with you in the past, as evidenced by their previous messages. By approving their proposal, you can maintain a positive relationship with ITALY and potentially set the stage for future cooperation. Additionally, attacking ENG AMY will weaken France's position in the region and create an opportunity for you to gain an advantage.
+
+Specifically, you could respond with the following message: "I approve of your proposal to attack ENG AMY. It aligns with my own plans to weaken France and create an opportunity for us to gain an advantage. I look forward to continuing to work together."
+
+By taking this action, you can demonstrate your willingness to cooperate with ITALY while also advancing your own interests.)
+[2024-10-01 20:38:46.354] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. As your advisor, I recommend sending the following message in response to RUSSIA's last message:
+
+"Thank you for your message, RUSSIA. I appreciate your willingness to share your plans with me. However, I must decline your proposal to coordinate our moves in the North. I have Cicero's recommendation to focus on the French fleet in the English Channel, which I believe is a higher priority at the moment. I will continue to monitor the situation and keep you informed of any changes in my plans. Thank you again for your message."
+
+The reason for this decision is that Cicero's recommendation for ENGLAND is to focus on the French fleet in the English Channel, which is a higher priority than coordinating with RUSSIA in the North. By declining RUSSIA's proposal, ENGLAND can align with Cicero's recommendation and ensure that it is taking the most effective course of action. Additionally, by keeping RUSSIA informed of any changes in ENGLAND's plans, ENGLAND can maintain a positive relationship with RUSSIA and be open to future coordination opportunities.)
+[2024-10-01 20:38:47.713] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031558395/S1901M/omniscient_type->GLOBAL](ENGLAND: F EDI - CLY, F LON S F EDI - NTH, A LVP - EDI)
+[2024-10-01 20:38:47.713] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031740181/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:38:47.713] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032211878/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:38:47.713] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032569283/S1901M/FRANCE->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG AMY LVP ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO WAL ) ) ))
+[2024-10-01 20:38:47.713] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032849225/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: PRP ( AND ( XDO ( ( FRA AMY MAR ) MTO GAS ) ) ( XDO ( ( FRA AMY PAR ) MTO BRE ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY PAR ) MTO PIC ) ) ))
+[2024-10-01 20:38:47.713] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033005818/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: PRP ( AND ( XDO ( ( TUR AMY CON ) SUP ( TUR FLT ANK ) ) ) ( XDO ( ( TUR AMY SMY ) MTO SYR ) ) ( XDO ( ( TUR FLT ANK ) SUP ( RUS FLT SEV ) MTO ARM ) ) ))
+[2024-10-01 20:38:47.713] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033216345/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: PRP ( AND ( XDO ( ( ITA AMY ROM ) MTO TUS ) ) ( XDO ( ( ITA AMY VEN ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( ITA FLT NAP ) SUP ( ITA AMY VEN ) MTO APU ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033354580/S1901M/AUSTRIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033423864/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS AMY WAR ) ) ) ( XDO ( ( RUS AMY WAR ) MTO UKR ) ) ( XDO ( ( RUS FLT (STP SCS) ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) SUP ( AUS AMY BUD ) MTO RUM ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033561339/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS FLT TRI ) MTO VEN ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033782194/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: PRP ( AND ( XDO ( ( GER AMY BER ) MTO KIE ) ) ( XDO ( ( GER AMY MUN ) SUP ( FRA AMY MAR ) MTO BUR ) ) ( XDO ( ( GER FLT KIE ) SUP ( GER AMY BER ) ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033851177/S1901M/ITALY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO ECH ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033989381/S1901M/RUSSIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) ) ( XDO ( ( ENG FLT EDI ) HLD ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034341724/S1901M/GERMANY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034844509/S1901M/TURKEY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ))
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815040876250/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to FRANCE:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that the message history indicates that FRANCE is trying to create a double support for ENG on LVP and FLT, which would allow ENG to move its fleet from LVP to FLT uncontested. By sending the message, ENG can help to solidify this support and make it more difficult for FRANCE to change its mind. Additionally, by supporting FRANCE's move, ENG can maintain a strong position in the north and prevent FRANCE from gaining an advantage.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815047560906/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by saying:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) )"
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting TURKEY's moves in the North and South, and TURKEY's last message aligns with these recommendations. By trusting TURKEY's message and following Cicero's recommendations, ENGLAND can further its strategic goals and increase its chances of success in the game.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815054401865/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this decision is that Cicero's recommendation for ENGLAND includes supporting the move to F EDI, which is the same move recommended by GERMANY in their last message. By sending the same message as GERMANY, ENGLAND can appear cooperative and build a relationship with GERMANY, which could be beneficial in the long run. Additionally, supporting the move to F EDI will also help to secure ENGLAND's flank and prevent GERMANY from attacking it.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815064590812/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to AUSTRIA's last message by sending the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) )"
+
+The reason for this decision is that AUSTRIA's last message is a PRP (Preferred Response) message, which indicates that they prefer you to fulfill the orders listed in their message. By sending the same orders back to them, you are showing that you are willing to cooperate and work together. Additionally, by sending the same orders, you are also demonstrating that you have understood and are willing to follow their recommendations.
+
+It is also worth noting that by sending the same orders, you are also making it clear that you do not have any other orders that you would prefer to send at this time. This can help to maintain a positive relationship with AUSTRIA and encourage them to continue providing you with recommendations in the future.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815070256336/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend sending the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this recommendation is that ITALY has explicitly expressed their intention to support England in attacking Austria's Munich, and England's army is currently in a favorable position to do so. By sending this message, England can secure Italy's support and increase the likelihood of successfully attacking Munich. Additionally, this message aligns with Cicero's recommendation for England to focus on supporting Italy in attacking Austria's Munich, which is a key strategic goal for both England and Italy.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815077030690/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to RUSSIA in response to their last message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this decision is that RUSSIA has recently been aiding you in the Mediterranean, and by sending this message, you are showing your appreciation for their support and reinforcing your relationship with them. Additionally, by keeping RUSSIA's fleet in the Mediterranean, you are able to maintain a strong presence in the region and potentially threaten Austria or Italy if necessary.
+
+By sending this message, you are also demonstrating your willingness to cooperate with RUSSIA and maintain a positive relationship, which could be beneficial in the long term.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815085106530/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided context, I would recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that FRANCE has shown a willingness to coordinate with you in the past, as evidenced by their previous messages, and this move will allow you to maintain a strong position in the North while also supporting their efforts in the South. Additionally, by supporting their move, you can further build trust and cooperation between the two of you, which could lead to more beneficial collaborations in the future.
+
+By sending this message, you are demonstrating your commitment to the board and your willingness to work together with FRANCE, while also positioning yourself to potentially gain an advantage in the game.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815097987152/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) )"
+
+Reason:
+
+The message history shows that TURKEY has a strong interest in supporting England in the north, as evidenced by their multiple mentions of supporting England's moves in the Baltic and North Sea. Additionally, TURKEY's last message includes several orders that align with England's interests, such as supporting England's moves in the North Sea and opposing Russia's moves in the Baltic. By sending a message that confirms and reinforces these interests, England can strengthen their relationship with TURKEY and increase the likelihood of success in the current phase.
+
+By sending this message, England can demonstrate their commitment to the partnership and create a stronger bond with TURKEY, which can be beneficial in the long term. Additionally, this message aligns with Cicero's recommendation for England, which suggests that supporting TURKEY in the north is a strategic move that can help England achieve their goals.
+
+Overall, sending this message is a good idea for England because it aligns with their interests, reinforces their partnership with TURKEY, and supports their strategic goals.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815104486890/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )'
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting GERMANY's move of attacking EDI with FLT, which is consistent with the message history provided. By sending this message, ENGLAND can maintain a good relationship with GERMANY and avoid any potential conflicts. Additionally, this message aligns with Cicero's recommendation, which suggests that ENGLAND should focus on supporting GERMANY's moves in the current phase.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815110145872/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to AUSTRIA in response to their last message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that AUSTRIA has provided a detailed plan of action, including the moves they will make and the supporting orders they have, which aligns with Cicero's recommendations. By sending this message, you are able to take advantage of their offered support and ensure that your moves are coordinated with theirs. Additionally, by confirming their plans, you are able to demonstrate your trust in their intentions and build a stronger alliance between the two of you.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815117881740/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to ITALY's last message by approving their proposal to attack ENG AMY.
+
+The reason for this decision is that ITALY has shown a willingness to coordinate with you in the past, as evidenced by their previous messages. By approving their proposal, you can maintain a positive relationship with ITALY and potentially set the stage for future cooperation. Additionally, attacking ENG AMY will weaken France's position in the region and create an opportunity for you to gain an advantage.
+
+Specifically, you could respond with the following message: "I approve of your proposal to attack ENG AMY. It aligns with my own plans to weaken France and create an opportunity for us to gain an advantage. I look forward to continuing to work together."
+
+By taking this action, you can demonstrate your willingness to cooperate with ITALY while also advancing your own interests.)
+[2024-10-01 20:38:47.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815126381132/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. As your advisor, I recommend sending the following message in response to RUSSIA's last message:
+
+"Thank you for your message, RUSSIA. I appreciate your willingness to share your plans with me. However, I must decline your proposal to coordinate our moves in the North. I have Cicero's recommendation to focus on the French fleet in the English Channel, which I believe is a higher priority at the moment. I will continue to monitor the situation and keep you informed of any changes in my plans. Thank you again for your message."
+
+The reason for this decision is that Cicero's recommendation for ENGLAND is to focus on the French fleet in the English Channel, which is a higher priority than coordinating with RUSSIA in the North. By declining RUSSIA's proposal, ENGLAND can align with Cicero's recommendation and ensure that it is taking the most effective course of action. Additionally, by keeping RUSSIA informed of any changes in ENGLAND's plans, ENGLAND can maintain a positive relationship with RUSSIA and be open to future coordination opportunities.)
+[2024-10-01 20:38:56.440] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR )"
+
+The reason for this decision is that FRANCE has shown a consistent pattern of supporting England's moves in the Mediterranean, particularly in the region of Marseilles. By supporting England's move to Marseilles, FRANCE has demonstrated its willingness to cooperate with England in this phase. Additionally, by sending a message that reinforces England's control over the Mediterranean, you can further solidify your relationship with FRANCE and create a more stable board position.
+
+Cicero's recommendation for England also supports this decision, as it suggests that England should focus on supporting its fleet in the Mediterranean and expanding its control over the region. By following Cicero's advice and responding to FRANCE's message with a message that reinforces England's control over Marseilles, you can further align your actions with Cicero's recommendations and create a more advantageous board position for England.)
+[2024-10-01 20:39:04.304] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( XDO ( ENG AMY LVP ) MTO WAL )"
+
+The reason for this recommendation is that TURKEY has recently been a reliable partner in the Mediterranean, as shown by their support for ENGLAND's moves in the region. By sending this message, ENGLAND can maintain their partnership and continue to work together to control the Mediterranean.
+
+Additionally, by supporting ENGLAND's move in the Mediterranean, TURKEY will be able to maintain their own influence in the region and prevent any other powers from gaining too much control. This will help to maintain the balance of power in the region and ensure that neither ENGLAND nor TURKEY is left vulnerable to attack.
+
+Overall, sending this message will help to further ENGLAND's goals in the Mediterranean and maintain their partnership with TURKEY, which is in line with Cicero's recommendations.)
+[2024-10-01 20:39:11.538] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. As your trusty AI assistant, I recommend that you respond to GERMANY's last message by approving their proposal to attack AMY with their fleet.
+
+The reason for this recommendation is that GERMANY has already demonstrated their willingness to cooperate by proposing to attack AMY, which aligns with your own interests in gaining a strategic advantage over FRANCE. By approving their proposal, you can maintain a strong relationship with GERMANY and potentially gain an advantageous position on the board. Additionally, by attacking AMY, you can weaken FRANCE's position in the north and set the stage for future attacks.
+
+Here is the specific message you can use to respond to GERMANY:
+
+"Approved. I appreciate your willingness to cooperate and look forward to our continued partnership."
+
+I hope this recommendation is helpful, and please let me know if you have any further questions or concerns.)
+[2024-10-01 20:39:19.475] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to respond with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that Cicero has recommended England to focus on building a strong navy in the Channel, and the message history shows that Austria is trying to create a favorable position for itself in the North. By supporting Austria's last message, England can help to create a more stable situation in the North and prevent France from gaining too much influence. Additionally, by focusing on the Channel, England can maintain its control over the English Channel and prevent France from using it as a path to attack England.
+
+This message will help to further Austria's goal of creating a favorable position in the North, while also supporting England's goal of maintaining control over the Channel. It is a strategic move that will help to balance the board and create a more stable situation for both players.)
+[2024-10-01 20:39:26.116] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend that you respond to ITALY's last message by sending a message expressing your trust in their proposal. The reason for this decision is that ITALY has provided a clear and detailed proposal for cooperation, which aligns with Cicero's recommendations for the current phase. By trusting their proposal, you can potentially gain a strategic advantage by working together to achieve your shared goals.
+
+Specific message: "I appreciate your willingness to cooperate, ITALY. I am pleased to accept your proposal and look forward to a successful partnership."
+
+Reason: "ITALY has provided a well-structured and aligned proposal, which aligns with Cicero's recommendations for the current phase. By trusting their proposal, I can potentially gain a strategic advantage by working together with ITALY towards our shared goals.")
+[2024-10-01 20:39:33.475] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the information provided, I would recommend that you respond to RUSSIA's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this recommendation is that RUSSIA's message indicates that they are willing to support England's move to take control of Amsterdam, which is a valuable port for England. By responding with the recommended message, England can secure the support of RUSSIA and ensure that their move is successful. Additionally, by working together with RUSSIA, England can potentially gain an advantage over other players on the board.
+
+It is important to note that this decision assumes that England is interested in taking control of Amsterdam, and that they have the necessary resources and support to make the move. If England does not have the necessary resources or if they are not interested in taking control of Amsterdam, a different response may be more appropriate.)
+[2024-10-01 20:39:35.012] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031558395/S1901M/omniscient_type->GLOBAL](ENGLAND: F EDI - CLY, F LON S F EDI - NTH, A LVP - EDI)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031740181/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032211878/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032569283/S1901M/FRANCE->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG AMY LVP ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO WAL ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032849225/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: PRP ( AND ( XDO ( ( FRA AMY MAR ) MTO GAS ) ) ( XDO ( ( FRA AMY PAR ) MTO BRE ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY PAR ) MTO PIC ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033005818/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: PRP ( AND ( XDO ( ( TUR AMY CON ) SUP ( TUR FLT ANK ) ) ) ( XDO ( ( TUR AMY SMY ) MTO SYR ) ) ( XDO ( ( TUR FLT ANK ) SUP ( RUS FLT SEV ) MTO ARM ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033216345/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: PRP ( AND ( XDO ( ( ITA AMY ROM ) MTO TUS ) ) ( XDO ( ( ITA AMY VEN ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( ITA FLT NAP ) SUP ( ITA AMY VEN ) MTO APU ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033354580/S1901M/AUSTRIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033423864/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS AMY WAR ) ) ) ( XDO ( ( RUS AMY WAR ) MTO UKR ) ) ( XDO ( ( RUS FLT (STP SCS) ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) SUP ( AUS AMY BUD ) MTO RUM ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033561339/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS FLT TRI ) MTO VEN ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033782194/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: PRP ( AND ( XDO ( ( GER AMY BER ) MTO KIE ) ) ( XDO ( ( GER AMY MUN ) SUP ( FRA AMY MAR ) MTO BUR ) ) ( XDO ( ( GER FLT KIE ) SUP ( GER AMY BER ) ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033851177/S1901M/ITALY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO ECH ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033989381/S1901M/RUSSIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) ) ( XDO ( ( ENG FLT EDI ) HLD ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034341724/S1901M/GERMANY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034844509/S1901M/TURKEY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ))
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815040876250/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to FRANCE:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that the message history indicates that FRANCE is trying to create a double support for ENG on LVP and FLT, which would allow ENG to move its fleet from LVP to FLT uncontested. By sending the message, ENG can help to solidify this support and make it more difficult for FRANCE to change its mind. Additionally, by supporting FRANCE's move, ENG can maintain a strong position in the north and prevent FRANCE from gaining an advantage.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815047560906/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by saying:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) )"
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting TURKEY's moves in the North and South, and TURKEY's last message aligns with these recommendations. By trusting TURKEY's message and following Cicero's recommendations, ENGLAND can further its strategic goals and increase its chances of success in the game.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815054401865/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this decision is that Cicero's recommendation for ENGLAND includes supporting the move to F EDI, which is the same move recommended by GERMANY in their last message. By sending the same message as GERMANY, ENGLAND can appear cooperative and build a relationship with GERMANY, which could be beneficial in the long run. Additionally, supporting the move to F EDI will also help to secure ENGLAND's flank and prevent GERMANY from attacking it.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815064590812/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to AUSTRIA's last message by sending the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) )"
+
+The reason for this decision is that AUSTRIA's last message is a PRP (Preferred Response) message, which indicates that they prefer you to fulfill the orders listed in their message. By sending the same orders back to them, you are showing that you are willing to cooperate and work together. Additionally, by sending the same orders, you are also demonstrating that you have understood and are willing to follow their recommendations.
+
+It is also worth noting that by sending the same orders, you are also making it clear that you do not have any other orders that you would prefer to send at this time. This can help to maintain a positive relationship with AUSTRIA and encourage them to continue providing you with recommendations in the future.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815070256336/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend sending the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this recommendation is that ITALY has explicitly expressed their intention to support England in attacking Austria's Munich, and England's army is currently in a favorable position to do so. By sending this message, England can secure Italy's support and increase the likelihood of successfully attacking Munich. Additionally, this message aligns with Cicero's recommendation for England to focus on supporting Italy in attacking Austria's Munich, which is a key strategic goal for both England and Italy.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815077030690/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to RUSSIA in response to their last message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this decision is that RUSSIA has recently been aiding you in the Mediterranean, and by sending this message, you are showing your appreciation for their support and reinforcing your relationship with them. Additionally, by keeping RUSSIA's fleet in the Mediterranean, you are able to maintain a strong presence in the region and potentially threaten Austria or Italy if necessary.
+
+By sending this message, you are also demonstrating your willingness to cooperate with RUSSIA and maintain a positive relationship, which could be beneficial in the long term.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815085106530/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided context, I would recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that FRANCE has shown a willingness to coordinate with you in the past, as evidenced by their previous messages, and this move will allow you to maintain a strong position in the North while also supporting their efforts in the South. Additionally, by supporting their move, you can further build trust and cooperation between the two of you, which could lead to more beneficial collaborations in the future.
+
+By sending this message, you are demonstrating your commitment to the board and your willingness to work together with FRANCE, while also positioning yourself to potentially gain an advantage in the game.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815097987152/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) )"
+
+Reason:
+
+The message history shows that TURKEY has a strong interest in supporting England in the north, as evidenced by their multiple mentions of supporting England's moves in the Baltic and North Sea. Additionally, TURKEY's last message includes several orders that align with England's interests, such as supporting England's moves in the North Sea and opposing Russia's moves in the Baltic. By sending a message that confirms and reinforces these interests, England can strengthen their relationship with TURKEY and increase the likelihood of success in the current phase.
+
+By sending this message, England can demonstrate their commitment to the partnership and create a stronger bond with TURKEY, which can be beneficial in the long term. Additionally, this message aligns with Cicero's recommendation for England, which suggests that supporting TURKEY in the north is a strategic move that can help England achieve their goals.
+
+Overall, sending this message is a good idea for England because it aligns with their interests, reinforces their partnership with TURKEY, and supports their strategic goals.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815104486890/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )'
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting GERMANY's move of attacking EDI with FLT, which is consistent with the message history provided. By sending this message, ENGLAND can maintain a good relationship with GERMANY and avoid any potential conflicts. Additionally, this message aligns with Cicero's recommendation, which suggests that ENGLAND should focus on supporting GERMANY's moves in the current phase.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815110145872/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to AUSTRIA in response to their last message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that AUSTRIA has provided a detailed plan of action, including the moves they will make and the supporting orders they have, which aligns with Cicero's recommendations. By sending this message, you are able to take advantage of their offered support and ensure that your moves are coordinated with theirs. Additionally, by confirming their plans, you are able to demonstrate your trust in their intentions and build a stronger alliance between the two of you.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815117881740/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to ITALY's last message by approving their proposal to attack ENG AMY.
+
+The reason for this decision is that ITALY has shown a willingness to coordinate with you in the past, as evidenced by their previous messages. By approving their proposal, you can maintain a positive relationship with ITALY and potentially set the stage for future cooperation. Additionally, attacking ENG AMY will weaken France's position in the region and create an opportunity for you to gain an advantage.
+
+Specifically, you could respond with the following message: "I approve of your proposal to attack ENG AMY. It aligns with my own plans to weaken France and create an opportunity for us to gain an advantage. I look forward to continuing to work together."
+
+By taking this action, you can demonstrate your willingness to cooperate with ITALY while also advancing your own interests.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815126381132/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. As your advisor, I recommend sending the following message in response to RUSSIA's last message:
+
+"Thank you for your message, RUSSIA. I appreciate your willingness to share your plans with me. However, I must decline your proposal to coordinate our moves in the North. I have Cicero's recommendation to focus on the French fleet in the English Channel, which I believe is a higher priority at the moment. I will continue to monitor the situation and keep you informed of any changes in my plans. Thank you again for your message."
+
+The reason for this decision is that Cicero's recommendation for ENGLAND is to focus on the French fleet in the English Channel, which is a higher priority than coordinating with RUSSIA in the North. By declining RUSSIA's proposal, ENGLAND can align with Cicero's recommendation and ensure that it is taking the most effective course of action. Additionally, by keeping RUSSIA informed of any changes in ENGLAND's plans, ENGLAND can maintain a positive relationship with RUSSIA and be open to future coordination opportunities.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815136467542/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR )"
+
+The reason for this decision is that FRANCE has shown a consistent pattern of supporting England's moves in the Mediterranean, particularly in the region of Marseilles. By supporting England's move to Marseilles, FRANCE has demonstrated its willingness to cooperate with England in this phase. Additionally, by sending a message that reinforces England's control over the Mediterranean, you can further solidify your relationship with FRANCE and create a more stable board position.
+
+Cicero's recommendation for England also supports this decision, as it suggests that England should focus on supporting its fleet in the Mediterranean and expanding its control over the region. By following Cicero's advice and responding to FRANCE's message with a message that reinforces England's control over Marseilles, you can further align your actions with Cicero's recommendations and create a more advantageous board position for England.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815144331049/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( XDO ( ENG AMY LVP ) MTO WAL )"
+
+The reason for this recommendation is that TURKEY has recently been a reliable partner in the Mediterranean, as shown by their support for ENGLAND's moves in the region. By sending this message, ENGLAND can maintain their partnership and continue to work together to control the Mediterranean.
+
+Additionally, by supporting ENGLAND's move in the Mediterranean, TURKEY will be able to maintain their own influence in the region and prevent any other powers from gaining too much control. This will help to maintain the balance of power in the region and ensure that neither ENGLAND nor TURKEY is left vulnerable to attack.
+
+Overall, sending this message will help to further ENGLAND's goals in the Mediterranean and maintain their partnership with TURKEY, which is in line with Cicero's recommendations.)
+[2024-10-01 20:39:35.013] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815151565637/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. As your trusty AI assistant, I recommend that you respond to GERMANY's last message by approving their proposal to attack AMY with their fleet.
+
+The reason for this recommendation is that GERMANY has already demonstrated their willingness to cooperate by proposing to attack AMY, which aligns with your own interests in gaining a strategic advantage over FRANCE. By approving their proposal, you can maintain a strong relationship with GERMANY and potentially gain an advantageous position on the board. Additionally, by attacking AMY, you can weaken FRANCE's position in the north and set the stage for future attacks.
+
+Here is the specific message you can use to respond to GERMANY:
+
+"Approved. I appreciate your willingness to cooperate and look forward to our continued partnership."
+
+I hope this recommendation is helpful, and please let me know if you have any further questions or concerns.)
+[2024-10-01 20:39:35.014] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815159503031/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to respond with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that Cicero has recommended England to focus on building a strong navy in the Channel, and the message history shows that Austria is trying to create a favorable position for itself in the North. By supporting Austria's last message, England can help to create a more stable situation in the North and prevent France from gaining too much influence. Additionally, by focusing on the Channel, England can maintain its control over the English Channel and prevent France from using it as a path to attack England.
+
+This message will help to further Austria's goal of creating a favorable position in the North, while also supporting England's goal of maintaining control over the Channel. It is a strategic move that will help to balance the board and create a more stable situation for both players.)
+[2024-10-01 20:39:35.014] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815166142687/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend that you respond to ITALY's last message by sending a message expressing your trust in their proposal. The reason for this decision is that ITALY has provided a clear and detailed proposal for cooperation, which aligns with Cicero's recommendations for the current phase. By trusting their proposal, you can potentially gain a strategic advantage by working together to achieve your shared goals.
+
+Specific message: "I appreciate your willingness to cooperate, ITALY. I am pleased to accept your proposal and look forward to a successful partnership."
+
+Reason: "ITALY has provided a well-structured and aligned proposal, which aligns with Cicero's recommendations for the current phase. By trusting their proposal, I can potentially gain a strategic advantage by working together with ITALY towards our shared goals.")
+[2024-10-01 20:39:35.014] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815173502264/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the information provided, I would recommend that you respond to RUSSIA's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this recommendation is that RUSSIA's message indicates that they are willing to support England's move to take control of Amsterdam, which is a valuable port for England. By responding with the recommended message, England can secure the support of RUSSIA and ensure that their move is successful. Additionally, by working together with RUSSIA, England can potentially gain an advantage over other players on the board.
+
+It is important to note that this decision assumes that England is interested in taking control of Amsterdam, and that they have the necessary resources and support to make the move. If England does not have the necessary resources or if they are not interested in taking control of Amsterdam, a different response may be more appropriate.)
+[2024-10-01 20:39:42.396] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I would recommend that you respond to FRANCE's last message by sending a message of "PRP" in agreement with their proposal.
+
+The reason for this recommendation is that FRANCE has provided a clear and well-supported proposal for a phase-ending move, which aligns with Cicero's recommendations for ENGLAND. By sending a "PRP" message, you are indicating that you are willing to work with FRANCE to achieve a successful phase-ending move, which is in line with your strategic interests.
+
+Additionally, by sending a "PRP" message, you are also demonstrating your willingness to cooperate with FRANCE and build a positive relationship, which could be beneficial for future phases.
+
+Overall, based on the information provided, it seems that FRANCE has put forward a reasonable and well-supported proposal, and sending a "PRP" message is the most appropriate response given the context of the game and Cicero's recommendations.)
+[2024-10-01 20:39:50.498] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by approving their proposal. The reason for this decision is that TURKEY has provided a detailed and coherent plan for their moves this phase, which aligns with your own interests and goals. By approving their proposal, you can secure their support for your moves and potentially gain an advantage in the game. Additionally, by working together with TURKEY, you can better coordinate your efforts and increase your chances of success.
+
+Here is a specific message you can use to respond to TURKEY:
+
+"I approve your proposal. I appreciate the detail and coherence in your plan, and I believe that working together will be beneficial for both of us. Let's continue to coordinate our efforts and achieve our goals."
+
+Reason: The proposal provided by TURKEY is well-thought-out and aligns with ENGLAND's interests and goals. By approving their proposal, ENGLAND can secure TURKEY's support and potentially gain an advantage in the game.)
+[2024-10-01 20:39:57.235] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I would recommend the following message for ENGLAND:
+
+"Thank you for your latest message. I appreciate your willingness to work together and secure our positions. I agree to the proposed plan, as it aligns with my own goals and provides a solid foundation for our future cooperation. I look forward to continuing our collaboration."
+
+The reason for this decision is that the proposed plan by GERMANY aligns with ENGLAND's goals of securing its positions in the north and south, and it also shows a willingness to work together and cooperate. By agreeing to the plan, ENGLAND can establish a positive relationship with GERMANY and pave the way for future cooperation. Additionally, the message demonstrates a willingness to trust GERMANY and work together towards common goals, which is crucial in a game of Diplomacy.)
+[2024-10-01 20:40:05.146] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to AUSTRIA:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that the message history shows that AUSTRIA has been consistently supporting ENGLAND's moves in the North, and this message aligns with that pattern. By sending this message, ENGLAND can further solidify their position in the North and prevent AUSTRIA from making any moves that could threaten their control there. Additionally, by supporting AUSTRIA's move in the Channel, ENGLAND can maintain a balance of power in the region and avoid any potential threats from AUSTRIA.
+
+By sending this message, ENGLAND can also demonstrate their trust in AUSTRIA's intentions and potentially pave the way for future collaborations. However, it is important to note that this decision should be revisited based on any new information or changes in the board status.)
+[2024-10-01 20:40:11.552] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to send the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that by supporting the move to CLY with your fleet, you are able to maintain a strong position in the Mediterranean and prevent Italy from gaining too much influence in the region. Additionally, by supporting your army in AMY, you are able to keep Italy from attacking your army in LVP and potentially gaining a strategic advantage.
+
+By sending this message, you are able to show Italy that you are willing to work together and maintain a balance of power in the region, while also protecting your own interests.)
+[2024-10-01 20:40:18.422] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the information provided, I would recommend the following message for ENGLAND to respond to RUSSIA's last message:
+
+"Thank you for your message, RUSSIA. I appreciate your willingness to work together to secure the NTH. I will support your plan to move FLT EDI and AMY LVP to NTH, as it aligns with my own interests and will help to secure the board. I look forward to continuing to work together."
+
+The reason for this recommendation is that the message aligns with ENGLAND's interests by securing a key port and supporting their own moves. Additionally, it demonstrates a willingness to cooperate with RUSSIA, which could lead to further opportunities for collaboration in the future. By supporting RUSSIA's plan, ENGLAND can also help to create a more stable board and reduce the risk of conflict.)
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031558395/S1901M/omniscient_type->GLOBAL](ENGLAND: F EDI - CLY, F LON S F EDI - NTH, A LVP - EDI)
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031740181/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032211878/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032569283/S1901M/FRANCE->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG AMY LVP ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO WAL ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032849225/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: PRP ( AND ( XDO ( ( FRA AMY MAR ) MTO GAS ) ) ( XDO ( ( FRA AMY PAR ) MTO BRE ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY PAR ) MTO PIC ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033005818/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: PRP ( AND ( XDO ( ( TUR AMY CON ) SUP ( TUR FLT ANK ) ) ) ( XDO ( ( TUR AMY SMY ) MTO SYR ) ) ( XDO ( ( TUR FLT ANK ) SUP ( RUS FLT SEV ) MTO ARM ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033216345/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: PRP ( AND ( XDO ( ( ITA AMY ROM ) MTO TUS ) ) ( XDO ( ( ITA AMY VEN ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( ITA FLT NAP ) SUP ( ITA AMY VEN ) MTO APU ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033354580/S1901M/AUSTRIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033423864/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS AMY WAR ) ) ) ( XDO ( ( RUS AMY WAR ) MTO UKR ) ) ( XDO ( ( RUS FLT (STP SCS) ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) SUP ( AUS AMY BUD ) MTO RUM ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033561339/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS FLT TRI ) MTO VEN ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033782194/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: PRP ( AND ( XDO ( ( GER AMY BER ) MTO KIE ) ) ( XDO ( ( GER AMY MUN ) SUP ( FRA AMY MAR ) MTO BUR ) ) ( XDO ( ( GER FLT KIE ) SUP ( GER AMY BER ) ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033851177/S1901M/ITALY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO ECH ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033989381/S1901M/RUSSIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) ) ( XDO ( ( ENG FLT EDI ) HLD ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034341724/S1901M/GERMANY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034844509/S1901M/TURKEY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ))
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815040876250/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to FRANCE:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that the message history indicates that FRANCE is trying to create a double support for ENG on LVP and FLT, which would allow ENG to move its fleet from LVP to FLT uncontested. By sending the message, ENG can help to solidify this support and make it more difficult for FRANCE to change its mind. Additionally, by supporting FRANCE's move, ENG can maintain a strong position in the north and prevent FRANCE from gaining an advantage.)
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815047560906/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by saying:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) )"
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting TURKEY's moves in the North and South, and TURKEY's last message aligns with these recommendations. By trusting TURKEY's message and following Cicero's recommendations, ENGLAND can further its strategic goals and increase its chances of success in the game.)
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815054401865/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this decision is that Cicero's recommendation for ENGLAND includes supporting the move to F EDI, which is the same move recommended by GERMANY in their last message. By sending the same message as GERMANY, ENGLAND can appear cooperative and build a relationship with GERMANY, which could be beneficial in the long run. Additionally, supporting the move to F EDI will also help to secure ENGLAND's flank and prevent GERMANY from attacking it.)
+[2024-10-01 20:40:19.461] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815064590812/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to AUSTRIA's last message by sending the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) )"
+
+The reason for this decision is that AUSTRIA's last message is a PRP (Preferred Response) message, which indicates that they prefer you to fulfill the orders listed in their message. By sending the same orders back to them, you are showing that you are willing to cooperate and work together. Additionally, by sending the same orders, you are also demonstrating that you have understood and are willing to follow their recommendations.
+
+It is also worth noting that by sending the same orders, you are also making it clear that you do not have any other orders that you would prefer to send at this time. This can help to maintain a positive relationship with AUSTRIA and encourage them to continue providing you with recommendations in the future.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815070256336/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend sending the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this recommendation is that ITALY has explicitly expressed their intention to support England in attacking Austria's Munich, and England's army is currently in a favorable position to do so. By sending this message, England can secure Italy's support and increase the likelihood of successfully attacking Munich. Additionally, this message aligns with Cicero's recommendation for England to focus on supporting Italy in attacking Austria's Munich, which is a key strategic goal for both England and Italy.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815077030690/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to RUSSIA in response to their last message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this decision is that RUSSIA has recently been aiding you in the Mediterranean, and by sending this message, you are showing your appreciation for their support and reinforcing your relationship with them. Additionally, by keeping RUSSIA's fleet in the Mediterranean, you are able to maintain a strong presence in the region and potentially threaten Austria or Italy if necessary.
+
+By sending this message, you are also demonstrating your willingness to cooperate with RUSSIA and maintain a positive relationship, which could be beneficial in the long term.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815085106530/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided context, I would recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that FRANCE has shown a willingness to coordinate with you in the past, as evidenced by their previous messages, and this move will allow you to maintain a strong position in the North while also supporting their efforts in the South. Additionally, by supporting their move, you can further build trust and cooperation between the two of you, which could lead to more beneficial collaborations in the future.
+
+By sending this message, you are demonstrating your commitment to the board and your willingness to work together with FRANCE, while also positioning yourself to potentially gain an advantage in the game.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815097987152/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) )"
+
+Reason:
+
+The message history shows that TURKEY has a strong interest in supporting England in the north, as evidenced by their multiple mentions of supporting England's moves in the Baltic and North Sea. Additionally, TURKEY's last message includes several orders that align with England's interests, such as supporting England's moves in the North Sea and opposing Russia's moves in the Baltic. By sending a message that confirms and reinforces these interests, England can strengthen their relationship with TURKEY and increase the likelihood of success in the current phase.
+
+By sending this message, England can demonstrate their commitment to the partnership and create a stronger bond with TURKEY, which can be beneficial in the long term. Additionally, this message aligns with Cicero's recommendation for England, which suggests that supporting TURKEY in the north is a strategic move that can help England achieve their goals.
+
+Overall, sending this message is a good idea for England because it aligns with their interests, reinforces their partnership with TURKEY, and supports their strategic goals.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815104486890/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )'
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting GERMANY's move of attacking EDI with FLT, which is consistent with the message history provided. By sending this message, ENGLAND can maintain a good relationship with GERMANY and avoid any potential conflicts. Additionally, this message aligns with Cicero's recommendation, which suggests that ENGLAND should focus on supporting GERMANY's moves in the current phase.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815110145872/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to AUSTRIA in response to their last message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that AUSTRIA has provided a detailed plan of action, including the moves they will make and the supporting orders they have, which aligns with Cicero's recommendations. By sending this message, you are able to take advantage of their offered support and ensure that your moves are coordinated with theirs. Additionally, by confirming their plans, you are able to demonstrate your trust in their intentions and build a stronger alliance between the two of you.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815117881740/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to ITALY's last message by approving their proposal to attack ENG AMY.
+
+The reason for this decision is that ITALY has shown a willingness to coordinate with you in the past, as evidenced by their previous messages. By approving their proposal, you can maintain a positive relationship with ITALY and potentially set the stage for future cooperation. Additionally, attacking ENG AMY will weaken France's position in the region and create an opportunity for you to gain an advantage.
+
+Specifically, you could respond with the following message: "I approve of your proposal to attack ENG AMY. It aligns with my own plans to weaken France and create an opportunity for us to gain an advantage. I look forward to continuing to work together."
+
+By taking this action, you can demonstrate your willingness to cooperate with ITALY while also advancing your own interests.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815126381132/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. As your advisor, I recommend sending the following message in response to RUSSIA's last message:
+
+"Thank you for your message, RUSSIA. I appreciate your willingness to share your plans with me. However, I must decline your proposal to coordinate our moves in the North. I have Cicero's recommendation to focus on the French fleet in the English Channel, which I believe is a higher priority at the moment. I will continue to monitor the situation and keep you informed of any changes in my plans. Thank you again for your message."
+
+The reason for this decision is that Cicero's recommendation for ENGLAND is to focus on the French fleet in the English Channel, which is a higher priority than coordinating with RUSSIA in the North. By declining RUSSIA's proposal, ENGLAND can align with Cicero's recommendation and ensure that it is taking the most effective course of action. Additionally, by keeping RUSSIA informed of any changes in ENGLAND's plans, ENGLAND can maintain a positive relationship with RUSSIA and be open to future coordination opportunities.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815136467542/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR )"
+
+The reason for this decision is that FRANCE has shown a consistent pattern of supporting England's moves in the Mediterranean, particularly in the region of Marseilles. By supporting England's move to Marseilles, FRANCE has demonstrated its willingness to cooperate with England in this phase. Additionally, by sending a message that reinforces England's control over the Mediterranean, you can further solidify your relationship with FRANCE and create a more stable board position.
+
+Cicero's recommendation for England also supports this decision, as it suggests that England should focus on supporting its fleet in the Mediterranean and expanding its control over the region. By following Cicero's advice and responding to FRANCE's message with a message that reinforces England's control over Marseilles, you can further align your actions with Cicero's recommendations and create a more advantageous board position for England.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815144331049/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( XDO ( ENG AMY LVP ) MTO WAL )"
+
+The reason for this recommendation is that TURKEY has recently been a reliable partner in the Mediterranean, as shown by their support for ENGLAND's moves in the region. By sending this message, ENGLAND can maintain their partnership and continue to work together to control the Mediterranean.
+
+Additionally, by supporting ENGLAND's move in the Mediterranean, TURKEY will be able to maintain their own influence in the region and prevent any other powers from gaining too much control. This will help to maintain the balance of power in the region and ensure that neither ENGLAND nor TURKEY is left vulnerable to attack.
+
+Overall, sending this message will help to further ENGLAND's goals in the Mediterranean and maintain their partnership with TURKEY, which is in line with Cicero's recommendations.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815151565637/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. As your trusty AI assistant, I recommend that you respond to GERMANY's last message by approving their proposal to attack AMY with their fleet.
+
+The reason for this recommendation is that GERMANY has already demonstrated their willingness to cooperate by proposing to attack AMY, which aligns with your own interests in gaining a strategic advantage over FRANCE. By approving their proposal, you can maintain a strong relationship with GERMANY and potentially gain an advantageous position on the board. Additionally, by attacking AMY, you can weaken FRANCE's position in the north and set the stage for future attacks.
+
+Here is the specific message you can use to respond to GERMANY:
+
+"Approved. I appreciate your willingness to cooperate and look forward to our continued partnership."
+
+I hope this recommendation is helpful, and please let me know if you have any further questions or concerns.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815159503031/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to respond with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that Cicero has recommended England to focus on building a strong navy in the Channel, and the message history shows that Austria is trying to create a favorable position for itself in the North. By supporting Austria's last message, England can help to create a more stable situation in the North and prevent France from gaining too much influence. Additionally, by focusing on the Channel, England can maintain its control over the English Channel and prevent France from using it as a path to attack England.
+
+This message will help to further Austria's goal of creating a favorable position in the North, while also supporting England's goal of maintaining control over the Channel. It is a strategic move that will help to balance the board and create a more stable situation for both players.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815166142687/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend that you respond to ITALY's last message by sending a message expressing your trust in their proposal. The reason for this decision is that ITALY has provided a clear and detailed proposal for cooperation, which aligns with Cicero's recommendations for the current phase. By trusting their proposal, you can potentially gain a strategic advantage by working together to achieve your shared goals.
+
+Specific message: "I appreciate your willingness to cooperate, ITALY. I am pleased to accept your proposal and look forward to a successful partnership."
+
+Reason: "ITALY has provided a well-structured and aligned proposal, which aligns with Cicero's recommendations for the current phase. By trusting their proposal, I can potentially gain a strategic advantage by working together with ITALY towards our shared goals.")
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815173502264/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the information provided, I would recommend that you respond to RUSSIA's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this recommendation is that RUSSIA's message indicates that they are willing to support England's move to take control of Amsterdam, which is a valuable port for England. By responding with the recommended message, England can secure the support of RUSSIA and ensure that their move is successful. Additionally, by working together with RUSSIA, England can potentially gain an advantage over other players on the board.
+
+It is important to note that this decision assumes that England is interested in taking control of Amsterdam, and that they have the necessary resources and support to make the move. If England does not have the necessary resources or if they are not interested in taking control of Amsterdam, a different response may be more appropriate.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815182423632/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I would recommend that you respond to FRANCE's last message by sending a message of "PRP" in agreement with their proposal.
+
+The reason for this recommendation is that FRANCE has provided a clear and well-supported proposal for a phase-ending move, which aligns with Cicero's recommendations for ENGLAND. By sending a "PRP" message, you are indicating that you are willing to work with FRANCE to achieve a successful phase-ending move, which is in line with your strategic interests.
+
+Additionally, by sending a "PRP" message, you are also demonstrating your willingness to cooperate with FRANCE and build a positive relationship, which could be beneficial for future phases.
+
+Overall, based on the information provided, it seems that FRANCE has put forward a reasonable and well-supported proposal, and sending a "PRP" message is the most appropriate response given the context of the game and Cicero's recommendations.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815190525539/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by approving their proposal. The reason for this decision is that TURKEY has provided a detailed and coherent plan for their moves this phase, which aligns with your own interests and goals. By approving their proposal, you can secure their support for your moves and potentially gain an advantage in the game. Additionally, by working together with TURKEY, you can better coordinate your efforts and increase your chances of success.
+
+Here is a specific message you can use to respond to TURKEY:
+
+"I approve your proposal. I appreciate the detail and coherence in your plan, and I believe that working together will be beneficial for both of us. Let's continue to coordinate our efforts and achieve our goals."
+
+Reason: The proposal provided by TURKEY is well-thought-out and aligns with ENGLAND's interests and goals. By approving their proposal, ENGLAND can secure TURKEY's support and potentially gain an advantage in the game.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815197262061/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I would recommend the following message for ENGLAND:
+
+"Thank you for your latest message. I appreciate your willingness to work together and secure our positions. I agree to the proposed plan, as it aligns with my own goals and provides a solid foundation for our future cooperation. I look forward to continuing our collaboration."
+
+The reason for this decision is that the proposed plan by GERMANY aligns with ENGLAND's goals of securing its positions in the north and south, and it also shows a willingness to work together and cooperate. By agreeing to the plan, ENGLAND can establish a positive relationship with GERMANY and pave the way for future cooperation. Additionally, the message demonstrates a willingness to trust GERMANY and work together towards common goals, which is crucial in a game of Diplomacy.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815205184426/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to AUSTRIA:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that the message history shows that AUSTRIA has been consistently supporting ENGLAND's moves in the North, and this message aligns with that pattern. By sending this message, ENGLAND can further solidify their position in the North and prevent AUSTRIA from making any moves that could threaten their control there. Additionally, by supporting AUSTRIA's move in the Channel, ENGLAND can maintain a balance of power in the region and avoid any potential threats from AUSTRIA.
+
+By sending this message, ENGLAND can also demonstrate their trust in AUSTRIA's intentions and potentially pave the way for future collaborations. However, it is important to note that this decision should be revisited based on any new information or changes in the board status.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815211579420/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to send the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that by supporting the move to CLY with your fleet, you are able to maintain a strong position in the Mediterranean and prevent Italy from gaining too much influence in the region. Additionally, by supporting your army in AMY, you are able to keep Italy from attacking your army in LVP and potentially gaining a strategic advantage.
+
+By sending this message, you are able to show Italy that you are willing to work together and maintain a balance of power in the region, while also protecting your own interests.)
+[2024-10-01 20:40:19.462] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815218448516/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the information provided, I would recommend the following message for ENGLAND to respond to RUSSIA's last message:
+
+"Thank you for your message, RUSSIA. I appreciate your willingness to work together to secure the NTH. I will support your plan to move FLT EDI and AMY LVP to NTH, as it aligns with my own interests and will help to secure the board. I look forward to continuing to work together."
+
+The reason for this recommendation is that the message aligns with ENGLAND's interests by securing a key port and supporting their own moves. Additionally, it demonstrates a willingness to cooperate with RUSSIA, which could lead to further opportunities for collaboration in the future. By supporting RUSSIA's plan, ENGLAND can also help to create a more stable board and reduce the risk of conflict.)
+[2024-10-01 20:40:27.686] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the information provided, I would recommend that you respond to FRANCE's last message by approving their proposal to attack AMY.
+
+The reason for this recommendation is that FRANCE has provided a detailed and coherent plan for attacking AMY, which aligns with ENGLAND's interests and goals. By approving their proposal, ENGLAND can gain a strategic advantage in the region and potentially weaken FRANCE's position. Additionally, by working together to attack AMY, ENGLAND and FRANCE can demonstrate their ability to cooperate and coordinate their efforts, which could lead to further opportunities for collaboration in the future.
+
+In terms of specific language, you could respond to FRANCE's message with something like: "I approve of your plan to attack AMY. It is a logical and well-coordinated move that aligns with our shared interests. Let us work together to achieve our goals in the region."
+
+Overall, this response will help to maintain a positive and cooperative tone in the conversation, while also advancing ENGLAND's strategic objectives.)
+[2024-10-01 20:40:35.783] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to TURKEY:
+
+"PRP ( XDO ( ( ENG AMY LVP ) MTO WAL ) )"
+
+The reason for this decision is that Cicero recommends England to focus on its military supplies in the north, and the message history shows that Turkey has been trying to take advantage of England's weakened military in the north by sending its fleet to attack England's capital, Amsterdam. By sending this message, England can further weaken its military in the north and make it more difficult for Turkey to attack its capital.
+
+Additionally, by sending this message, England can also create a potential threat to Turkey's supply line, which could make it more difficult for Turkey to continue its offensive against England.
+
+Overall, this message is a strategic move to weaken England's military in the north and create a potential threat to Turkey's supply line, which aligns with Cicero's recommendations and the current board status.)
+[2024-10-01 20:40:42.447] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to respond with the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this decision is that the message from GERMANY suggests a coordinated move with ENG, which aligns with Cicero's recommendations to focus on the North and East. By trusting the message and following Cicero's recommendations, you can maximize your chances of success in the current phase. Additionally, the message from GERMANY provides a clear and specific plan of action, which makes it easier to coordinate your moves.)
+[2024-10-01 20:40:50.464] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to AUSTRIA:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) ) )"
+
+The reason for this decision is that the message history shows that AUSTRIA has consistently provided accurate information and recommendations in the past, and their latest message includes several orders that align with Cicero's recommendations. By trusting their last message, you can take advantage of their expertise and potentially gain an advantage on the board. Additionally, by sending a message that confirms their recommendations, you can demonstrate your willingness to work together and build trust with AUSTRIA.)
+[2024-10-01 20:41:01.852] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to ITALY's last message with the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO ECH ) ) ) A LON"
+
+The reason for this recommendation is that by responding with this message, you are supporting the recommended orders by Cicero for the current phase, which is to focus on supporting the French fleet in the North. By moving a unit from LON to NTH, you are strengthening your position in the North and making it more difficult for ITALY to attack you there. Additionally, by supporting the French fleet in the North, you are also supporting your own interests in the Mediterranean, as you will be able to better defend your territories there.
+
+It is also worth noting that by moving a unit from LON to NTH, you are also creating a potential threat for ITALY, as they will have to choose between attacking you in the North or defending against the French fleet. This can put pressure on ITALY and make it more difficult for them to coordinate their attacks.
+
+Overall, responding with this message will help you to achieve your strategic goals and support your recommended orders for the current phase.)
+[2024-10-01 20:41:07.762] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the provided information, I recommend that you respond to RUSSIA's last message with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) )"
+
+The reason for this decision is that RUSSIA has shown a consistent pattern of supporting your moves in the Mediterranean, specifically by blocking your enemy's units and providing you with a strategic advantage. By trusting RUSSIA's last message, you are able to further solidify your position in the Mediterranean and potentially gain an advantage over your opponents. Additionally, by working together with RUSSIA, you can create a more formidable alliance and increase your chances of success in the game.)
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031558395/S1901M/omniscient_type->GLOBAL](ENGLAND: F EDI - CLY, F LON S F EDI - NTH, A LVP - EDI)
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815031740181/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032211878/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032569283/S1901M/FRANCE->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG AMY LVP ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO WAL ) ) ))
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815032849225/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: PRP ( AND ( XDO ( ( FRA AMY MAR ) MTO GAS ) ) ( XDO ( ( FRA AMY PAR ) MTO BRE ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY PAR ) MTO PIC ) ) ))
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033005818/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: PRP ( AND ( XDO ( ( TUR AMY CON ) SUP ( TUR FLT ANK ) ) ) ( XDO ( ( TUR AMY SMY ) MTO SYR ) ) ( XDO ( ( TUR FLT ANK ) SUP ( RUS FLT SEV ) MTO ARM ) ) ))
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033216345/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: PRP ( AND ( XDO ( ( ITA AMY ROM ) MTO TUS ) ) ( XDO ( ( ITA AMY VEN ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( ITA FLT NAP ) SUP ( ITA AMY VEN ) MTO APU ) ) ))
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033354580/S1901M/AUSTRIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) ))
+[2024-10-01 20:41:08.839] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033423864/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS AMY WAR ) ) ) ( XDO ( ( RUS AMY WAR ) MTO UKR ) ) ( XDO ( ( RUS FLT (STP SCS) ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) SUP ( AUS AMY BUD ) MTO RUM ) ) ))
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033561339/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS FLT TRI ) MTO VEN ) ) ))
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033782194/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: PRP ( AND ( XDO ( ( GER AMY BER ) MTO KIE ) ) ( XDO ( ( GER AMY MUN ) SUP ( FRA AMY MAR ) MTO BUR ) ) ( XDO ( ( GER FLT KIE ) SUP ( GER AMY BER ) ) ) ))
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033851177/S1901M/ITALY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO ECH ) ) ))
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815033989381/S1901M/RUSSIA->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) ) ( XDO ( ( ENG FLT EDI ) HLD ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034341724/S1901M/GERMANY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) ))
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815034844509/S1901M/TURKEY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ))
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815040876250/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to FRANCE:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that the message history indicates that FRANCE is trying to create a double support for ENG on LVP and FLT, which would allow ENG to move its fleet from LVP to FLT uncontested. By sending the message, ENG can help to solidify this support and make it more difficult for FRANCE to change its mind. Additionally, by supporting FRANCE's move, ENG can maintain a strong position in the north and prevent FRANCE from gaining an advantage.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815047560906/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by saying:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) )"
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting TURKEY's moves in the North and South, and TURKEY's last message aligns with these recommendations. By trusting TURKEY's message and following Cicero's recommendations, ENGLAND can further its strategic goals and increase its chances of success in the game.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815054401865/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this decision is that Cicero's recommendation for ENGLAND includes supporting the move to F EDI, which is the same move recommended by GERMANY in their last message. By sending the same message as GERMANY, ENGLAND can appear cooperative and build a relationship with GERMANY, which could be beneficial in the long run. Additionally, supporting the move to F EDI will also help to secure ENGLAND's flank and prevent GERMANY from attacking it.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815064590812/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to AUSTRIA's last message by sending the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) )"
+
+The reason for this decision is that AUSTRIA's last message is a PRP (Preferred Response) message, which indicates that they prefer you to fulfill the orders listed in their message. By sending the same orders back to them, you are showing that you are willing to cooperate and work together. Additionally, by sending the same orders, you are also demonstrating that you have understood and are willing to follow their recommendations.
+
+It is also worth noting that by sending the same orders, you are also making it clear that you do not have any other orders that you would prefer to send at this time. This can help to maintain a positive relationship with AUSTRIA and encourage them to continue providing you with recommendations in the future.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815070256336/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend sending the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this recommendation is that ITALY has explicitly expressed their intention to support England in attacking Austria's Munich, and England's army is currently in a favorable position to do so. By sending this message, England can secure Italy's support and increase the likelihood of successfully attacking Munich. Additionally, this message aligns with Cicero's recommendation for England to focus on supporting Italy in attacking Austria's Munich, which is a key strategic goal for both England and Italy.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815077030690/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to RUSSIA in response to their last message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this decision is that RUSSIA has recently been aiding you in the Mediterranean, and by sending this message, you are showing your appreciation for their support and reinforcing your relationship with them. Additionally, by keeping RUSSIA's fleet in the Mediterranean, you are able to maintain a strong presence in the region and potentially threaten Austria or Italy if necessary.
+
+By sending this message, you are also demonstrating your willingness to cooperate with RUSSIA and maintain a positive relationship, which could be beneficial in the long term.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815085106530/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided context, I would recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR ) )"
+
+The reason for this recommendation is that FRANCE has shown a willingness to coordinate with you in the past, as evidenced by their previous messages, and this move will allow you to maintain a strong position in the North while also supporting their efforts in the South. Additionally, by supporting their move, you can further build trust and cooperation between the two of you, which could lead to more beneficial collaborations in the future.
+
+By sending this message, you are demonstrating your commitment to the board and your willingness to work together with FRANCE, while also positioning yourself to potentially gain an advantage in the game.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815097987152/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG FLT EDI ) MTO YOR ) ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) )"
+
+Reason:
+
+The message history shows that TURKEY has a strong interest in supporting England in the north, as evidenced by their multiple mentions of supporting England's moves in the Baltic and North Sea. Additionally, TURKEY's last message includes several orders that align with England's interests, such as supporting England's moves in the North Sea and opposing Russia's moves in the Baltic. By sending a message that confirms and reinforces these interests, England can strengthen their relationship with TURKEY and increase the likelihood of success in the current phase.
+
+By sending this message, England can demonstrate their commitment to the partnership and create a stronger bond with TURKEY, which can be beneficial in the long term. Additionally, this message aligns with Cicero's recommendation for England, which suggests that supporting TURKEY in the north is a strategic move that can help England achieve their goals.
+
+Overall, sending this message is a good idea for England because it aligns with their interests, reinforces their partnership with TURKEY, and supports their strategic goals.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815104486890/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )'
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting GERMANY's move of attacking EDI with FLT, which is consistent with the message history provided. By sending this message, ENGLAND can maintain a good relationship with GERMANY and avoid any potential conflicts. Additionally, this message aligns with Cicero's recommendation, which suggests that ENGLAND should focus on supporting GERMANY's moves in the current phase.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815110145872/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to AUSTRIA in response to their last message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that AUSTRIA has provided a detailed plan of action, including the moves they will make and the supporting orders they have, which aligns with Cicero's recommendations. By sending this message, you are able to take advantage of their offered support and ensure that your moves are coordinated with theirs. Additionally, by confirming their plans, you are able to demonstrate your trust in their intentions and build a stronger alliance between the two of you.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815117881740/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to respond to ITALY's last message by approving their proposal to attack ENG AMY.
+
+The reason for this decision is that ITALY has shown a willingness to coordinate with you in the past, as evidenced by their previous messages. By approving their proposal, you can maintain a positive relationship with ITALY and potentially set the stage for future cooperation. Additionally, attacking ENG AMY will weaken France's position in the region and create an opportunity for you to gain an advantage.
+
+Specifically, you could respond with the following message: "I approve of your proposal to attack ENG AMY. It aligns with my own plans to weaken France and create an opportunity for us to gain an advantage. I look forward to continuing to work together."
+
+By taking this action, you can demonstrate your willingness to cooperate with ITALY while also advancing your own interests.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815126381132/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. As your advisor, I recommend sending the following message in response to RUSSIA's last message:
+
+"Thank you for your message, RUSSIA. I appreciate your willingness to share your plans with me. However, I must decline your proposal to coordinate our moves in the North. I have Cicero's recommendation to focus on the French fleet in the English Channel, which I believe is a higher priority at the moment. I will continue to monitor the situation and keep you informed of any changes in my plans. Thank you again for your message."
+
+The reason for this decision is that Cicero's recommendation for ENGLAND is to focus on the French fleet in the English Channel, which is a higher priority than coordinating with RUSSIA in the North. By declining RUSSIA's proposal, ENGLAND can align with Cicero's recommendation and ensure that it is taking the most effective course of action. Additionally, by keeping RUSSIA informed of any changes in ENGLAND's plans, ENGLAND can maintain a positive relationship with RUSSIA and be open to future coordination opportunities.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815136467542/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I recommend that you respond to FRANCE's last message with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR )"
+
+The reason for this decision is that FRANCE has shown a consistent pattern of supporting England's moves in the Mediterranean, particularly in the region of Marseilles. By supporting England's move to Marseilles, FRANCE has demonstrated its willingness to cooperate with England in this phase. Additionally, by sending a message that reinforces England's control over the Mediterranean, you can further solidify your relationship with FRANCE and create a more stable board position.
+
+Cicero's recommendation for England also supports this decision, as it suggests that England should focus on supporting its fleet in the Mediterranean and expanding its control over the region. By following Cicero's advice and responding to FRANCE's message with a message that reinforces England's control over Marseilles, you can further align your actions with Cicero's recommendations and create a more advantageous board position for England.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815144331049/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to TURKEY:
+
+"PRP ( XDO ( ENG AMY LVP ) MTO WAL )"
+
+The reason for this recommendation is that TURKEY has recently been a reliable partner in the Mediterranean, as shown by their support for ENGLAND's moves in the region. By sending this message, ENGLAND can maintain their partnership and continue to work together to control the Mediterranean.
+
+Additionally, by supporting ENGLAND's move in the Mediterranean, TURKEY will be able to maintain their own influence in the region and prevent any other powers from gaining too much control. This will help to maintain the balance of power in the region and ensure that neither ENGLAND nor TURKEY is left vulnerable to attack.
+
+Overall, sending this message will help to further ENGLAND's goals in the Mediterranean and maintain their partnership with TURKEY, which is in line with Cicero's recommendations.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815151565637/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. As your trusty AI assistant, I recommend that you respond to GERMANY's last message by approving their proposal to attack AMY with their fleet.
+
+The reason for this recommendation is that GERMANY has already demonstrated their willingness to cooperate by proposing to attack AMY, which aligns with your own interests in gaining a strategic advantage over FRANCE. By approving their proposal, you can maintain a strong relationship with GERMANY and potentially gain an advantageous position on the board. Additionally, by attacking AMY, you can weaken FRANCE's position in the north and set the stage for future attacks.
+
+Here is the specific message you can use to respond to GERMANY:
+
+"Approved. I appreciate your willingness to cooperate and look forward to our continued partnership."
+
+I hope this recommendation is helpful, and please let me know if you have any further questions or concerns.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815159503031/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to respond with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that Cicero has recommended England to focus on building a strong navy in the Channel, and the message history shows that Austria is trying to create a favorable position for itself in the North. By supporting Austria's last message, England can help to create a more stable situation in the North and prevent France from gaining too much influence. Additionally, by focusing on the Channel, England can maintain its control over the English Channel and prevent France from using it as a path to attack England.
+
+This message will help to further Austria's goal of creating a favorable position in the North, while also supporting England's goal of maintaining control over the Channel. It is a strategic move that will help to balance the board and create a more stable situation for both players.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815166142687/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the information provided, I recommend that you respond to ITALY's last message by sending a message expressing your trust in their proposal. The reason for this decision is that ITALY has provided a clear and detailed proposal for cooperation, which aligns with Cicero's recommendations for the current phase. By trusting their proposal, you can potentially gain a strategic advantage by working together to achieve your shared goals.
+
+Specific message: "I appreciate your willingness to cooperate, ITALY. I am pleased to accept your proposal and look forward to a successful partnership."
+
+Reason: "ITALY has provided a well-structured and aligned proposal, which aligns with Cicero's recommendations for the current phase. By trusting their proposal, I can potentially gain a strategic advantage by working together with ITALY towards our shared goals.")
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815173502264/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the information provided, I would recommend that you respond to RUSSIA's last message with the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) ) )"
+
+The reason for this recommendation is that RUSSIA's message indicates that they are willing to support England's move to take control of Amsterdam, which is a valuable port for England. By responding with the recommended message, England can secure the support of RUSSIA and ensure that their move is successful. Additionally, by working together with RUSSIA, England can potentially gain an advantage over other players on the board.
+
+It is important to note that this decision assumes that England is interested in taking control of Amsterdam, and that they have the necessary resources and support to make the move. If England does not have the necessary resources or if they are not interested in taking control of Amsterdam, a different response may be more appropriate.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815182423632/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I would recommend that you respond to FRANCE's last message by sending a message of "PRP" in agreement with their proposal.
+
+The reason for this recommendation is that FRANCE has provided a clear and well-supported proposal for a phase-ending move, which aligns with Cicero's recommendations for ENGLAND. By sending a "PRP" message, you are indicating that you are willing to work with FRANCE to achieve a successful phase-ending move, which is in line with your strategic interests.
+
+Additionally, by sending a "PRP" message, you are also demonstrating your willingness to cooperate with FRANCE and build a positive relationship, which could be beneficial for future phases.
+
+Overall, based on the information provided, it seems that FRANCE has put forward a reasonable and well-supported proposal, and sending a "PRP" message is the most appropriate response given the context of the game and Cicero's recommendations.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815190525539/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to TURKEY's last message by approving their proposal. The reason for this decision is that TURKEY has provided a detailed and coherent plan for their moves this phase, which aligns with your own interests and goals. By approving their proposal, you can secure their support for your moves and potentially gain an advantage in the game. Additionally, by working together with TURKEY, you can better coordinate your efforts and increase your chances of success.
+
+Here is a specific message you can use to respond to TURKEY:
+
+"I approve your proposal. I appreciate the detail and coherence in your plan, and I believe that working together will be beneficial for both of us. Let's continue to coordinate our efforts and achieve our goals."
+
+Reason: The proposal provided by TURKEY is well-thought-out and aligns with ENGLAND's interests and goals. By approving their proposal, ENGLAND can secure TURKEY's support and potentially gain an advantage in the game.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815197262061/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I would recommend the following message for ENGLAND:
+
+"Thank you for your latest message. I appreciate your willingness to work together and secure our positions. I agree to the proposed plan, as it aligns with my own goals and provides a solid foundation for our future cooperation. I look forward to continuing our collaboration."
+
+The reason for this decision is that the proposed plan by GERMANY aligns with ENGLAND's goals of securing its positions in the north and south, and it also shows a willingness to work together and cooperate. By agreeing to the plan, ENGLAND can establish a positive relationship with GERMANY and pave the way for future cooperation. Additionally, the message demonstrates a willingness to trust GERMANY and work together towards common goals, which is crucial in a game of Diplomacy.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815205184426/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to AUSTRIA:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that the message history shows that AUSTRIA has been consistently supporting ENGLAND's moves in the North, and this message aligns with that pattern. By sending this message, ENGLAND can further solidify their position in the North and prevent AUSTRIA from making any moves that could threaten their control there. Additionally, by supporting AUSTRIA's move in the Channel, ENGLAND can maintain a balance of power in the region and avoid any potential threats from AUSTRIA.
+
+By sending this message, ENGLAND can also demonstrate their trust in AUSTRIA's intentions and potentially pave the way for future collaborations. However, it is important to note that this decision should be revisited based on any new information or changes in the board status.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815211579420/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the board status, Cicero's recommendations, and the message history, I would advise you to send the following message to ITALY:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY )"
+
+The reason for this decision is that by supporting the move to CLY with your fleet, you are able to maintain a strong position in the Mediterranean and prevent Italy from gaining too much influence in the region. Additionally, by supporting your army in AMY, you are able to keep Italy from attacking your army in LVP and potentially gaining a strategic advantage.
+
+By sending this message, you are able to show Italy that you are willing to work together and maintain a balance of power in the region, while also protecting your own interests.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815218448516/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the information provided, I would recommend the following message for ENGLAND to respond to RUSSIA's last message:
+
+"Thank you for your message, RUSSIA. I appreciate your willingness to work together to secure the NTH. I will support your plan to move FLT EDI and AMY LVP to NTH, as it aligns with my own interests and will help to secure the board. I look forward to continuing to work together."
+
+The reason for this recommendation is that the message aligns with ENGLAND's interests by securing a key port and supporting their own moves. Additionally, it demonstrates a willingness to cooperate with RUSSIA, which could lead to further opportunities for collaboration in the future. By supporting RUSSIA's plan, ENGLAND can also help to create a more stable board and reduce the risk of conflict.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815227712380/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the information provided, I would recommend that you respond to FRANCE's last message by approving their proposal to attack AMY.
+
+The reason for this recommendation is that FRANCE has provided a detailed and coherent plan for attacking AMY, which aligns with ENGLAND's interests and goals. By approving their proposal, ENGLAND can gain a strategic advantage in the region and potentially weaken FRANCE's position. Additionally, by working together to attack AMY, ENGLAND and FRANCE can demonstrate their ability to cooperate and coordinate their efforts, which could lead to further opportunities for collaboration in the future.
+
+In terms of specific language, you could respond to FRANCE's message with something like: "I approve of your plan to attack AMY. It is a logical and well-coordinated move that aligns with our shared interests. Let us work together to achieve our goals in the region."
+
+Overall, this response will help to maintain a positive and cooperative tone in the conversation, while also advancing ENGLAND's strategic objectives.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815235811025/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to TURKEY:
+
+"PRP ( XDO ( ( ENG AMY LVP ) MTO WAL ) )"
+
+The reason for this decision is that Cicero recommends England to focus on its military supplies in the north, and the message history shows that Turkey has been trying to take advantage of England's weakened military in the north by sending its fleet to attack England's capital, Amsterdam. By sending this message, England can further weaken its military in the north and make it more difficult for Turkey to attack its capital.
+
+Additionally, by sending this message, England can also create a potential threat to Turkey's supply line, which could make it more difficult for Turkey to continue its offensive against England.
+
+Overall, this message is a strategic move to weaken England's military in the north and create a potential threat to Turkey's supply line, which aligns with Cicero's recommendations and the current board status.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815242474042/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to respond with the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this decision is that the message from GERMANY suggests a coordinated move with ENG, which aligns with Cicero's recommendations to focus on the North and East. By trusting the message and following Cicero's recommendations, you can maximize your chances of success in the current phase. Additionally, the message from GERMANY provides a clear and specific plan of action, which makes it easier to coordinate your moves.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815250488418/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to send the following message to AUSTRIA:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) ) )"
+
+The reason for this decision is that the message history shows that AUSTRIA has consistently provided accurate information and recommendations in the past, and their latest message includes several orders that align with Cicero's recommendations. By trusting their last message, you can take advantage of their expertise and potentially gain an advantage on the board. Additionally, by sending a message that confirms their recommendations, you can demonstrate your willingness to work together and build trust with AUSTRIA.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815261878894/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the provided information, I recommend that you respond to ITALY's last message with the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO ECH ) ) ) A LON"
+
+The reason for this recommendation is that by responding with this message, you are supporting the recommended orders by Cicero for the current phase, which is to focus on supporting the French fleet in the North. By moving a unit from LON to NTH, you are strengthening your position in the North and making it more difficult for ITALY to attack you there. Additionally, by supporting the French fleet in the North, you are also supporting your own interests in the Mediterranean, as you will be able to better defend your territories there.
+
+It is also worth noting that by moving a unit from LON to NTH, you are also creating a potential threat for ITALY, as they will have to choose between attacking you in the North or defending against the French fleet. This can put pressure on ITALY and make it more difficult for them to coordinate their attacks.
+
+Overall, responding with this message will help you to achieve your strategic goals and support your recommended orders for the current phase.)
+[2024-10-01 20:41:08.840] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) received message: [1727815267789800/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: I recommend to trust the last message. Based on the provided information, I recommend that you respond to RUSSIA's last message with the following message:
+
+"PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) )"
+
+The reason for this decision is that RUSSIA has shown a consistent pattern of supporting your moves in the Mediterranean, specifically by blocking your enemy's units and providing you with a strategic advantage. By trusting RUSSIA's last message, you are able to further solidify your position in the Mediterranean and potentially gain an advantage over your opponents. Additionally, by working together with RUSSIA, you can create a more formidable alliance and increase your chances of success in the game.)
+[2024-10-01 20:41:15.973] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: I recommend to trust the last message. Based on the provided information, I would recommend that you respond to FRANCE's last message by sending a message stating: "PRP ( XDO ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO YOR )".
+
+The reason for this recommendation is that FRANCE has shown a willingness to work with you in the past by providing you with valuable information about the status of your fleet in the North Sea. By trusting their message and sending a message that confirms the status of your fleet, you are demonstrating your goodwill and willingness to cooperate with them. Additionally, by sending a message that is consistent with their previous message, you are showing that you are willing to follow through on your commitments and maintain a positive relationship with FRANCE.
+
+It is important to note that this recommendation is based on the current phase of the game and the information provided. The recommendation may change if the phase or the information changes in the future.)
+[2024-10-01 20:41:24.782] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: I recommend to trust the last message. Based on the board status, Cicero recommendations, and message history, I would advise you to respond to TURKEY's last message by sending a PRP message.
+
+Specifically, you could send the following message:
+
+"PRP ( XDO ( ( ENG AMY LVP ) MTO WAL ) )"
+
+The reason for this decision is that TURKEY's message indicates that they are willing to support your moves in the north, which aligns with Cicero's recommendations. By sending a PRP message, you are acknowledging their support and setting up a potential opportunity for future cooperation.
+
+Additionally, by sending a PRP message, you are also demonstrating your willingness to work with TURKEY in the north, which could help to build trust and coordination between the two of you. This could be particularly useful in the current phase, as it allows you to potentially gain an advantage in the north while also setting up a potential opportunity for future cooperation.
+
+Overall, sending a PRP message is a strategic move that aligns with Cicero's recommendations and takes into account the current board status and message history.)
+[2024-10-01 20:41:31.347] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to GERMANY:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO EDI ) ) ( XDO ( ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT LON ) MTO NTH ) ) )"
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND includes supporting GERMANY's plan to attack ENG, which aligns with the message history provided. Additionally, the message from GERMANY indicates that they are willing to work together to attack ENG, which suggests that they are likely to be trustworthy. By sending the recommended message, ENGLAND can further solidify their alliance with GERMANY and ensure that their plans are aligned.)
+[2024-10-01 20:41:39.896] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: I recommend to trust the last message. Based on the information provided, I recommend that you respond to AUSTRIA's last message with the following message:
+
+"PRP ( AND ( XDO ( ( ENG AMY LVP ) SUP ( ENG FLT EDI ) MTO CLY ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO NTH ) ) ( XDO ( ( ENG FLT LON ) SUP ( FRA FLT BRE ) MTO ECH ) ) )"
+
+The reason for this recommendation is that Cicero's recommendation for ENGLAND this phase is to focus on its fleet in the North Sea, and the message history shows that AUSTRIA is trying to force ENGLAND to move its fleet to the Channel. By responding with the recommended message, ENGLAND can maintain its fleet in the North Sea and avoid falling into AUSTRIA's trap. Additionally, by repeating the last message, ENGLAND can further demonstrate its commitment to the plan and make it more difficult for AUSTRIA to take advantage of any potential opportunities.)
+[2024-10-01 20:41:47.736] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (LlmAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to ITALY:
+
+"Acknowledge and agree with your last message. Your proposal to support ENG with FLT EDI and FLT LON while attacking ENG with AMY LVP and supporting FLT EDI with MTO CLY aligns with our current strategy and goals. We appreciate your willingness to collaborate and look forward to continuing our alliance."
+
+The reason for this recommendation is that ITALY's message clearly outlines a plan for cooperation and coordination between the two powers, which aligns with our current strategy of focusing on the North and supporting each other's moves. By agreeing with ITALY's proposal, we can further solidify our alliance and increase the likelihood of success in the current phase. Additionally, by supporting ITALY's attack on ENG with FLT EDI and FLT LON, we can weaken ENG's position and set ourselves up for potential gains in the future.)
+[2024-10-01 20:41:47.738] [INFO] [chiron_utils.bots.baseline_bot] Exiting communication phase because out of time
+[2024-10-01 20:41:47.739] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F EDI S F LON - YOR', 'F LON - ENG', 'A LVP S F EDI']
+[2024-10-01 20:41:47.745] [INFO] [diplomacy.engine.game[337629]] AUSTRIA	comm_status: ready
+[2024-10-01 20:41:47.745] [INFO] [diplomacy.engine.game[337629]] FRANCE	comm_status: ready
+[2024-10-01 20:41:47.745] [INFO] [diplomacy.engine.game[337629]] ENGLAND	comm_status: ready
+[2024-10-01 20:41:47.746] [INFO] [diplomacy.engine.game[337629]] GERMANY	comm_status: ready
+[2024-10-01 20:41:47.746] [INFO] [diplomacy.engine.game[337629]] ITALY	comm_status: ready
+[2024-10-01 20:41:47.746] [INFO] [diplomacy.engine.game[337629]] TURKEY	comm_status: ready
+[2024-10-01 20:41:47.746] [INFO] [diplomacy.engine.game[337629]] RUSSIA	comm_status: ready
+[2024-10-01 20:41:47.957] [ERROR] [diplomacy.client.connection[337629]] Error received for request send_game_message: Data does not match current game phase. Expected: Data does not match current game phase. Expected: F1901M Given: S1901M
+[2024-10-01 20:41:47.957] [DEBUG] [diplomacy.client.connection[337629]] Full request was: {'request_id': 'dce22e9a-bf4d-4db5-a160-83a7927bd74d', 'name': 'send_game_message', 're_sent': False, 'token': '49a9e68cde749d5a363473ea7de5f66f9938d0e841c8a1b111a224b2e600e2154e58c0fe8d16d626c5a19a6809a270b8b747b4a0d7e7c9ce06c94e614b9ef6febf804057c41eb94aa10f5b4ca5343dfa522d07fab71e7e3f790cf58d7db4fd4883f6fd4b6500965b983dd340e6305e0cdc2e3e159448dce7fae5ea906a2321c1', 'game_id': 'test_chiron_12', 'game_role': 'omniscient_type', 'phase': 'S1901M', 'message': {'sender': 'omniscient_type', 'recipient': 'GLOBAL', 'time_sent': None, 'phase': 'S1901M', 'message': 'ENGLAND-ITALY: I recommend to trust the last message. Based on the provided information, I recommend sending the following message to ITALY:\n\n"Acknowledge and agree with your last message. Your proposal to support ENG with FLT EDI and FLT LON while attacking ENG with AMY LVP and supporting FLT EDI with MTO CLY aligns with our current strategy and goals. We appreciate your willingness to collaborate and look forward to continuing our alliance."\n\nThe reason for this recommendation is that ITALY\'s message clearly outlines a plan for cooperation and coordination between the two powers, which aligns with our current strategy of focusing on the North and supporting each other\'s moves. By agreeing with ITALY\'s proposal, we can further solidify our alliance and increase the likelihood of success in the current phase. Additionally, by supporting ITALY\'s attack on ENG with FLT EDI and FLT LON, we can weaken ENG\'s position and set ourselves up for potential gains in the future.', 'truth': None, 'type': 'suggested_message'}}
+[2024-10-01 20:41:47.957] [ERROR] [tornado.application] Exception after Future was cancelled
+Traceback (most recent call last):
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/tornado/gen.py", line 779, in run
+    yielded = self.gen.throw(exc)
+              ^^^^^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/diplomacy/client/channel.py", line 74, in func
+    return (yield self.connection.send(request, game))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/tornado/gen.py", line 766, in run
+    value = future.result()
+            ^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/diplomacy/client/connection.py", line 246, in _on_socket_message
+    response = responses.parse_dict(json_message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/diplomacy/communication/responses.py", line 292, in parse_dict
+    response_object.throw()
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/diplomacy/communication/responses.py", line 66, in throw
+    raise symbol(self.message)
+diplomacy.utils.exceptions.GamePhaseException: Data does not match current game phase. Expected: Data does not match current game phase. Expected: F1901M Given: S1901M
+[2024-10-01 20:41:48.172] [ERROR] [diplomacy.client.connection[337629]] Error received for request set_orders: Invalid order phase, received S1901M, server phase is F1901M
+[2024-10-01 20:41:48.172] [DEBUG] [diplomacy.client.connection[337629]] Full request was: {'request_id': 'ea559e54-778d-40ff-8f46-00ccd9393820', 'name': 'set_orders', 're_sent': False, 'token': '49a9e68cde749d5a363473ea7de5f66f9938d0e841c8a1b111a224b2e600e2154e58c0fe8d16d626c5a19a6809a270b8b747b4a0d7e7c9ce06c94e614b9ef6febf804057c41eb94aa10f5b4ca5343dfa522d07fab71e7e3f790cf58d7db4fd4883f6fd4b6500965b983dd340e6305e0cdc2e3e159448dce7fae5ea906a2321c1', 'game_id': 'test_chiron_12', 'game_role': 'omniscient_type', 'phase': 'S1901M', 'power_name': 'ENGLAND', 'orders': ['F EDI S F LON - YOR', 'F LON - ENG', 'A LVP S F EDI'], 'wait': False}
++++++++++++++++++++++++++++++++++++
+S1901M
+S1901M
++++++++++++++++++++++++++++++++
+Traceback (most recent call last):
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/src/chiron_utils/scripts/run_bot.py", line 170, in <module>
+    main()
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/src/chiron_utils/scripts/run_bot.py", line 157, in main
+    asyncio.run(
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/src/chiron_utils/scripts/run_bot.py", line 92, in play
+    await bot.send_orders(orders_data)
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/src/chiron_utils/bots/baseline_bot.py", line 162, in send_orders
+    await self.game.set_orders(power_name=self.power_name, orders=orders, wait=wait)
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/tornado/gen.py", line 779, in run
+    yielded = self.gen.throw(exc)
+              ^^^^^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/diplomacy/client/channel.py", line 74, in func
+    return (yield self.connection.send(request, game))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/tornado/gen.py", line 766, in run
+    value = future.result()
+            ^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/diplomacy/client/connection.py", line 246, in _on_socket_message
+    response = responses.parse_dict(json_message)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/diplomacy/communication/responses.py", line 292, in parse_dict
+    response_object.throw()
+  File "/home/exouser/yanzewan/CHIRON/chiron-utils/CHIRON-game/lib/python3.11/site-packages/diplomacy/communication/responses.py", line 66, in throw
+    raise symbol(self.message)
+diplomacy.utils.exceptions.ResponseException: Invalid order phase, received S1901M, server phase is F1901M
