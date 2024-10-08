@@ -79,8 +79,9 @@ async def play(
             # Fetch orders from bot
             orders_data = await bot()
 
-            # Always send orders so engine knows turn is over
-            await bot.send_orders(orders_data)
+            if bot.bot_type == BotType.PLAYER:
+                # Always send orders so engine knows turn is over
+                await bot.send_orders(orders_data)
 
         phase_end_time = time.time()
         logger.info(
