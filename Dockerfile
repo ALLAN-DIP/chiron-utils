@@ -2,7 +2,7 @@
 # Use the command `hadolint Dockerfile` to test
 # Adding Hadolint to `pre-commit` is non-trivial, so the command must be run manually
 
-FROM python:3.11.9-slim-bookworm AS achilles
+FROM python:3.11.10-slim-bookworm AS achilles
 
 WORKDIR /bot
 
