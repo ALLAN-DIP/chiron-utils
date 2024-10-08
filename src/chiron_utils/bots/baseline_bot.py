@@ -133,6 +133,12 @@ class BaselineBot(ABC):
         Args:
             orders: Orders to suggest.
         """
+        if self.bot_type != BotType.ADVISOR:
+            raise TypeError(
+                f"{self.suggest_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.ADVISOR}"
+            )
+
         await self.send_message(
             diplomacy_strings.GLOBAL,
             f"{self.power_name}: {', '.join(orders)}",
@@ -147,6 +153,12 @@ class BaselineBot(ABC):
             recipient: The name of the power that would receive the recommended message.
             message: Text of the recommended message.
         """
+        if self.bot_type != BotType.ADVISOR:
+            raise TypeError(
+                f"{self.suggest_message.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.ADVISOR}"
+            )
+
         await self.send_message(
             diplomacy_strings.GLOBAL,
             f"{self.power_name}-{recipient}: {message}",
@@ -174,6 +186,12 @@ class BaselineBot(ABC):
             orders: Orders to send.
             wait: Whether the server should be told to wait for further orders.
         """
+        if self.bot_type != BotType.PLAYER:
+            raise TypeError(
+                f"{self.send_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.PLAYER}"
+            )
+
         logger.info("Sent orders: %s", orders)
 
         # Orders should not be sent in local games, only stored
