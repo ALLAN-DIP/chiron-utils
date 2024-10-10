@@ -14,7 +14,7 @@ GAME_COMMAND=(
   --game_id "$GAME_ID"
   --host "$HOST"
   --use-ssl
-  --power "$POWER"
+  --human_powers "$POWER"
   --game_type 2
 )
 
@@ -26,5 +26,5 @@ time docker run \
   --volume "$CICERO_DIR"/gpt2:/usr/local/lib/python3.7/site-packages/data/gpt2:ro \
   --volume "$CICERO_DIR"/models:/diplomacy_cicero/models:ro \
   --workdir /diplomacy_cicero \
-  ghcr.io/allan-dip/diplomacy_cicero:human_experiments-alex \
+  ghcr.io/allan-dip/diplomacy_cicero:chiron-alex \
   "${GAME_COMMAND[@]}" "$@"
