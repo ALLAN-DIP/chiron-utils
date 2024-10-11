@@ -1,3 +1,3 @@
 daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@7f6dcca60f2e6dd89c37862663be7b098cc03794
-diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@1f6ce8803bfd35a3ebbcf9ded7325434f72d966a
+diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@232740abe53e18476c0f5d6de806e07f5d12b434
 tornado
