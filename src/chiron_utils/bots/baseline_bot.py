@@ -72,16 +72,6 @@ class BaselineBot(ABC):
             await asyncio.sleep(1)
             logger.info("Still waiting")
 
-        if self.bot_type == BotType.ADVISOR:
-            assert self.suggestion_type is not None
-            await self.send_message(
-                diplomacy_strings.GLOBAL,
-                # Explicit `int` cast is needed before Python 3.11
-                f"{self.power_name}: {int(self.suggestion_type)}",
-                sender=diplomacy_strings.OMNISCIENT_TYPE,
-                msg_type=diplomacy_strings.HAS_SUGGESTIONS,
-            )
-
     def read_messages(self) -> List[Message]:
         """Retrieves all valid messages for the current phase sent to the bot.
 
@@ -127,11 +117,32 @@ class BaselineBot(ABC):
         else:
             self.game.add_message(message=msg_obj)
 
-    async def suggest_orders(self, orders: List[str]) -> None:
+    async def declare_suggestion_type(self) -> None:
+        """Declare the advisor's suggestion type to the engine."""
+        if self.bot_type != BotType.ADVISOR:
+            raise TypeError(
+                f"{self.declare_suggestion_type.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.ADVISOR}"
+            )
+
+        assert self.suggestion_type is not None
+
+        await self.send_message(
+            diplomacy_strings.GLOBAL,
+            # Explicit `int` cast is needed before Python 3.11
+            f"{self.power_name}: {int(self.suggestion_type)}",
+            sender=diplomacy_strings.OMNISCIENT_TYPE,
+            msg_type=diplomacy_strings.HAS_SUGGESTIONS,
+        )
+
+    async def suggest_orders(
+        self, orders: List[str], *, partial_orders: Optional[List[str]] = None
+    ) -> None:
         """Send suggested orders for power to the server.
 
         Args:
             orders: Orders to suggest.
+            partial_orders: Orders already set by the player.
         """
         if self.bot_type != BotType.ADVISOR:
             raise TypeError(
@@ -139,11 +150,18 @@ class BaselineBot(ABC):
                 f"because it is not a {BotType.ADVISOR}"
             )
 
+        if partial_orders:
+            message = f"{self.power_name}:{', '.join(partial_orders)} : {', '.join(orders)}"
+            suggestion_type = diplomacy_strings.SUGGESTED_MOVE_PARTIAL
+        else:
+            message = f"{self.power_name}: {', '.join(orders)}"
+            suggestion_type = diplomacy_strings.SUGGESTED_MOVE_FULL
+
         await self.send_message(
             diplomacy_strings.GLOBAL,
-            f"{self.power_name}: {', '.join(orders)}",
+            message,
             sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=diplomacy_strings.SUGGESTED_MOVE_FULL,
+            msg_type=suggestion_type,
         )
 
     async def suggest_message(self, recipient: str, message: str) -> None:
@@ -234,6 +252,9 @@ class BaselineBot(ABC):
             List of orders to carry out.
         """
         await self.start_phase()
+
+        if self.bot_type == BotType.ADVISOR:
+            await self.declare_suggestion_type()
 
         orders = await self.gen_orders()
 

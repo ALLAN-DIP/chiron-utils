@@ -114,6 +114,7 @@ class RandomProposerBot(BaselineBot, ABC):
         return orders
 
 
+@dataclass
 class RandomProposerAdvisor(RandomProposerBot):
     """Advisor form of `RandomProposerBot`."""
 
@@ -121,6 +122,7 @@ class RandomProposerAdvisor(RandomProposerBot):
     suggestion_type = SuggestionType.MESSAGE_AND_MOVE
 
 
+@dataclass
 class RandomProposerPlayer(RandomProposerBot):
     """Player form of `RandomProposerBot`."""
 
