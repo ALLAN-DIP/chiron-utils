@@ -11,14 +11,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenize
 from chiron_utils.bots.baseline_bot import BaselineBot
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
 import numpy as np
-# try:
-#     from fairdiplomacy.agents.bqre1p_agent import BQRE1PAgent as PyBQRE1PAgent
-#     from fairdiplomacy.agents.player import Player
-#     import heyhi
 
-#     USE_CICERO = True
-# except ImportError:
-#     USE_CICERO = False
 
 
 @dataclass
@@ -83,12 +76,6 @@ class LlmAdvisor(BaselineBot):
         return classification_model, classification_tokenizer
 
 
-    # @staticmethod
-    # def load_cicero() -> "PyBQRE1PAgent":
-    #     """Load Cicero agent."""
-    #     agent_config = heyhi.load_config("/diplomacy_cicero/conf/common/agents/cicero.prototxt")
-    #     return PyBQRE1PAgent(agent_config.bqre1p)
-
     def generate_text(self, prompt: str) -> str:
         """Generate text based on a given prompt.
 
@@ -127,12 +114,6 @@ class LlmAdvisor(BaselineBot):
             predicted_class = "to trust"
 
         return predicted_class
-
-    # def get_cicero_order_recommendations(self, own: str) -> List[str]:
-    #     """Retrieve orders from CICERO."""
-    #     sender_player = Player(self.agent, own)
-    #     sender_orders = sender_player.get_orders(self.game)
-    #     return sender_orders  # type: ignore[no-any-return]
 
     def format_prompt(self, own: str, oppo: str, suggest_orders: List[str]) -> str:
         """Create prompt used as input to LLM."""
@@ -210,12 +191,18 @@ class LlmAdvisor(BaselineBot):
             #     sender_orders = self.get_random_orders()
 
             prompt = (
-                f"<s>[INST] {system_prompt}\n    \n---\n\n"
+                f"<s>[INST] {system_prompt}\n\n"
+                f"---\n\n"
                 f"Board Status: {sorted_board_states}\n\n"
                 f"Cicero Recommendation for {own}: {suggest_orders}\n\n"
-                f"Message History: {my_message}\n    \n---\n\n"
-                f"Last Message: Message from {oppo}: {last_message}\n    \n---\n\n"
-                f"Question: I am {own} and I decide {decision} the last message from {oppo}. As my advisor, give me one short but specific message for the last message which I can use directly to respond to {oppo}'s last message. You also need to give me the reason to support my decision. [/INST]"
+                f"Message History: {my_message}\n\n"
+                f"---\n\n"
+                f"Last Message: Message from {oppo}: {last_message}\n\n"
+                f"---\n\n"
+                f"Question: I am {own} and I decide to {decision} the last message from {oppo}. "
+                f"As my advisor, give me one short but specific message for the last message which "
+                f"I can use directly to respond to {oppo}'s last message. You also need to give me "
+                f"the reason to support my decision. [/INST]"
             )
             return prompt,decision
     
@@ -282,12 +269,3 @@ class LlmAdvisor(BaselineBot):
         orders = self.get_random_orders()
         return orders
 
-
-# advisor = LlmAdvisor()
-# prompt = advisor.format_prompt_test()
-# print(prompt)
-# print('-------------------------------------------')
-# generate_text = advisor.generate_text(prompt)
-# index = generate_text.find('[/INST] ')
-# model_output = generate_text[index+8:]
-# print(model_output)
