@@ -1,0 +1,106 @@
+[2024-10-15 13:47:11.834] [INFO] [__main__] LlmAdvisor joining game 'demo_play_3' as ENGLAND
+[2024-10-15 13:47:11.834] [INFO] [diplomacy.client.connection[31433]] Trying to connect.
+[2024-10-15 13:47:11.976] [INFO] [diplomacy.client.connection[31433]] Connection succeeds.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  9.94it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 12.10it/s]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:02,  1.17it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.13it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.20it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.53it/s]
+Some weights of LlamaForSequenceClassification were not initialized from the model checkpoint at meta-llama/Meta-Llama-3.1-8B and are newly initialized: ['score.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[2024-10-15 13:47:31.978] [INFO] [__main__] Waiting for game to start
+[2024-10-15 13:47:33.980] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:35.983] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:37.985] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:39.988] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:41.988] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:43.989] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:45.991] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:47.993] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:49.996] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:51.998] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:54.001] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:56.004] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:58.005] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:00.008] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:02.010] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:04.013] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:06.015] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:08.018] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:10.020] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:12.021] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:14.026] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:16.030] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:18.032] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:20.034] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:22.037] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:24.040] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:26.044] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:28.047] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:30.051] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:32.053] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:34.055] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:36.059] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:38.061] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:40.064] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:42.065] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:44.067] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:46.070] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:48.073] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:50.076] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:52.078] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:54.082] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:56.084] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:58.086] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:00.088] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:02.091] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:04.094] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:06.096] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:08.098] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:10.099] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:12.100] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:14.102] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:16.104] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:18.107] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:20.109] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:22.111] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:24.114] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:26.116] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:28.117] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:30.120] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:32.122] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:34.124] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:36.127] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:38.128] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:40.130] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:42.131] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:44.133] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:46.136] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:48.138] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:50.140] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:52.142] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:54.144] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:56.147] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:58.149] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:00.151] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:02.154] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:04.156] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:06.158] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:08.160] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:10.162] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:12.164] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:14.166] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:16.168] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:18.170] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:20.173] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:22.175] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:24.178] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:26.180] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:28.182] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:30.185] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:32.187] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:34.189] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:36.192] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:38.194] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:40.196] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:42.197] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:44.199] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:46.202] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:48.203] [INFO] [__main__] Still waiting
