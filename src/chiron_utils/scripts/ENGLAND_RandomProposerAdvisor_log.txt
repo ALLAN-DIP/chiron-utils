@@ -1,110 +1,108 @@
-[2024-10-01 20:35:25.186] [INFO] [__main__] RandomProposerAdvisor joining game 'test_chiron_12' as ENGLAND
-[2024-10-01 20:35:25.186] [INFO] [diplomacy.client.connection[337628]] Trying to connect.
-[2024-10-01 20:35:30.193] [WARNING] [diplomacy.client.connection[337628]] Connection failing (attempt 1), retrying.
-[2024-10-01 20:35:35.350] [INFO] [diplomacy.client.connection[337628]] Connection succeeds.
-[2024-10-01 20:35:37.430] [INFO] [__main__] Waiting for game to start
-[2024-10-01 20:35:39.432] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:41.434] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:43.437] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:45.439] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:47.441] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:49.443] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:51.446] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:53.448] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:55.450] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:57.452] [INFO] [__main__] Still waiting
-[2024-10-01 20:35:59.455] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:01.457] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:03.459] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:05.459] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:07.462] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:09.464] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:11.466] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:13.469] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:15.471] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:17.473] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:19.475] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:21.478] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:23.480] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:25.482] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:27.484] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:29.487] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:31.487] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:33.490] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:35.492] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:37.494] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:39.497] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:41.499] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:43.501] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:45.503] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:47.506] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:49.508] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:51.510] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:53.513] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:55.515] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:57.517] [INFO] [__main__] Still waiting
-[2024-10-01 20:36:59.519] [INFO] [__main__] Still waiting
-[2024-10-01 20:37:01.521] [INFO] [__main__] Still waiting
-[2024-10-01 20:37:03.523] [INFO] [__main__] Still waiting
-[2024-10-01 20:37:05.525] [INFO] [__main__] Still waiting
-[2024-10-01 20:37:07.527] [INFO] [__main__] Still waiting
-[2024-10-01 20:37:09.529] [INFO] [__main__] Still waiting
-[2024-10-01 20:37:11.324] [INFO] [diplomacy.engine.game[337628]] ITALY	comm_status: ready
-[2024-10-01 20:37:11.364] [INFO] [diplomacy.engine.game[337628]] GERMANY	comm_status: ready
-[2024-10-01 20:37:11.370] [INFO] [diplomacy.engine.game[337628]] TURKEY	comm_status: ready
-[2024-10-01 20:37:11.370] [INFO] [diplomacy.engine.game[337628]] AUSTRIA	comm_status: ready
-[2024-10-01 20:37:11.370] [INFO] [diplomacy.engine.game[337628]] RUSSIA	comm_status: ready
-[2024-10-01 20:37:11.371] [INFO] [diplomacy.engine.game[337628]] FRANCE	comm_status: ready
-[2024-10-01 20:37:11.531] [INFO] [__main__] Still waiting
-[2024-10-01 20:37:11.531] [INFO] [__main__] Started playing
-[2024-10-01 20:37:11.531] [INFO] [__main__] Starting phase: S1901M
-[2024-10-01 20:37:11.532] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND: F EDI - CLY, F LON S F EDI - NTH, A LVP - EDI)
-[2024-10-01 20:37:11.714] [INFO] [diplomacy.engine.game[337628]] ENGLAND	comm_status: ready
-[2024-10-01 20:37:11.714] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND: 3)
-[2024-10-01 20:37:12.101] [INFO] [diplomacy.engine.game[337628]] ENGLAND	comm_status: ready
-[2024-10-01 20:37:12.754] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: PRP ( AND ( XDO ( ( FRA AMY MAR ) MTO GAS ) ) ( XDO ( ( FRA AMY PAR ) MTO BRE ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY PAR ) MTO PIC ) ) ))
-[2024-10-01 20:37:12.943] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: PRP ( AND ( XDO ( ( TUR AMY CON ) SUP ( TUR FLT ANK ) ) ) ( XDO ( ( TUR AMY SMY ) MTO SYR ) ) ( XDO ( ( TUR FLT ANK ) SUP ( RUS FLT SEV ) MTO ARM ) ) ))
-[2024-10-01 20:37:13.094] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: PRP ( AND ( XDO ( ( ITA AMY ROM ) MTO TUS ) ) ( XDO ( ( ITA AMY VEN ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( ITA FLT NAP ) SUP ( ITA AMY VEN ) MTO APU ) ) ))
-[2024-10-01 20:37:13.301] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS AMY WAR ) ) ) ( XDO ( ( RUS AMY WAR ) MTO UKR ) ) ( XDO ( ( RUS FLT (STP SCS) ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) SUP ( AUS AMY BUD ) MTO RUM ) ) ))
-[2024-10-01 20:37:13.510] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: PRP ( AND ( XDO ( ( AUS AMY BUD ) SUP ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS AMY VIE ) MTO TRI ) ) ( XDO ( ( AUS FLT TRI ) MTO VEN ) ) ))
-[2024-10-01 20:37:13.646] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: PRP ( AND ( XDO ( ( GER AMY BER ) MTO KIE ) ) ( XDO ( ( GER AMY MUN ) SUP ( FRA AMY MAR ) MTO BUR ) ) ( XDO ( ( GER FLT KIE ) SUP ( GER AMY BER ) ) ) ))
-[2024-10-01 20:41:41.871] [INFO] [chiron_utils.bots.baseline_bot] Exiting communication phase because out of time
-[2024-10-01 20:41:41.871] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F EDI - CLY', 'F LON S F EDI - NTH', 'A LVP - EDI']
-[2024-10-01 20:41:41.930] [INFO] [__main__] Time taken for phase S1901M: 270.3987s
-[2024-10-01 20:41:43.553] [INFO] [diplomacy.engine.game[337628]] AUSTRIA	comm_status: ready
-[2024-10-01 20:41:43.559] [INFO] [diplomacy.engine.game[337628]] FRANCE	comm_status: ready
-[2024-10-01 20:41:43.931] [INFO] [__main__] Starting phase: F1901M
-[2024-10-01 20:41:43.933] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/F1901M/omniscient_type->GLOBAL](ENGLAND: F CLY S A EDI - LVP, A EDI S F LON - YOR, F LON S F BRE - ENG)
-[2024-10-01 20:41:44.119] [INFO] [diplomacy.engine.game[337628]] ENGLAND	comm_status: ready
-[2024-10-01 20:41:44.511] [INFO] [diplomacy.engine.game[337628]] GERMANY	comm_status: ready
-[2024-10-01 20:41:44.516] [INFO] [diplomacy.engine.game[337628]] ITALY	comm_status: ready
-[2024-10-01 20:41:44.518] [INFO] [diplomacy.engine.game[337628]] TURKEY	comm_status: ready
-[2024-10-01 20:41:44.524] [INFO] [diplomacy.engine.game[337628]] RUSSIA	comm_status: ready
-[2024-10-01 20:41:45.120] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/F1901M/omniscient_type->GLOBAL](ENGLAND: 3)
-[2024-10-01 20:41:46.717] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/F1901M/omniscient_type->GLOBAL](ENGLAND-FRANCE: PRP ( AND ( XDO ( ( FRA AMY BUR ) SUP ( FRA FLT BRE ) MTO GAS ) ) ( XDO ( ( FRA AMY PAR ) MTO BUR ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY BUR ) MTO GAS ) ) ))
-[2024-10-01 20:41:47.045] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/F1901M/omniscient_type->GLOBAL](ENGLAND-TURKEY: PRP ( AND ( XDO ( ( TUR AMY CON ) SUP ( TUR AMY SMY ) ) ) ( XDO ( ( TUR AMY SMY ) SUP ( TUR AMY CON ) MTO ARM ) ) ( XDO ( ( TUR FLT BLA ) SUP ( TUR AMY SMY ) MTO CON ) ) ))
-[2024-10-01 20:41:47.483] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/F1901M/omniscient_type->GLOBAL](ENGLAND-ITALY: PRP ( AND ( XDO ( ( ITA AMY ROM ) SUP ( ITA FLT NAP ) MTO APU ) ) ( XDO ( ( ITA AMY VEN ) MTO TYR ) ) ( XDO ( ( ITA FLT NAP ) SUP ( ITA AMY VEN ) MTO ROM ) ) ))
-[2024-10-01 20:41:47.769] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/F1901M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS AMY WAR ) ) ) ( XDO ( ( RUS AMY WAR ) SUP ( GER AMY MUN ) MTO SIL ) ) ( XDO ( ( RUS FLT ARM ) MTO BLA ) ) ( XDO ( ( RUS FLT LVN ) MTO (STP SCS) ) ) ))
-[2024-10-01 20:41:48.023] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/F1901M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: PRP ( AND ( XDO ( ( AUS AMY BUD ) MTO VIE ) ) ( XDO ( ( AUS AMY GAL ) MTO BOH ) ) ( XDO ( ( AUS FLT ALB ) MTO ION ) ) ))
-[2024-10-01 20:41:48.239] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/F1901M/omniscient_type->GLOBAL](ENGLAND-GERMANY: PRP ( AND ( XDO ( ( GER AMY MUN ) MTO TYR ) ) ( XDO ( ( GER AMY SIL ) SUP ( AUS AMY GAL ) MTO WAR ) ) ( XDO ( ( GER FLT KIE ) SUP ( GER AMY SIL ) MTO BER ) ) ))
-[2024-10-01 20:46:15.248] [INFO] [chiron_utils.bots.baseline_bot] Exiting communication phase because out of time
-[2024-10-01 20:46:15.248] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F CLY S A EDI - LVP', 'A EDI S F LON - YOR', 'F LON S F BRE - ENG']
-[2024-10-01 20:46:15.301] [INFO] [__main__] Time taken for phase F1901M: 271.3702s
-[2024-10-01 20:46:17.303] [INFO] [__main__] Starting phase: W1901A
-[2024-10-01 20:46:17.304] [INFO] [__main__] Time taken for phase W1901A: 0.0003s
-[2024-10-01 20:46:18.682] [INFO] [diplomacy.engine.game[337628]] RUSSIA	comm_status: ready
-[2024-10-01 20:46:18.709] [INFO] [diplomacy.engine.game[337628]] AUSTRIA	comm_status: ready
-[2024-10-01 20:46:18.831] [INFO] [diplomacy.engine.game[337628]] FRANCE	comm_status: ready
-[2024-10-01 20:46:19.306] [INFO] [__main__] Starting phase: S1902M
-[2024-10-01 20:46:19.308] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1902M/omniscient_type->GLOBAL](ENGLAND: F CLY - NAO, A EDI S F CLY, F LON - ENG)
-[2024-10-01 20:46:19.472] [INFO] [diplomacy.engine.game[337628]] ENGLAND	comm_status: ready
-[2024-10-01 20:46:19.712] [INFO] [diplomacy.engine.game[337628]] GERMANY	comm_status: ready
-[2024-10-01 20:46:19.712] [INFO] [diplomacy.engine.game[337628]] ITALY	comm_status: ready
-[2024-10-01 20:46:19.769] [INFO] [diplomacy.engine.game[337628]] TURKEY	comm_status: ready
-[2024-10-01 20:46:20.473] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1902M/omniscient_type->GLOBAL](ENGLAND: 3)
-[2024-10-01 20:46:21.520] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1902M/omniscient_type->GLOBAL](ENGLAND-FRANCE: PRP ( AND ( XDO ( ( FRA AMY BEL ) SUP ( FRA AMY BUR ) ) ) ( XDO ( ( FRA AMY BUR ) SUP ( FRA AMY BEL ) MTO RUH ) ) ( XDO ( ( FRA FLT BRE ) SUP ( FRA AMY BUR ) MTO GAS ) ) ( XDO ( ( FRA FLT MAR ) SUP ( ITA AMY VEN ) MTO PIE ) ) ))
-[2024-10-01 20:46:21.646] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1902M/omniscient_type->GLOBAL](ENGLAND-TURKEY: PRP ( AND ( XDO ( ( TUR AMY BUL ) MTO CON ) ) ( XDO ( ( TUR AMY SYR ) SUP ( RUS FLT ARM ) ) ) ( XDO ( ( TUR FLT BLA ) SUP ( TUR FLT SMY ) MTO CON ) ) ( XDO ( ( TUR FLT SMY ) SUP ( TUR AMY SYR ) ) ) ))
-[2024-10-01 20:46:21.861] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1902M/omniscient_type->GLOBAL](ENGLAND-ITALY: PRP ( AND ( XDO ( ( ITA AMY NAP ) SUP ( AUS FLT ADR ) MTO APU ) ) ( XDO ( ( ITA AMY VEN ) SUP ( AUS FLT ADR ) MTO APU ) ) ( XDO ( ( ITA FLT APU ) SUP ( ITA AMY NAP ) ) ) ))
-[2024-10-01 20:46:22.072] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1902M/omniscient_type->GLOBAL](ENGLAND-RUSSIA: PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS FLT LVN ) MTO STP ) ) ( XDO ( ( RUS AMY WAR ) MTO PRU ) ) ( XDO ( ( RUS FLT ARM ) SUP ( TUR FLT BLA ) MTO ANK ) ) ( XDO ( ( RUS FLT LVN ) SUP ( RUS AMY WAR ) MTO PRU ) ) ))
-[2024-10-01 20:46:22.312] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1902M/omniscient_type->GLOBAL](ENGLAND-AUSTRIA: PRP ( AND ( XDO ( ( AUS AMY BUD ) MTO VIE ) ) ( XDO ( ( AUS AMY GAL ) SUP ( AUS AMY BUD ) MTO VIE ) ) ( XDO ( ( AUS FLT ADR ) SUP ( ITA AMY NAP ) MTO APU ) ) ))
-[2024-10-01 20:46:22.686] [INFO] [chiron_utils.bots.baseline_bot] ENGLAND (RandomProposerAdvisor) sent message: [0/S1902M/omniscient_type->GLOBAL](ENGLAND-GERMANY: PRP ( AND ( XDO ( ( GER AMY MUN ) SUP ( FRA AMY BEL ) MTO BUR ) ) ( XDO ( ( GER AMY SIL ) SUP ( RUS AMY WAR ) MTO GAL ) ) ( XDO ( ( GER FLT BAL ) SUP ( RUS FLT LVN ) MTO PRU ) ) ))
+[2024-10-15 13:47:11.760] [INFO] [__main__] RandomProposerAdvisor joining game 'demo_play_3' as ENGLAND
+[2024-10-15 13:47:11.761] [INFO] [diplomacy.client.connection[31432]] Trying to connect.
+[2024-10-15 13:47:11.959] [INFO] [diplomacy.client.connection[31432]] Connection succeeds.
+[2024-10-15 13:47:19.693] [INFO] [__main__] Waiting for game to start
+[2024-10-15 13:47:21.696] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:23.698] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:25.702] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:27.705] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:29.707] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:31.709] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:33.711] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:35.714] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:37.716] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:39.719] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:41.721] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:43.724] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:45.726] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:47.729] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:49.732] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:51.734] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:53.737] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:55.739] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:57.742] [INFO] [__main__] Still waiting
+[2024-10-15 13:47:59.744] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:01.747] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:03.749] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:05.751] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:07.754] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:09.756] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:11.759] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:13.762] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:15.764] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:17.766] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:19.769] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:21.770] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:23.772] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:25.775] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:27.777] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:29.779] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:31.782] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:33.785] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:35.787] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:37.789] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:39.792] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:41.793] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:43.796] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:45.799] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:47.801] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:49.804] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:51.806] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:53.809] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:55.811] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:57.814] [INFO] [__main__] Still waiting
+[2024-10-15 13:48:59.816] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:01.818] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:03.821] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:05.823] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:07.826] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:09.828] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:11.831] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:13.833] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:15.835] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:17.838] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:19.840] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:21.842] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:23.845] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:25.847] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:27.849] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:29.851] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:31.853] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:33.855] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:35.857] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:37.859] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:39.863] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:41.864] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:43.867] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:45.869] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:47.872] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:49.874] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:51.877] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:53.879] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:55.882] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:57.884] [INFO] [__main__] Still waiting
+[2024-10-15 13:49:59.887] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:01.889] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:03.892] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:05.894] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:07.897] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:09.899] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:11.902] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:13.905] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:15.907] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:17.909] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:19.912] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:21.914] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:23.916] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:25.919] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:27.921] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:29.924] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:31.926] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:33.928] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:35.931] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:37.933] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:39.935] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:41.937] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:43.940] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:45.942] [INFO] [__main__] Still waiting
+[2024-10-15 13:50:47.944] [INFO] [__main__] Still waiting
