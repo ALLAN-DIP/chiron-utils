@@ -3,7 +3,7 @@
 import argparse
 import asyncio
 import time
-from typing import List, Type
+from typing import Type
 
 from diplomacy import connect
 from diplomacy.client.network_game import NetworkGame
