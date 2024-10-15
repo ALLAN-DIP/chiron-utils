@@ -2,20 +2,15 @@
 
 set -euxo pipefail
 
-GAME_ID=$1
-HOST=$2
-POWER=$3
-shift 3
+BOT_NAME=$1
+shift 1
 
 CICERO_DIR=/media/volume/cicero-base-models
 
 GAME_COMMAND=(
   python fairdiplomacy_external/mila_api.py
-  --game_id "$GAME_ID"
-  --host "$HOST"
-  --use-ssl
-  --human_powers "$POWER"
   --game_type 2
+  "$@"
 )
 
 time docker run \
@@ -26,5 +21,5 @@ time docker run \
   --volume "$CICERO_DIR"/gpt2:/usr/local/lib/python3.7/site-packages/data/gpt2:ro \
   --volume "$CICERO_DIR"/models:/diplomacy_cicero/models:ro \
   --workdir /diplomacy_cicero \
-  ghcr.io/allan-dip/diplomacy_cicero:chiron-alex \
-  "${GAME_COMMAND[@]}" "$@"
+  ghcr.io/allan-dip/diplomacy_cicero:"$BOT_NAME" \
+  "${GAME_COMMAND[@]}"
