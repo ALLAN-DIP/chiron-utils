@@ -16,7 +16,7 @@ GAME_COMMAND=(
 time docker run \
   --rm \
   --gpus all \
-  --name cicero_"$GAME_ID"_"$POWER" \
+  --name cicero_"$BOT_NAME"_"$RANDOM" \
   --volume "$CICERO_DIR"/agents:/diplomacy_cicero/conf/common/agents:ro \
   --volume "$CICERO_DIR"/gpt2:/usr/local/lib/python3.7/site-packages/data/gpt2:ro \
   --volume "$CICERO_DIR"/models:/diplomacy_cicero/models:ro \
