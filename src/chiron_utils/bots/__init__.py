@@ -5,6 +5,7 @@ from chiron_utils.bots.random_proposer_bot import (
     RandomProposerAdvisor as RandomProposerAdvisor,
     RandomProposerPlayer as RandomProposerPlayer,
 )
+
 from chiron_utils.bots.llm_advisor_bot import LlmAdvisor
 
 BOTS = [

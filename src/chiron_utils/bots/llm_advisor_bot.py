@@ -8,8 +8,9 @@ from peft import PeftModel
 import torch
 from torch.nn import DataParallel
 from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizer,AutoModelForSequenceClassification
-from chiron_utils.bots.baseline_bot import BaselineBot
+from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
+from diplomacy.utils.constants import SuggestionType
 import numpy as np
 
 
@@ -21,7 +22,8 @@ class LlmAdvisor(BaselineBot):
     Because of the similarity between the advisor and player versions of this bot,
     both of their behaviors are abstracted into this single abstract base class.
     """
-    bot_type: ClassVar[str] = "advisor"
+    bot_type = BotType.ADVISOR
+    suggestion_type = SuggestionType.MESSAGE_AND_MOVE
     base_model_name = "meta-llama/Llama-2-7b-chat-hf"
     adapter_path: str = "usc-isi/Llama2-Advisor"
     tokenizer_path: str = "usc-isi/Llama2-Advisor"
@@ -124,9 +126,9 @@ class LlmAdvisor(BaselineBot):
         # system prompt format
         system_prompt = (
             "<<SYS>>\n"
-            "You are an AI assistant tasked with understanding and analyzing the board status "
-            "of a Diplomacy game, the message history between two players and"
-            "the recommended orders by Cicero for the current phase.\n"
+            "You are an good assistant tasked with understanding and analyzing the board status "
+            "of a Diplomacy board game, the message history between two players and"
+            "the recommended orders from AI for the current phase.\n"
             "Your goal is to help respond to the last message from another player, "
             "based on the context provided.\n"
             "\n<</SYS>>"

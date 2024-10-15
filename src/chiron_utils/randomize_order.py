@@ -20,9 +20,6 @@ from daidepp import (
 
 from chiron_utils.parsing_utils import daidefy_location, dipnetify_location
 
-# The comments below signal the formatter not to expand these dicts to multiple lines
-# fmt: off
-
 # This dictionary represents every adjacent province and coast from any given province or coast
 ADJACENCY = {
     "ADR": ["ALB", "APU", "ION", "TRI", "VEN"],
@@ -108,6 +105,9 @@ ADJACENCY = {
     "YOR": ["EDI", "LON", "LVP", "NTH", "WAL"],
 }
 
+# The comments below signal the formatter not to expand these dicts to multiple lines
+# fmt: off
+
 # This dict defines the type of every province. Every province is either "COAST", "WATER", or "LAND"
 TYPES = {
     "ADR": "WATER", "AEG": "WATER", "ALB": "COAST", "ANK": "COAST", "APU": "COAST", "ARM": "COAST",
@@ -131,8 +131,8 @@ TYPES = {
 # This nested dict represents the areas that certain types of units can support others into. The format is
 # as follows: COMBOS[ SUPPORTING_UNIT_TYPE ] [ SUPPORTED_UNIT_TYPE ] = {SET OF ALL PROVINCE TYPES THAT SUPPORT CAN OCCUR INTO}
 COMBOS = {
-    "FLT": {"FLT": {"WATER", "COAST"}, "AMY": {"COAST"}},
-    "AMY": {"FLT": {"COAST"}, "AMY": {"LAND", "COAST"}},
+    "AMY": {"AMY": {"COAST", "LAND"}, "FLT": {"COAST"}},
+    "FLT": {"AMY": {"COAST"}, "FLT": {"COAST", "WATER"}},
 }
 
 # This represents the DAIDE commands that join orders which are handled in this file

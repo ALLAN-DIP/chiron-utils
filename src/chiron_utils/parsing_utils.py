@@ -1,4 +1,20 @@
-"""Utilities for converting between DipNet and DAIDE syntax."""
+"""Utilities for converting between DipNet and DAIDE syntax.
+
+The DAIDE specification is located at <https://github.com/SHADE-AI/daidepp/blob/main/daide-specification.md>.
+
+Here are the differences between the DipNet and DAIDE syntax for orders:
+
+| **DipNet**          | **DAIDE**                               | Meaning                               |
+|---------------------| --------------------------------------- | ------------------------------------- |
+| A PAR H             | (FRA AMY PAR) HLD                       | Hold order                            |
+| A PAR - MAR         | (FRA AMY PAR) MTO MAR                   | Move order                            |
+| A PAR R MAR         | (FRA AMY PAR) MTO MAR                   | Move order                            |
+| A BUD S F TRI       | (AUS AMY BUD) SUP (AUS FLT TRI)         | Support to hold order                 |
+| A PAR S A MAR - BUR | (FRA AMY PAR) SUP (FRA AMY MAR) MTO BUR | Support to move order                 |
+| F ION C A TUN - SYR | (ITA FLT ION) CVY (ITA AMY TUN) CTO SYR | Convoy support to move order overseas |
+| F EAS C A TUN - SYR | (ITA FLT EAS) CVY (ITA AMY TUN) CTO SYR | Convoy support to move order overseas |
+| A TUN - SYR VIA     | (ITA AMY TUN) CTO SYR VIA (ION EAS)     | Move order using convoys              |
+"""
 
 import asyncio
 from collections import defaultdict
@@ -84,8 +100,6 @@ def dipnet_to_daide_parsing(
     """Convert set of DipNet-style orders to DAIDE-style orders.
 
     Needs game instance to determine the powers owning the units.
-
-    More details here: https://docs.google.com/document/d/16RODa6KDX7vNNooBdciI4NqSVN31lToto3MLTNcEHk0/edit?usp=sharing
 
     Args:
         dipnet_style_order_strs: DipNet-style list of orders to be converted to DAIDE.
@@ -261,8 +275,6 @@ def dipnetify_unit(unit: Unit) -> str:
 
 def daide_to_dipnet_parsing(daide_order: Command) -> Optional[Tuple[str, str]]:
     """Convert single DAIDE-style order to DipNet-style order.
-
-    More details here: https://docs.google.com/document/d/16RODa6KDX7vNNooBdciI4NqSVN31lToto3MLTNcEHk0/edit?usp=sharing
 
     Args:
         daide_order: DAIDE-style order to be converted to DipNet style.

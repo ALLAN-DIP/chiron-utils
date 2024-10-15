@@ -1,108 +1,201 @@
-[2024-10-15 13:47:11.754] [INFO] [__main__] RandomProposerPlayer joining game 'demo_play_3' as ITALY
-[2024-10-15 13:47:11.754] [INFO] [diplomacy.client.connection[31430]] Trying to connect.
-[2024-10-15 13:47:11.948] [INFO] [diplomacy.client.connection[31430]] Connection succeeds.
-[2024-10-15 13:47:19.650] [INFO] [__main__] Waiting for game to start
-[2024-10-15 13:47:21.653] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:23.655] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:25.660] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:27.663] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:29.666] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:31.668] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:33.670] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:35.673] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:37.675] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:39.678] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:41.680] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:43.683] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:45.686] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:47.689] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:49.691] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:51.694] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:53.696] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:55.699] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:57.701] [INFO] [__main__] Still waiting
-[2024-10-15 13:47:59.704] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:01.707] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:03.709] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:05.712] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:07.714] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:09.716] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:11.719] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:13.721] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:15.724] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:17.726] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:19.728] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:21.731] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:23.733] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:25.735] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:27.738] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:29.740] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:31.743] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:33.745] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:35.748] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:37.750] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:39.753] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:41.755] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:43.759] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:45.761] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:47.764] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:49.766] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:51.767] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:53.769] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:55.772] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:57.775] [INFO] [__main__] Still waiting
-[2024-10-15 13:48:59.777] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:01.780] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:03.782] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:05.786] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:07.788] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:09.791] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:11.793] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:13.796] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:15.798] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:17.800] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:19.803] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:21.805] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:23.808] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:25.811] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:27.812] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:29.815] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:31.816] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:33.819] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:35.821] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:37.824] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:39.827] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:41.829] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:43.832] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:45.835] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:47.838] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:49.841] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:51.844] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:53.847] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:55.849] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:57.853] [INFO] [__main__] Still waiting
-[2024-10-15 13:49:59.856] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:01.859] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:03.861] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:05.864] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:07.866] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:09.868] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:11.871] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:13.873] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:15.876] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:17.878] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:19.880] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:21.881] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:23.884] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:25.886] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:27.888] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:29.891] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:31.893] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:33.897] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:35.899] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:37.901] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:39.904] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:41.906] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:43.909] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:45.911] [INFO] [__main__] Still waiting
-[2024-10-15 13:50:47.914] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:12.726] [INFO] [__main__] RandomProposerPlayer joining game 'demo_play_5' as ITALY
+[2024-10-15 14:32:12.726] [INFO] [diplomacy.client.connection[116840]] Trying to connect.
+[2024-10-15 14:32:13.792] [INFO] [diplomacy.client.connection[116840]] Connection succeeds.
+[2024-10-15 14:32:20.566] [INFO] [__main__] Waiting for game to start
+[2024-10-15 14:32:22.569] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:24.572] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:26.574] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:28.579] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:30.581] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:32.583] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:34.585] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:36.588] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:38.591] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:40.593] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:42.596] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:44.597] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:46.600] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:48.603] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:50.605] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:52.608] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:54.610] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:56.613] [INFO] [__main__] Still waiting
+[2024-10-15 14:32:58.615] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:00.617] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:02.619] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:04.622] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:06.624] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:08.627] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:10.630] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:12.632] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:14.634] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:16.636] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:18.638] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:20.641] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:22.643] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:24.645] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:26.648] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:28.650] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:30.652] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:32.655] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:34.657] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:36.659] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:38.662] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:40.663] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:42.665] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:44.667] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:46.669] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:48.671] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:50.673] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:52.675] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:54.678] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:56.680] [INFO] [__main__] Still waiting
+[2024-10-15 14:33:58.683] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:00.684] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:02.686] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:04.688] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:06.691] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:08.693] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:10.695] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:12.698] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:14.700] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:16.702] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:18.704] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:20.706] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:22.709] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:24.710] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:26.712] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:28.715] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:30.717] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:32.719] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:34.721] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:36.724] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:38.726] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:40.728] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:42.731] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:44.733] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:46.735] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:48.737] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:50.739] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:52.742] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:54.744] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:56.746] [INFO] [__main__] Still waiting
+[2024-10-15 14:34:58.748] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:00.751] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:02.753] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:04.755] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:06.757] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:08.760] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:10.762] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:12.764] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:14.765] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:16.768] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:18.770] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:20.772] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:22.774] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:24.777] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:26.779] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:28.781] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:30.783] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:32.786] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:34.788] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:36.790] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:38.792] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:40.794] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:42.797] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:44.799] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:46.801] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:48.803] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:50.806] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:52.808] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:54.810] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:56.812] [INFO] [__main__] Still waiting
+[2024-10-15 14:35:58.815] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:00.817] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:02.819] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:04.822] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:06.824] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:08.826] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:10.829] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:12.831] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:14.833] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:16.835] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:18.838] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:20.840] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:22.842] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:24.844] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:26.846] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:28.848] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:30.850] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:32.853] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:34.855] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:36.857] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:38.859] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:40.861] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:42.864] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:44.866] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:46.869] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:48.871] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:50.874] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:52.876] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:54.878] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:56.881] [INFO] [__main__] Still waiting
+[2024-10-15 14:36:58.883] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:00.885] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:02.888] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:04.890] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:06.892] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:08.894] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:10.897] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:12.899] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:14.901] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:16.903] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:18.905] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:20.907] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:22.910] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:24.109] [INFO] [diplomacy.engine.game[116840]] ENGLAND	comm_status: ready
+[2024-10-15 14:37:24.487] [INFO] [diplomacy.engine.game[116840]] RUSSIA	comm_status: ready
+[2024-10-15 14:37:24.911] [INFO] [__main__] Still waiting
+[2024-10-15 14:37:24.911] [INFO] [__main__] Started playing
+[2024-10-15 14:37:24.911] [INFO] [__main__] Starting phase: S1901M
+[2024-10-15 14:37:24.914] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F NAP H', 'A ROM S F TRI - VEN', 'A VEN H']
+[2024-10-15 14:37:24.978] [INFO] [chiron_utils.bots.baseline_bot] Intent log: "Initial orders (before communication): ['F NAP H', 'A ROM S F TRI - VEN', 'A VEN H']"
+[2024-10-15 14:37:25.023] [INFO] [chiron_utils.bots.baseline_bot] Waiting for communication stage to start
+[2024-10-15 14:37:25.064] [INFO] [diplomacy.engine.game[116840]] ENGLAND	comm_status: ready
+[2024-10-15 14:37:25.064] [INFO] [diplomacy.engine.game[116840]] FRANCE	comm_status: ready
+[2024-10-15 14:37:25.064] [INFO] [diplomacy.engine.game[116840]] TURKEY	comm_status: ready
+[2024-10-15 14:37:25.064] [INFO] [diplomacy.engine.game[116840]] GERMANY	comm_status: ready
+[2024-10-15 14:37:25.072] [INFO] [diplomacy.engine.game[116840]] ITALY	comm_status: ready
+[2024-10-15 14:37:25.111] [INFO] [diplomacy.engine.game[116840]] AUSTRIA	comm_status: ready
+[2024-10-15 14:37:26.073] [INFO] [chiron_utils.bots.baseline_bot] Still waiting
+[2024-10-15 14:37:26.630] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/S1901M/ITALY->FRANCE](PRP ( AND ( XDO ( ( FRA AMY MAR ) SUP ( FRA FLT BRE ) MTO GAS ) ) ( XDO ( ( FRA AMY PAR ) SUP ( FRA AMY MAR ) MTO GAS ) ) ( XDO ( ( FRA FLT BRE ) HLD ) ) ))
+[2024-10-15 14:37:26.707] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/S1901M/ITALY->TURKEY](PRP ( AND ( XDO ( ( TUR AMY CON ) MTO ANK ) ) ( XDO ( ( TUR AMY SMY ) MTO CON ) ) ( XDO ( ( TUR FLT ANK ) SUP ( RUS FLT SEV ) MTO ARM ) ) ))
+[2024-10-15 14:37:26.783] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/S1901M/ITALY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY LVP ) MTO WAL ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG AMY LVP ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) SUP ( ENG AMY LVP ) MTO WAL ) ) ))
+[2024-10-15 14:37:26.854] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/S1901M/ITALY->GERMANY](PRP ( AND ( XDO ( ( GER AMY BER ) HLD ) ) ( XDO ( ( GER AMY MUN ) SUP ( GER AMY BER ) MTO SIL ) ) ( XDO ( ( GER FLT KIE ) MTO HOL ) ) ))
+[2024-10-15 14:37:26.915] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/S1901M/ITALY->AUSTRIA](PRP ( AND ( XDO ( ( AUS AMY BUD ) MTO VIE ) ) ( XDO ( ( AUS AMY VIE ) SUP ( AUS FLT TRI ) ) ) ( XDO ( ( AUS FLT TRI ) SUP ( ITA AMY VEN ) ) ) ))
+[2024-10-15 14:37:26.972] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/S1901M/ITALY->RUSSIA](PRP ( AND ( XDO ( ( RUS AMY MOS ) MTO STP ) ) ( XDO ( ( RUS AMY WAR ) HLD ) ) ( XDO ( ( RUS FLT (STP SCS) ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) SUP ( TUR AMY SMY ) MTO ARM ) ) ))
+[2024-10-15 14:42:16.074] [INFO] [chiron_utils.bots.baseline_bot] Exiting communication phase because out of time
+[2024-10-15 14:42:16.074] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F NAP H', 'A ROM S F TRI - VEN', 'A VEN H']
+[2024-10-15 14:42:16.120] [INFO] [__main__] Time taken for phase S1901M: 291.2088s
+[2024-10-15 14:42:17.312] [INFO] [diplomacy.engine.game[116840]] AUSTRIA	comm_status: ready
+[2024-10-15 14:42:17.714] [INFO] [diplomacy.engine.game[116840]] RUSSIA	comm_status: ready
+[2024-10-15 14:42:18.121] [INFO] [__main__] Starting phase: F1901M
+[2024-10-15 14:42:18.123] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F NAP - APU', 'A ROM S A PIE - TUS', 'A VEN S A ROM - APU']
+[2024-10-15 14:42:18.183] [INFO] [chiron_utils.bots.baseline_bot] Intent log: "Initial orders (before communication): ['F NAP - APU', 'A ROM S A PIE - TUS', 'A VEN S A ROM - APU']"
+[2024-10-15 14:42:18.230] [INFO] [chiron_utils.bots.baseline_bot] Waiting for communication stage to start
+[2024-10-15 14:42:18.269] [INFO] [diplomacy.engine.game[116840]] ENGLAND	comm_status: ready
+[2024-10-15 14:42:18.281] [INFO] [diplomacy.engine.game[116840]] ITALY	comm_status: ready
+[2024-10-15 14:42:18.316] [INFO] [diplomacy.engine.game[116840]] FRANCE	comm_status: ready
+[2024-10-15 14:42:18.316] [INFO] [diplomacy.engine.game[116840]] GERMANY	comm_status: ready
+[2024-10-15 14:42:18.333] [INFO] [diplomacy.engine.game[116840]] TURKEY	comm_status: ready
+[2024-10-15 14:42:19.281] [INFO] [chiron_utils.bots.baseline_bot] Still waiting
+[2024-10-15 14:42:20.659] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/F1901M/ITALY->FRANCE](PRP ( AND ( XDO ( ( FRA AMY PAR ) MTO PIC ) ) ( XDO ( ( FRA AMY PIE ) MTO VEN ) ) ( XDO ( ( FRA FLT GAS ) SUP ( FRA AMY PAR ) MTO BRE ) ) ))
+[2024-10-15 14:42:20.712] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/F1901M/ITALY->TURKEY](PRP ( AND ( XDO ( ( TUR AMY CON ) SUP ( TUR AMY SMY ) ) ) ( XDO ( ( TUR AMY SMY ) HLD ) ) ( XDO ( ( TUR FLT ANK ) MTO BLA ) ) ))
+[2024-10-15 14:42:20.764] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/F1901M/ITALY->ENGLAND](PRP ( AND ( XDO ( ( ENG AMY YOR ) SUP ( ENG FLT LON ) ) ) ( XDO ( ( ENG FLT EDI ) SUP ( ENG FLT LON ) MTO YOR ) ) ( XDO ( ( ENG FLT LON ) MTO WAL ) ) ))
+[2024-10-15 14:42:20.823] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/F1901M/ITALY->GERMANY](PRP ( AND ( XDO ( ( GER AMY BER ) SUP ( RUS AMY WAR ) MTO SIL ) ) ( XDO ( ( GER AMY MUN ) SUP ( ITA AMY VEN ) MTO TYR ) ) ( XDO ( ( GER FLT DEN ) MTO KIE ) ) ))
+[2024-10-15 14:42:20.884] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/F1901M/ITALY->AUSTRIA](PRP ( AND ( XDO ( ( AUS AMY BOH ) MTO SIL ) ) ( XDO ( ( AUS AMY SER ) SUP ( ITA AMY VEN ) MTO TRI ) ) ( XDO ( ( AUS FLT ADR ) SUP ( ITA FLT NAP ) MTO APU ) ) ))
+[2024-10-15 14:42:20.957] [INFO] [chiron_utils.bots.baseline_bot] ITALY (RandomProposerPlayer) sent message: [0/F1901M/ITALY->RUSSIA](PRP ( AND ( XDO ( ( RUS AMY MOS ) SUP ( RUS AMY WAR ) MTO UKR ) ) ( XDO ( ( RUS AMY WAR ) SUP ( AUS AMY BOH ) MTO GAL ) ) ( XDO ( ( RUS FLT GOB ) MTO LVN ) ) ( XDO ( ( RUS FLT SEV ) SUP ( AUS AMY SER ) MTO RUM ) ) ))
+[2024-10-15 14:42:24.791] [INFO] [diplomacy.engine.game[116840]] ENGLAND	comm_status: ready
+[2024-10-15 14:47:09.283] [INFO] [chiron_utils.bots.baseline_bot] Exiting communication phase because out of time
+[2024-10-15 14:47:09.283] [INFO] [chiron_utils.bots.baseline_bot] Sent orders: ['F NAP - APU', 'A ROM S A PIE - TUS', 'A VEN S A ROM - APU']
+[2024-10-15 14:47:09.348] [INFO] [__main__] Time taken for phase F1901M: 291.2268s

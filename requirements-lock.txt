@@ -1,13 +1,12 @@
-accelerate==0.33.0
-astroid==3.2.4
+astroid==3.3.5
 bcrypt==4.2.0
 certifi==2024.7.4
 cfgv==3.4.0
 charset-normalizer==3.3.2
 coloredlogs==15.0.1
-daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@d55a2090c261783e5128fc7c58b5cb137a7653a6
+daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@7f6dcca60f2e6dd89c37862663be7b098cc03794
 dill==0.3.8
-diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@eaeb1747a108a7ffc0fec962bc2249d5a529b576
+diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@232740abe53e18476c0f5d6de806e07f5d12b434
 distlib==0.3.8
 filelock==3.15.4
 fsspec==2024.6.1
@@ -31,9 +30,8 @@ parsimonious==0.9.0
 peft==0.12.0
 platformdirs==4.2.2
 pluggy==1.5.0
-pre-commit==3.8.0
-psutil==6.0.0
-pylint==3.2.6
+pre_commit==4.0.1
+pylint==3.3.1
 pytest==8.3.2
 python-dateutil==2.9.0.post0
 pytz==2024.1

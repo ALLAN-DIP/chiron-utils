@@ -5,7 +5,7 @@ for power in "${powers[@]}"; do
     python run_bot.py --host diplomacy.alexhedges.dev \
     --port 8433 \
     --use-ssl \
-    --game_id demo_play_3 \
+    --game_id demo_play_5 \
     --power $power \
     --bot_type RandomProposerPlayer > "${power}_log.txt" 2>&1 &
 done
@@ -14,13 +14,13 @@ done
 python run_bot.py --host diplomacy.alexhedges.dev \
     --port 8433 \
     --use-ssl \
-    --game_id demo_play_3 \
+    --game_id demo_play_5 \
     --power ENGLAND \
     --bot_type RandomProposerAdvisor > "ENGLAND_RandomProposerAdvisor_log.txt" 2>&1 &
 
 python run_bot.py --host diplomacy.alexhedges.dev \
     --port 8433 \
     --use-ssl \
-    --game_id demo_play_3 \
+    --game_id demo_play_5 \
     --power ENGLAND \
     --bot_type LlmAdvisor > "ENGLAND_LlmAdvisor_log.txt" 2>&1 &
