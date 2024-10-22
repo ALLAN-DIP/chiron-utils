@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 import random
-from typing import ClassVar, List, Sequence, Tuple
+from typing import List, Sequence, Tuple, Union
 
 import numpy as np
 from peft import PeftModel
@@ -15,7 +15,7 @@ from transformers import (
     PreTrainedTokenizer,
 )
 
-from chiron_utils.bots.baseline_bot import BaselineBot
+from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
 
 
@@ -27,7 +27,7 @@ class LlmAdvisor(BaselineBot):
     both of their behaviors are abstracted into this single abstract base class.
     """
 
-    bot_type: ClassVar[str] = "advisor"
+    bot_type = BotType.ADVISOR
     base_model_name = "meta-llama/Llama-2-7b-chat-hf"
     adapter_path: str = "usc-isi/Llama2-Advisor"
     tokenizer_path: str = "usc-isi/Llama2-Advisor"
@@ -37,7 +37,7 @@ class LlmAdvisor(BaselineBot):
     )
     device: str = "cuda"
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Initialize models."""
         # Load the main model and tokenizer
         self.tokenizer, self.model = self.load_model(
@@ -123,7 +123,9 @@ class LlmAdvisor(BaselineBot):
 
         return predicted_class
 
-    def format_prompt(self, own: str, oppo: str, suggest_orders: List[str]) -> str:
+    def format_prompt(
+        self, own: str, oppo: str, suggest_orders: List[str]
+    ) -> Union[Tuple[str, str], Tuple[None, None]]:
         """Create prompt used as input to LLM."""
         if own in POWER_NAMES_DICT:
             own = POWER_NAMES_DICT[own]
