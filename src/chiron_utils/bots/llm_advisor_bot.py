@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import random
 from typing import List, Sequence, Tuple, Union
 
+from diplomacy.utils.constants import SuggestionType
 import numpy as np
 from peft import PeftModel
 import torch
@@ -28,6 +29,8 @@ class LlmAdvisor(BaselineBot):
     """
 
     bot_type = BotType.ADVISOR
+    suggestion_type = SuggestionType.MESSAGE_ONLY
+
     base_model_name = "meta-llama/Llama-2-7b-chat-hf"
     adapter_path: str = "usc-isi/Llama2-Advisor"
     tokenizer_path: str = "usc-isi/Llama2-Advisor"
