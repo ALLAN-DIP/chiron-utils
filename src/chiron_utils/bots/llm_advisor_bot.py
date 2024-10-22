@@ -241,7 +241,7 @@ class LlmAdvisor(BaselineBot):
         suggested_orders = await self.read_suggestions_from_advisor()
         for other_power in get_other_powers([self.power_name], self.game):
             prompt, decision = self.format_prompt(self.power_name, other_power, suggested_orders)
-            if prompt == None:
+            if prompt is None:
                 continue
             else:
                 generate_text = self.generate_text(prompt)
