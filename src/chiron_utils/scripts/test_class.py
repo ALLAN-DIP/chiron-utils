@@ -1,6 +1,6 @@
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
-import torch
 import numpy as np
+import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 
 def classification(prompt, device):
