@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 powers=("AUSTRIA" "GERMANY" "RUSSIA" "TURKEY" "ITALY" "FRANCE")
 
 # Loop over each power and run the command in the background
