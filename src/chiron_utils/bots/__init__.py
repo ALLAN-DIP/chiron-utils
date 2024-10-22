@@ -1,5 +1,7 @@
 """Module for CHIRON advisors and players."""
 
+from typing import List, Type
+
 from chiron_utils.bots.baseline_bot import BaselineBot as BaselineBot
 from chiron_utils.bots.llm_advisor_bot import LlmAdvisor as LlmAdvisor
 from chiron_utils.bots.random_proposer_bot import (
@@ -7,7 +9,7 @@ from chiron_utils.bots.random_proposer_bot import (
     RandomProposerPlayer as RandomProposerPlayer,
 )
 
-BOTS = [
+BOTS: List[Type[BaselineBot]] = [
     LlmAdvisor,
     RandomProposerAdvisor,
     RandomProposerPlayer,
