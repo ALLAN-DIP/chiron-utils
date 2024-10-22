@@ -2,24 +2,27 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import torch
 import numpy as np
 
+
 def classification(prompt, device):
     # Load the model and tokenizer, and place the model on the specified device
-    classification_model = AutoModelForSequenceClassification.from_pretrained("AutonLabTruth/llama3_m",torch_dtype=torch.float16).to(device)
+    classification_model = AutoModelForSequenceClassification.from_pretrained(
+        "AutonLabTruth/llama3_m", torch_dtype=torch.float16
+    ).to(device)
     classification_tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
 
     # Tokenize the input and move it to the same device as the model
     inputs = classification_tokenizer(prompt, return_tensors="pt").to(device)
-    
+
     # Set model to evaluation mode
     classification_model.eval()
-    
+
     # Perform inference
     with torch.no_grad():
         logits = classification_model(**inputs).logits
 
     # Move logits back to CPU to avoid device mismatch issues
     logits = logits.cpu().numpy()
-    
+
     # Calculate softmax and classification score
     softmaxed = np.exp(logits) / np.sum(np.exp(logits), axis=1, keepdims=True)
     score = softmaxed[0, 1]  # Assuming binary classification (index 1 is "untrustworthy")
@@ -32,8 +35,9 @@ def classification(prompt, device):
 
     return predicted_class
 
+
 # Define device
-device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 # Define prompt
 prompt = (

@@ -7,11 +7,15 @@ import sys
 from peft import PeftModel
 import torch
 from torch.nn import DataParallel
-from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizer,AutoModelForSequenceClassification
+from transformers import (
+    AutoModelForCausalLM,
+    AutoTokenizer,
+    PreTrainedTokenizer,
+    AutoModelForSequenceClassification,
+)
 from chiron_utils.bots.baseline_bot import BaselineBot
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
 import numpy as np
-
 
 
 @dataclass
@@ -21,12 +25,15 @@ class LlmAdvisor(BaselineBot):
     Because of the similarity between the advisor and player versions of this bot,
     both of their behaviors are abstracted into this single abstract base class.
     """
+
     bot_type: ClassVar[str] = "advisor"
     base_model_name = "meta-llama/Llama-2-7b-chat-hf"
     adapter_path: str = "usc-isi/Llama2-Advisor"
     tokenizer_path: str = "usc-isi/Llama2-Advisor"
     classification_model_name: str = "AutonLabTruth/llama3_m"  # Added for classification model
-    classification_tokenizer_name: str = "meta-llama/Llama-3.1-8B"  # Added for classification tokenizer
+    classification_tokenizer_name: str = (
+        "meta-llama/Llama-3.1-8B"  # Added for classification tokenizer
+    )
     device: str = "cuda"
 
     def __post_init__(self):
@@ -40,7 +47,6 @@ class LlmAdvisor(BaselineBot):
         self.classification_model, self.classification_tokenizer = self.load_classification_model(
             self.classification_model_name, self.classification_tokenizer_name, self.device
         )
-
 
     @staticmethod
     def load_model(
@@ -58,23 +64,24 @@ class LlmAdvisor(BaselineBot):
             The loaded tokenizer and model.
         """
         tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
-        model = AutoModelForCausalLM.from_pretrained(base_model_name,torch_dtype=torch.float16)
+        model = AutoModelForCausalLM.from_pretrained(base_model_name, torch_dtype=torch.float16)
         model = PeftModel.from_pretrained(model, adapter_path)
         if torch.cuda.device_count() > 1:
             model = DataParallel(model)
         model.to(device)
 
         return tokenizer, model
-    
+
     def load_classification_model(
         self, model_name: str, tokenizer_name: str, device: str
     ) -> Tuple[AutoModelForSequenceClassification, AutoTokenizer]:
         """Load the classification model and tokenizer."""
-        classification_model = AutoModelForSequenceClassification.from_pretrained(model_name,torch_dtype=torch.float16)
+        classification_model = AutoModelForSequenceClassification.from_pretrained(
+            model_name, torch_dtype=torch.float16
+        )
         classification_tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
         classification_model.to(device)
         return classification_model, classification_tokenizer
-
 
     def generate_text(self, prompt: str) -> str:
         """Generate text based on a given prompt.
@@ -90,13 +97,13 @@ class LlmAdvisor(BaselineBot):
         self.model.eval()
         with torch.no_grad():
             if isinstance(self.model, DataParallel):
-                output_ids = self.model.module.generate(input_ids = input_ids)
+                output_ids = self.model.module.generate(input_ids=input_ids)
             else:
                 output_ids = self.model.generate(input_ids=input_ids)
 
         generated_text = self.tokenizer.decode(output_ids[0], skip_special_tokens=True)
         return generated_text  # type: ignore[no-any-return]
-    
+
     def classification(self, prompt: str) -> str:
         """Classify a prompt to decide whether to trust or not trust."""
         inputs = self.classification_tokenizer(prompt, return_tensors="pt").to(self.device)
@@ -154,7 +161,7 @@ class LlmAdvisor(BaselineBot):
             or (message.sender == oppo and message.recipient == own)
         ]
         if filtered_messages == []:
-            return None,None
+            return None, None
         else:
             sorted_messages = sorted(filtered_messages, key=lambda x: x.time_sent, reverse=True)
             closest_8_messages = sorted_messages[:8]
@@ -182,7 +189,7 @@ class LlmAdvisor(BaselineBot):
                     break
 
             prompt_for_classification = f"{oppo} sends {own}:{last_message}"
-            decision = self.classification(prompt = prompt_for_classification)
+            decision = self.classification(prompt=prompt_for_classification)
 
             # cicero recommendation format
             # if USE_CICERO:
@@ -204,8 +211,8 @@ class LlmAdvisor(BaselineBot):
                 f"I can use directly to respond to {oppo}'s last message. You also need to give me "
                 f"the reason to support my decision. [/INST]"
             )
-            return prompt,decision
-    
+            return prompt, decision
+
     async def read_suggestions_from_advisor(self) -> List[str]:
         """Read suggestions from RandomProposerAdvisor.
 
@@ -213,7 +220,7 @@ class LlmAdvisor(BaselineBot):
             List of suggested orders.
         """
         received_messages = self.read_messages()
-        
+
         # Filter for messages sent by the RandomProposerAdvisor with msg_type "suggested_move_full"
         suggestions = [
             msg.message
@@ -224,7 +231,6 @@ class LlmAdvisor(BaselineBot):
         # Return a flattened list of suggested orders if there are any suggestions
         return suggestions if suggestions else []
 
-
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
         """Carry out one round of messaging, along with related tasks.
 
@@ -233,13 +239,13 @@ class LlmAdvisor(BaselineBot):
         """
         suggested_orders = await self.read_suggestions_from_advisor()
         for other_power in get_other_powers([self.power_name], self.game):
-            prompt,decision = self.format_prompt(self.power_name, other_power,suggested_orders)
+            prompt, decision = self.format_prompt(self.power_name, other_power, suggested_orders)
             if prompt == None:
                 continue
             else:
                 generate_text = self.generate_text(prompt)
-                index = generate_text.find('[/INST] ')
-                model_output = generate_text[index+8:]
+                index = generate_text.find("[/INST] ")
+                model_output = generate_text[index + 8 :]
                 decision_output = f"I recommend {decision} the last message."
                 final_output = decision_output + model_output
                 await self.suggest_message(other_power, final_output)
@@ -268,4 +274,3 @@ class LlmAdvisor(BaselineBot):
         """
         orders = self.get_random_orders()
         return orders
-
