@@ -3,19 +3,20 @@
 from dataclasses import dataclass
 import random
 from typing import ClassVar, List, Sequence, Tuple
-import sys
+
+import numpy as np
 from peft import PeftModel
 import torch
 from torch.nn import DataParallel
 from transformers import (
     AutoModelForCausalLM,
+    AutoModelForSequenceClassification,
     AutoTokenizer,
     PreTrainedTokenizer,
-    AutoModelForSequenceClassification,
 )
+
 from chiron_utils.bots.baseline_bot import BaselineBot
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
-import numpy as np
 
 
 @dataclass
