@@ -8,7 +8,7 @@ for power in "${powers[@]}"; do
     --port 8433 \
     --use-ssl \
     --game_id demo_play_3 \
-    --power $power \
+    --power "$power" \
     --bot_type RandomProposerPlayer >"${power}_log.txt" 2>&1 &
 done
 
