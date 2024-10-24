@@ -1,4 +1,5 @@
 """Abstract base classes for bots."""
+
 from abc import ABC
 from dataclasses import dataclass
 import os
