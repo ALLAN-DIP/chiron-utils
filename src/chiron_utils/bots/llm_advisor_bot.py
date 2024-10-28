@@ -257,8 +257,8 @@ class LlmAdvisor(BaselineBot,ABC):
                 new_messages = [msg for msg in filtered_messages if msg not in self.previous_newest_messages[self.power_name]]
                 if new_messages:
                     prompt = self.format_prompt(self.power_name, other_power,suggested_orders)
-                    # logger.info("=========")
-                    # logger.info(" prompt is :%s",  prompt)
+                    logger.info("=========")
+                    logger.info(" prompt is :%s",  prompt)
                     if prompt == None:
                         continue
                     else:
@@ -267,26 +267,26 @@ class LlmAdvisor(BaselineBot,ABC):
                         model_output = generate_text[index+8:]
                         # decision_output = f"I recommend {decision} the last message."
                         final_output = model_output
-                        # logger.info(" output is :%s",  final_output)
-                        # logger.info("=========")
+                        logger.info(" output is :%s",  final_output)
+                        logger.info("=========")
                         pattern = r"1\.\s\*\*Decision\*\*:(.*?)\s*2\.\s\*\*Reason\*\*:(.*?)\s*3\.\s\*\*Message\*\*:(.*?)(?:\n|$)"
                         match = re.search(pattern, model_output, re.DOTALL)
                         if match:
                             decision = match.group(1).strip()
                             reason = match.group(2).strip()
                             message = match.group(3).strip()
-                            # print("Decision:", decision)
-                            # print("Reason:", reason)
-                            # print("Message:", message)
+                            print("Decision:", decision)
+                            print("Reason:", reason)
+                            print("Message:", message)
                         
-                        await self.suggest_message(other_power, decision+reason)
-                        await self.suggest_message(other_power, message)
+                        await self.suggest_message(other_power, "Commentary: " + decision + " " + reason)
+                        await self.suggest_message(other_power, "Message: " + message)
                 else:
                     continue
             else:
                 prompt = self.format_prompt(self.power_name, other_power,suggested_orders)
-                # logger.info("=========")
-                # logger.info(" prompt is :%s",  prompt)
+                logger.info("=========")
+                logger.info(" prompt is :%s",  prompt)
                 if prompt == None:
                     continue
                 else:
@@ -295,20 +295,20 @@ class LlmAdvisor(BaselineBot,ABC):
                     model_output = generate_text[index+8:]
                     # decision_output = f"I recommend {decision} the last message."
                     final_output = model_output
-                    # logger.info(" output is :%s",  final_output)
-                    # logger.info("=========")
+                    logger.info(" output is :%s",  final_output)
+                    logger.info("=========")
                     pattern = r"1\.\s\*\*Decision\*\*:(.*?)\s*2\.\s\*\*Reason\*\*:(.*?)\s*3\.\s\*\*Message\*\*:(.*?)(?:\n|$)"
                     match = re.search(pattern, model_output, re.DOTALL)
                     if match:
                         decision = match.group(1).strip()
                         reason = match.group(2).strip()
                         message = match.group(3).strip()
-                        # print("Decision:", decision)
-                        # print("Reason:", reason)
-                        # print("Message:", message)
+                        print("Decision:", decision)
+                        print("Reason:", reason)
+                        print("Message:", message)
                     
-                    await self.suggest_message(other_power, decision+reason)
-                    await self.suggest_message(other_power, message)
+                    await self.suggest_message(other_power, "Commentary: " + decision + " " + reason)
+                    await self.suggest_message(other_power, "Message: " + message)
             self.previous_newest_messages[self.power_name] = filtered_messages
 
         return list(orders)
