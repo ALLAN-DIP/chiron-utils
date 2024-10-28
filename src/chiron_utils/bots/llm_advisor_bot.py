@@ -1,5 +1,5 @@
 """Bots that carry out random orders and make random order proposals."""
-
+from abc import ABC
 from dataclasses import dataclass
 import random
 from typing import List, Sequence, Tuple, Union
@@ -18,10 +18,16 @@ from transformers import (
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
+from diplomacy.utils.constants import SuggestionType
+import numpy as np
+from chiron_utils.utils import return_logger
+import re
+
+logger = return_logger(__name__)
 
 
 @dataclass
-class LlmAdvisor(BaselineBot):
+class LlmAdvisor(BaselineBot,ABC):
     """Bot that carries out random orders and sends random order proposals to other bots.
 
     Because of the similarity between the advisor and player versions of this bot,
@@ -39,6 +45,7 @@ class LlmAdvisor(BaselineBot):
         "meta-llama/Llama-3.1-8B"  # Added for classification tokenizer
     )
     device: str = "cuda"
+    previous_newest_messages = {'ENGLAND': None, 'FRANCE': None, 'GERMANY': None,'RUSSIA':None, 'TURKEY':None,'ITALY':None,'AUSTRIA':None}
 
     def __post_init__(self) -> None:
         """Initialize models."""
@@ -167,7 +174,7 @@ class LlmAdvisor(BaselineBot):
             or (message.sender == oppo and message.recipient == own)
         ]
         if filtered_messages == []:
-            return None, None
+            return None
         else:
             sorted_messages = sorted(filtered_messages, key=lambda x: x.time_sent, reverse=True)
             closest_8_messages = sorted_messages[:8]
@@ -207,17 +214,20 @@ class LlmAdvisor(BaselineBot):
                 f"<s>[INST] {system_prompt}\n\n"
                 f"---\n\n"
                 f"Board Status: {sorted_board_states}\n\n"
-                f"Cicero Recommendation for {own}: {suggest_orders}\n\n"
+                f"AI Recommendation for {own}: {suggest_orders}\n\n"
                 f"Message History: {my_message}\n\n"
                 f"---\n\n"
                 f"Last Message: Message from {oppo}: {last_message}\n\n"
                 f"---\n\n"
                 f"Question: I am {own} and I decide to {decision} the last message from {oppo}. "
-                f"As my advisor, give me one short but specific message for the last message which "
-                f"I can use directly to respond to {oppo}'s last message. You also need to give me "
-                f"the reason to support my decision. [/INST]"
+                f"As my advisor, provide a response with the following format:\n"
+                f"1. **Decision**: restate my decision. (e.g. I recommend you to trust or not trust the last message.)\n"
+                f"2. **Reason**: Briefly explain the rationale behind this decision.\n"
+                f"3. **Message**: Draft a concise response I can send to {oppo} addressing their last message.\n"
+                f"[/INST]"
             )
-            return prompt, decision
+
+            return prompt
 
     async def read_suggestions_from_advisor(self) -> List[str]:
         """Read suggestions from RandomProposerAdvisor.
@@ -233,7 +243,9 @@ class LlmAdvisor(BaselineBot):
             for msg in received_messages
             if msg.sender == "omniscient_type" and msg.type == "suggested_move_full"
         ]
-
+        # logger.info("-----------")
+        # logger.info("%s received suggested message: %s", self.display_name, suggestions)
+        # logger.info("-----------")
         # Return a flattened list of suggested orders if there are any suggestions
         return suggestions if suggestions else []
 
@@ -243,18 +255,73 @@ class LlmAdvisor(BaselineBot):
         Returns:
             List of orders to carry out.
         """
+
         suggested_orders = await self.read_suggestions_from_advisor()
         for other_power in get_other_powers([self.power_name], self.game):
-            prompt, decision = self.format_prompt(self.power_name, other_power, suggested_orders)
-            if prompt is None:
-                continue
+            messages = self.game.messages
+            filtered_messages = [
+                message
+                for message in messages.values()
+                if (message.sender == self.power_name and message.recipient == other_power)
+                or (message.sender == other_power and message.recipient == self.power_name)
+            ]
+            if self.previous_newest_messages[self.power_name] is not None:
+                new_messages = [msg for msg in filtered_messages if msg not in self.previous_newest_messages[self.power_name]]
+                if new_messages:
+                    prompt = self.format_prompt(self.power_name, other_power,suggested_orders)
+                    # logger.info("=========")
+                    # logger.info(" prompt is :%s",  prompt)
+                    if prompt == None:
+                        continue
+                    else:
+                        generate_text = self.generate_text(prompt)
+                        index = generate_text.find('[/INST] ')
+                        model_output = generate_text[index+8:]
+                        # decision_output = f"I recommend {decision} the last message."
+                        final_output = model_output
+                        # logger.info(" output is :%s",  final_output)
+                        # logger.info("=========")
+                        pattern = r"1\.\s\*\*Decision\*\*:(.*?)\s*2\.\s\*\*Reason\*\*:(.*?)\s*3\.\s\*\*Message\*\*:(.*?)(?:\n|$)"
+                        match = re.search(pattern, model_output, re.DOTALL)
+                        if match:
+                            decision = match.group(1).strip()
+                            reason = match.group(2).strip()
+                            message = match.group(3).strip()
+                            # print("Decision:", decision)
+                            # print("Reason:", reason)
+                            # print("Message:", message)
+
+                        await self.suggest_message(other_power, decision+reason)
+                        await self.suggest_message(other_power, message)
+                else:
+                    continue
             else:
-                generate_text = self.generate_text(prompt)
-                index = generate_text.find("[/INST] ")
-                model_output = generate_text[index + 8 :]
-                decision_output = f"I recommend {decision} the last message."
-                final_output = decision_output + model_output
-                await self.suggest_message(other_power, final_output)
+                prompt = self.format_prompt(self.power_name, other_power,suggested_orders)
+                # logger.info("=========")
+                # logger.info(" prompt is :%s",  prompt)
+                if prompt == None:
+                    continue
+                else:
+                    generate_text = self.generate_text(prompt)
+                    index = generate_text.find('[/INST] ')
+                    model_output = generate_text[index+8:]
+                    # decision_output = f"I recommend {decision} the last message."
+                    final_output = model_output
+                    # logger.info(" output is :%s",  final_output)
+                    # logger.info("=========")
+                    pattern = r"1\.\s\*\*Decision\*\*:(.*?)\s*2\.\s\*\*Reason\*\*:(.*?)\s*3\.\s\*\*Message\*\*:(.*?)(?:\n|$)"
+                    match = re.search(pattern, model_output, re.DOTALL)
+                    if match:
+                        decision = match.group(1).strip()
+                        reason = match.group(2).strip()
+                        message = match.group(3).strip()
+                        # print("Decision:", decision)
+                        # print("Reason:", reason)
+                        # print("Message:", message)
+
+                    await self.suggest_message(other_power, decision+reason)
+                    await self.suggest_message(other_power, message)
+            self.previous_newest_messages[self.power_name] = filtered_messages
 
         return list(orders)
 
@@ -279,4 +346,6 @@ class LlmAdvisor(BaselineBot):
             List of orders to carry out.
         """
         orders = self.get_random_orders()
+        if self.bot_type == BotType.ADVISOR:
+            await self.suggest_orders(orders)
         return orders
