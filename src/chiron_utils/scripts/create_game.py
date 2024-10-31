@@ -40,6 +40,9 @@ def main() -> None:
     parser.add_argument("--game-password", type=str, help="Game password.")
     parser.add_argument("--host", type=str, default=DEFAULT_HOST, help="Server hostname.")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT, help="Server port.")
+    parser.add_argument(
+        "--use-ssl", action="store_true", help="Whether to use SSL to connect to the game server."
+    )
     args = parser.parse_args()
 
     if args.deadline < 0:
@@ -60,6 +63,7 @@ def main() -> None:
             game_password=args.game_password,
             hostname=args.host,
             port=args.port,
+            use_ssl=args.use_ssl,
         )
     )
     print(json.dumps(game_data, ensure_ascii=False, indent=4))

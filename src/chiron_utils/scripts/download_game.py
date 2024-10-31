@@ -29,6 +29,9 @@ def main() -> None:
     parser.add_argument("--game-password", type=str, help="Game password.")
     parser.add_argument("--host", type=str, default=DEFAULT_HOST, help="Server hostname.")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT, help="Server port.")
+    parser.add_argument(
+        "--use-ssl", action="store_true", help="Whether to use SSL to connect to the game server."
+    )
     args = parser.parse_args()
     game_id: str = args.game_id
     raw_output_file: Optional[Path] = args.output_file
@@ -37,6 +40,7 @@ def main() -> None:
     game_password: Optional[str] = args.game_password
     host: str = args.host
     port: int = args.port
+    use_ssl: bool = args.use_ssl
 
     if raw_output_file is None:
         output_file = REPO_DIR / "data" / f"{game_id}_log.json"
@@ -53,6 +57,7 @@ def main() -> None:
             game_password=game_password,
             hostname=host,
             port=port,
+            use_ssl=use_ssl,
         )
     )
     with open(output_file, mode="w", encoding="utf-8") as file:
