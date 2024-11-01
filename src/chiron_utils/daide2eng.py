@@ -103,8 +103,6 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
         return f"not understand \"{daide.press_message}\" "
     if isinstance(daide, PRP):
         return f"propose {daide.arrangement} "
-    if isinstance(daide, ALYONLY):
-        return "an alliance of " + and_items(daide.powers)
     if isinstance(daide, ALYVSS):
         if not any(pp in daide.aly_powers for pp in daide.vss_powers):
             # if there is VSS power and no overlap between the allies and the enemies
@@ -181,7 +179,7 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
     if isinstance(daide, HOW):
         return f"How do you think we should attack {daide.province_power} ? "
     if isinstance(daide, EXP):
-        return f"The explanation for what {daide.power} did in {daide.turn} is {daide.message} "
+        return f"The explanation for what they did in {daide.turn} is {daide.message} "
     if isinstance(daide, SRY):
         return f"I'm sorry about {daide.exp} "
     if isinstance(daide, FOR):
