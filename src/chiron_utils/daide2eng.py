@@ -2,7 +2,6 @@ from daidepp import (
     ALYVSS,
     AND,
     ANG,
-    AnyDAIDEToken,
     BCC,
     BLD,
     BWX,
@@ -24,9 +23,7 @@ from daidepp import (
     IDK,
     IFF,
     INS,
-    Location,
     MTO,
-    MoveByCVY,
     NAR,
     NOT,
     OCC,
@@ -34,7 +31,6 @@ from daidepp import (
     PCE,
     POB,
     PRP,
-    PowerAndSupplyCenters,
     QRY,
     REJ,
     REM,
@@ -48,11 +44,9 @@ from daidepp import (
     SUP,
     THK,
     TRY,
-    Turn,
     UHY,
     ULB,
     UUB,
-    Unit,
     WHT,
     WHY,
     WVE,
@@ -60,6 +54,12 @@ from daidepp import (
     XOY,
     YDO,
     YES,
+    AnyDAIDEToken,
+    Location,
+    MoveByCVY,
+    PowerAndSupplyCenters,
+    Turn,
+    Unit,
 )
 
 from chiron_utils.utils import POWER_NAMES_DICT, parse_daide
@@ -72,8 +72,7 @@ unit_dict = {
 
 
 def gen_English(daide: str, sender="I", recipient="You", make_natural=True) -> str:
-    """
-    Generate English from DAIDE. If make_natural is true, first and
+    """Generate English from DAIDE. If make_natural is true, first and
     second person pronouns/possessives will be used instead. We don't
     recommend passing in make_natural=False unless there is a
     specific reason to do so.
@@ -82,7 +81,6 @@ def gen_English(daide: str, sender="I", recipient="You", make_natural=True) -> s
     :param sender: power sending the message, e.g., 'ENG'
     :param recipient: power to which the message is sent, e.g., 'TUR'
     """
-
     if not make_natural and (not sender or not recipient):
         return "ERROR: sender and recipient must be provided if make_natural is False"
 
@@ -184,7 +182,7 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
         if daide.powers:
             return and_items(daide.powers) + "draw "
         else:
-            return f"draw"
+            return "draw"
     if isinstance(daide, YES):
         return f"accept {daide.press_message} "
     if isinstance(daide, REJ):
@@ -215,10 +213,10 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
         )
     if isinstance(daide, SCD):
         pas_str = [str(pas) + " " for pas in daide.power_and_supply_centers]
-        return f"an arragement of supply centre distribution as follows: " + and_items(pas_str)
+        return "an arragement of supply centre distribution as follows: " + and_items(pas_str)
     if isinstance(daide, OCC):
         unit_str = [str(unit) for unit in daide.units]
-        return f"placing " + and_items(unit_str)
+        return "placing " + and_items(unit_str)
     if isinstance(daide, CHO):
         if daide.minimum == daide.maximum:
             return f"choosing {daide.minimum} in " + and_items(daide.arrangements)
@@ -281,7 +279,7 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
     if isinstance(daide, ANG):
         return f'am angry that "{daide.press_message}" '
     if isinstance(daide, ROF):
-        return f"requesting an offer"
+        return "requesting an offer"
     if isinstance(daide, ULB):
         return f"having a utility lower bound of float for {daide.power} is {daide.float_val} "
     if isinstance(daide, UUB):
@@ -291,11 +289,9 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
 
 
 def post_process(sentence: str, sender: str, recipient: str, make_natural: bool) -> str:
-    """
-    Make the sentence more grammatical and readable
+    """Make the sentence more grammatical and readable
     :param sentence: string, e.g. 'reject propose build fleet LON'
     """
-
     # if sender or recipient is not provided, use first and second
     # person (default case).
     if make_natural:
@@ -341,7 +337,7 @@ def post_process(sentence: str, sender: str, recipient: str, make_natural: bool)
     # make natural for proposals
     detect_str = f"I propose an order using {sender}'s"
     if sender != "I" and make_natural and detect_str in output:
-        output = output.replace(detect_str, f"I will move")
+        output = output.replace(detect_str, "I will move")
     elif sender in power_list and make_natural:
         output = output.replace("I propose an order using", "I think")
         output = output.replace(" to ", " is going to ")
