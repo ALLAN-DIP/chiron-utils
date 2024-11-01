@@ -1,7 +1,66 @@
-from daidepp import ALYVSS, AND, ANG, AnyDAIDEToken, BCC, BLD, BWX, CCL, CHO, CVY, DMZ, DRW, DSB, EXP, FCT, FOR, FRM, \
-    FWD, HLD, HOW, HPY, HUH, IDK, IFF, INS, Location, MTO, MoveByCVY, NAR, NOT, OCC, ORR, PCE, POB, PRP, \
-    PowerAndSupplyCenters, QRY, REJ, REM, ROF, RTO, SCD, SLO, SND, SRY, SUG, SUP, THK, TRY, Turn, UHY, ULB, UUB, Unit, \
-    WHT, WHY, WVE, XDO, XOY, YDO, YES
+from daidepp import (
+    ALYVSS,
+    AND,
+    ANG,
+    AnyDAIDEToken,
+    BCC,
+    BLD,
+    BWX,
+    CCL,
+    CHO,
+    CVY,
+    DMZ,
+    DRW,
+    DSB,
+    EXP,
+    FCT,
+    FOR,
+    FRM,
+    FWD,
+    HLD,
+    HOW,
+    HPY,
+    HUH,
+    IDK,
+    IFF,
+    INS,
+    Location,
+    MTO,
+    MoveByCVY,
+    NAR,
+    NOT,
+    OCC,
+    ORR,
+    PCE,
+    POB,
+    PRP,
+    PowerAndSupplyCenters,
+    QRY,
+    REJ,
+    REM,
+    ROF,
+    RTO,
+    SCD,
+    SLO,
+    SND,
+    SRY,
+    SUG,
+    SUP,
+    THK,
+    TRY,
+    Turn,
+    UHY,
+    ULB,
+    UUB,
+    Unit,
+    WHT,
+    WHY,
+    WVE,
+    XDO,
+    XOY,
+    YDO,
+    YES,
+)
 
 from chiron_utils.utils import POWER_NAMES_DICT, parse_daide
 
@@ -13,7 +72,7 @@ unit_dict = {
 
 
 def gen_English(daide: str, sender="I", recipient="You", make_natural=True) -> str:
-    '''
+    """
     Generate English from DAIDE. If make_natural is true, first and
     second person pronouns/possessives will be used instead. We don't
     recommend passing in make_natural=False unless there is a
@@ -22,7 +81,7 @@ def gen_English(daide: str, sender="I", recipient="You", make_natural=True) -> s
     :param daide: DAIDE string, e.g. '(ENG FLT LON) BLD'
     :param sender: power sending the message, e.g., 'ENG'
     :param recipient: power to which the message is sent, e.g., 'TUR'
-    '''
+    """
 
     if not make_natural and (not sender or not recipient):
         return "ERROR: sender and recipient must be provided if make_natural is False"
@@ -73,11 +132,12 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
         else:
             return f"using {daide.supporting_unit} to support {daide.supported_unit} moving into {daide.province_no_coast} "
     if isinstance(daide, CVY):
-        return f"using {daide.convoying_unit} to convoy {daide.convoyed_unit} into {daide.province} "
-    if isinstance(daide, MoveByCVY):
         return (
-            f"moving {daide.unit} by convoy into {daide.province} via "
-            + and_items(list(map(lambda x: str(x), daide.province_seas)))
+            f"using {daide.convoying_unit} to convoy {daide.convoyed_unit} into {daide.province} "
+        )
+    if isinstance(daide, MoveByCVY):
+        return f"moving {daide.unit} by convoy into {daide.province} via " + and_items(
+            list(map(lambda x: str(x), daide.province_seas))
         )
     if isinstance(daide, RTO):
         return f"retreating {daide.unit} to {daide.location} "
@@ -96,11 +156,11 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
     if isinstance(daide, PCE):
         return "peace between " + and_items(daide.powers)
     if isinstance(daide, CCL):
-        return f"cancel \"{daide.press_message}\" "
+        return f'cancel "{daide.press_message}" '
     if isinstance(daide, TRY):
         return "try the following tokens: " + " ".join(daide.try_tokens) + " "
     if isinstance(daide, HUH):
-        return f"not understand \"{daide.press_message}\" "
+        return f'not understand "{daide.press_message}" '
     if isinstance(daide, PRP):
         return f"propose {daide.arrangement} "
     if isinstance(daide, ALYVSS):
@@ -132,12 +192,10 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
     if isinstance(daide, BWX):
         return f"refuse answering to {daide.press_message} "
     if isinstance(daide, FCT):
-        return f"expect the following: \"{daide.arrangement_qry_not}\" "
+        return f'expect the following: "{daide.arrangement_qry_not}" '
     if isinstance(daide, FRM):
         return (
-            f"from {daide.frm_power} to "
-            + and_items(daide.recv_powers)
-            + f": \"{daide.message}\" "
+            f"from {daide.frm_power} to " + and_items(daide.recv_powers) + f': "{daide.message}" '
         )
     if isinstance(daide, XDO):
         return f"an order {daide.order} "
@@ -152,7 +210,9 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
     if isinstance(daide, ORR):
         return or_items(daide.arrangements)
     if isinstance(daide, PowerAndSupplyCenters):
-        return f"{daide.power} to have " + and_items(list(map(lambda x: str(x), daide.supply_centers)))
+        return f"{daide.power} to have " + and_items(
+            list(map(lambda x: str(x), daide.supply_centers))
+        )
     if isinstance(daide, SCD):
         pas_str = [str(pas) + " " for pas in daide.power_and_supply_centers]
         return f"an arragement of supply centre distribution as follows: " + and_items(pas_str)
@@ -163,7 +223,9 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
         if daide.minimum == daide.maximum:
             return f"choosing {daide.minimum} in " + and_items(daide.arrangements)
         else:
-            return f"choosing between {daide.minimum} and {daide.maximum} in " + and_items(daide.arrangements)
+            return f"choosing between {daide.minimum} and {daide.maximum} in " + and_items(
+                daide.arrangements
+            )
     if isinstance(daide, INS):
         return f"insist {daide.arrangement} "
     if isinstance(daide, QRY):
@@ -189,39 +251,35 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
             return f"{daide.arrangement} from {daide.start_turn} to {daide.end_turn} "
     if isinstance(daide, IFF):
         if not daide.els_press_message:
-            return f"if {daide.arrangement} then \"{daide.press_message}\" "
+            return f'if {daide.arrangement} then "{daide.press_message}" '
         else:
-            return f"if {daide.arrangement} then \"{daide.press_message}\" else \"{daide.els_press_message}\" "
+            return f'if {daide.arrangement} then "{daide.press_message}" else "{daide.els_press_message}" '
     if isinstance(daide, XOY):
         return f"{daide.power_x} owes {daide.power_y} "
     if isinstance(daide, YDO):
         unit_str = [str(unit) for unit in daide.units]
         return f"giving {daide.power} the control of" + and_items(unit_str)
     if isinstance(daide, SND):
-        return (
-            f"{daide.power} sending {daide.message} to "
-            + and_items(daide.recv_powers)
-        )
+        return f"{daide.power} sending {daide.message} to " + and_items(daide.recv_powers)
     if isinstance(daide, FWD):
         return (
             f"forwarding to {daide.power_2} if {daide.power_1} receives message from "
             + and_items(daide.powers)
         )
     if isinstance(daide, BCC):
-        return (
-            f"forwarding to {daide.power_2} if {daide.power_1} sends message to "
-            + and_items(daide.powers)
+        return f"forwarding to {daide.power_2} if {daide.power_1} sends message to " + and_items(
+            daide.powers
         )
     if isinstance(daide, WHY):
-        return f"Why do you believe \"{daide.fct_thk_prp_ins}\" ? "
+        return f'Why do you believe "{daide.fct_thk_prp_ins}" ? '
     if isinstance(daide, POB):
-        return f"answer \"{daide.why}\": the position on the board, or the previous moves, suggests/implies it "
+        return f'answer "{daide.why}": the position on the board, or the previous moves, suggests/implies it '
     if isinstance(daide, UHY):
-        return f"am unhappy that \"{daide.press_message}\" "
+        return f'am unhappy that "{daide.press_message}" '
     if isinstance(daide, HPY):
-        return f"am happy that \"{daide.press_message}\" "
+        return f'am happy that "{daide.press_message}" '
     if isinstance(daide, ANG):
-        return f"am angry that \"{daide.press_message}\" "
+        return f'am angry that "{daide.press_message}" '
     if isinstance(daide, ROF):
         return f"requesting an offer"
     if isinstance(daide, ULB):
@@ -233,19 +291,19 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
 
 
 def post_process(sentence: str, sender: str, recipient: str, make_natural: bool) -> str:
-    '''
+    """
     Make the sentence more grammatical and readable
     :param sentence: string, e.g. 'reject propose build fleet LON'
-    '''
+    """
 
     # if sender or recipient is not provided, use first and second
     # person (default case).
     if make_natural:
-        AGENT_SUBJECTIVE = 'I'
-        RECIPIENT_SUBJECTIVE = 'you'
-        AGENT_POSSESSIVE = 'my'
-        RECIPIENT_POSSESSIVE = 'your'
-        AGENT_OBJECTIVE = 'me'
+        AGENT_SUBJECTIVE = "I"
+        RECIPIENT_SUBJECTIVE = "you"
+        AGENT_POSSESSIVE = "my"
+        RECIPIENT_POSSESSIVE = "your"
+        AGENT_OBJECTIVE = "me"
         RECIPIENT_OBJECTIVE = RECIPIENT_SUBJECTIVE
 
     else:
@@ -260,32 +318,31 @@ def post_process(sentence: str, sender: str, recipient: str, make_natural: bool)
     output = output.replace("<country>'s", "")
 
     # general steps that apply to all types of daide messages
-    output = AGENT_SUBJECTIVE + ' ' + output
+    output = AGENT_SUBJECTIVE + " " + output
 
     # remove extra spaces
     output = " ".join(output.split())
 
     # add period if needed
-    if not output.endswith('.') or not output.endswith('?'):
-        output += '.'
+    if not output.endswith(".") or not output.endswith("?"):
+        output += "."
 
     # substitute power names with pronouns
     if make_natural:
-        output = output.replace(' ' + sender + ' ', ' ' + AGENT_OBJECTIVE + ' ')
-        output = output.replace(' ' + recipient + ' ', ' ' + RECIPIENT_OBJECTIVE + ' ')
+        output = output.replace(" " + sender + " ", " " + AGENT_OBJECTIVE + " ")
+        output = output.replace(" " + recipient + " ", " " + RECIPIENT_OBJECTIVE + " ")
 
     # case-dependent handling
 
     # REJ/YES
     if "reject" in output or "accept" in output:
-        output = output.replace(
-            'propose', RECIPIENT_POSSESSIVE + ' proposal of', 1)
+        output = output.replace("propose", RECIPIENT_POSSESSIVE + " proposal of", 1)
 
     # make natural for proposals
     detect_str = f"I propose an order using {sender}'s"
     if sender != "I" and make_natural and detect_str in output:
         output = output.replace(detect_str, f"I will move")
     elif sender in power_list and make_natural:
-        output = output.replace('I propose an order using', 'I think')
-        output = output.replace(' to ', ' is going to ')
+        output = output.replace("I propose an order using", "I think")
+        output = output.replace(" to ", " is going to ")
     return output
