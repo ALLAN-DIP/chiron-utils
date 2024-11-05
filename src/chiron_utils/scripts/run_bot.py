@@ -38,7 +38,7 @@ async def play(
         use_ssl: Whether to use SSL to connect to the game server.
     """
     # Connect to the game
-    logger.info("%s joining game %r as %s", bot_class.__name__, (game_id), power_name)
+    logger.info("%s joining game %r as %s", bot_class.__name__, game_id, power_name)
     connection = await connect(hostname, port, use_ssl=use_ssl)
     channel = await connection.authenticate(
         (
