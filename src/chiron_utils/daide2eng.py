@@ -1,3 +1,5 @@
+"""Utilities for converting from DAIDE syntax to English."""
+
 from typing import Union
 
 from daidepp import (
@@ -75,15 +77,20 @@ unit_dict = {
 }
 
 
-def gen_English(daide: str, sender="I", recipient="You", make_natural=True) -> str:
-    """Generate English from DAIDE. If make_natural is true, first and
-    second person pronouns/possessives will be used instead. We don't
-    recommend passing in make_natural=False unless there is a
-    specific reason to do so.
+def gen_english(daide: str, sender="I", recipient="You", *, make_natural=True) -> str:
+    """Generate English from DAIDE.
 
-    :param daide: DAIDE string, e.g. '(ENG FLT LON) BLD'
-    :param sender: power sending the message, e.g., 'ENG'
-    :param recipient: power to which the message is sent, e.g., 'TUR'
+    If `make_natural` is true, first- and second-person pronouns/possessives will be used instead.
+    We don't recommend passing in `make_natural=False` unless there is a specific reason to do so.
+
+    Params:
+        daide: DAIDE string, e.g., "(ENG FLT LON) BLD".
+        sender: Power sending the message, e.g., "ENG".
+        recipient: Power to which the message is sent, e.g., "TUR".
+        make_natural: Whether to make the resulting English sound "natural".
+
+    Returns:
+        DAIDE message converted to English.
     """
     if not make_natural and (not sender or not recipient):
         return "ERROR: sender and recipient must be provided if make_natural is False"
@@ -98,6 +105,7 @@ def gen_English(daide: str, sender="I", recipient="You", make_natural=True) -> s
 
 
 def and_items(items):
+    """Convert a list of items into an English list joined by "and"."""
     if len(items) == 1:
         return daide_to_en(items[0]) + " "
     elif len(items) == 2:
@@ -112,6 +120,7 @@ def and_items(items):
 
 
 def or_items(items):
+    """Convert a list of items into an English list joined by "or"."""
     if len(items) == 1:
         return daide_to_en(items[0]) + " "
     elif len(items) == 2:
@@ -126,6 +135,7 @@ def or_items(items):
 
 
 def daide_to_en(daide: DaideObject) -> str:
+    """Convert a DAIDE object (or raw string) into a mostly-English string."""
     if isinstance(daide, str):
         return daide
 
@@ -151,7 +161,7 @@ def daide_to_en(daide: DaideObject) -> str:
     if isinstance(daide, MoveByCVY):
         return (
             f"moving {daide_to_en(daide.unit)} by convoy into {daide_to_en(daide.province)} via "
-            + and_items(list(map(lambda x: daide_to_en(x), daide.province_seas)))
+            + and_items([daide_to_en(x) for x in daide.province_seas])
         )
     if isinstance(daide, RTO):
         return f"retreating {daide_to_en(daide.unit)} to {daide_to_en(daide.location)} "
@@ -219,16 +229,14 @@ def daide_to_en(daide: DaideObject) -> str:
         return (
             and_items(daide.powers)
             + "demilitarize "
-            + and_items(list(map(lambda x: daide_to_en(x), daide.provinces)))
+            + and_items([daide_to_en(x) for x in daide.provinces])
         )
     if isinstance(daide, AND):
         return and_items(daide.arrangements)
     if isinstance(daide, ORR):
         return or_items(daide.arrangements)
     if isinstance(daide, PowerAndSupplyCenters):
-        return f"{daide.power} to have " + and_items(
-            list(map(lambda x: daide_to_en(x), daide.supply_centers))
-        )
+        return f"{daide.power} to have " + and_items([daide_to_en(x) for x in daide.supply_centers])
     if isinstance(daide, SCD):
         pas_str = [daide_to_en(pas) + " " for pas in daide.power_and_supply_centers]
         return "an arrangement of supply centre distribution as follows: " + and_items(pas_str)
@@ -308,33 +316,39 @@ def daide_to_en(daide: DaideObject) -> str:
     raise ValueError(f"Unable to process {daide}")
 
 
-def post_process(sentence: str, sender: str, recipient: str, make_natural: bool) -> str:
-    """Make the sentence more grammatical and readable
-    :param sentence: string, e.g. 'reject propose build fleet LON'
+def post_process(sentence: str, sender: str, recipient: str, *, make_natural: bool) -> str:
+    """Make a sentence more grammatical and readable.
+
+    Params:
+        sentence: English string, e.g., "reject propose build fleet LON".
+        sender: Power sending the message, e.g., "ENG".
+        recipient: Power to which the message is sent, e.g., "TUR".
+        make_natural: Whether to make the resulting English sound "natural".
+
+    Returns:
+        More readable English string.
     """
     # if sender or recipient is not provided, use first and second
     # person (default case).
     if make_natural:
-        AGENT_SUBJECTIVE = "I"
-        RECIPIENT_SUBJECTIVE = "you"
-        AGENT_POSSESSIVE = "my"
-        RECIPIENT_POSSESSIVE = "your"
-        AGENT_OBJECTIVE = "me"
-        RECIPIENT_OBJECTIVE = RECIPIENT_SUBJECTIVE
+        agent_subjective = "I"
+        recipient_subjective = "you"
+        recipient_possessive = "your"
+        agent_objective = "me"
+        recipient_objective = recipient_subjective
 
     else:
-        AGENT_SUBJECTIVE = sender
-        RECIPIENT_SUBJECTIVE = recipient
-        AGENT_POSSESSIVE = sender + "'s"
-        RECIPIENT_POSSESSIVE = recipient + "'s"
-        AGENT_OBJECTIVE = sender
-        RECIPIENT_OBJECTIVE = recipient
+        agent_subjective = sender
+        recipient_subjective = recipient
+        recipient_possessive = recipient + "'s"
+        agent_objective = sender
+        recipient_objective = recipient
 
     output = sentence.replace("in <location>", "")
     output = output.replace("<country>'s", "")
 
     # general steps that apply to all types of daide messages
-    output = AGENT_SUBJECTIVE + " " + output
+    output = agent_subjective + " " + output
 
     # remove extra spaces
     output = " ".join(output.split())
@@ -345,14 +359,14 @@ def post_process(sentence: str, sender: str, recipient: str, make_natural: bool)
 
     # substitute power names with pronouns
     if make_natural:
-        output = output.replace(" " + sender + " ", " " + AGENT_OBJECTIVE + " ")
-        output = output.replace(" " + recipient + " ", " " + RECIPIENT_OBJECTIVE + " ")
+        output = output.replace(" " + sender + " ", " " + agent_objective + " ")
+        output = output.replace(" " + recipient + " ", " " + recipient_objective + " ")
 
     # case-dependent handling
 
     # REJ/YES
     if "reject" in output or "accept" in output:
-        output = output.replace("propose", RECIPIENT_POSSESSIVE + " proposal of", 1)
+        output = output.replace("propose", recipient_possessive + " proposal of", 1)
 
     # make natural for proposals
     detect_str = f"I propose an order using {sender}'s"
