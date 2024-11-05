@@ -1,3 +1,7 @@
+# type: ignore
+# pylint: disable=all
+# ruff: noqa: D100, D103
+
 import numpy as np
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
