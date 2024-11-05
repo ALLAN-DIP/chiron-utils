@@ -301,7 +301,6 @@ class LlmAdvisor(BaselineBot, ABC):
                             logger.info("Message: %s", message)
 
                         await self.suggest_commentary(other_power, decision + " " + reason)
-                        await self.suggest_message(other_power, message)
                 else:
                     continue
             else:
@@ -329,7 +328,6 @@ class LlmAdvisor(BaselineBot, ABC):
                         logger.info("Message: %s", message)
 
                     await self.suggest_commentary(other_power, decision + " " + reason)
-                    await self.suggest_message(other_power, message)
             self.previous_newest_messages[self.power_name] = filtered_messages
 
         return list(orders)
@@ -355,6 +353,4 @@ class LlmAdvisor(BaselineBot, ABC):
             List of orders to carry out.
         """
         orders = self.get_random_orders()
-        if self.bot_type == BotType.ADVISOR:
-            await self.suggest_orders(orders)
         return orders
