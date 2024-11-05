@@ -10,6 +10,7 @@ from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
+from chiron_utils.daide2eng import gen_english
 from chiron_utils.parsing_utils import dipnet_to_daide_parsing
 from chiron_utils.utils import get_other_powers
 
@@ -61,7 +62,7 @@ class RandomProposerBot(BaselineBot, ABC):
                 else:
                     suggested_random_orders = PRP(*random_orders)
 
-                proposals[other_power] = str(suggested_random_orders)
+                proposals[other_power] = gen_english(suggested_random_orders)
 
         return proposals
 
