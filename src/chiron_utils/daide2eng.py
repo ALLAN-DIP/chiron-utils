@@ -193,7 +193,7 @@ def daide_to_en(daide: DaideObject) -> str:
     if isinstance(daide, NOT):
         return f"not {daide_to_en(daide.arrangement_qry)} "
     if isinstance(daide, NAR):
-        return f"lack of arragement: {daide_to_en(daide.arrangement)} "
+        return f"lack of arrangement: {daide_to_en(daide.arrangement)} "
     if isinstance(daide, DRW):
         if daide.powers:
             return and_items(daide.powers) + "draw "
@@ -231,7 +231,7 @@ def daide_to_en(daide: DaideObject) -> str:
         )
     if isinstance(daide, SCD):
         pas_str = [daide_to_en(pas) + " " for pas in daide.power_and_supply_centers]
-        return "an arragement of supply centre distribution as follows: " + and_items(pas_str)
+        return "an arrangement of supply centre distribution as follows: " + and_items(pas_str)
     if isinstance(daide, OCC):
         unit_str = [daide_to_en(unit) for unit in daide.units]
         return "placing " + and_items(unit_str)
