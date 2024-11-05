@@ -3,6 +3,7 @@
 from abc import ABC
 from dataclasses import dataclass
 import random
+import re
 from typing import List, Sequence, Tuple, Union
 
 from diplomacy.utils.constants import SuggestionType
@@ -18,11 +19,7 @@ from transformers import (
 )
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
-from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers
-from diplomacy.utils.constants import SuggestionType
-import numpy as np
-from chiron_utils.utils import return_logger
-import re
+from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers, return_logger
 
 logger = return_logger(__name__)
 
@@ -264,7 +261,6 @@ class LlmAdvisor(BaselineBot, ABC):
         Returns:
             List of orders to carry out.
         """
-
         suggested_orders = await self.read_suggestions_from_advisor()
         for other_power in get_other_powers([self.power_name], self.game):
             messages = self.game.messages
