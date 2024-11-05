@@ -16,6 +16,7 @@ from transformers import (
     AutoModelForCausalLM,
     AutoModelForSequenceClassification,
     AutoTokenizer,
+    PreTrainedModel,
     PreTrainedTokenizer,
 )
 
@@ -47,6 +48,11 @@ class LlmAdvisor(BaselineBot, ABC):
     previous_newest_messages: Dict[str, Optional[List[Message]]] = field(
         default_factory=lambda: dict.fromkeys(POWER_NAMES_DICT)
     )
+
+    model: PeftModel = field(init=False)
+    tokenizer: PreTrainedTokenizer = field(init=False)
+    classification_model: PreTrainedModel = field(init=False)
+    classification_tokenizer: PreTrainedTokenizer = field(init=False)
 
     def __post_init__(self) -> None:
         """Initialize models."""
@@ -84,9 +90,10 @@ class LlmAdvisor(BaselineBot, ABC):
 
         return tokenizer, model
 
+    @staticmethod
     def load_classification_model(
-        self, model_name: str, tokenizer_name: str, device: str
-    ) -> Tuple[AutoModelForSequenceClassification, AutoTokenizer]:
+        model_name: str, tokenizer_name: str, device: str
+    ) -> Tuple[PreTrainedModel, PreTrainedTokenizer]:
         """Load the classification model and tokenizer."""
         classification_model = AutoModelForSequenceClassification.from_pretrained(
             model_name, torch_dtype=torch.float16
@@ -172,7 +179,7 @@ class LlmAdvisor(BaselineBot, ABC):
             if (message.sender == own and message.recipient == oppo)
             or (message.sender == oppo and message.recipient == own)
         ]
-        if filtered_messages == []:
+        if not filtered_messages:
             return None
         else:
             sorted_messages = sorted(filtered_messages, key=lambda x: x.time_sent, reverse=True)
