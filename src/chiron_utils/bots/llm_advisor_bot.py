@@ -1,11 +1,12 @@
 """Bots that carry out random orders and make random order proposals."""
 
 from abc import ABC
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import random
 import re
-from typing import List, Sequence, Tuple, Union
+from typing import Dict, List, Optional, Sequence, Tuple, Union
 
+from diplomacy import Message
 from diplomacy.utils.constants import SuggestionType
 import numpy as np
 from peft import PeftModel
@@ -43,15 +44,9 @@ class LlmAdvisor(BaselineBot, ABC):
         "meta-llama/Llama-3.1-8B"  # Added for classification tokenizer
     )
     device: str = "cuda"
-    previous_newest_messages = {
-        "ENGLAND": None,
-        "FRANCE": None,
-        "GERMANY": None,
-        "RUSSIA": None,
-        "TURKEY": None,
-        "ITALY": None,
-        "AUSTRIA": None,
-    }
+    previous_newest_messages: Dict[str, Optional[Message]] = field(
+        default_factory=lambda: dict.fromkeys(POWER_NAMES_DICT)
+    )
 
     def __post_init__(self) -> None:
         """Initialize models."""
