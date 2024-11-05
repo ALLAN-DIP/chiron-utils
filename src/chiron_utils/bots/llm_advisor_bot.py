@@ -1,4 +1,5 @@
 """Bots that carry out random orders and make random order proposals."""
+
 from abc import ABC
 from dataclasses import dataclass
 import random
@@ -27,7 +28,7 @@ logger = return_logger(__name__)
 
 
 @dataclass
-class LlmAdvisor(BaselineBot,ABC):
+class LlmAdvisor(BaselineBot, ABC):
     """Bot that carries out random orders and sends random order proposals to other bots.
 
     Because of the similarity between the advisor and player versions of this bot,
@@ -45,7 +46,15 @@ class LlmAdvisor(BaselineBot,ABC):
         "meta-llama/Llama-3.1-8B"  # Added for classification tokenizer
     )
     device: str = "cuda"
-    previous_newest_messages = {'ENGLAND': None, 'FRANCE': None, 'GERMANY': None,'RUSSIA':None, 'TURKEY':None,'ITALY':None,'AUSTRIA':None}
+    previous_newest_messages = {
+        "ENGLAND": None,
+        "FRANCE": None,
+        "GERMANY": None,
+        "RUSSIA": None,
+        "TURKEY": None,
+        "ITALY": None,
+        "AUSTRIA": None,
+    }
 
     def __post_init__(self) -> None:
         """Initialize models."""
@@ -266,20 +275,24 @@ class LlmAdvisor(BaselineBot,ABC):
                 or (message.sender == other_power and message.recipient == self.power_name)
             ]
             if self.previous_newest_messages[self.power_name] is not None:
-                new_messages = [msg for msg in filtered_messages if msg not in self.previous_newest_messages[self.power_name]]
+                new_messages = [
+                    msg
+                    for msg in filtered_messages
+                    if msg not in self.previous_newest_messages[self.power_name]
+                ]
                 if new_messages:
-                    prompt = self.format_prompt(self.power_name, other_power,suggested_orders)
+                    prompt = self.format_prompt(self.power_name, other_power, suggested_orders)
                     logger.info("=========")
-                    logger.info(" prompt is :%s",  prompt)
+                    logger.info(" prompt is :%s", prompt)
                     if prompt == None:
                         continue
                     else:
                         generate_text = self.generate_text(prompt)
-                        index = generate_text.find('[/INST] ')
-                        model_output = generate_text[index+8:]
+                        index = generate_text.find("[/INST] ")
+                        model_output = generate_text[index + 8 :]
                         # decision_output = f"I recommend {decision} the last message."
                         final_output = model_output
-                        logger.info(" output is :%s",  final_output)
+                        logger.info(" output is :%s", final_output)
                         logger.info("=========")
                         pattern = r"1\.\s\*\*Decision\*\*:(.*?)\s*2\.\s\*\*Reason\*\*:(.*?)\s*3\.\s\*\*Message\*\*:(.*?)(?:\n|$)"
                         match = re.search(pattern, model_output, re.DOTALL)
@@ -291,23 +304,25 @@ class LlmAdvisor(BaselineBot,ABC):
                             print("Reason:", reason)
                             print("Message:", message)
 
-                        await self.suggest_message(other_power, "Commentary: " + decision + " " + reason)
+                        await self.suggest_message(
+                            other_power, "Commentary: " + decision + " " + reason
+                        )
                         await self.suggest_message(other_power, "Message: " + message)
                 else:
                     continue
             else:
-                prompt = self.format_prompt(self.power_name, other_power,suggested_orders)
+                prompt = self.format_prompt(self.power_name, other_power, suggested_orders)
                 logger.info("=========")
-                logger.info(" prompt is :%s",  prompt)
+                logger.info(" prompt is :%s", prompt)
                 if prompt == None:
                     continue
                 else:
                     generate_text = self.generate_text(prompt)
-                    index = generate_text.find('[/INST] ')
-                    model_output = generate_text[index+8:]
+                    index = generate_text.find("[/INST] ")
+                    model_output = generate_text[index + 8 :]
                     # decision_output = f"I recommend {decision} the last message."
                     final_output = model_output
-                    logger.info(" output is :%s",  final_output)
+                    logger.info(" output is :%s", final_output)
                     logger.info("=========")
                     pattern = r"1\.\s\*\*Decision\*\*:(.*?)\s*2\.\s\*\*Reason\*\*:(.*?)\s*3\.\s\*\*Message\*\*:(.*?)(?:\n|$)"
                     match = re.search(pattern, model_output, re.DOTALL)
@@ -319,7 +334,9 @@ class LlmAdvisor(BaselineBot,ABC):
                         print("Reason:", reason)
                         print("Message:", message)
 
-                    await self.suggest_message(other_power, "Commentary: " + decision + " " + reason)
+                    await self.suggest_message(
+                        other_power, "Commentary: " + decision + " " + reason
+                    )
                     await self.suggest_message(other_power, "Message: " + message)
             self.previous_newest_messages[self.power_name] = filtered_messages
 
