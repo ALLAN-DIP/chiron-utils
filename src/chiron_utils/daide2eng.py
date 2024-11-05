@@ -1,3 +1,5 @@
+from typing import Union
+
 from daidepp import (
     ALYVSS,
     AND,
@@ -64,6 +66,8 @@ from daidepp import (
 
 from chiron_utils.utils import POWER_NAMES_DICT, parse_daide
 
+DaideObject = Union[AnyDAIDEToken, Location, PowerAndSupplyCenters, Turn, Unit, str]
+
 power_list = list(POWER_NAMES_DICT)
 unit_dict = {
     "FLT": "fleet",
@@ -95,23 +99,36 @@ def gen_English(daide: str, sender="I", recipient="You", make_natural=True) -> s
 
 def and_items(items):
     if len(items) == 1:
-        return str(items[0]) + " "
+        return daide_to_en(items[0]) + " "
     elif len(items) == 2:
-        return str(items[0]) + " and " + str(items[1]) + " "
+        return daide_to_en(items[0]) + " and " + daide_to_en(items[1]) + " "
     else:
-        return ", ".join([str(item) for item in items[:-1]]) + ", and " + str(items[-1]) + " "
+        return (
+            ", ".join([daide_to_en(item) for item in items[:-1]])
+            + ", and "
+            + daide_to_en(items[-1])
+            + " "
+        )
 
 
 def or_items(items):
     if len(items) == 1:
-        return str(items[0]) + " "
+        return daide_to_en(items[0]) + " "
     elif len(items) == 2:
-        return str(items[0]) + " or " + str(items[1]) + " "
+        return daide_to_en(items[0]) + " or " + daide_to_en(items[1]) + " "
     else:
-        return ", ".join([str(item) for item in items[:-1]]) + ", or " + str(items[-1]) + " "
+        return (
+            ", ".join([daide_to_en(item) for item in items[:-1]])
+            + ", or "
+            + daide_to_en(items[-1])
+            + " "
+        )
 
 
-def daide_to_en(daide: AnyDAIDEToken) -> str:
+def daide_to_en(daide: DaideObject) -> str:
+    if isinstance(daide, str):
+        return daide
+
     # From `base_keywords.py`
     if isinstance(daide, Location):
         if daide.coast:
@@ -119,32 +136,31 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
         return daide.province
     if isinstance(daide, Unit):
         unit = unit_dict[daide.unit_type]
-        return f"{daide.power}'s {unit} in {daide.location} "
+        return f"{daide.power}'s {unit} in {daide_to_en(daide.location)} "
     if isinstance(daide, HLD):
-        return f"holding {daide.unit} "
+        return f"holding {daide_to_en(daide.unit)} "
     if isinstance(daide, MTO):
-        return f"moving {daide.unit} to {daide.location} "
+        return f"moving {daide_to_en(daide.unit)} to {daide_to_en(daide.location)} "
     if isinstance(daide, SUP):
         if not daide.province_no_coast:
-            return f"using {daide.supporting_unit} to support {daide.supported_unit} "
+            return f"using {daide_to_en(daide.supporting_unit)} to support {daide_to_en(daide.supported_unit)} "
         else:
-            return f"using {daide.supporting_unit} to support {daide.supported_unit} moving into {daide.province_no_coast} "
+            return f"using {daide_to_en(daide.supporting_unit)} to support {daide_to_en(daide.supported_unit)} moving into {daide.province_no_coast} "
     if isinstance(daide, CVY):
-        return (
-            f"using {daide.convoying_unit} to convoy {daide.convoyed_unit} into {daide.province} "
-        )
+        return f"using {daide_to_en(daide.convoying_unit)} to convoy {daide_to_en(daide.convoyed_unit)} into {daide_to_en(daide.province)} "
     if isinstance(daide, MoveByCVY):
-        return f"moving {daide.unit} by convoy into {daide.province} via " + and_items(
-            list(map(lambda x: str(x), daide.province_seas))
+        return (
+            f"moving {daide_to_en(daide.unit)} by convoy into {daide_to_en(daide.province)} via "
+            + and_items(list(map(lambda x: daide_to_en(x), daide.province_seas)))
         )
     if isinstance(daide, RTO):
-        return f"retreating {daide.unit} to {daide.location} "
+        return f"retreating {daide_to_en(daide.unit)} to {daide_to_en(daide.location)} "
     if isinstance(daide, DSB):
-        return f"disbanding {daide.unit} "
+        return f"disbanding {daide_to_en(daide.unit)} "
     if isinstance(daide, BLD):
-        return f"building {daide.unit} "
+        return f"building {daide_to_en(daide.unit)} "
     if isinstance(daide, REM):
-        return f"removing {daide.unit} "
+        return f"removing {daide_to_en(daide.unit)} "
     if isinstance(daide, WVE):
         return f"waiving {daide.power} "
     if isinstance(daide, Turn):
@@ -154,13 +170,13 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
     if isinstance(daide, PCE):
         return "peace between " + and_items(daide.powers)
     if isinstance(daide, CCL):
-        return f'cancel "{daide.press_message}" '
+        return f'cancel "{daide_to_en(daide.press_message)}" '
     if isinstance(daide, TRY):
         return "try the following tokens: " + " ".join(daide.try_tokens) + " "
     if isinstance(daide, HUH):
-        return f'not understand "{daide.press_message}" '
+        return f'not understand "{daide_to_en(daide.press_message)}" '
     if isinstance(daide, PRP):
-        return f"propose {daide.arrangement} "
+        return f"propose {daide_to_en(daide.arrangement)} "
     if isinstance(daide, ALYVSS):
         if not any(pp in daide.aly_powers for pp in daide.vss_powers):
             # if there is VSS power and no overlap between the allies and the enemies
@@ -175,33 +191,35 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
     if isinstance(daide, SLO):
         return f"{daide.power} solo"
     if isinstance(daide, NOT):
-        return f"not {daide.arrangement_qry} "
+        return f"not {daide_to_en(daide.arrangement_qry)} "
     if isinstance(daide, NAR):
-        return f"lack of arragement: {daide.arrangement} "
+        return f"lack of arragement: {daide_to_en(daide.arrangement)} "
     if isinstance(daide, DRW):
         if daide.powers:
             return and_items(daide.powers) + "draw "
         else:
             return "draw"
     if isinstance(daide, YES):
-        return f"accept {daide.press_message} "
+        return f"accept {daide_to_en(daide.press_message)} "
     if isinstance(daide, REJ):
-        return f"reject {daide.press_message} "
+        return f"reject {daide_to_en(daide.press_message)} "
     if isinstance(daide, BWX):
-        return f"refuse answering to {daide.press_message} "
+        return f"refuse answering to {daide_to_en(daide.press_message)} "
     if isinstance(daide, FCT):
-        return f'expect the following: "{daide.arrangement_qry_not}" '
+        return f'expect the following: "{daide_to_en(daide.arrangement_qry_not)}" '
     if isinstance(daide, FRM):
         return (
-            f"from {daide.frm_power} to " + and_items(daide.recv_powers) + f': "{daide.message}" '
+            f"from {daide.frm_power} to "
+            + and_items(daide.recv_powers)
+            + f': "{daide_to_en(daide.message)}" '
         )
     if isinstance(daide, XDO):
-        return f"an order {daide.order} "
+        return f"an order {daide_to_en(daide.order)} "
     if isinstance(daide, DMZ):
         return (
             and_items(daide.powers)
             + "demilitarize "
-            + and_items(list(map(lambda x: str(x), daide.provinces)))
+            + and_items(list(map(lambda x: daide_to_en(x), daide.provinces)))
         )
     if isinstance(daide, AND):
         return and_items(daide.arrangements)
@@ -209,13 +227,13 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
         return or_items(daide.arrangements)
     if isinstance(daide, PowerAndSupplyCenters):
         return f"{daide.power} to have " + and_items(
-            list(map(lambda x: str(x), daide.supply_centers))
+            list(map(lambda x: daide_to_en(x), daide.supply_centers))
         )
     if isinstance(daide, SCD):
-        pas_str = [str(pas) + " " for pas in daide.power_and_supply_centers]
+        pas_str = [daide_to_en(pas) + " " for pas in daide.power_and_supply_centers]
         return "an arragement of supply centre distribution as follows: " + and_items(pas_str)
     if isinstance(daide, OCC):
-        unit_str = [str(unit) for unit in daide.units]
+        unit_str = [daide_to_en(unit) for unit in daide.units]
         return "placing " + and_items(unit_str)
     if isinstance(daide, CHO):
         if daide.minimum == daide.maximum:
@@ -225,40 +243,42 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
                 daide.arrangements
             )
     if isinstance(daide, INS):
-        return f"insist {daide.arrangement} "
+        return f"insist {daide_to_en(daide.arrangement)} "
     if isinstance(daide, QRY):
-        return f"Is {daide.arrangement} true? "
+        return f"Is {daide_to_en(daide.arrangement)} true? "
     if isinstance(daide, THK):
-        return f"think {daide.arrangement_qry_not} is true "
+        return f"think {daide_to_en(daide.arrangement_qry_not)} is true "
     if isinstance(daide, IDK):
-        return f"don't know about {daide.qry_exp_wht_prp_ins_sug} "
+        return f"don't know about {daide_to_en(daide.qry_exp_wht_prp_ins_sug)} "
     if isinstance(daide, SUG):
-        return f"suggest {daide.arrangement} "
+        return f"suggest {daide_to_en(daide.arrangement)} "
     if isinstance(daide, WHT):
-        return f"What do you think about {daide.unit} ? "
+        return f"What do you think about {daide_to_en(daide.unit)} ? "
     if isinstance(daide, HOW):
         return f"How do you think we should attack {daide.province_power} ? "
     if isinstance(daide, EXP):
-        return f"The explanation for what they did in {daide.turn} is {daide.message} "
+        return f"The explanation for what they did in {daide_to_en(daide.turn)} is {daide_to_en(daide.message)} "
     if isinstance(daide, SRY):
-        return f"I'm sorry about {daide.exp} "
+        return f"I'm sorry about {daide_to_en(daide.exp)} "
     if isinstance(daide, FOR):
         if not daide.end_turn:
-            return f"{daide.arrangement} in {daide.start_turn} "
+            return f"{daide_to_en(daide.arrangement)} in {daide_to_en(daide.start_turn)} "
         else:
-            return f"{daide.arrangement} from {daide.start_turn} to {daide.end_turn} "
+            return f"{daide_to_en(daide.arrangement)} from {daide_to_en(daide.start_turn)} to {daide_to_en(daide.end_turn)} "
     if isinstance(daide, IFF):
         if not daide.els_press_message:
-            return f'if {daide.arrangement} then "{daide.press_message}" '
+            return f'if {daide_to_en(daide.arrangement)} then "{daide_to_en(daide.press_message)}" '
         else:
-            return f'if {daide.arrangement} then "{daide.press_message}" else "{daide.els_press_message}" '
+            return f'if {daide_to_en(daide.arrangement)} then "{daide_to_en(daide.press_message)}" else "{daide_to_en(daide.els_press_message)}" '
     if isinstance(daide, XOY):
         return f"{daide.power_x} owes {daide.power_y} "
     if isinstance(daide, YDO):
-        unit_str = [str(unit) for unit in daide.units]
+        unit_str = [daide_to_en(unit) for unit in daide.units]
         return f"giving {daide.power} the control of" + and_items(unit_str)
     if isinstance(daide, SND):
-        return f"{daide.power} sending {daide.message} to " + and_items(daide.recv_powers)
+        return f"{daide.power} sending {daide_to_en(daide.message)} to " + and_items(
+            daide.recv_powers
+        )
     if isinstance(daide, FWD):
         return (
             f"forwarding to {daide.power_2} if {daide.power_1} receives message from "
@@ -269,15 +289,15 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
             daide.powers
         )
     if isinstance(daide, WHY):
-        return f'Why do you believe "{daide.fct_thk_prp_ins}" ? '
+        return f'Why do you believe "{daide_to_en(daide.fct_thk_prp_ins)}" ? '
     if isinstance(daide, POB):
-        return f'answer "{daide.why}": the position on the board, or the previous moves, suggests/implies it '
+        return f'answer "{daide_to_en(daide.why)}": the position on the board, or the previous moves, suggests/implies it '
     if isinstance(daide, UHY):
-        return f'am unhappy that "{daide.press_message}" '
+        return f'am unhappy that "{daide_to_en(daide.press_message)}" '
     if isinstance(daide, HPY):
-        return f'am happy that "{daide.press_message}" '
+        return f'am happy that "{daide_to_en(daide.press_message)}" '
     if isinstance(daide, ANG):
-        return f'am angry that "{daide.press_message}" '
+        return f'am angry that "{daide_to_en(daide.press_message)}" '
     if isinstance(daide, ROF):
         return "requesting an offer"
     if isinstance(daide, ULB):
@@ -285,7 +305,7 @@ def daide_to_en(daide: AnyDAIDEToken) -> str:
     if isinstance(daide, UUB):
         return f"having a utility upper bound of float for {daide.power} is {daide.float_val} "
 
-    return str(daide)
+    raise ValueError(f"Unable to process {daide}")
 
 
 def post_process(sentence: str, sender: str, recipient: str, make_natural: bool) -> str:
