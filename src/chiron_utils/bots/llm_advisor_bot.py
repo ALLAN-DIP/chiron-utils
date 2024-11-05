@@ -293,10 +293,8 @@ class LlmAdvisor(BaselineBot, ABC):
                             print("Reason:", reason)
                             print("Message:", message)
 
-                        await self.suggest_message(
-                            other_power, "Commentary: " + decision + " " + reason
-                        )
-                        await self.suggest_message(other_power, "Message: " + message)
+                        await self.suggest_commentary(other_power, decision + " " + reason)
+                        await self.suggest_message(other_power, message)
                 else:
                     continue
             else:
@@ -323,10 +321,8 @@ class LlmAdvisor(BaselineBot, ABC):
                         print("Reason:", reason)
                         print("Message:", message)
 
-                    await self.suggest_message(
-                        other_power, "Commentary: " + decision + " " + reason
-                    )
-                    await self.suggest_message(other_power, "Message: " + message)
+                    await self.suggest_commentary(other_power, decision + " " + reason)
+                    await self.suggest_message(other_power, message)
             self.previous_newest_messages[self.power_name] = filtered_messages
 
         return list(orders)
