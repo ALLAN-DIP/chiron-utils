@@ -179,7 +179,27 @@ class BaselineBot(ABC):
 
         await self.send_message(
             diplomacy_strings.GLOBAL,
-            f"{self.power_name}-{recipient}: {message}",
+            f"{self.power_name}-{recipient}:message:{message}",
+            sender=diplomacy_strings.OMNISCIENT_TYPE,
+            msg_type=diplomacy_strings.SUGGESTED_MESSAGE,
+        )
+
+    async def suggest_commentary(self, recipient: str, message: str) -> None:
+        """Send suggested commentary for power to the server.
+
+        Args:
+            recipient: The name of the power that the commentary is about.
+            message: Text of the commentary.
+        """
+        if self.bot_type != BotType.ADVISOR:
+            raise TypeError(
+                f"{self.suggest_message.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.ADVISOR}"
+            )
+
+        await self.send_message(
+            diplomacy_strings.GLOBAL,
+            f"{self.power_name}-{recipient}:commentary:{message}",
             sender=diplomacy_strings.OMNISCIENT_TYPE,
             msg_type=diplomacy_strings.SUGGESTED_MESSAGE,
         )
