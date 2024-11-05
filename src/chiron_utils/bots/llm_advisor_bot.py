@@ -34,7 +34,7 @@ class LlmAdvisor(BaselineBot, ABC):
     """
 
     bot_type = BotType.ADVISOR
-    suggestion_type = SuggestionType.MESSAGE_ONLY
+    suggestion_type = SuggestionType.COMMENTARY
 
     base_model_name = "meta-llama/Llama-2-7b-chat-hf"
     adapter_path: str = "usc-isi/Llama2-Advisor"
