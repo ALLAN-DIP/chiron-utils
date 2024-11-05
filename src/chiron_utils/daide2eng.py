@@ -1,6 +1,7 @@
 """Utilities for converting from DAIDE syntax to English."""
 
-from typing import Union
+from collections.abc import Sequence
+from typing import Union, cast
 
 from daidepp import (
     ALYVSS,
@@ -77,7 +78,9 @@ unit_dict = {
 }
 
 
-def gen_english(daide: str, sender="I", recipient="You", *, make_natural=True) -> str:
+def gen_english(
+    daide: str, sender: str = "I", recipient: str = "You", *, make_natural: bool = True
+) -> str:
     """Generate English from DAIDE.
 
     If `make_natural` is true, first- and second-person pronouns/possessives will be used instead.
@@ -98,13 +101,13 @@ def gen_english(daide: str, sender="I", recipient="You", *, make_natural=True) -
     try:
         parsed_daide = parse_daide(daide)
         eng = daide_to_en(parsed_daide)
-        return post_process(eng, sender, recipient, make_natural)
+        return post_process(eng, sender, recipient, make_natural=make_natural)
 
     except ValueError as e:
         return "ERROR value: " + str(e)
 
 
-def and_items(items):
+def and_items(items: Sequence[DaideObject]) -> str:
     """Convert a list of items into an English list joined by "and"."""
     if len(items) == 1:
         return daide_to_en(items[0]) + " "
@@ -119,7 +122,7 @@ def and_items(items):
         )
 
 
-def or_items(items):
+def or_items(items: Sequence[DaideObject]) -> str:
     """Convert a list of items into an English list joined by "or"."""
     if len(items) == 1:
         return daide_to_en(items[0]) + " "
@@ -143,7 +146,7 @@ def daide_to_en(daide: DaideObject) -> str:
     if isinstance(daide, Location):
         if daide.coast:
             return f"({daide.province} {daide.coast})"
-        return daide.province
+        return cast(str, daide.province)
     if isinstance(daide, Unit):
         unit = unit_dict[daide.unit_type]
         return f"{daide.power}'s {unit} in {daide_to_en(daide.location)} "
