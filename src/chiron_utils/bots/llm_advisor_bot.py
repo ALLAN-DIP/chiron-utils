@@ -280,7 +280,7 @@ class LlmAdvisor(BaselineBot, ABC):
                     prompt = self.format_prompt(self.power_name, other_power, suggested_orders)
                     logger.info("=========")
                     logger.info(" prompt is :%s", prompt)
-                    if prompt == None:
+                    if prompt is None:
                         continue
                     else:
                         generate_text = self.generate_text(prompt)
@@ -310,7 +310,7 @@ class LlmAdvisor(BaselineBot, ABC):
                 prompt = self.format_prompt(self.power_name, other_power, suggested_orders)
                 logger.info("=========")
                 logger.info(" prompt is :%s", prompt)
-                if prompt == None:
+                if prompt is None:
                     continue
                 else:
                     generate_text = self.generate_text(prompt)
