@@ -79,7 +79,11 @@ unit_dict = {
 
 
 def gen_english(
-    daide: str, sender: str = "I", recipient: str = "You", *, make_natural: bool = True
+    daide: Union[AnyDAIDEToken, str],
+    sender: str = "I",
+    recipient: str = "You",
+    *,
+    make_natural: bool = True,
 ) -> str:
     """Generate English from DAIDE.
 
@@ -99,7 +103,10 @@ def gen_english(
         return "ERROR: sender and recipient must be provided if make_natural is False"
 
     try:
-        parsed_daide = parse_daide(daide)
+        if isinstance(daide, str):
+            parsed_daide = parse_daide(daide)
+        else:
+            parsed_daide = daide
         eng = daide_to_en(parsed_daide)
         return post_process(eng, sender, recipient, make_natural=make_natural)
 
