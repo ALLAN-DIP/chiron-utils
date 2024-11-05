@@ -4,7 +4,7 @@ from abc import ABC
 from dataclasses import dataclass, field
 import random
 import re
-from typing import Dict, List, Optional, Sequence, Tuple, Union
+from typing import Dict, List, Optional, Sequence, Tuple
 
 from diplomacy import Message
 from diplomacy.utils.constants import SuggestionType
@@ -44,7 +44,7 @@ class LlmAdvisor(BaselineBot, ABC):
         "meta-llama/Llama-3.1-8B"  # Added for classification tokenizer
     )
     device: str = "cuda"
-    previous_newest_messages: Dict[str, Optional[Message]] = field(
+    previous_newest_messages: Dict[str, Optional[List[Message]]] = field(
         default_factory=lambda: dict.fromkeys(POWER_NAMES_DICT)
     )
 
@@ -134,9 +134,7 @@ class LlmAdvisor(BaselineBot, ABC):
 
         return predicted_class
 
-    def format_prompt(
-        self, own: str, oppo: str, suggest_orders: List[str]
-    ) -> Union[Tuple[str, str], Tuple[None, None]]:
+    def format_prompt(self, own: str, oppo: str, suggest_orders: List[str]) -> Optional[str]:
         """Create prompt used as input to LLM."""
         if own in POWER_NAMES_DICT:
             own = POWER_NAMES_DICT[own]
@@ -269,7 +267,7 @@ class LlmAdvisor(BaselineBot, ABC):
                 new_messages = [
                     msg
                     for msg in filtered_messages
-                    if msg not in self.previous_newest_messages[self.power_name]
+                    if msg not in self.previous_newest_messages[self.power_name]  # type: ignore[operator]
                 ]
                 if new_messages:
                     prompt = self.format_prompt(self.power_name, other_power, suggested_orders)
