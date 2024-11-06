@@ -1,6 +1,7 @@
 """Bots that carry out random orders and make random order proposals."""
 
 from abc import ABC
+import asyncio
 from dataclasses import dataclass, field
 import random
 import re
@@ -261,6 +262,9 @@ class LlmAdvisor(BaselineBot, ABC):
         Returns:
             List of orders to carry out.
         """
+        # sleep for a random amount of time before retrieving new messages for the power
+        await asyncio.sleep(random.uniform(20, 30))
+
         suggested_orders = await self.read_suggestions_from_advisor()
         for other_power in get_other_powers([self.power_name], self.game):
             messages = self.game.messages
