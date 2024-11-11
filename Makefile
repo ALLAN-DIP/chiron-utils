@@ -108,7 +108,7 @@ install:
 	make update
 
 TAG ?= latest
-TARGET = base
+TARGET ?= base
 
 .PHONY: build
 build:
@@ -117,3 +117,8 @@ build:
 		--target $(TARGET) \
 		--tag ghcr.io/allan-dip/chiron-utils:$(TAG) \
 		.
+
+.PHONY: build-knn-baseline
+build-knn-baseline:
+	export TARGET=knn-baseline && \
+	make build
