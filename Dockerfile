@@ -2,6 +2,8 @@
 # Use the command `hadolint Dockerfile` to test
 # Adding Hadolint to `pre-commit` is non-trivial, so the command must be run manually
 
+FROM ghcr.io/allan-dip/chiron-utils:baseline-knn-model AS baseline-knn-model
+
 FROM python:3.11.10-slim-bookworm AS achilles
 
 WORKDIR /bot
@@ -16,6 +18,9 @@ RUN pip install --no-cache-dir --upgrade pip==24.2
 
 COPY requirements-lock.txt .
 RUN pip install --no-cache-dir -r requirements-lock.txt
+
+RUN --mount=from=baseline-knn-model,target=/baseline_knn_model \
+    cp /baseline_knn_model/baseline_knn_model.pkl .
 
 RUN mkdir src/
 COPY LICENSE .
