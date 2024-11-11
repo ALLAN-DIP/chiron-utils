@@ -4,7 +4,7 @@
 
 FROM ghcr.io/allan-dip/chiron-utils:baseline-knn-model AS baseline-knn-model
 
-FROM python:3.11.10-slim-bookworm AS achilles
+FROM python:3.11.10-slim-bookworm AS base
 
 WORKDIR /bot
 
@@ -16,17 +16,14 @@ RUN apt-get -y update \
 
 RUN pip install --no-cache-dir --upgrade pip==24.2
 
+COPY requirements.txt .
 COPY requirements-lock.txt .
-RUN pip install --no-cache-dir -r requirements-lock.txt
-
-RUN --mount=from=baseline-knn-model,target=/baseline_knn_model \
-    cp /baseline_knn_model/baseline_knn_model.pkl .
+RUN pip install --no-cache-dir -r requirements.txt -c requirements-lock.txt
 
 RUN mkdir src/
 COPY LICENSE .
 COPY README.md .
 COPY pyproject.toml .
-COPY requirements.txt .
 RUN pip install --no-cache-dir -e .
 
 # Copy package code into the Docker image
@@ -36,3 +33,13 @@ COPY src/ src/
 ENTRYPOINT ["python", "-m", "chiron_utils.scripts.run_bot"]
 
 LABEL org.opencontainers.image.source=https://github.com/ALLAN-DIP/chiron-utils
+
+FROM base AS knn-baseline
+
+RUN --mount=from=baseline-knn-model,target=/baseline_knn_model \
+    cp /baseline_knn_model/baseline_knn_model.pkl .
+
+COPY requirements-baseline.txt .
+COPY requirements-lock.txt .
+RUN pip install --no-cache-dir -r requirements-baseline.txt -c requirements-lock.txt
+RUN pip install --no-cache-dir -e .[baseline]

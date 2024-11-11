@@ -35,6 +35,7 @@ Homepage = "https://github.com/ALLAN-DIP/chiron-utils"
 dependencies = { file = "requirements.txt" }
 
 [tool.setuptools.dynamic.optional-dependencies]
+baseline = { file = "requirements-baseline.txt" }
 dev = { file = "requirements-dev.txt" }
 
 [tool.black]
