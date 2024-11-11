@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Sequence
 
 from baseline_models.model_code.evaluation import infer
 from baseline_models.model_code.preprocess import entry_to_vectors
+from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
@@ -38,15 +39,11 @@ class KnnBot(BaselineBot, ABC):
     Phase types are 'SM', 'FM', 'WA, 'SR', 'FR', 'CD'
     """
 
-    is_first_messaging_round = False
+    player_type = diplomacy_strings.NO_PRESS_BOT
 
     def __post_init__(self) -> None:
         with open(MODEL_PATH, "rb") as model_file:
             self.models: Dict[str, Any] = pickle.load(model_file)
-
-    async def start_phase(self) -> None:
-        """Execute actions at the start of the phase."""
-        self.is_first_messaging_round = True
 
     def get_orders(self) -> List[str]:
         name = self.game.phase
@@ -68,7 +65,7 @@ class KnnBot(BaselineBot, ABC):
             influences_data=influences,
         )
         orders = infer(self.models[season], vector.reshape(1, -1))
-        print(orders)
+        logger.info("Orders to suggest: %s", orders)
 
         return orders
 
@@ -77,28 +74,11 @@ class KnnBot(BaselineBot, ABC):
         power_orders = orders[POWER_TO_INDEX[self.power_name]]
         if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(power_orders)
-        print(f"Sending orders!!!\n{power_orders}")
+        elif self.bot_type == BotType.PLAYER:
+            await self.send_orders(orders, wait=True)
         return power_orders
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
-
-        if not self.is_first_messaging_round:
-            return list(orders)
-
-        order_proposal = str(self.get_orders())
-
-        for power in POWER_TO_INDEX:
-            print(f"Other power: {power}")
-            print(f"Suggested order: {order_proposal}")
-            if power == self.power_name:
-                continue
-            elif self.bot_type == BotType.ADVISOR:
-                await self.suggest_message(power, order_proposal)
-            elif self.bot_type == BotType.PLAYER:
-                await self.send_message(power, order_proposal)
-
-        self.is_first_messaging_round = False
-
         return list(orders)
 
 
@@ -106,7 +86,7 @@ class KnnAdvisor(KnnBot):
     """Advisor form of `KnnBot`."""
 
     bot_type = BotType.ADVISOR
-    suggestion_type = SuggestionType.MOVE_ONLY
+    suggestion_type = SuggestionType.MOVE
 
 
 class KnnPlayer(KnnBot):
