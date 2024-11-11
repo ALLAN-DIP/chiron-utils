@@ -40,6 +40,4 @@ RUN --mount=from=baseline-knn-model,target=/baseline_knn_model \
     cp /baseline_knn_model/baseline_knn_model.pkl .
 
 COPY requirements-baseline.txt .
-COPY requirements-lock.txt .
-RUN pip install --no-cache-dir -r requirements-baseline.txt -c requirements-lock.txt
-RUN pip install --no-cache-dir -e .[baseline]
+RUN pip install --no-cache-dir -e .[baseline] -c requirements-lock.txt
