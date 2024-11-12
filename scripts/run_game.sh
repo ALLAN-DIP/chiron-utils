@@ -2,9 +2,16 @@
 
 set -euxo pipefail
 
-powers=("AUSTRIA" "FRANCE" "GERMANY" "RUSSIA" "TURKEY" "ITALY")
+powers=(
+  AUSTRIA
+  FRANCE
+  GERMANY
+  ITALY
+  RUSSIA
+  TURKEY
+)
 for power in "${powers[@]}"; do
-  python scripts/run_bot.py \
+  python -m chiron_utils.scripts.run_bot \
     --host diplomacy.alexhedges.dev \
     --port 8433 \
     --use-ssl \
@@ -12,7 +19,8 @@ for power in "${powers[@]}"; do
     --power "$power" \
     --bot_type RandomProposerPlayer &
 done
-python scripts/run_bot.py \
+
+python chiron_utils.scripts.run_bot \
   --host diplomacy.alexhedges.dev \
   --port 8433 \
   --use-ssl \
