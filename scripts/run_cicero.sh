@@ -2,6 +2,8 @@
 
 set -euxo pipefail
 
+# TODO: Add help text
+
 BOT_TAG=$1
 BOT_TYPE=$2
 shift 2
