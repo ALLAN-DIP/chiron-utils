@@ -1,7 +1,6 @@
 """Utilities for converting from DAIDE syntax to English."""
 
-from collections.abc import Sequence
-from typing import Union, cast
+from typing import Sequence, Union, cast
 
 from daidepp import (
     ALYVSS,
