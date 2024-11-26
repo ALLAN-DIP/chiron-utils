@@ -23,9 +23,8 @@ mkdir /Llama-family
 ```
 2. Configuring the instance
 Create the file 
-```
-/etc/ceph/ceph.client.llamashare.keyring
-``` and add the accessKey
+```/etc/ceph/ceph.client.llamashare.keyring``` 
+and add the accessKey
 ```shell
 [client.llamashare]
     key = AQAqjBlnGwfWNBAA8UiNEYcyK0s5HWYx7Mm7vg==
