@@ -8,40 +8,54 @@ This repository serves multiple purposes:
 
 ## Installation
 
-Use the provided Makefile to install this project by running the following from the project root directory (the same directory as this README). Ensure the `python` in `PATH` is 3.11 before running this command:
+Install the environment by running the following from the project root directory (the same directory as this README). Ensure the `python` in `PATH` is 3.11 before running this command:
 
 ```shell
-make install
+pip install -r requirements.txt
 ```
 
 Newer Python versions might work but have not yet been tested.
 
-If the installation process fails, is interrupted, or for any reason needs to be restarted, run `git clean -xdf` to reset the repository's state.
+Now, need to mount the manila drive for Llama models:
+1. Create a mount point on your instance,e.g.
+```shell
+mkdir /Llama-family
+```
+2. Configuring the instance
+Create the file 
+```
+/etc/ceph/ceph.client.llamashare.keyring
+``` and add the accessKey
+```shell
+[client.llamashare]
+    key = AQAqjBlnGwfWNBAA8UiNEYcyK0s5HWYx7Mm7vg==
+```
+Also, make sure the permissions on the file are rw to the owner only.
+```shell
+sudo chmod 600 /etc/ceph/ceph.client.llamashare.keyring
+```
+3. Edit ```/etc/fstab``` to add the following line(remember to change the address to your created address):
+```shell
+149.165.158.38:6789,149.165.158.22:6789,149.165.158.54:6789,149.165.158.70:6789,149.165.158.86:6789:/volumes/_nogroup/b901a3c7-a891-46f1-9467-4d05b47987a6/92b22cf8-728b-46b6-aacb-4bacead99116 /Llama-family ceph name=llamashare,x-systemd.device-timeout=30,x-systemd.mount-timeout=30,noatime,_netdev,rw 0 2
+```
+4. Mount the share
+```shell
+mount -a
+```
+
+5. Add following lines into `~/.bashrc`(change the address accordingly):
+
+```shell
+export HF_HOME=/Llama-family/huggingface
+export HF_TOKEN_PATH=/Llama-family/huggingface/token
+export PYTHONPATH=/home/exouser/yanzewan/chiron-utils/src:$PYTHONPATH
+```
 
 ## Usage
-
-To build the default bot container, run the following command:
-
+Modify the ```run_bots.sh``` under ```/chiron_utils/src/chiron_utils/scripts``` to launch the game by running:
 ```shell
-make build
+source run_bots.sh
 ```
-
-Once built, you will need to manually handle distributing the generated OCI image.
-
-To use a bot, run the following command:
-
-```shell
-docker run --rm achilles [ARGUMENTS]
-```
-
-To run a complete game, run the following command:
-
-```shell
-python -m chiron_utils.scripts.run_games [ARGUMENTS]
-```
-
-Both the bot and game running commands support a `--help` argument to list available options.
-
 ## Bots
 
 - [`RandomProposerBot`](src/chiron_utils/bots/random_proposer_bot.py) (`RandomProposerAdvisor` and `RandomProposerPlayer`):

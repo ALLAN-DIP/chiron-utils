@@ -46,9 +46,11 @@ class LlmAdvisor(BaselineBot, ABC):
         "meta-llama/Llama-3.1-8B"  # Added for classification tokenizer
     )
     device: str = "cuda"
-    previous_newest_messages: Dict[str, Optional[List[Message]]] = field(
-        default_factory=lambda: dict.fromkeys(POWER_NAMES_DICT)
-    )
+    # previous_newest_messages: Dict[str, Optional[List[Message]]] = field(
+    #     default_factory=lambda: dict.fromkeys(POWER_NAMES_DICT)
+    # )
+    previous_newest_messages = {'ENGLAND': None, 'FRANCE': None, 'GERMANY': None,'RUSSIA':None, 'TURKEY':None,'ITALY':None,'AUSTRIA':None}
+
 
     model: PeftModel = field(init=False)
     tokenizer: PreTrainedTokenizer = field(init=False)
@@ -151,11 +153,13 @@ class LlmAdvisor(BaselineBot, ABC):
         # system prompt format
         system_prompt = (
             "<<SYS>>\n"
-            "You are an AI assistant tasked with understanding and analyzing the board status "
-            "of a Diplomacy game, the message history between two players and"
-            "the recommended orders by Cicero for the current phase.\n"
-            "Your goal is to help respond to the last message from another player, "
-            "based on the context provided.\n"
+            "You are an expert assistant tasked with supporting a novice player in the Diplomacy board game. "
+            "Your role is to analyze the current board state, the message history between the novice player and the counterplayer, the AI-recommended orders for the novice player.\n"
+            "Using this information, your primary goal is to craft a response to the counterplayer's last message that: "
+            "1. Maximizes the novice player's strategic advantage,"
+            "2. Is consistent with the game's context and diplomatic tone, and"
+            "3. Provides a clear rationale for your suggested response based on the provided information.\n"
+            "Always ensure your advice is actionable, contextually appropriate, and enhances the novice player's understanding of the game dynamics."
             "\n<</SYS>>"
         )
         # board states format
@@ -175,11 +179,13 @@ class LlmAdvisor(BaselineBot, ABC):
         # message format
         messages = self.game.messages
         filtered_messages = [
-            message
-            for message in messages.values()
-            if (message.sender == own and message.recipient == oppo)
-            or (message.sender == oppo and message.recipient == own)
-        ]
+                message
+                for message in messages.values()
+                if (
+                    (message.sender == own and message.recipient == oppo)
+                    or (message.sender == oppo and message.recipient == own)
+                )
+            ]
         if not filtered_messages:
             return None
         else:
@@ -228,9 +234,9 @@ class LlmAdvisor(BaselineBot, ABC):
                 f"---\n\n"
                 f"Question: I am {own} and I decide to {decision} the last message from {oppo}. "
                 f"As my advisor, provide a response with the following format:\n"
-                f"1. **Decision**: restate my decision. (e.g. I recommend you to trust or not trust the last message.)\n"
-                f"2. **Reason**: Briefly explain the rationale behind this decision.\n"
-                f"3. **Message**: Draft a concise response I can send to {oppo} addressing their last message.\n"
+                f"Decision: restate my decision. (e.g. I recommend you to trust or not trust the last message.)\n"
+                f"Reason: Provides a clear rationale for your suggested response based on the provided information. Briefly explain the rationale behind my decision.\n"
+                f"Message: Draft a concise, conversational response to {oppo}'s last message. The tone should be friendly and oral, directly addressing their main points or questions in a streamlined and straightforward manner.\n"
                 f"[/INST]"
             )
 
@@ -254,7 +260,7 @@ class LlmAdvisor(BaselineBot, ABC):
         # logger.info("%s received suggested message: %s", self.display_name, suggestions)
         # logger.info("-----------")
         # Return a flattened list of suggested orders if there are any suggestions
-        return suggestions if suggestions else []
+        return suggestions[-1] if suggestions else []
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
         """Carry out one round of messaging, along with related tasks.
@@ -271,15 +277,29 @@ class LlmAdvisor(BaselineBot, ABC):
             filtered_messages = [
                 message
                 for message in messages.values()
-                if (message.sender == self.power_name and message.recipient == other_power)
-                or (message.sender == other_power and message.recipient == self.power_name)
+                if (
+                    (message.sender == self.power_name and message.recipient == other_power)
+                    or (message.sender == other_power and message.recipient == self.power_name)
+                )
             ]
-            if self.previous_newest_messages[self.power_name] is not None:
+            for msg in filtered_messages:
+                logger.info("=========")
+                logger.info("filtered_messages is :%s", msg)
+                logger.info("filtered_message_value is :%s", msg.message)
+            # logger.info("=========")
+            if self.previous_newest_messages[other_power] is not None:
+                for msg in self.previous_newest_messages[other_power]:
+                    logger.info(" previous_newest_message is :%s", msg)
+                    logger.info(" previous_newest_message is :%s", msg.message)
                 new_messages = [
                     msg
                     for msg in filtered_messages
-                    if msg not in self.previous_newest_messages[self.power_name]  # type: ignore[operator]
+                    if msg not in self.previous_newest_messages[other_power] # type: ignore[operator]
                 ]
+                for msg in new_messages:
+                    logger.info("=========")
+                    logger.info("new_message is :%s", msg)
+                    logger.info("new_message is :%s", msg.message)
                 if new_messages:
                     prompt = self.format_prompt(self.power_name, other_power, suggested_orders)
                     logger.info("=========")
@@ -294,7 +314,7 @@ class LlmAdvisor(BaselineBot, ABC):
                         final_output = model_output
                         logger.info(" output is :%s", final_output)
                         logger.info("=========")
-                        pattern = r"1\.\s\*\*Decision\*\*:(.*?)\s*2\.\s\*\*Reason\*\*:(.*?)\s*3\.\s\*\*Message\*\*:(.*?)(?:\n|$)"
+                        pattern = r"Decision:(.*?)\s*Reason:(.*?)\s*Message:(.*?)(?:\n|$)"
                         match = re.search(pattern, model_output, re.DOTALL)
                         if match:
                             decision = match.group(1).strip()
@@ -304,7 +324,8 @@ class LlmAdvisor(BaselineBot, ABC):
                             logger.info("Reason: %s", reason)
                             logger.info("Message: %s", message)
 
-                        await self.suggest_commentary(other_power, decision + " " + reason)
+                            await self.suggest_commentary(other_power, decision + " " + reason)
+                            await self.suggest_message(other_power, message.replace('"', ''))
                 else:
                     continue
             else:
@@ -321,7 +342,7 @@ class LlmAdvisor(BaselineBot, ABC):
                     final_output = model_output
                     logger.info(" output is :%s", final_output)
                     logger.info("=========")
-                    pattern = r"1\.\s\*\*Decision\*\*:(.*?)\s*2\.\s\*\*Reason\*\*:(.*?)\s*3\.\s\*\*Message\*\*:(.*?)(?:\n|$)"
+                    pattern = r"Decision:(.*?)\s*Reason:(.*?)\s*Message:(.*?)(?:\n|$)"
                     match = re.search(pattern, model_output, re.DOTALL)
                     if match:
                         decision = match.group(1).strip()
@@ -331,8 +352,9 @@ class LlmAdvisor(BaselineBot, ABC):
                         logger.info("Reason: %s", reason)
                         logger.info("Message: %s", message)
 
-                    await self.suggest_commentary(other_power, decision + " " + reason)
-            self.previous_newest_messages[self.power_name] = filtered_messages
+                        await self.suggest_commentary(other_power, decision + " " + reason)
+                        await self.suggest_message(other_power, message.replace('"', ''))
+            self.previous_newest_messages[other_power] = filtered_messages
 
         return list(orders)
 
@@ -357,4 +379,6 @@ class LlmAdvisor(BaselineBot, ABC):
             List of orders to carry out.
         """
         orders = self.get_random_orders()
+        logger.info(" orders is :%s", orders)
+        logger.info("=========")
         return orders

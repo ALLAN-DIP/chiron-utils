@@ -12,9 +12,9 @@ from diplomacy.utils.constants import SuggestionType
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.daide2eng import gen_english
 from chiron_utils.parsing_utils import dipnet_to_daide_parsing
-from chiron_utils.utils import get_other_powers
+from chiron_utils.utils import get_other_powers, return_logger
 
-
+logger = return_logger(__name__)
 @dataclass
 class RandomProposerBot(BaselineBot, ABC):
     """Bot that carries out random orders and sends random order proposals to other bots.
@@ -109,6 +109,7 @@ class RandomProposerBot(BaselineBot, ABC):
             List of orders to carry out.
         """
         orders = self.get_random_orders()
+        logger.info(" orders is :%s", orders)
         if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(orders)
         elif self.bot_type == BotType.PLAYER:
