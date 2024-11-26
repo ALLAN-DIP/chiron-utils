@@ -51,7 +51,7 @@ export HF_TOKEN_PATH=/Llama-family/huggingface/token
 export PYTHONPATH=/home/exouser/yanzewan/chiron-utils/src:$PYTHONPATH
 ```
 
-LlmAdvisor is done, install CiceroAdvisor following below instructions:
+LlmAdvisor is done. Now install and run CiceroAdvisor following below instructions:
 
 Clone the CICERO repo (https://github.com/ALLAN-DIP/diplomacy_cicero) and run the following commands in the ```diplomacy_cicero/``` directory:
 ```shell
@@ -64,7 +64,7 @@ Obviously, adjust the arguments like ```--game_id``` as needed. When creating th
 You can get run_cicero.sh from https://github.com/ALLAN-DIP/chiron-utils/blob/4a11684d1b58d6e527e519d863f189754fd874d6/scripts/run_cicero.sh. The script assumes that https://js2.jetstream-cloud.org/project/shares/534a349e-9d9a-4757-b820-12d2cb30c76c/ is mounted at /media/volume/cicero-base-models.(The mount method is same as above, but need to change the commend accordingly) Change the hardcoded path accordingly if needed.
 
 ## Usage
-Modify the ```run_bots.sh``` under ```/chiron_utils/src/chiron_utils/scripts``` to launch the game by running:
+Modify the ```run_bots.sh``` under ```/chiron_utils/src/chiron_utils/scripts``` to launch LlmAdvisor:
 ```shell
 source run_bots.sh
 ```
