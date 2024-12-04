@@ -131,10 +131,9 @@ def main() -> None:
         bot_args += " "
     if extra_bot_args is not None:
         bot_args += f"{extra_bot_args} "
-    log_dir = output_dir / "logs" / game_id
-    log_dir.mkdir(parents=True, exist_ok=True)
     data_dir = output_dir / "data"
-    data_dir.mkdir(parents=True, exist_ok=True)
+    log_dir = data_dir / "logs" / game_id
+    log_dir.mkdir(parents=True, exist_ok=True)
     powers = sorted(POWER_NAMES_DICT.values())
     run_cmds = []
     for power in powers:
