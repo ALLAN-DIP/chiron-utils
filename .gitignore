@@ -2,7 +2,6 @@
 # See upstream repo for more entries
 
 ### Project files
-*.sif
 /data/
 
 ### Programming language files
