@@ -124,9 +124,14 @@ class BaselineBot(ABC):
             message_dict: Dictionary mapping powers to suggestions intended for them.
             suggestion_type: Type of suggestion (e.g., `"has_suggestions"`, `"suggested_message"`).
         """
+        # Store advisor name in message so it can be used later
+        # No power has the name "advisor", so putting it at the top level is safe
+        new_message_dict = dict(message_dict)
+        new_message_dict["advisor"] = self.display_name
+
         await self.send_message(
             diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
+            message=serialize_message_dict(new_message_dict),
             sender=diplomacy_strings.OMNISCIENT_TYPE,
             msg_type=suggestion_type,
         )
