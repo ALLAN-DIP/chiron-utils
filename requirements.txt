@@ -1,4 +1,4 @@
 daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@7f6dcca60f2e6dd89c37862663be7b098cc03794
 # Pinned `diplomacy` to `main`
-diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@f4ec4517dc5ea3c3ed787d3ad483ce01f4f0e0ea
+diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@2d1368d8e35f98618fd4750a5afc8f79662eadb7
 tornado

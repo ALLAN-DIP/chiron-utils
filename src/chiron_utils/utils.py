@@ -1,9 +1,10 @@
 """A collection of various utilities useful for building bots."""
 
 import asyncio
+import json
 import logging
 import os
-from typing import List, Optional, Set
+from typing import Any, List, Mapping, Optional, Set
 
 from daidepp import AnyDAIDEToken, DAIDEGrammar, create_daide_grammar, daide_visitor
 from daidepp.grammar.grammar import MAX_DAIDE_LEVEL
@@ -96,6 +97,12 @@ def parse_daide(string: str) -> AnyDAIDEToken:
         raise
     except Exception as ex:
         raise ValueError(f"Failed to parse DAIDE string: {string!r}") from ex
+
+
+def serialize_message_dict(message_dict: Mapping[str, Any]) -> str:
+    """Serialize suggestion message in a consistent format."""
+    # `separators` is used here to write JSON compactly
+    return json.dumps(message_dict, ensure_ascii=False, separators=(",", ":"))
 
 
 def get_order_tokens(order: str) -> List[str]:

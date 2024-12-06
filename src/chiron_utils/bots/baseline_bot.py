@@ -13,7 +13,7 @@ from diplomacy.client.network_game import NetworkGame
 from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
-from chiron_utils.utils import return_logger
+from chiron_utils.utils import return_logger, serialize_message_dict
 
 logger = return_logger(__name__)
 
@@ -127,10 +127,12 @@ class BaselineBot(ABC):
 
         assert self.suggestion_type is not None
 
+        # Explicit `int` cast is needed before Python 3.11
+        message_dict = {self.power_name: int(self.suggestion_type)}
+
         await self.send_message(
             diplomacy_strings.GLOBAL,
-            # Explicit `int` cast is needed before Python 3.11
-            f"{self.power_name}: {int(self.suggestion_type)}",
+            message=serialize_message_dict(message_dict),
             sender=diplomacy_strings.OMNISCIENT_TYPE,
             msg_type=diplomacy_strings.HAS_SUGGESTIONS,
         )
@@ -151,15 +153,17 @@ class BaselineBot(ABC):
             )
 
         if partial_orders:
-            message = f"{self.power_name}:{', '.join(partial_orders)} : {', '.join(orders)}"
+            message_dict = {
+                self.power_name: {"player_orders": partial_orders, "suggested_orders": orders}
+            }
             suggestion_type = diplomacy_strings.SUGGESTED_MOVE_PARTIAL
         else:
-            message = f"{self.power_name}: {', '.join(orders)}"
+            message_dict = {self.power_name: {"suggested_orders": orders}}
             suggestion_type = diplomacy_strings.SUGGESTED_MOVE_FULL
 
         await self.send_message(
             diplomacy_strings.GLOBAL,
-            message,
+            message=serialize_message_dict(message_dict),
             sender=diplomacy_strings.OMNISCIENT_TYPE,
             msg_type=suggestion_type,
         )
@@ -177,9 +181,11 @@ class BaselineBot(ABC):
                 f"because it is not a {BotType.ADVISOR}"
             )
 
+        message_dict = {self.power_name: {"recipient": recipient, "message": message}}
+
         await self.send_message(
             diplomacy_strings.GLOBAL,
-            f"{self.power_name}-{recipient}:message:{message}",
+            message=serialize_message_dict(message_dict),
             sender=diplomacy_strings.OMNISCIENT_TYPE,
             msg_type=diplomacy_strings.SUGGESTED_MESSAGE,
         )
@@ -197,11 +203,13 @@ class BaselineBot(ABC):
                 f"because it is not a {BotType.ADVISOR}"
             )
 
+        message_dict = {self.power_name: {"recipient": recipient, "commentary": message}}
+
         await self.send_message(
             diplomacy_strings.GLOBAL,
-            f"{self.power_name}-{recipient}:commentary:{message}",
+            message=serialize_message_dict(message_dict),
             sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=diplomacy_strings.SUGGESTED_MESSAGE,
+            msg_type=diplomacy_strings.SUGGESTED_COMMENTARY,
         )
 
     async def send_intent_log(self, log_msg: str) -> None:
