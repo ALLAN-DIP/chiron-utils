@@ -99,7 +99,10 @@ def parse_daide(string: str) -> AnyDAIDEToken:
         raise ValueError(f"Failed to parse DAIDE string: {string!r}") from ex
 
 
-def serialize_message_dict(message_dict: Mapping[str, Any]) -> str:
+MessageDict = Mapping[str, Any]
+
+
+def serialize_message_dict(message_dict: MessageDict) -> str:
     """Serialize suggestion message in a consistent format."""
     # `separators` is used here to write JSON compactly
     return json.dumps(message_dict, ensure_ascii=False, separators=(",", ":"))
