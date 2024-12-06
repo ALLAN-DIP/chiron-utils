@@ -2,9 +2,7 @@
 # See upstream repo for more entries
 
 ### Project files
-*.sif
 /data/
-/logs/
 
 ### Programming language files
 ## Java files

@@ -47,10 +47,9 @@ def main() -> None:
         now = datetime.datetime.now(datetime.timezone.utc)
         game_id = f"{game_id}_{now.strftime('%Y_%m_%d_%H_%M_%S_%f')}"
 
-        log_dir = output_dir / "logs"
-        log_dir.mkdir(parents=True, exist_ok=True)
         data_dir = output_dir
-        data_dir.mkdir(parents=True, exist_ok=True)
+        log_dir = data_dir / "logs"
+        log_dir.mkdir(parents=True, exist_ok=True)
         run_cmds = []
         powers = sorted(POWER_NAMES_DICT.values())
         for cuda_num, power in enumerate(powers):
