@@ -125,6 +125,7 @@ class BaselineBot(ABC):
             suggestion_type: Type of suggestion (e.g., `"has_suggestions"`, `"suggested_message"`).
         """
         message_dict = {
+            "advisor": self.display_name,
             "recipient": self.power_name,
             "payload": payload,
         }
