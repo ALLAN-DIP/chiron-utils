@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum, auto
 import os
 import random
-from typing import ClassVar, List, Optional, Sequence
+from typing import Any, ClassVar, List, Mapping, Optional, Sequence
 
 from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
@@ -117,6 +117,20 @@ class BaselineBot(ABC):
         else:
             self.game.add_message(message=msg_obj)
 
+    async def send_suggestion(self, message_dict: Mapping[str, Any], suggestion_type: str) -> None:
+        """Send suggestion message to the server.
+
+        Args:
+            message_dict: Dictionary mapping powers to suggestions intended for them.
+            suggestion_type: Type of suggestion (e.g., `"has_suggestions"`, `"suggested_message"`).
+        """
+        await self.send_message(
+            diplomacy_strings.GLOBAL,
+            message=serialize_message_dict(message_dict),
+            sender=diplomacy_strings.OMNISCIENT_TYPE,
+            msg_type=suggestion_type,
+        )
+
     async def declare_suggestion_type(self) -> None:
         """Declare the advisor's suggestion type to the engine."""
         if self.bot_type != BotType.ADVISOR:
@@ -130,11 +144,9 @@ class BaselineBot(ABC):
         # Explicit `int` cast is needed before Python 3.11
         message_dict = {self.power_name: int(self.suggestion_type)}
 
-        await self.send_message(
-            diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
-            sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=diplomacy_strings.HAS_SUGGESTIONS,
+        await self.send_suggestion(
+            message_dict=message_dict,
+            suggestion_type=diplomacy_strings.HAS_SUGGESTIONS,
         )
 
     async def suggest_orders(
@@ -161,11 +173,9 @@ class BaselineBot(ABC):
             message_dict = {self.power_name: {"suggested_orders": orders}}
             suggestion_type = diplomacy_strings.SUGGESTED_MOVE_FULL
 
-        await self.send_message(
-            diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
-            sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=suggestion_type,
+        await self.send_suggestion(
+            message_dict=message_dict,
+            suggestion_type=suggestion_type,
         )
 
     async def suggest_message(self, recipient: str, message: str) -> None:
@@ -183,11 +193,9 @@ class BaselineBot(ABC):
 
         message_dict = {self.power_name: {"recipient": recipient, "message": message}}
 
-        await self.send_message(
-            diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
-            sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=diplomacy_strings.SUGGESTED_MESSAGE,
+        await self.send_suggestion(
+            message_dict=message_dict,
+            suggestion_type=diplomacy_strings.SUGGESTED_MESSAGE,
         )
 
     async def suggest_commentary(self, recipient: str, message: str) -> None:
@@ -205,11 +213,9 @@ class BaselineBot(ABC):
 
         message_dict = {self.power_name: {"recipient": recipient, "commentary": message}}
 
-        await self.send_message(
-            diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
-            sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=diplomacy_strings.SUGGESTED_COMMENTARY,
+        await self.send_suggestion(
+            message_dict=message_dict,
+            suggestion_type=diplomacy_strings.SUGGESTED_COMMENTARY,
         )
 
     async def send_intent_log(self, log_msg: str) -> None:
