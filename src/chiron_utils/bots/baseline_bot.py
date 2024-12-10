@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum, auto
 import os
 import random
-from typing import Any, ClassVar, List, Mapping, Optional, Sequence
+from typing import Any, ClassVar, List, Optional, Sequence
 
 from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
@@ -117,13 +117,18 @@ class BaselineBot(ABC):
         else:
             self.game.add_message(message=msg_obj)
 
-    async def send_suggestion(self, message_dict: Mapping[str, Any], suggestion_type: str) -> None:
+    async def send_suggestion(self, payload: Any, suggestion_type: str) -> None:
         """Send suggestion message to the server.
 
         Args:
-            message_dict: Dictionary mapping powers to suggestions intended for them.
+            payload: Dictionary mapping powers to suggestions intended for them.
             suggestion_type: Type of suggestion (e.g., `"has_suggestions"`, `"suggested_message"`).
         """
+        message_dict = {
+            "recipient": self.power_name,
+            "payload": payload,
+        }
+
         await self.send_message(
             diplomacy_strings.GLOBAL,
             message=serialize_message_dict(message_dict),
@@ -142,10 +147,10 @@ class BaselineBot(ABC):
         assert self.suggestion_type is not None
 
         # Explicit `int` cast is needed before Python 3.11
-        message_dict = {self.power_name: int(self.suggestion_type)}
+        payload = int(self.suggestion_type)
 
         await self.send_suggestion(
-            message_dict=message_dict,
+            payload=payload,
             suggestion_type=diplomacy_strings.HAS_SUGGESTIONS,
         )
 
@@ -164,17 +169,15 @@ class BaselineBot(ABC):
                 f"because it is not a {BotType.ADVISOR}"
             )
 
+        payload = {"suggested_orders": orders}
         if partial_orders:
-            message_dict = {
-                self.power_name: {"player_orders": partial_orders, "suggested_orders": orders}
-            }
+            payload["player_orders"] = partial_orders
             suggestion_type = diplomacy_strings.SUGGESTED_MOVE_PARTIAL
         else:
-            message_dict = {self.power_name: {"suggested_orders": orders}}
             suggestion_type = diplomacy_strings.SUGGESTED_MOVE_FULL
 
         await self.send_suggestion(
-            message_dict=message_dict,
+            payload=payload,
             suggestion_type=suggestion_type,
         )
 
@@ -191,10 +194,10 @@ class BaselineBot(ABC):
                 f"because it is not a {BotType.ADVISOR}"
             )
 
-        message_dict = {self.power_name: {"recipient": recipient, "message": message}}
+        payload = {"recipient": recipient, "message": message}
 
         await self.send_suggestion(
-            message_dict=message_dict,
+            payload=payload,
             suggestion_type=diplomacy_strings.SUGGESTED_MESSAGE,
         )
 
@@ -211,10 +214,10 @@ class BaselineBot(ABC):
                 f"because it is not a {BotType.ADVISOR}"
             )
 
-        message_dict = {self.power_name: {"recipient": recipient, "commentary": message}}
+        payload = {"recipient": recipient, "commentary": message}
 
         await self.send_suggestion(
-            message_dict=message_dict,
+            payload=payload,
             suggestion_type=diplomacy_strings.SUGGESTED_COMMENTARY,
         )
 
