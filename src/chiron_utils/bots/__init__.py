@@ -7,6 +7,10 @@ from chiron_utils.bots.knn_bot import (
     KnnAdvisor as KnnAdvisor,
     KnnPlayer as KnnPlayer,
 )
+from chiron_utils.bots.lr_bot import (
+    LrAdvisor as LrAdvisor,
+    LrPlayer as LrPlayer,
+)
 from chiron_utils.bots.random_proposer_bot import (
     RandomProposerAdvisor as RandomProposerAdvisor,
     RandomProposerPlayer as RandomProposerPlayer,
@@ -15,6 +19,8 @@ from chiron_utils.bots.random_proposer_bot import (
 BOTS: List[Type[BaselineBot]] = [
     KnnPlayer,
     KnnAdvisor,
+    LrPlayer,
+    LrAdvisor,
     RandomProposerAdvisor,
     RandomProposerPlayer,
 ]
