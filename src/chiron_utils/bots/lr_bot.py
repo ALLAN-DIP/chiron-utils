@@ -38,10 +38,6 @@ class LrBot(BaselineBot, ABC):
     player_type = diplomacy_strings.NO_PRESS_BOT
 
     def get_orders(self) -> List[str]:
-        influences = {}
-        for power, power_class in self.game.powers.items():
-            influences[power] = power_class.influence
-
         orders = list()
         state = self.game.get_state()
         orders = predict(MODEL_PATH, state, self.power_name)

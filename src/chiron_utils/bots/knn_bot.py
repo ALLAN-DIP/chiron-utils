@@ -43,10 +43,6 @@ class KnnBot(BaselineBot, ABC):
             self.models: Dict[str, Any] = pickle.load(model_file)
 
     def get_orders(self) -> List[str]:
-        influences = {}
-        for power, power_class in self.game.powers.items():
-            influences[power] = power_class.influence
-
         orders = list()
         state = self.game.get_state()
         orders = predict(MODEL_PATH, state, self.power_name)
