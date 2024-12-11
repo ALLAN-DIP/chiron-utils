@@ -4,7 +4,6 @@ from abc import ABC
 from dataclasses import dataclass
 import os
 from pathlib import Path
-import pickle
 from typing import Any, Dict, List, Sequence
 
 from baseline_models.model_code.predict import predict
@@ -18,12 +17,12 @@ logger = return_logger(__name__)
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
-MODEL_PATH = Path() / "knn_models"
+MODEL_PATH = Path() / "lr_models"
 
 
 @dataclass
-class KnnBot(BaselineBot, ABC):
-    """Baseline knn model
+class LrBot(BaselineBot, ABC):
+    """Baseline lr model
 
     MODEL_PATH should point to folder containing model .pkl files
 
@@ -37,10 +36,6 @@ class KnnBot(BaselineBot, ABC):
     """
 
     player_type = diplomacy_strings.NO_PRESS_BOT
-
-    def __post_init__(self) -> None:
-        with open(MODEL_PATH, "rb") as model_file:
-            self.models: Dict[str, Any] = pickle.load(model_file)
 
     def get_orders(self) -> List[str]:
         orders = list()
@@ -63,14 +58,14 @@ class KnnBot(BaselineBot, ABC):
         return list(orders)
 
 
-class KnnAdvisor(KnnBot):
-    """Advisor form of `KnnBot`."""
+class LrAdvisor(LrBot):
+    """Advisor form of `LrBot`."""
 
     bot_type = BotType.ADVISOR
     suggestion_type = SuggestionType.MOVE
 
 
-class KnnPlayer(KnnBot):
-    """Player form of `KnnBot`."""
+class LrPlayer(LrBot):
+    """Player form of `LrBot`."""
 
     bot_type = BotType.PLAYER
