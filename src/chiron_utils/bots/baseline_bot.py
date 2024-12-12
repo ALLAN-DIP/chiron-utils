@@ -144,8 +144,11 @@ class BaselineBot(ABC):
                 f"{self.declare_suggestion_type.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
             )
-
-        assert self.suggestion_type is not None
+        if self.suggestion_type is None:
+            raise ValueError(
+                f"{self.declare_suggestion_type.__name__!r} cannot be called because "
+                f"it does not support any suggestion types"
+            )
 
         # Explicit `int` cast is needed before Python 3.11
         payload = int(self.suggestion_type)
@@ -168,6 +171,11 @@ class BaselineBot(ABC):
             raise TypeError(
                 f"{self.suggest_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
+            )
+        if not self.suggestion_type & SuggestionType.MOVE:
+            raise ValueError(
+                f"{self.suggest_orders.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.MOVE.name} suggestions"
             )
 
         payload = {"suggested_orders": orders}
@@ -193,6 +201,11 @@ class BaselineBot(ABC):
                 f"{self.suggest_opponent_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
             )
+        if not self.suggestion_type & SuggestionType.OPPONENT_MOVE:
+            raise ValueError(
+                f"{self.suggest_opponent_orders.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.OPPONENT_MOVE.name} suggestions"
+            )
 
         payload = {"predicted_orders": opponent_orders}
 
@@ -213,6 +226,11 @@ class BaselineBot(ABC):
                 f"{self.suggest_message.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
             )
+        if not self.suggestion_type & SuggestionType.MESSAGE:
+            raise ValueError(
+                f"{self.suggest_message.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.MESSAGE.name} suggestions"
+            )
 
         payload = {"recipient": recipient, "message": message}
 
@@ -232,6 +250,11 @@ class BaselineBot(ABC):
             raise TypeError(
                 f"{self.suggest_commentary.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
+            )
+        if not self.suggestion_type & SuggestionType.COMMENTARY:
+            raise ValueError(
+                f"{self.suggest_commentary.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.COMMENTARY.name} suggestions"
             )
 
         payload = {"recipient": recipient, "commentary": message}
