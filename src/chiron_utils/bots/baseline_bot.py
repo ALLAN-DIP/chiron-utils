@@ -199,7 +199,7 @@ class BaselineBot(ABC):
         """
         if self.bot_type != BotType.ADVISOR:
             raise TypeError(
-                f"{self.suggest_message.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"{self.suggest_commentary.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
             )
 
