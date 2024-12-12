@@ -138,7 +138,7 @@ class BaselineBot(ABC):
         )
 
     async def suggest_orders(
-        self, orders: List[str], *, partial_orders: Optional[List[str]] = None
+        self, orders: Sequence[str], *, partial_orders: Optional[Sequence[str]] = None
     ) -> None:
         """Send suggested orders for power to the server.
 
