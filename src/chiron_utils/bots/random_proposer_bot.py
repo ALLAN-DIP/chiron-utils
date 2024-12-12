@@ -35,18 +35,11 @@ class RandomProposerBot(BaselineBot, ABC):
         Returns:
             Mapping from powers to random order proposals.
         """
-        # Getting the list of possible orders for all locations
-        possible_orders = self.game.get_all_possible_orders()
-
         proposals = {}
 
         # For each power, randomly sample a valid order
         for other_power in get_other_powers([self.power_name], self.game):
-            suggested_random_orders = [
-                random.choice(possible_orders[loc])
-                for loc in self.game.get_orderable_locations(other_power)
-                if possible_orders[loc]
-            ]
+            suggested_random_orders = self.get_random_orders(other_power)
             suggested_random_orders = list(
                 filter(
                     lambda x: x != diplomacy_strings.WAIVE
