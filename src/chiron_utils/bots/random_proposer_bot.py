@@ -111,6 +111,11 @@ class RandomProposerBot(BaselineBot, ABC):
         orders = self.get_random_orders()
         if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(orders)
+
+            random_predicted_orders = {}
+            for other_power in get_other_powers([self.power_name], self.game):
+                random_predicted_orders[other_power] = self.get_random_orders(other_power)
+            await self.suggest_opponent_orders(random_predicted_orders)
         elif self.bot_type == BotType.PLAYER:
             await self.send_orders(orders, wait=True)
         return orders
@@ -121,7 +126,12 @@ class RandomProposerAdvisor(RandomProposerBot):
     """Advisor form of `RandomProposerBot`."""
 
     bot_type = BotType.ADVISOR
-    suggestion_type = SuggestionType.MESSAGE | SuggestionType.MOVE | SuggestionType.COMMENTARY
+    suggestion_type = (
+        SuggestionType.MESSAGE
+        | SuggestionType.MOVE
+        | SuggestionType.COMMENTARY
+        | SuggestionType.OPPONENT_MOVE
+    )
 
 
 @dataclass
