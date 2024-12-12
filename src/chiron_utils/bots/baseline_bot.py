@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum, auto
 import os
 import random
-from typing import Any, ClassVar, List, Optional, Sequence
+from typing import Any, ClassVar, List, Mapping, Optional, Sequence
 
 from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
@@ -180,6 +180,25 @@ class BaselineBot(ABC):
         await self.send_suggestion(
             payload=payload,
             suggestion_type=suggestion_type,
+        )
+
+    async def suggest_opponent_orders(self, opponent_orders: Mapping[str, Sequence[str]]) -> None:
+        """Send predicted orders for opponent powers to the server.
+
+        Args:
+            opponent_orders: Mapping from opponent powers to their predicted orders.
+        """
+        if self.bot_type != BotType.ADVISOR:
+            raise TypeError(
+                f"{self.suggest_opponent_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.ADVISOR}"
+            )
+
+        payload = {"predicted_orders": opponent_orders}
+
+        await self.send_suggestion(
+            payload=payload,
+            suggestion_type=diplomacy_strings.SUGGESTED_MOVE_OPPONENTS,
         )
 
     async def suggest_message(self, recipient: str, message: str) -> None:
