@@ -3,7 +3,7 @@
 from abc import ABC
 from dataclasses import dataclass
 import random
-from typing import Dict, List, Sequence
+from typing import Dict, List, Optional, Sequence
 
 from daidepp import AND, PRP, XDO
 from diplomacy.utils import strings as diplomacy_strings
@@ -88,16 +88,23 @@ class RandomProposerBot(BaselineBot, ABC):
 
         return list(orders)
 
-    def get_random_orders(self) -> List[str]:
-        """Generate random orders to carry out.
+    def get_random_orders(self, power_name: Optional[str] = None) -> List[str]:
+        """Generate random orders for a power to carry out.
+
+        Args:
+            power_name: Name of power to generate random orders for.
+                Defaults to current power.
 
         Returns:
             List of random orders.
         """
+        if power_name is None:
+            power_name = self.power_name
+
         possible_orders = self.game.get_all_possible_orders()
         orders = [
             random.choice(list(possible_orders[loc]))
-            for loc in self.game.get_orderable_locations(self.power_name)
+            for loc in self.game.get_orderable_locations(power_name)
             if possible_orders[loc]
         ]
         return orders
