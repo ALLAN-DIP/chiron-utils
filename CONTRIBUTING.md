@@ -8,7 +8,7 @@ If there are dependencies that are not purely Python, you will likely need to ma
 
 There should also be some documentation in the README on how to build each bot and the basics of how it works.
 
-I (Alex) will have to make some changes to the bot runner scripts to pass in different types of bots for each power. That can be a relatively simple list with a default value, though. Also, I should probably move the list and the default bot class to `bots/__init__.py` to add more encapsulation and keep all general logic in a single place.
+I (Alex) will have to make some changes to the bot runner scripts to pass in different types of bots for each power. That can be a relatively simple list with a default value, though.
 
 If your code base is particularly complex (e.g., CICERO), you should import `chiron_utils` as a package. Otherwise, the bot should be developed right in this repository. Keeping as much as possible in a single place will make refactoring easier.
 
