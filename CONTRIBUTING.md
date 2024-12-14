@@ -16,7 +16,7 @@ You generally should not be interfacing directly with game communications yourse
 
 I (Alex) will require all code meets the various standards set for the repository, which will involve code review. It is useful to add tests as well. They don't need to be comprehensive, but they should at least be a 1v1 against a `RandomProposalBot` to catch any obvious crashes.
 
-If you want to share code between an advisor and a player, it's up to your how you structure it. You can factor out code into functions, or you can make a class your advisor and player both inherit from. It's up to you. Regardless, you _do_ need to declare the `bot_type` field as either `"advisor"` or `"player"`. These will become enums in the near future.
+If you want to share code between an advisor and a player, it's up to your how you structure it. You can factor out code into functions, or you can make a class your advisor and player both inherit from. It's up to you. Regardless, you _do_ need to declare the `bot_type` field as either `BotType.ADVISOR` or `BotType.PLAYER`.
 
 Feel free to create utilities and utility classes as needed. If something would be useful to reuse, then we should design it modularly so it can be used in multiple players. In addition, model training scripts and other files should all be stored in the repository to make them easy to find.
 
