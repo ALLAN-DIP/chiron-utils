@@ -44,7 +44,7 @@ class LrBot(BaselineBot, ABC):
             List of predicted orders.
         """
         state = self.game.get_state()
-        orders = predict(MODEL_PATH, state, self.power_name)
+        orders: List[str] = predict(MODEL_PATH, state, self.power_name)
 
         logger.info("Orders to suggest: %s", orders)
 
