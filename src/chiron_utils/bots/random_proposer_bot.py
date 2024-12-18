@@ -3,7 +3,7 @@
 from abc import ABC
 from dataclasses import dataclass
 import random
-from typing import Dict, List, Sequence
+from typing import Dict, List, Optional, Sequence
 
 from daidepp import AND, PRP, XDO
 from diplomacy.utils import strings as diplomacy_strings
@@ -35,18 +35,11 @@ class RandomProposerBot(BaselineBot, ABC):
         Returns:
             Mapping from powers to random order proposals.
         """
-        # Getting the list of possible orders for all locations
-        possible_orders = self.game.get_all_possible_orders()
-
         proposals = {}
 
         # For each power, randomly sample a valid order
         for other_power in get_other_powers([self.power_name], self.game):
-            suggested_random_orders = [
-                random.choice(possible_orders[loc])
-                for loc in self.game.get_orderable_locations(other_power)
-                if possible_orders[loc]
-            ]
+            suggested_random_orders = self.get_random_orders(other_power)
             suggested_random_orders = list(
                 filter(
                     lambda x: x != diplomacy_strings.WAIVE
@@ -88,16 +81,23 @@ class RandomProposerBot(BaselineBot, ABC):
 
         return list(orders)
 
-    def get_random_orders(self) -> List[str]:
-        """Generate random orders to carry out.
+    def get_random_orders(self, power_name: Optional[str] = None) -> List[str]:
+        """Generate random orders for a power to carry out.
+
+        Args:
+            power_name: Name of power to generate random orders for.
+                Defaults to current power.
 
         Returns:
             List of random orders.
         """
+        if power_name is None:
+            power_name = self.power_name
+
         possible_orders = self.game.get_all_possible_orders()
         orders = [
             random.choice(list(possible_orders[loc]))
-            for loc in self.game.get_orderable_locations(self.power_name)
+            for loc in self.game.get_orderable_locations(power_name)
             if possible_orders[loc]
         ]
         return orders
@@ -111,6 +111,11 @@ class RandomProposerBot(BaselineBot, ABC):
         orders = self.get_random_orders()
         if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(orders)
+
+            random_predicted_orders = {}
+            for other_power in get_other_powers([self.power_name], self.game):
+                random_predicted_orders[other_power] = self.get_random_orders(other_power)
+            await self.suggest_opponent_orders(random_predicted_orders)
         elif self.bot_type == BotType.PLAYER:
             await self.send_orders(orders, wait=True)
         return orders
@@ -121,7 +126,12 @@ class RandomProposerAdvisor(RandomProposerBot):
     """Advisor form of `RandomProposerBot`."""
 
     bot_type = BotType.ADVISOR
-    suggestion_type = SuggestionType.MESSAGE | SuggestionType.MOVE | SuggestionType.COMMENTARY
+    suggestion_type = (
+        SuggestionType.MESSAGE
+        | SuggestionType.MOVE
+        | SuggestionType.COMMENTARY
+        | SuggestionType.OPPONENT_MOVE
+    )
 
 
 @dataclass

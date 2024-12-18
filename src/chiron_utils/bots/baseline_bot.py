@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum, auto
 import os
 import random
-from typing import ClassVar, List, Optional, Sequence
+from typing import Any, ClassVar, List, Mapping, Optional, Sequence
 
 from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
@@ -117,6 +117,26 @@ class BaselineBot(ABC):
         else:
             self.game.add_message(message=msg_obj)
 
+    async def send_suggestion(self, payload: Any, suggestion_type: str) -> None:
+        """Send suggestion message to the server.
+
+        Args:
+            payload: Dictionary mapping powers to suggestions intended for them.
+            suggestion_type: Type of suggestion (e.g., `"has_suggestions"`, `"suggested_message"`).
+        """
+        message_dict = {
+            "advisor": self.display_name,
+            "recipient": self.power_name,
+            "payload": payload,
+        }
+
+        await self.send_message(
+            diplomacy_strings.GLOBAL,
+            message=serialize_message_dict(message_dict),
+            sender=diplomacy_strings.OMNISCIENT_TYPE,
+            msg_type=suggestion_type,
+        )
+
     async def declare_suggestion_type(self) -> None:
         """Declare the advisor's suggestion type to the engine."""
         if self.bot_type != BotType.ADVISOR:
@@ -124,21 +144,22 @@ class BaselineBot(ABC):
                 f"{self.declare_suggestion_type.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
             )
-
-        assert self.suggestion_type is not None
+        if self.suggestion_type is None:
+            raise ValueError(
+                f"{self.declare_suggestion_type.__name__!r} cannot be called because "
+                f"it does not support any suggestion types"
+            )
 
         # Explicit `int` cast is needed before Python 3.11
-        message_dict = {self.power_name: int(self.suggestion_type)}
+        payload = int(self.suggestion_type)
 
-        await self.send_message(
-            diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
-            sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=diplomacy_strings.HAS_SUGGESTIONS,
+        await self.send_suggestion(
+            payload=payload,
+            suggestion_type=diplomacy_strings.HAS_SUGGESTIONS,
         )
 
     async def suggest_orders(
-        self, orders: List[str], *, partial_orders: Optional[List[str]] = None
+        self, orders: Sequence[str], *, partial_orders: Optional[Sequence[str]] = None
     ) -> None:
         """Send suggested orders for power to the server.
 
@@ -151,21 +172,46 @@ class BaselineBot(ABC):
                 f"{self.suggest_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
             )
+        if not self.suggestion_type & SuggestionType.MOVE:
+            raise ValueError(
+                f"{self.suggest_orders.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.MOVE.name} suggestions"
+            )
 
+        payload = {"suggested_orders": orders}
         if partial_orders:
-            message_dict = {
-                self.power_name: {"player_orders": partial_orders, "suggested_orders": orders}
-            }
+            payload["player_orders"] = partial_orders
             suggestion_type = diplomacy_strings.SUGGESTED_MOVE_PARTIAL
         else:
-            message_dict = {self.power_name: {"suggested_orders": orders}}
             suggestion_type = diplomacy_strings.SUGGESTED_MOVE_FULL
 
-        await self.send_message(
-            diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
-            sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=suggestion_type,
+        await self.send_suggestion(
+            payload=payload,
+            suggestion_type=suggestion_type,
+        )
+
+    async def suggest_opponent_orders(self, opponent_orders: Mapping[str, Sequence[str]]) -> None:
+        """Send predicted orders for opponent powers to the server.
+
+        Args:
+            opponent_orders: Mapping from opponent powers to their predicted orders.
+        """
+        if self.bot_type != BotType.ADVISOR:
+            raise TypeError(
+                f"{self.suggest_opponent_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.ADVISOR}"
+            )
+        if not self.suggestion_type & SuggestionType.OPPONENT_MOVE:
+            raise ValueError(
+                f"{self.suggest_opponent_orders.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.OPPONENT_MOVE.name} suggestions"
+            )
+
+        payload = {"predicted_orders": opponent_orders}
+
+        await self.send_suggestion(
+            payload=payload,
+            suggestion_type=diplomacy_strings.SUGGESTED_MOVE_OPPONENTS,
         )
 
     async def suggest_message(self, recipient: str, message: str) -> None:
@@ -180,14 +226,17 @@ class BaselineBot(ABC):
                 f"{self.suggest_message.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
             )
+        if not self.suggestion_type & SuggestionType.MESSAGE:
+            raise ValueError(
+                f"{self.suggest_message.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.MESSAGE.name} suggestions"
+            )
 
-        message_dict = {self.power_name: {"recipient": recipient, "message": message}}
+        payload = {"recipient": recipient, "message": message}
 
-        await self.send_message(
-            diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
-            sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=diplomacy_strings.SUGGESTED_MESSAGE,
+        await self.send_suggestion(
+            payload=payload,
+            suggestion_type=diplomacy_strings.SUGGESTED_MESSAGE,
         )
 
     async def suggest_commentary(self, recipient: str, message: str) -> None:
@@ -199,17 +248,20 @@ class BaselineBot(ABC):
         """
         if self.bot_type != BotType.ADVISOR:
             raise TypeError(
-                f"{self.suggest_message.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"{self.suggest_commentary.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.ADVISOR}"
             )
+        if not self.suggestion_type & SuggestionType.COMMENTARY:
+            raise ValueError(
+                f"{self.suggest_commentary.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.COMMENTARY.name} suggestions"
+            )
 
-        message_dict = {self.power_name: {"recipient": recipient, "commentary": message}}
+        payload = {"recipient": recipient, "commentary": message}
 
-        await self.send_message(
-            diplomacy_strings.GLOBAL,
-            message=serialize_message_dict(message_dict),
-            sender=diplomacy_strings.OMNISCIENT_TYPE,
-            msg_type=diplomacy_strings.SUGGESTED_COMMENTARY,
+        await self.send_suggestion(
+            payload=payload,
+            suggestion_type=diplomacy_strings.SUGGESTED_COMMENTARY,
         )
 
     async def send_intent_log(self, log_msg: str) -> None:
