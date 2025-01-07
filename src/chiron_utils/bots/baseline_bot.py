@@ -27,6 +27,7 @@ class BotType(str, Enum):
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
+SENTINEL = object()
 
 
 @dataclass
@@ -35,11 +36,17 @@ class BaselineBot(ABC):
 
     player_type: ClassVar[str] = diplomacy_strings.PRESS_BOT
     bot_type: ClassVar[BotType]
-    suggestion_type: ClassVar[Optional[SuggestionType]] = None
+    default_suggestion_type: ClassVar[Optional[SuggestionType]] = None
     power_name: str
     game: Game
     num_message_rounds: Optional[int] = None
     communication_stage_length: int = COMM_STAGE_LENGTH  # in seconds
+    suggestion_type: Optional[SuggestionType] = SENTINEL
+
+    def __post_init__(self) -> None:
+        """Initialize uninitialized value(s)."""
+        if self.suggestion_type is SENTINEL:
+            self.suggestion_type = self.default_suggestion_type
 
     @property
     def display_name(self) -> str:
