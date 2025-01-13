@@ -1,5 +1,5 @@
 astroid==3.3.5
-baseline_models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@ba5700a587ffab63e35a44d9ed96919a4ffee0cf
+baseline_models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@2f386249d3d1e8ae8c6c77784b9b38d6705e65ab
 bcrypt==4.2.0
 certifi==2024.7.4
 cfgv==3.4.0
