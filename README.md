@@ -45,6 +45,7 @@ Both the bot and game running commands support a `--help` argument to list avail
 ## Bots
 
 - [`RandomProposerBot`](src/chiron_utils/bots/random_proposer_bot.py) (`RandomProposerAdvisor` and `RandomProposerPlayer`):
+
   - Orders are randomly selected from the space of valid moves.
   - Messages are proposals to carry out a set of valid moves, which is also randomly selected. One such proposal is sent to each opponent.
   - Due to the random nature of play, a game consisting entirely of `RandomProposerPlayer`s can last for a very long time. I (Alex) have observed multiple games lasting past 1950 without a clear winner.
@@ -52,9 +53,9 @@ Both the bot and game running commands support a `--help` argument to list avail
 
 - [`LrBot`](src/chiron_utils/bots/lr_bot.py) (`LrAdvisor` and `LrPlayer`):
   - A Logistic Regression model is used to predict orders for each available unit, given current game state.
-  - To run the bot, get the latest model zip file from https://unisydneyedu-my.sharepoint.com/:f:/g/personal/nhad0493_uni_sydney_edu_au/EpvBJyx08X1HvnluND6tZAYBe2Fvoiz2GjVEM7Q_NpsAkg (filename is postfixed with model release date in YYYYMMDD format).
+  - To run the bot, get the latest model zip file from [`here`](https://unisydneyedu-my.sharepoint.com/:f:/g/personal/nhad0493_uni_sydney_edu_au/EpvBJyx08X1HvnluND6tZAYBe2Fvoiz2GjVEM7Q_NpsAkg) (filename is postfixed with model release date in YYYYMMDD format).
   - Make sure to edit MODEL_PATH constant in lr_bot.py to point to the model folder.
-  - Code for model training can be found at https://github.com/ALLAN-DIP/baseline-models
+  - Code for model training can be found [`here`](https://github.com/ALLAN-DIP/baseline-models)
 
 ## Contributing
 
