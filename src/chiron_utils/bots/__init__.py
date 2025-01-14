@@ -7,10 +7,16 @@ from chiron_utils.bots.random_proposer_bot import (
     RandomProposerAdvisor as RandomProposerAdvisor,
     RandomProposerPlayer as RandomProposerPlayer,
 )
+from chiron_utils.bots.LlmAdvisor_bot import (
+    LlmAdvisor as LlmAdvisor,
+    LlmPlayer as LlmPlayer,
+)
 
 BOTS: List[Type[BaselineBot]] = [
     RandomProposerAdvisor,
     RandomProposerPlayer,
+    LlmAdvisor,
+    LlmPlayer
 ]
 NAMES_TO_BOTS = {bot.__name__: bot for bot in BOTS}
 
