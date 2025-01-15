@@ -22,6 +22,9 @@ BOTS: List[Type[BaselineBot]] = [
 # but there currently isn't a way to check if a given extra was used during installation.
 importable_modules = set(importlib_metadata.packages_distributions())
 if {"baseline_models"} < importable_modules:
+    from chiron_utils.bots.elastic_bot import (
+        ElasticAdvisor as ElasticAdvisor,
+    )
     from chiron_utils.bots.lr_bot import (
         LrAdvisor as LrAdvisor,
         LrPlayer as LrPlayer,
@@ -45,6 +48,7 @@ if {"baseline_models"} < importable_modules:
             LrProbsTextAdvisor,
             LrProbsTextVisualAdvisor,
             LrProbsVisualAdvisor,
+            ElasticAdvisor,
         ]
     )
 if {"torch", "transformers"} < importable_modules:
