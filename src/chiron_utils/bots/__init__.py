@@ -7,10 +7,14 @@ from chiron_utils.bots.random_proposer_bot import (
     RandomProposerAdvisor as RandomProposerAdvisor,
     RandomProposerPlayer as RandomProposerPlayer,
 )
+from chiron_utils.bots.elastic_bot import (
+    ElasticAdvisor as ElasticAdvisor,
+)
 
 BOTS: List[Type[BaselineBot]] = [
     RandomProposerAdvisor,
     RandomProposerPlayer,
+    ElasticAdvisor
 ]
 NAMES_TO_BOTS = {bot.__name__: bot for bot in BOTS}
 
