@@ -137,8 +137,6 @@ def main() -> None:
     powers = sorted(POWER_NAMES_DICT.values())
     run_cmds = []
     for power in powers:
-        if power == "AUSTRIA":
-            continue
         container_name = f"--name {power}-{game_id} " if runner == DOCKER else ""
         # `localhost` doesn't work when running an agent with Docker Desktop
         host_from_container = "host.docker.internal" if host == "localhost" else host
