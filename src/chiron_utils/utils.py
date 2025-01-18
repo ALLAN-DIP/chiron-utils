@@ -128,10 +128,7 @@ mapping = {
     "war": ["Warsaw"],
     "wes": ["Western Mediterranean"],
     "yor": ["Yorkshire"],
-    "s":["Support"],
-    "a":["Army at"],
-    "f":["Fleet at"],
-    "[a":["[Army at"]
+    " - ": ["to"]
 }
 
 

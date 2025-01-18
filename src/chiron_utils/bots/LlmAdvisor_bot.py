@@ -111,7 +111,7 @@ Your primary objective is to evaluate whether the counterplayer's predicted orde
 Key Evaluation Guidelines:
 
 1. Consider an order aligned if its purpose or intent is consistent with the counterplayer's stated goals or the tactical/strategic needs implied by the board state.
-2. Redundancy in orders (e.g., supporting moves or double coverage) can still be aligned if it serves to ensure the success of a critical move or maintains flexibility in uncertain situations.
+2. Redundancy in orders (e.g., several supporting moves) can still be aligned if it serves to ensure the success of a critical move or maintains flexibility in uncertain situations.
 3. Misalignment occurs only if the order: 
     Contradicts the stated strategy or creates unnecessary risks. 
     Fails to contribute meaningfully to the position given the board state.
@@ -149,16 +149,16 @@ Message from ITALY: "Sorry, some connection issues on my end so messages sent ou
 I am playing as AUSTRIA. For each of ITALY's predicted orders, evaluate whether it aligns with the message history and the current board state. Explain the orders first and provide short reasoning and analysis for each predicted move. 
 
 **Answer:**
-A TUN - ALB VIA
+A TUN to ALB VIA,
 Alignment: The move is aligned with the message history and board state. Italy previously mentioned the idea of moving east and positioning to take Greece. Convoying from TUN to ALB sets up a strong position for further collaboration with Austria in the Balkans, consistent with the stated plan to focus on Greece in the fall.
 
-F ION C A TUN - ALB
-Alignment: The convoy aligns with the board state and message history. The convoy facilitates Italy's movement into ALB, aligning with the communicated intent to focus efforts on securing Greece. This move ensures Italy’s positioning in the region while maintaining the tactical flexibility discussed.
+F ION C A TUN to ALB,
+Alignment: The convoy is aligned with the board state and message history. The convoy facilitates Italy's movement into ALB, aligning with the communicated intent to focus efforts on securing Greece. This move ensures Italy’s positioning in the region while maintaining the tactical flexibility discussed.
 
-F NAP - TYS
+F NAP to TYS,
 Alignment: This move is aligned as it supports Italy’s eastward intentions. Moving the fleet to the Tyrrhenian Sea strengthens Italy’s naval presence in the Mediterranean and provides future flexibility to either defend against France or support further eastern operations, consistent with Italy’s concerns about overextending.
 
-A VEN - TRI
+A VEN to TRI,
 Misalignment: This move is misaligned with the message history and board state. Austria explicitly trusts Italy and has not shown hostility, and Italy’s previous messages suggest no immediate plans to antagonize Austria. Moving to TRI is aggressive and undermines the collaborative stance Italy communicated. It could create unnecessary conflict, contradicting Italy’s expressed preference for focusing eastward and securing Greece.
 
 
@@ -239,7 +239,7 @@ Now let's see the question:"""
             f"{system_prompt}"
             f'''
 **Predicted Orders of {oppo}:**
-{orders_string}
+{orders_string.replace('-','to')}
 
 **Board State:**  
 '''
@@ -268,15 +268,14 @@ f'''**Answer:**
             f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
             You are an expert assistant specializing in the Diplomacy board game. Based on the detailed evaluation of following predicted orders, respond in the following short and structured format:
 
-            I think {oppo} is being deceptive, they are possible to place the order like (misaligned orders), these are contradictory with their message advice and sentence.
-            
+            I think {oppo} is being deceptive, because I think they are going to make these moves: <predicted misaligned moves>. These moves are contradictory to {oppo}’s previous messages to you.
             <|eot_id|><|start_header_id|>user<|end_header_id|>  
             **Evluation**:
             {input}
 
             **Question**:
             from Evluation part, extract necessary information and fill in the following as the output:
-            I think {oppo} is being deceptive, they are possible to place the order like (misaligned orders), these are contradictory with their message advice and sentence.
+            I think {oppo} is being deceptive, because I think they are going to make these moves: <predicted misaligned moves>. These moves are contradictory to {oppo}’s previous messages to you.
             <|eot_id|><|start_header_id|>assistant<|end_header_id|>
 
             """
@@ -359,14 +358,14 @@ f'''**Answer:**
         Returns:
             List of orders to carry out.
         """
-        await asyncio.sleep(random.uniform(20, 30))
+        await asyncio.sleep(random.uniform(10, 20))
         logger.info(" previous_newest_messages is :%s", self.previous_newest_messages)
 
         suggested_orders = await self.read_suggestions_from_advisor()
-
+        logger.info("name of power is %s", self.power_name)
         filtered_orders = [
             order for order in suggested_orders
-            if '"advisor":"ENGLAND (CiceroAdvisor)"' in order and '"predicted_orders"' in order
+            if f'"advisor":"{self.power_name} (CiceroAdvisor)"' in order and '"predicted_orders"' in order
         ]
         if not filtered_orders:
             pass
@@ -395,13 +394,14 @@ f'''**Answer:**
                 logger.info("=========")
                 logger.info("output_phase1: %s", output_phase1)
 
-                alignment_count = output_phase1.count("is aligned")
-                misalignment_count = output_phase1.count("is misaligned")
-                misalignment_count_2 = output_phase1.count("is not aligned")
-                if misalignment_count >= alignment_count or misalignment_count_2>=alignment_count:
+                alignment_count = output_phase1.count("Alignment")
+                misalignment_count = output_phase1.count("Misalignment")
+                if misalignment_count >= alignment_count:
                     prompt2 = self.format_prompt_phase2(other_power, output_phase1)
                     output_phase2 = self.generate_and_parse_response(prompt2)
-                    if output_phase2 and output_phase2.startswith("I think"):
+                    logger.info("=========")
+                    logger.info("output_phase2: %s", output_phase2)
+                    if output_phase2 and output_phase2.lstrip().startswith("I think"):
                         try:
                             await self.suggest_commentary(other_power, f"{output_phase2.lstrip()}")
                         except diplomacy.utils.exceptions.GamePhaseException as exc:
@@ -430,13 +430,14 @@ f'''**Answer:**
                 logger.info("=========")
                 logger.info("output_phase1: %s", output_phase1)
 
-                alignment_count = output_phase1.count("is aligned")
-                misalignment_count = output_phase1.count("is misaligned")
-                misalignment_count_2 = output_phase1.count("is not aligned")
-                if misalignment_count >= alignment_count or misalignment_count_2>=alignment_count:
+                alignment_count = output_phase1.count("Alignment")
+                misalignment_count = output_phase1.count("Misalignment")
+                if misalignment_count >= alignment_count:
                     prompt2 = self.format_prompt_phase2(other_power, output_phase1)
                     output_phase2 = self.generate_and_parse_response(prompt2)
-                    if output_phase2 and output_phase2.startswith("I think"):
+                    logger.info("=========")
+                    logger.info("output_phase2: %s", output_phase2)
+                    if output_phase2 and output_phase2.lstrip().startswith("I think"):
                         try:
                             await self.suggest_commentary(other_power, f"{output_phase2.lstrip()}")
                         except diplomacy.utils.exceptions.GamePhaseException as exc:
