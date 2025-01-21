@@ -1,10 +1,40 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
+
+SCRIPT_FILE=$(realpath "$0")
+SCRIPT_NAME=$(basename "$SCRIPT_FILE")
+
+function show_usage() {
+  {
+    echo "usage: bash $SCRIPT_NAME [--help] BOT_TAG BOT_TYPE BOT_ARGS..."
+    echo
+    echo 'Run CICERO from an OCI image using Docker.'
+    echo '- BOT_TAG is the tag assigned when building the image.'
+    echo '- BOT_TYPE is the type of bot to run and must be either "advisor" or "player".'
+    echo '- BOT_ARGS are passed as arguments to the script within the running container.'
+  } >&2
+}
+
+if [[ $# -lt 2 ]] || [[ ${1:-} = --help ]]; then
+  show_usage
+  exit 1
+fi
 
 BOT_TAG=$1
 BOT_TYPE=$2
 shift 2
+
+if [[ $BOT_TYPE != advisor ]] && [[ $BOT_TYPE != player ]]; then
+  {
+    echo 'Invalid BOT_TYPE given: must be "advisor" or "player".'
+    echo
+  } >&2
+  show_usage
+  exit 1
+fi
+
+set -x
 
 CICERO_DIR=/media/volume/cicero-base-models
 
