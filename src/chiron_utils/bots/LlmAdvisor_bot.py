@@ -358,11 +358,10 @@ f'''**Answer:**
         Returns:
             List of orders to carry out.
         """
-        await asyncio.sleep(random.uniform(10, 20))
-        logger.info(" previous_newest_messages is :%s", self.previous_newest_messages)
+        await asyncio.sleep(random.uniform(5, 10))
+        # logger.info(" previous_newest_messages is :%s", self.previous_newest_messages)
 
         suggested_orders = await self.read_suggestions_from_advisor()
-        logger.info("name of power is %s", self.power_name)
         filtered_orders = [
             order for order in suggested_orders
             if f'"advisor":"{self.power_name} (CiceroAdvisor)"' in order and '"predicted_orders"' in order
@@ -372,9 +371,7 @@ f'''**Answer:**
 
         for other_power in get_other_powers([self.power_name], self.game):
             all_relevant = self._get_relevant_messages(self.power_name, other_power)
-            logger.info(" all relevant is :%s", all_relevant)
             prev_msgs = self.previous_newest_messages.get(other_power)
-            logger.info(" all relevant is :%s", prev_msgs)
             if prev_msgs is not None:
                 # Compare to find new messages
                 new_messages = [m for m in all_relevant if m not in prev_msgs]
