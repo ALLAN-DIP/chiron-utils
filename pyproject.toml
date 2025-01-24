@@ -27,6 +27,7 @@ dependencies = [
   "daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e",
   # Pinned `diplomacy` to `main`
   "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@5733af848f3e5b35cd9ff8a1eba77bb40e09c946",
+  'importlib-metadata ; python_version < "3.10"',
   "tornado",
 ]
 
