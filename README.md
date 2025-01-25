@@ -31,7 +31,7 @@ Once built, you will need to manually handle distributing the generated OCI imag
 To use a bot, run the following command:
 
 ```shell
-docker run --rm achilles [ARGUMENTS]
+docker run --rm ghcr.io/allan-dip/chiron-utils [ARGUMENTS]
 ```
 
 To run a complete game, run the following command:
