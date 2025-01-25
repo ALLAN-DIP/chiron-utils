@@ -113,6 +113,6 @@ TAG ?= latest
 build:
 	docker buildx build \
 		--platform linux/amd64 \
-		--target achilles \
+		--target base \
 		--tag ghcr.io/allan-dip/chiron-utils:$(TAG) \
 		.
