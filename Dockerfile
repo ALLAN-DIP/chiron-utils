@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 # This file passes all checks from Hadolint (https://github.com/hadolint/hadolint)
 # Use the command `hadolint Dockerfile` to test
 # Adding Hadolint to `pre-commit` is non-trivial, so the command must be run manually
