@@ -118,3 +118,8 @@ build:
 		--tag ghcr.io/allan-dip/chiron-utils:$(TAG) \
 		--target $(TARGET) \
 		.
+
+.PHONY: build-baseline-lr
+build-baseline-lr:
+	TARGET=baseline-lr \
+	make build
