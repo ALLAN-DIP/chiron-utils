@@ -19,7 +19,8 @@ RUN pip install --no-cache-dir --upgrade pip==24.3.1
 # Install required packages
 COPY requirements-lock.txt .
 COPY pyproject.toml .
-RUN pip install --no-cache-dir -e . -c requirements-lock.txt
+ARG TARGET
+RUN pip install --no-cache-dir -e .[$TARGET] -c requirements-lock.txt
 
 # Copy remaining files
 COPY LICENSE .
@@ -27,7 +28,7 @@ COPY README.md .
 COPY src/ src/
 
 # Re-install so `pip` stores all metadata properly
-RUN pip install --no-cache-dir --no-deps -e .
+RUN pip install --no-cache-dir --no-deps -e .[$TARGET]
 
 # Script executors
 ENTRYPOINT ["python", "-m", "chiron_utils.scripts.run_bot"]

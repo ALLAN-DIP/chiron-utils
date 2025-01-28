@@ -113,6 +113,7 @@ TARGET ?= base
 .PHONY: build
 build:
 	docker buildx build \
+		--build-arg TARGET=$(TARGET) \
 		--platform linux/amd64 \
 		--tag ghcr.io/allan-dip/chiron-utils:$(TAG) \
 		--target $(TARGET) \

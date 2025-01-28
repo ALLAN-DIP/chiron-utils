@@ -33,8 +33,11 @@ dependencies = [
 [project.optional-dependencies]
 # `all` extra allows an easy install of all optional dependencies
 all = [
+  "chiron_utils[base]",
   "chiron_utils[dev]",
 ]
+# Default extra to make OCI image builds easier
+base = []
 dev = [
   # Use older `mypy` version to keep code compatible with Python 3.7
   "mypy<1.9",
