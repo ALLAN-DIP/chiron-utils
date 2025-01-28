@@ -1,4 +1,0 @@
-mypy<1.9  # Use older version to keep code compatible with Python 3.7
-pre-commit
-pylint
-pytest

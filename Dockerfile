@@ -17,8 +17,6 @@ RUN apt-get -y update \
 RUN pip install --no-cache-dir --upgrade pip==24.3.1
 
 # Install required packages
-COPY requirements.txt .
-COPY requirements-dev.txt .
 COPY requirements-lock.txt .
 COPY pyproject.toml .
 RUN pip install --no-cache-dir -e . -c requirements-lock.txt

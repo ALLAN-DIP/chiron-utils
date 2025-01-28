@@ -96,12 +96,12 @@ fix: lock check
 .PHONY: update
 update:
 	pip install --upgrade pip
-	pip install --upgrade -r requirements-lock.txt -e .
+	pip install --upgrade -r requirements-lock.txt -e .[all]
 
 .PHONY: upgrade
 upgrade:
 	pip install --upgrade pip
-	pip install --upgrade --upgrade-strategy eager -r requirements.txt -r requirements-dev.txt -e .
+	pip install --upgrade --upgrade-strategy eager -e .[all]
 
 .PHONY: install
 install:
