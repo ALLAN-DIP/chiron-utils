@@ -108,11 +108,12 @@ install:
 	make update
 
 TAG ?= latest
+TARGET ?= base
 
 .PHONY: build
 build:
 	docker buildx build \
 		--platform linux/amd64 \
 		--tag ghcr.io/allan-dip/chiron-utils:$(TAG) \
-		--target base \
+		--target $(TARGET) \
 		.
