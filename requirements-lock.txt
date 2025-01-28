@@ -4,7 +4,7 @@ certifi==2024.7.4
 cfgv==3.4.0
 charset-normalizer==3.3.2
 coloredlogs==15.0.1
-daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@7f6dcca60f2e6dd89c37862663be7b098cc03794
+daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e
 dill==0.3.9
 diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@5733af848f3e5b35cd9ff8a1eba77bb40e09c946
 distlib==0.3.9
