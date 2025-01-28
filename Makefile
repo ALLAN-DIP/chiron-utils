@@ -111,7 +111,7 @@ TAG ?= latest
 
 .PHONY: build
 build:
-	docker build \
+	docker buildx build \
 		--platform linux/amd64 \
 		--target achilles \
 		--tag ghcr.io/allan-dip/chiron-utils:$(TAG) \
