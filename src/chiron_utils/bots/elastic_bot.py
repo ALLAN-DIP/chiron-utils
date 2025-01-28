@@ -3,9 +3,10 @@
 from abc import ABC
 from dataclasses import dataclass
 import os
+from pathlib import Path
 from typing import List, Sequence
 
-from baseline_models.elastic.client import ElasticClient
+from baseline_models.message_advisor_code.elastic.autoencoder_client import AutoencoderClient
 from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
@@ -16,24 +17,25 @@ logger = return_logger(__name__)
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
+CERT_PATH = Path() / "http_ca.crt"
+MODEL_PATH = Path() / "ae_256"
 
-CERT_PATH = os.path.join("D:", os.sep, "Downloads", "http_ca.crt")
 ELASTIC_USERNAME = "elastic"
-ELASTIC_PASSWORD = "password"
+ELASTIC_PASSWORD = ""
 ELASTIC_HOST = "https://localhost:9200"
+ELASTIC_INDEX = "tagged_documents_encoded"
 
 MESSAGE_ADVICE_COUNT = 10
 
 
 @dataclass
 class ElasticBot(BaselineBot, ABC):
-    """Elastic search message advisor.
-    """
+    """Elastic search message advisor."""
 
     is_first_messaging_round = False
     player_type = diplomacy_strings.NO_PRESS_BOT
-    elastic_client = ElasticClient(
-        ELASTIC_HOST, ELASTIC_USERNAME, ELASTIC_PASSWORD, CERT_PATH
+    elastic_client = AutoencoderClient(
+        ELASTIC_HOST, ELASTIC_USERNAME, ELASTIC_PASSWORD, CERT_PATH, MODEL_PATH
     )
 
     async def start_phase(self) -> None:
@@ -46,7 +48,7 @@ class ElasticBot(BaselineBot, ABC):
         Returns:
             List of orders to carry out.
         """
-        return list()
+        return []
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
         """Carry out one round of messaging.
@@ -59,14 +61,15 @@ class ElasticBot(BaselineBot, ABC):
 
         state = self.game.get_state()
 
-        messages = self.elastic_client.get_messages_from_sender(state, self.power_name)
+        messages = self.elastic_client.get_messages_from_sender(
+            ELASTIC_INDEX, state, self.power_name
+        )
         for other_power in get_other_powers([self.power_name], self.game):
-            if self.bot_type == BotType.ADVISOR:
-                if other_power in messages.keys():
+            if other_power in messages:
+                if self.bot_type == BotType.ADVISOR:
                     for i in range(min(MESSAGE_ADVICE_COUNT, len(messages[other_power]))):
                         await self.suggest_message(other_power, messages[other_power][i])
-            elif self.bot_type == BotType.PLAYER:
-                if other_power in messages.keys():
+                elif self.bot_type == BotType.PLAYER:
                     await self.send_message(other_power, messages[other_power][0])
 
         self.is_first_messaging_round = False
