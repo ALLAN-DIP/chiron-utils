@@ -50,6 +50,11 @@ Both the bot and game running commands support a `--help` argument to list avail
   - Due to the random nature of play, a game consisting entirely of `RandomProposerPlayer`s can last for a very long time. I (Alex) have observed multiple games lasting past 1950 without a clear winner.
   - `RandomProposerPlayer` uses very few resources, so it are useful as stand-ins for other players.
 
+- [`ElasticBot`](src/chiron_utils/bots/elastic_bot.py) (`ElasticAdvisor`):
+  - This bot does not return orders, and is only intended to be a message advisor.
+  - Messages are retrieved from an elasticsearch database using similarity search based on game state.
+  - Running the bot requires a populated elasticsearch instance (see [`baseline-models`](https://github.com/ALLAN-DIP/baseline-models/tree/v2) on how to run a dockerized elasticsearch instance locally) and an autoencoder model (get from [`here`](https://drive.google.com/drive/folders/1Mhd_dX4uNfzhSoiwPe0Na_8BbxiIgBs0)).
+
 ## Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for instructions on how to implement new bots (i.e., advisors and players).
