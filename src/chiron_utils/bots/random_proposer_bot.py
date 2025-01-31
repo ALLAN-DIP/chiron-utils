@@ -126,7 +126,7 @@ class RandomProposerAdvisor(RandomProposerBot):
     """Advisor form of `RandomProposerBot`."""
 
     bot_type = BotType.ADVISOR
-    suggestion_type = (
+    default_suggestion_type = (
         SuggestionType.MESSAGE
         | SuggestionType.MOVE
         | SuggestionType.COMMENTARY
