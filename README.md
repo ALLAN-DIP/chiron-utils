@@ -31,7 +31,7 @@ Once built, you will need to manually handle distributing the generated OCI imag
 To use a bot, run the following command:
 
 ```shell
-docker run --rm achilles [ARGUMENTS]
+docker run --rm ghcr.io/allan-dip/chiron-utils [ARGUMENTS]
 ```
 
 To run a complete game, run the following command:
@@ -48,7 +48,7 @@ Both the bot and game running commands support a `--help` argument to list avail
   - Orders are randomly selected from the space of valid moves.
   - Messages are proposals to carry out a set of valid moves, which is also randomly selected. One such proposal is sent to each opponent.
   - Due to the random nature of play, a game consisting entirely of `RandomProposerPlayer`s can last for a very long time. I (Alex) have observed multiple games lasting past 1950 without a clear winner.
-  - `RandomProposerPlayer` uses very few resources, so it are useful as stand-ins for other players.
+  - `RandomProposerPlayer` uses very few resources, so it is useful as stand-ins for other players.
 
 ## Contributing
 
