@@ -96,23 +96,25 @@ fix: lock check
 .PHONY: update
 update:
 	pip install --upgrade pip
-	pip install --upgrade -r requirements-lock.txt -e .
+	pip install --upgrade -r requirements-lock.txt -e .[all]
 
 .PHONY: upgrade
 upgrade:
 	pip install --upgrade pip
-	pip install --upgrade --upgrade-strategy eager -r requirements.txt -r requirements-dev.txt -e .
+	pip install --upgrade --upgrade-strategy eager -e .[all]
 
 .PHONY: install
 install:
 	make update
 
 TAG ?= latest
+TARGET ?= base
 
 .PHONY: build
 build:
-	docker build \
+	docker buildx build \
+		--build-arg TARGET=$(TARGET) \
 		--platform linux/amd64 \
-		--target achilles \
 		--tag ghcr.io/allan-dip/chiron-utils:$(TAG) \
+		--target $(TARGET) \
 		.

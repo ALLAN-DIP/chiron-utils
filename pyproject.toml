@@ -23,19 +23,31 @@ classifiers = [
 ]
 requires-python = ">=3.7"
 license = { text = "MIT" }
-dynamic = [
-  "dependencies",
-  "optional-dependencies",
+dependencies = [
+  "daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e",
+  # Pinned `diplomacy` to `main`
+  "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@5733af848f3e5b35cd9ff8a1eba77bb40e09c946",
+  "tornado",
+]
+
+[project.optional-dependencies]
+# `all` extra allows an easy install of all optional dependencies
+all = [
+  "chiron_utils[base]",
+  "chiron_utils[dev]",
+]
+# Default extra to make OCI image builds easier
+base = []
+dev = [
+  # Use older `mypy` version to keep code compatible with Python 3.7
+  "mypy<1.9",
+  "pre-commit",
+  "pylint",
+  "pytest",
 ]
 
 [project.urls]
 Homepage = "https://github.com/ALLAN-DIP/chiron-utils"
-
-[tool.setuptools.dynamic]
-dependencies = { file = "requirements.txt" }
-
-[tool.setuptools.dynamic.optional-dependencies]
-dev = { file = "requirements-dev.txt" }
 
 [tool.black]
 line-length = 100
