@@ -34,10 +34,14 @@ dependencies = [
 # `all` extra allows an easy install of all optional dependencies
 all = [
   "chiron_utils[base]",
+  "chiron_utils[baseline-lr]",
   "chiron_utils[dev]",
 ]
 # Default extra to make OCI image builds easier
 base = []
+baseline-lr = [
+  "baseline-models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@2fd62f89963eb804f5f98ba0a1321656e28e594a",
+]
 dev = [
   # Use older `mypy` version to keep code compatible with Python 3.7
   "mypy<1.9",
