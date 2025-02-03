@@ -1,4 +1,5 @@
 astroid==3.3.8
+baseline_models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@2fd62f89963eb804f5f98ba0a1321656e28e594a
 bcrypt==4.2.1
 certifi==2024.12.14
 cfgv==3.4.0
@@ -14,10 +15,12 @@ identify==2.6.6
 idna==3.10
 iniconfig==2.0.0
 isort==6.0.0
+joblib==1.4.2
 mccabe==0.7.0
 mypy==1.8.0
 mypy-extensions==1.0.0
 nodeenv==1.9.1
+numpy==1.26.4
 packaging==24.2
 parsimonious==0.9.0
 platformdirs==4.3.6
@@ -30,8 +33,11 @@ pytz==2024.2
 PyYAML==6.0.2
 regex==2024.11.6
 requests==2.32.3
+scikit-learn==1.4.1.post1
+scipy==1.15.1
 setuptools==75.8.0
 six==1.17.0
+threadpoolctl==3.5.0
 tomlkit==0.13.2
 tornado==6.4.2
 tqdm==4.67.1
