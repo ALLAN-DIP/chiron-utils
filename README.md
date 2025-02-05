@@ -49,6 +49,12 @@ Both the bot and game running commands support a `--help` argument to list avail
   - Messages are proposals to carry out a set of valid moves, which is also randomly selected. One such proposal is sent to each opponent.
   - Due to the random nature of play, a game consisting entirely of `RandomProposerPlayer`s can last for a very long time. I (Alex) have observed multiple games lasting past 1950 without a clear winner.
   - `RandomProposerPlayer` uses very few resources, so it is useful as stand-ins for other players.
+- [`LrBot`](src/chiron_utils/bots/lr_bot.py) (`LrAdvisor` and `LrPlayer`):
+  - A logistic regression model is used to predict orders for each available unit, given current game state.
+  - To build the bot, run `make build-baseline-lr` to generate the OCI image to run with Docker
+    - When running the bot outside of a container, download the latest model file from [lr_models - Google Drive](https://drive.google.com/drive/folders/1FuG3qY51wRkR8RgEBVY49-loln06W-Ro). The filename includes the model release date in `YYYYMMDD` format).
+    - Edit the `MODEL_PATH` constant in `lr_bot.py` to point to the unzipped model folder.
+  - Code for model training can be found at <https://github.com/ALLAN-DIP/baseline-models>
 
 ## Contributing
 
