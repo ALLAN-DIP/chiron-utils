@@ -37,6 +37,7 @@ all = [
   "chiron_utils[base]",
   "chiron_utils[baseline-lr]",
   "chiron_utils[dev]",
+  "chiron_utils[llm-advisor]",
 ]
 # Default extra to make OCI image builds easier
 base = []
@@ -49,6 +50,11 @@ dev = [
   "pre-commit",
   "pylint",
   "pytest",
+]
+llm-advisor = [
+  "torch",
+  # Recommended minimum version for Llama 3.1 support
+  "transformers>=4.43.2",
 ]
 
 [project.urls]
