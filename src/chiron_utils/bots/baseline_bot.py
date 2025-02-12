@@ -25,7 +25,7 @@ class BotType(str, Enum):
     PLAYER = auto()
 
 
-DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
+DEFAULT_COMM_STAGE_LENGTH = 600
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
 SENTINEL = object()
 
