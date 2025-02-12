@@ -71,7 +71,7 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: pip
-          cache-dependency-path: requirements.txt
+          cache-dependency-path: pyproject.toml
       - name: Install dependencies into Python environment
         run: |
           pip install pytest==7.4.4 .
