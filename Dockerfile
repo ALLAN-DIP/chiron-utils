@@ -16,7 +16,7 @@ RUN apt-get -y update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --upgrade pip==24.3.1
+RUN pip install --no-cache-dir --upgrade pip==25.0.1
 
 # Install required packages
 COPY requirements-lock.txt .
