@@ -55,6 +55,13 @@ Both the bot and game running commands support a `--help` argument to list avail
     - When running the bot outside of a container, download the latest model file from [lr_models - Google Drive](https://drive.google.com/drive/folders/1FuG3qY51wRkR8RgEBVY49-loln06W-Ro). The filename includes the model release date in `YYYYMMDD` format).
     - Edit the `MODEL_PATH` constant in `lr_bot.py` to point to the unzipped model folder.
   - Code for model training can be found at <https://github.com/ALLAN-DIP/baseline-models>
+- [`LlmAdvisorBot`](src/chiron_utils/bots/llm_advisor_bot.py):
+  - A Large language model based on Llama-3.1-8B-Instruct to provide commentary advice given board states, message history and predicted orders from Cicero.
+  - To use the bot, run the following code under src/chiron_utils/scripts:
+
+```shell
+python run_bot.py --host [host_address] --port [port_address] --game_id [game_id] --power [power_name] --bot_type LlmAdvisor
+```
 
 ## Contributing
 

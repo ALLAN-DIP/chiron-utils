@@ -5,14 +5,14 @@ import asyncio
 from dataclasses import dataclass, field
 import json
 import random
-from typing import Dict, List, Optional, Sequence
+from typing import Dict, List, Optional, Sequence, Tuple, Union
 
 import diplomacy
 from diplomacy import Message
 from diplomacy.utils.constants import SuggestionType
 import torch
 from torch.nn import DataParallel
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers, mapping, return_logger
@@ -21,7 +21,7 @@ logger = return_logger(__name__)
 
 
 @dataclass
-class LlmAdvisorBot(BaselineBot, ABC):
+class LlmAdvisor(BaselineBot, ABC):
     """Bot that carries out random orders and sends random order proposals to other bots.
 
     Because of the similarity between the advisor and player versions of this bot,
@@ -34,11 +34,12 @@ class LlmAdvisorBot(BaselineBot, ABC):
     )
     base_model_name = "meta-llama/Llama-3.1-8B-Instruct"
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    bot_type = BotType.ADVISOR
+    default_suggestion_type = SuggestionType.COMMENTARY
 
     def __post_init__(self) -> None:
         """Initialize models."""
-        # Load the main model and tokenizer
-        self.tokenizer, self.model = self.load_model(self.base_model_name, None, None, self.device)
+        self.tokenizer, self.model = self.load_model(self.base_model_name, None, self.device)
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
@@ -51,17 +52,11 @@ class LlmAdvisorBot(BaselineBot, ABC):
             List of suggested orders.
         """
         received_messages = self.read_messages()
-        suggestions = [
-            msg.message
-            for msg in received_messages
-            # if msg.sender == "omniscient_type" and msg.type == "suggested_move_full"
-        ]
-        logger.info("-----------")
+        suggestions = [msg.message for msg in received_messages]
         logger.info("%s received suggested message: %s", self.display_name, suggestions)
-        logger.info("-----------")
         return suggestions if suggestions else []
 
-    def _get_relevant_messages(self, own: str, oppo: str) -> List:
+    def get_relevant_messages(self, own: str, oppo: str) -> List[str]:
         """Return all messages sent between 'own' and 'oppo'."""
         return [
             msg
@@ -70,7 +65,9 @@ class LlmAdvisorBot(BaselineBot, ABC):
             or (msg.sender == oppo and msg.recipient == own)
         ]
 
-    def _get_recent_message_history(self, messages: List, max_count: int = 8) -> List:
+    def get_recent_message_history(
+        self, messages: List[Message], max_count: int = 8
+    ) -> List[Message]:
         """Sort a list of messages by `time_sent` descending and return up to max_count most recent.
 
         Also ensures the very last message is from the opponent (if available).
@@ -87,7 +84,7 @@ class LlmAdvisorBot(BaselineBot, ABC):
 
         return reversed_msgs
 
-    def _create_system_prompt(self) -> str:
+    def create_system_prompt(self) -> str:
         """Return the system prompt string (static text)."""
         return """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 You are an expert assistant specializing in the Diplomacy board game. Your role is to assist a novice player by analyzing:
@@ -160,7 +157,7 @@ Moving to TRI is aggressive and undermines the collaborative stance Italy commun
 
 Now let's see the question:"""
 
-    def format_boardstates(self, boardstates):
+    def format_boardstates(self, boardstates: Dict[str, List[str]]) -> str:
         """Return formatted board states."""
         lines = []
         for power, units in boardstates.items():
@@ -169,7 +166,7 @@ Now let's see the question:"""
             lines.append(line)
         return "\n".join(lines)
 
-    def map_words_in_sentence(self, sentence, data):
+    def map_words_in_sentence(self, sentence: str, data: Dict[str, List[str]]) -> str:
         """Return abbreviation conversed words in sentences."""
         words = sentence.split()
         mapped_words = []
@@ -193,29 +190,23 @@ Now let's see the question:"""
         Returns:
             A string prompt, or None if no messages exist between 'own' and 'oppo'.
         """
-        # Convert power names if needed
         if own in POWER_NAMES_DICT:
             own = POWER_NAMES_DICT[own]
         if oppo in POWER_NAMES_DICT:
             oppo = POWER_NAMES_DICT[oppo]
 
-        system_prompt = self._create_system_prompt()
-
-        # Grab and sort board states
+        system_prompt = self.create_system_prompt()
         board_states = self.game.get_state()["units"]
         sorted_board_states = {key: sorted(value) for key, value in board_states.items()}
         formated_board_states = self.format_boardstates(sorted_board_states)
-        # Filter relevant messages
-        filtered_messages = self._get_relevant_messages(own, oppo)
+        filtered_messages = self.get_relevant_messages(own, oppo)
         if not filtered_messages:
             return None
 
-        # Get up to 16 recent messages, ensuring last is from opponent
-        recent_msgs = self._get_recent_message_history(filtered_messages, max_count=16)
+        recent_msgs = self.get_recent_message_history(filtered_messages, max_count=16)
         if not recent_msgs:
             return None
 
-        # Build a text representation of the message history
         message_history = ""
         for msg in recent_msgs:
             message_history += f"Message from {msg.sender}:'{msg.message}' "
@@ -223,7 +214,6 @@ Now let's see the question:"""
         parsed_data = json.loads(suggest_orders[0])
         predicted_orders = parsed_data["payload"]["predicted_orders"][oppo]
 
-        # Convert the list to a comma-separated string
         orders_string = ", ".join(predicted_orders)
 
         prompt = (
@@ -250,7 +240,6 @@ Now let's see the question:"""
         Returns:
             A string prompt, or None if no messages exist between 'own' and 'oppo'.
         """
-        # Convert power names if needed
         if oppo in POWER_NAMES_DICT:
             oppo = POWER_NAMES_DICT[oppo]
 
@@ -270,11 +259,13 @@ Now let's see the question:"""
             """
         return prompt
 
-    def load_model(self, base_model_name, adapter_path=None, tokenizer_path=None, device="cpu"):
-        """Loads and returns a tokenizer and model on the requested device.
-
-        If adapter_path is None, we won't load any adapter.
-        """
+    def load_model(
+        self,
+        base_model_name: str,
+        tokenizer_path: Optional[str] = None,
+        device: str = "cpu",
+    ) -> Tuple[PreTrainedTokenizer, Union[PreTrainedModel, DataParallel]]:
+        """Loads and returns a tokenizer and model on the requested device."""
         if tokenizer_path is None:
             tokenizer_path = base_model_name
 
@@ -286,9 +277,15 @@ Now let's see the question:"""
 
         return tokenizer, model
 
-    def generate_text(self, prompt, tokenizer, model, device="cpu", max_new_tokens=512):
+    def generate_text(
+        self,
+        prompt: str,
+        tokenizer: PreTrainedTokenizer,
+        model: Union[PreTrainedModel, DataParallel],
+        device: str = "cpu",
+        max_new_tokens: int = 512,
+    ) -> str:
         """Performs text generation using the tokenizer/model loaded above."""
-        # Ensure pad_token_id is defined
         if tokenizer.pad_token_id is None:
             tokenizer.pad_token_id = tokenizer.eos_token_id
 
@@ -321,22 +318,16 @@ Now let's see the question:"""
                     pad_token_id=tokenizer.pad_token_id,
                 )
 
-        return tokenizer.decode(output_ids[0], skip_special_tokens=True)
+        return tokenizer.decode(output_ids[0], skip_special_tokens=True)  # type: ignore[no-any-return]
 
-    def generate_and_parse_response(
-        self, prompt: str
-    ) -> tuple[Optional[str], Optional[str], Optional[str]]:
-        """Generate text from the model given 'prompt'. Parse out (Decision, Reason, Message) from the model output.
+    def generate_and_parse_response(self, prompt: str) -> str:
+        """Generate text from the model given 'prompt'.
 
         Returns:
-            (decision, reason, message) or (None, None, None) if something fails.
+            message or None if something fails.
         """
-        if prompt is None:
-            return None
-
         generated_text = self.generate_text(prompt, self.tokenizer, self.model, self.device, 1024)
         assistant_output = generated_text.split("assistant")[2]
-
         return assistant_output
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
@@ -346,7 +337,6 @@ Now let's see the question:"""
             List of orders to carry out.
         """
         await asyncio.sleep(random.uniform(5, 10))
-        # logger.info(" previous_newest_messages is :%s", self.previous_newest_messages)
 
         suggested_orders = await self.read_suggestions_from_advisor()
         filtered_orders = [
@@ -359,110 +349,70 @@ Now let's see the question:"""
             pass
 
         for other_power in get_other_powers([self.power_name], self.game):
-            all_relevant = self._get_relevant_messages(self.power_name, other_power)
+            all_relevant = self.get_relevant_messages(self.power_name, other_power)
             prev_msgs = self.previous_newest_messages.get(other_power)
             if prev_msgs is not None:
-                # Compare to find new messages
                 new_messages = [m for m in all_relevant if m not in prev_msgs]
                 if not new_messages:
-                    # No new messages, skip
                     continue
 
-                # We have new messages → create prompt, generate text, parse
                 prompt = self.format_prompt_phase1(self.power_name, other_power, filtered_orders)
                 if prompt is None:
                     continue
                 processed_prompt = self.map_words_in_sentence(prompt, mapping)
-                logger.info("=========")
-                logger.info(" prompt is :%s", processed_prompt)
-
+                logger.info("Prompt is :%s", processed_prompt)
                 output_phase1 = self.generate_and_parse_response(processed_prompt)
-                logger.info("=========")
-                logger.info("output_phase1: %s", output_phase1)
+                logger.info("Output of phase1 is : %s", output_phase1)
 
                 alignment_count = output_phase1.count("Alignment")
                 misalignment_count = output_phase1.count("Misalignment")
                 if misalignment_count >= alignment_count:
                     prompt2 = self.format_prompt_phase2(other_power, output_phase1)
+                    if prompt2 is None:
+                        continue
                     output_phase2 = self.generate_and_parse_response(prompt2)
-                    logger.info("=========")
-                    logger.info("output_phase2: %s", output_phase2)
+                    logger.info("Output of phase2 is : %s", output_phase2)
                     if output_phase2 and output_phase2.lstrip().startswith("I think"):
                         try:
                             await self.suggest_commentary(other_power, f"{output_phase2.lstrip()}")
                         except diplomacy.utils.exceptions.GamePhaseException as exc:
-                            # Handle it gracefully: log, ignore, etc.
-                            print(f"Ignoring GamePhaseException: {exc}")
+                            logger.info("Ignoring GamePhaseException:, %s", exc)
                     else:
                         pass
                 else:
-                    # do nothing if alignment_count > misalignment_count
                     pass
-
-                # if decision and reason:
-                #     await self.suggest_commentary(other_power, decision + " " + reason)
 
             else:
-                # If we have no previous messages, treat this as first time for this power
                 prompt = self.format_prompt_phase1(self.power_name, other_power, filtered_orders)
                 if prompt is None:
                     continue
                 processed_prompt = self.map_words_in_sentence(prompt, mapping)
-                logger.info("=========")
-                logger.info(" prompt is :%s", processed_prompt)
-
+                logger.info("Prompt is :%s", processed_prompt)
                 output_phase1 = self.generate_and_parse_response(processed_prompt)
-                logger.info("=========")
-                logger.info("output_phase1: %s", output_phase1)
+                logger.info("Output of phase1 is : %s", output_phase1)
 
                 alignment_count = output_phase1.count("Alignment")
                 misalignment_count = output_phase1.count("Misalignment")
                 if misalignment_count >= alignment_count:
                     prompt2 = self.format_prompt_phase2(other_power, output_phase1)
+                    if prompt2 is None:
+                        continue
                     output_phase2 = self.generate_and_parse_response(prompt2)
-                    logger.info("=========")
-                    logger.info("output_phase2: %s", output_phase2)
+                    logger.info("Output of phase2 is : %s", output_phase2)
                     if output_phase2 and output_phase2.lstrip().startswith("I think"):
                         try:
                             await self.suggest_commentary(other_power, f"{output_phase2.lstrip()}")
                         except diplomacy.utils.exceptions.GamePhaseException as exc:
-                            # Handle it gracefully: log, ignore, etc.
-                            print(f"Ignoring GamePhaseException: {exc}")
+                            logger.info("Ignoring GamePhaseException:, %s", exc)
                     else:
                         pass
                 else:
                     pass
 
-                # if decision and reason:
-                #     await self.suggest_commentary(other_power, decision + " " + reason)
-
-            # After handling new (or first-time) messages, update the record
             self.previous_newest_messages[other_power] = all_relevant
 
-        # Done with first messaging round
         self.is_first_messaging_round = False
         return list(orders)
-
-    # def get_random_orders(self, power_name: Optional[str] = None) -> List[str]:
-    #     """Generate random orders for a power to carry out.
-
-    #     Args:
-    #         power_name: Name of power to generate random orders for.
-    #             Defaults to current power.
-
-    #     Returns:
-    #         List of random orders.
-    #     """
-    #     if power_name is None:
-    #         power_name = self.power_name
-
-    #     possible_orders = self.game.get_all_possible_orders()
-    #     orders = [
-    #         random.choice(list(possible_orders[loc]))
-    #         for loc in self.game.get_orderable_locations(power_name)
-    #         if possible_orders[loc]
-    #     ]
-    #     return orders
 
     async def gen_orders(self) -> List[str]:
         """Generate orders for a turn.
@@ -474,41 +424,17 @@ Now let's see the question:"""
         filtered_orders = [
             order
             for order in suggested_orders
-            if '"advisor":"ENGLAND (CiceroAdvisor)"' in order and '"suggested_orders"' in order
+            if f'"advisor":"{self.power_name} (CiceroAdvisor)"' in order
+            and '"predicted_orders"' in order
         ]
+        orders: List[str] = []
         if not filtered_orders:
-            orders = []
             return orders
         parsed_data = json.loads(filtered_orders[0])
-        predicted_orders = parsed_data["payload"]["suggested_orders"]
+        predicted_orders: List[str] = parsed_data["payload"]["suggested_orders"]
         orders = predicted_orders
+
         if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(orders)
 
-        #     random_predicted_orders = {}
-        #     for other_power in get_other_powers([self.power_name], self.game):
-        #         random_predicted_orders[other_power] = self.get_random_orders(other_power)
-        #     await self.suggest_opponent_orders(random_predicted_orders)
-        # elif self.bot_type == BotType.PLAYER:
-        #     await self.send_orders(orders, wait=True)
         return orders
-
-
-@dataclass
-class LlmAdvisor(LlmAdvisorBot):
-    """Advisor form of `LlmAdvisorBot`."""
-
-    bot_type = BotType.ADVISOR
-    suggestion_type = (
-        SuggestionType.MESSAGE
-        | SuggestionType.MOVE
-        | SuggestionType.COMMENTARY
-        | SuggestionType.OPPONENT_MOVE
-    )
-
-
-@dataclass
-class LlmPlayer(LlmAdvisorBot):
-    """Player form of `LlmAdvisorBot`."""
-
-    bot_type = BotType.PLAYER
