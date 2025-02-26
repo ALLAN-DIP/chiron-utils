@@ -34,17 +34,9 @@ if {"baseline_models"} < importable_modules:
         ]
     )
 if {"torch", "transformers"} < importable_modules:
-    from chiron_utils.bots.llm_advisor_bot import (
-        LlmAdvisor as LlmAdvisor,
-        LlmPlayer as LlmPlayer,
-    )
+    from chiron_utils.bots.llm_advisor_bot import LlmAdvisor as LlmAdvisor
 
-    BOTS.extend(
-        [
-            LlmAdvisor,
-            LlmPlayer,
-        ]
-    )
+    BOTS.extend([LlmAdvisor])
 # Alphabetize list of classes
 BOTS.sort(key=lambda t: t.__name__)
 
