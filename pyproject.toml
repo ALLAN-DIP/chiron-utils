@@ -193,7 +193,7 @@ broad-exception-caught
 score = false
 
 [tool.pytest.ini_options]
-addopts = "-m 'not server' --strict-markers --verbosity=2"
+addopts = "-m 'not server' --strict-config --strict-markers --verbosity=2"
 filterwarnings = [
   "ignore::DeprecationWarning",
 ]
