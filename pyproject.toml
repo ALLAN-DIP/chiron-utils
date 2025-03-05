@@ -193,7 +193,10 @@ broad-exception-caught
 score = false
 
 [tool.pytest.ini_options]
-addopts = "--verbosity=2"
+addopts = "-m 'not server' --strict-markers --verbosity=2"
 filterwarnings = [
   "ignore::DeprecationWarning",
+]
+markers = [
+  "server: Marks tests as requiring `diplomacy` server (deselect with `-m 'not server'`)",
 ]
