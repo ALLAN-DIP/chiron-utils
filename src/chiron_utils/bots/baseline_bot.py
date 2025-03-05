@@ -221,6 +221,39 @@ class BaselineBot(ABC):
             suggestion_type=diplomacy_strings.SUGGESTED_MOVE_OPPONENTS,
         )
 
+    async def suggest_deception(self, deception_info: dict) -> None:
+        """Send predicted deception for opponent powers to the server.
+
+        Args:
+            deception_info: dictionary about deception from_power (key='sender'), to_power (key='recipient'), 
+            message content (key='message'), number of scs (key='scores'), deceptive values (key='1_rule', '2_rule', '3_rule')
+        """
+        if self.bot_type != BotType.ADVISOR:
+            raise TypeError(
+                f"{self.suggest_deception.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.ADVISOR}"
+            )
+        if not self.suggestion_type & SuggestionType.DECEPTION:
+            raise ValueError(
+                f"{self.suggest_deception.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.DECEPTION.name} suggestions"
+            )
+
+        payload = {"sender": deception_info['sender'], 
+                   "recipient": deception_info['recipient'],
+                   "message": deception_info['message'], 
+                   "scores": deception_info['scores'],
+                   "d_proposed_action": deception_info['d_proposed_action'], 
+                   "v_proposed_action": deception_info['v_proposed_action'],
+                   "V_best": deception_info['V_best'],
+                   "deceptive_values": [deception_info['1_rule'], deception_info['2_rule'], deception_info['3_rule']]}
+
+        await self.send_suggestion(
+            payload=payload,
+            suggestion_type=diplomacy_strings.SUGGESTED_DECEPTION,
+        )
+
+
     async def suggest_message(self, recipient: str, message: str) -> None:
         """Send suggested messages for power to the server.
 
