@@ -11,9 +11,11 @@ import diplomacy
 from diplomacy import Message
 from diplomacy.utils.constants import SuggestionType
 import torch
+from torch.nn import DataParallel
 import torch.nn as nn
+
 import numpy as np
-from transformers import BertTokenizer, BertModel, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer, DataParallel
+from transformers import BertTokenizer, BertModel, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer
 from sklearn.preprocessing import StandardScaler
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
