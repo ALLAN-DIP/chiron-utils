@@ -35,8 +35,10 @@ if {"baseline_models"} < importable_modules:
     )
 if {"torch", "transformers"} < importable_modules:
     from chiron_utils.bots.llm_advisor_bot import LlmAdvisor as LlmAdvisor
+    from chiron_utils.bots.bert_based_deception_bot import DeceptionBertAdvisor as DeceptionBertAdvisor
 
     BOTS.extend([LlmAdvisor])
+    BOTS.extend([DeceptionBertAdvisor])
 # Alphabetize list of classes
 BOTS.sort(key=lambda t: t.__name__)
 
