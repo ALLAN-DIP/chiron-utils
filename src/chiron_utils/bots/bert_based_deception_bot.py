@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 import json
 import random
 from typing import Dict, List, Optional, Sequence, Tuple, Union
-
+import copy
 import diplomacy
 from diplomacy import Message
 from diplomacy.utils.constants import SuggestionType
@@ -18,7 +18,7 @@ import numpy as np
 from transformers import BertTokenizer, BertModel, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer
 from sklearn.preprocessing import StandardScaler
 
-from chiron_utils.bots.baseline_bot import BaselineBot, BotType
+from chiron_utils.bots.baseline_bot import BaselineBot, BotType, SENTINEL
 from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers, mapping, return_logger
 
 logger = return_logger(__name__)
@@ -54,7 +54,6 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
     Because of the similarity between the advisor and player versions of this bot,
     both of their behaviors are abstracted into this single abstract base class.
     """
-
     is_first_messaging_round = False
     # trained BERTWithNumericalFeatures model and BERT tokennizer paths
     model_path = 'src/chiron_utils/models/bert_based_deception/best_model_epoch_10.pth'
@@ -62,12 +61,21 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     bot_type = BotType.ADVISOR
     default_suggestion_type = SuggestionType.COMMENTARY
+    suggestion_type = SuggestionType.COMMENTARY
+
     scaler = StandardScaler()
     _ = scaler.fit_transform(np.array([[0, -1, -1, -1], [15, 0.0933, 0.1047, 0.0725]]))
 
     def __post_init__(self) -> None:
         """Initialize models."""
+
+        super().__post_init__()  # Call BaselineBot's __post_init__
+        if self.suggestion_type is None or self.suggestion_type == SENTINEL:
+            self.suggestion_type = self.default_suggestion_type
+
+        print(f"DEBUG: DeceptionBertAdvisor initialized with suggestion_type = {self.suggestion_type}")
         self.tokenizer, self.model = self.load_model(self.model_path, self.tokenizer_path, self.device)
+        self.last_predict_deception = dict()
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
@@ -91,24 +99,6 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
             return []
 
         return reversed_msgs
-
-    def map_words_in_sentence(self, sentence: str, data: Dict[str, List[str]]) -> str:
-        """Return abbreviation conversed words in sentences."""
-        words = sentence.split()
-        mapped_words = []
-
-        for word in words:
-            clean_word = word.strip(",.!?")
-            word_lower = clean_word.lower()
-
-            if word_lower in data:
-                mapped_value = data[word_lower][0]
-                mapped_word = word.replace(clean_word, mapped_value)
-                mapped_words.append(mapped_word)
-            else:
-                mapped_words.append(word)
-
-        return " ".join(mapped_words)
 
     def load_model(
         self,
@@ -144,6 +134,17 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
         result = predictions[0].item()
         is_deceptive = result >= 0.5
         return is_deceptive
+
+    async def read_suggestions_from_advisor(self) -> List[str]:
+        """Read suggestions from CiceroAdvisor.
+
+        Returns:
+            List of suggested orders.
+        """
+        received_messages = self.read_messages()
+        suggestions = [msg.message for msg in received_messages]
+        logger.info("%s received suggested message: %s", self.display_name, suggestions)
+        return suggestions if suggestions else []
     
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
         """Carry out one round of messaging, along with related tasks.
@@ -152,7 +153,7 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
             List of orders to carry out.
         """
         await asyncio.sleep(random.uniform(5, 10))
-        
+        orders = []
         # must check for new message, if not then dont suggest deception for last sender-recipient message
 
         suggested_deceptions = await self.read_suggestions_from_advisor()
@@ -162,20 +163,25 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
             if f'"advisor":"{self.power_name} (CiceroAdvisor)"' in deception_msg
             and '"deceptive_values":' in deception_msg
         ]
-        if not filtered_deceptions:
-            pass
+        if not len(filtered_deceptions):
+            return orders
         
         parsed_data = json.loads(filtered_deceptions[0])
         payload = parsed_data["payload"]
-        score = payload["score"]
+        if payload == self.last_predict_deception:
+            return orders
+        
+        scores = payload["scores"]
         deceptive_values = payload["deceptive_values"]
-        is_deception = self.predict_deception(payload, [score] + deceptive_values)
+        is_deception = self.predict_deception(payload, [scores] + deceptive_values)
         deception_commentary = f"""detect possible deception in {payload['sender']} if they promise to do followings: /n
                             {payload['d_proposed_action']} /n
                             or ask you to do followings: /n
                             {payload['v_proposed_action']} /n
                             we recommend you to be cautious and proceed with your best move in this situation:
                             {payload['V_best']}"""
+        self.last_predict_deception = copy.deepcopy(payload)
+        logger.info(f"Deception prediction a message {payload}: {is_deception}")
         
         if is_deception:
             try:
@@ -183,7 +189,7 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
             except diplomacy.utils.exceptions.GamePhaseException as exc:
                 logger.info("Ignoring GamePhaseException:, %s", exc)
         
-        return list(orders)
+        return orders
 
     async def gen_orders(self) -> List[str]:
         """Generate None for orders
