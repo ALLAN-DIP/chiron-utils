@@ -64,7 +64,7 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
     suggestion_type = SuggestionType.COMMENTARY
 
     scaler = StandardScaler()
-    _ = scaler.fit_transform(np.array([[0, -1, -1, -1], [15, 0.0933, 0.1047, 0.0725]]))
+    
 
     def __post_init__(self) -> None:
         """Initialize models."""
@@ -76,11 +76,53 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
         print(f"DEBUG: DeceptionBertAdvisor initialized with suggestion_type = {self.suggestion_type}")
         self.tokenizer, self.model = self.load_model(self.model_path, self.tokenizer_path, self.device)
         self.last_predict_deception = dict()
+        
+        gold_amr_path = f"src/chiron_utils/models/train_data/denis_train_messages_detection_1_with_scores.json"    
+        with open(gold_amr_path, "r") as f:
+            gold_amr_data = json.load(f)
+            
+        more_data = f"src/chiron_utils/models/train_data/sample_1_5K_train_messages.json"    
+        with open(gold_amr_path, "r") as f:
+            more_data = json.load(f)
+            
+        train_data =  self.extract_features(gold_amr_data) + self.extract_features(more_data)
+        _, numeric_features_train_data, _ = zip(*train_data)
+        numeric_features_train_data = np.array(numeric_features_train_data)
+        
+        _ = self.scaler.fit_transform(numeric_features_train_data)
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
+        self.last_predict_deception = dict()
 
+
+    def extract_features(self, messages):
+        count_lies = 0
+        count_non_rl = 0
+        max_non_rl = 100
+        data =[]
+        for msg in messages:
+            text = f"{msg['sender']} sends to {msg['recipient']} with a message: {msg['message']}"
+            label = 1 if not msg['sender_labels'] else 0
+            scores = msg.get('scores',0)
+            if label ==1:
+                count_lies+=1
+
+            # Extract friction features if available, selecting the entry with the highest sum
+            if msg['friction_info']:
+                best_friction = max(
+                    msg['friction_info'],
+                    key=lambda x: sum([x.get('1_rule', -1), x.get('2_rule', -1), x.get('3_rule', -1)])
+                )
+                features = [scores, best_friction.get('1_rule', -1), best_friction.get('2_rule', -1), best_friction.get('3_rule', -1)]
+            
+            else:
+                features = [scores, -1, -1,-1 ]
+            data.append((text, features, label))
+                
+        return data
+    
     def get_recent_message_history(
         self, messages: List[Message], max_count: int = 8
     ) -> List[Message]:
@@ -130,7 +172,11 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
         text = f"{msg['sender']} sends to {msg['recipient']} with a message: {msg['message']}"
         tokenized_text = self.tokenizer(
                         list([text]), padding=True, truncation=True, max_length=512, return_tensors="pt")
+        logger.info(f"input_ids: {tokenized_text['input_ids']}")
+        logger.info(f"attention_mask: {tokenized_text['attention_mask']}")
+        logger.info(f"numerical_features: {numerical_features}")
         predictions = self.model(tokenized_text['input_ids'].to(self.device), tokenized_text['attention_mask'].to(self.device), numerical_features.to(self.device))
+        logger.info(f'predictions: {predictions} >= 0.5')
         result = predictions[0].item()
         is_deceptive = result >= 0.5
         return is_deceptive
@@ -166,7 +212,7 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
         if not len(filtered_deceptions):
             return orders
         
-        parsed_data = json.loads(filtered_deceptions[0])
+        parsed_data = json.loads(filtered_deceptions[-1])
         payload = parsed_data["payload"]
         if payload == self.last_predict_deception:
             return orders
