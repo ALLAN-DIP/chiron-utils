@@ -38,6 +38,7 @@ class LlmAdvisor(BaselineBot):
 
     def __post_init__(self) -> None:
         """Initialize models."""
+        super().__post_init__()
         self.tokenizer, self.model = self.load_model(self.base_model_name, None, self.device)
 
     async def start_phase(self) -> None:
