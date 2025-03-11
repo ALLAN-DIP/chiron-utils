@@ -48,7 +48,8 @@ dev = [
   "mypy<1.9",
   "pre-commit",
   "pylint",
-  "pytest",
+  # `pytest` `6.0` introduced `--strict-config` argument and `pyproject.toml` support
+  "pytest>=6.0",
 ]
 
 [project.urls]
@@ -193,7 +194,11 @@ broad-exception-caught
 score = false
 
 [tool.pytest.ini_options]
-addopts = "--verbosity=2"
+addopts = "-m 'not server' --strict-config --strict-markers --verbosity=2"
 filterwarnings = [
   "ignore::DeprecationWarning",
 ]
+markers = [
+  "server: Marks tests as requiring `diplomacy` server (deselect with `-m 'not server'`)",
+]
+minversion = "6.0"
