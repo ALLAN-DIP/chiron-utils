@@ -1,6 +1,5 @@
 """Bots that carry out random orders and make random order proposals."""
 
-from abc import ABC
 import asyncio
 from dataclasses import dataclass, field
 import json
@@ -21,7 +20,7 @@ logger = return_logger(__name__)
 
 
 @dataclass
-class LlmAdvisor(BaselineBot, ABC):
+class LlmAdvisor(BaselineBot):
     """Bot that carries out random orders and sends random order proposals to other bots.
 
     Because of the similarity between the advisor and player versions of this bot,
