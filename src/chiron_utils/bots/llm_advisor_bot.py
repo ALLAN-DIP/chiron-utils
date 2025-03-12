@@ -75,10 +75,12 @@ class LlmAdvisor(BaselineBot, ABC):
         if not messages:
             return []
 
+        # Sort descending by time_sent
         sorted_msgs = sorted(messages, key=lambda x: x.time_sent, reverse=True)
         recent_msgs = sorted_msgs[:max_count]
         reversed_msgs = list(reversed(recent_msgs))
 
+        # Make sure the last message is from opponent, if possible
         if reversed_msgs and reversed_msgs[-1].sender == self.power_name:
             return []
 
@@ -190,11 +192,13 @@ Now let's see the question:"""
         Returns:
             A string prompt, or None if no messages exist between 'own' and 'oppo'.
         """
+        # Convert power names
         if own in POWER_NAMES_DICT:
             own = POWER_NAMES_DICT[own]
         if oppo in POWER_NAMES_DICT:
             oppo = POWER_NAMES_DICT[oppo]
 
+        # Grab and sort board states, filter relevant messages.
         system_prompt = self.create_system_prompt()
         board_states = self.game.get_state()["units"]
         sorted_board_states = {key: sorted(value) for key, value in board_states.items()}
@@ -203,10 +207,11 @@ Now let's see the question:"""
         if not filtered_messages:
             return None
 
-        recent_msgs = self.get_recent_message_history(filtered_messages, max_count=16)
+        recent_msgs = self.get_recent_message_history(filtered_messages, max_count=10)
         if not recent_msgs:
             return None
 
+        # Build a text representation of the message history
         message_history = ""
         for msg in recent_msgs:
             message_history += f"Message from {msg.sender}:'{msg.message}' "
@@ -352,8 +357,10 @@ Now let's see the question:"""
             all_relevant = self.get_relevant_messages(self.power_name, other_power)
             prev_msgs = self.previous_newest_messages.get(other_power)
             if prev_msgs is not None:
+                # Compare to find new messages
                 new_messages = [m for m in all_relevant if m not in prev_msgs]
                 if not new_messages:
+                    # No new messages, skip
                     continue
 
                 prompt = self.format_prompt_phase1(self.power_name, other_power, filtered_orders)
@@ -380,9 +387,11 @@ Now let's see the question:"""
                     else:
                         pass
                 else:
+                    # do nothing if alignment_count > misalignment_count
                     pass
 
             else:
+                # If we have no previous messages, treat this as first time for this power
                 prompt = self.format_prompt_phase1(self.power_name, other_power, filtered_orders)
                 if prompt is None:
                     continue
