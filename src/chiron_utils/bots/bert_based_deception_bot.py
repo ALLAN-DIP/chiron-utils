@@ -7,6 +7,7 @@ import json
 import random
 from typing import Dict, List, Optional, Sequence, Tuple, Union
 import copy
+import joblib
 import diplomacy
 from diplomacy import Message
 from diplomacy.utils.constants import SuggestionType
@@ -63,8 +64,7 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
     default_suggestion_type = SuggestionType.COMMENTARY
     suggestion_type = SuggestionType.COMMENTARY
 
-    scaler = StandardScaler()
-    
+    scaler = joblib.load("src/chiron_utils/models/bert_based_deception/scaler.pkl")
 
     def __post_init__(self) -> None:
         """Initialize models."""
@@ -76,20 +76,6 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
         print(f"DEBUG: DeceptionBertAdvisor initialized with suggestion_type = {self.suggestion_type}")
         self.tokenizer, self.model = self.load_model(self.model_path, self.tokenizer_path, self.device)
         self.last_predict_deception = dict()
-        
-        gold_amr_path = f"src/chiron_utils/models/train_data/denis_train_messages_detection_1_with_scores.json"    
-        with open(gold_amr_path, "r") as f:
-            gold_amr_data = json.load(f)
-            
-        more_data = f"src/chiron_utils/models/train_data/sample_1_5K_train_messages.json"    
-        with open(gold_amr_path, "r") as f:
-            more_data = json.load(f)
-            
-        train_data =  self.extract_features(gold_amr_data) + self.extract_features(more_data)
-        _, numeric_features_train_data, _ = zip(*train_data)
-        numeric_features_train_data = np.array(numeric_features_train_data)
-        
-        _ = self.scaler.fit_transform(numeric_features_train_data)
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
@@ -167,7 +153,7 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
             is_deceptive 
         """
         # eval bert 
-        numerical_features = self.scaler.transform(np.array([numerical_features], dtype=float))
+        numerical_features = self.scaler.transform(np.array([numerical_features]))
         numerical_features = torch.tensor(numerical_features, dtype=torch.float32)
         text = f"{msg['sender']} sends to {msg['recipient']} with a message: {msg['message']}"
         tokenized_text = self.tokenizer(
@@ -220,12 +206,16 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
         scores = payload["scores"]
         deceptive_values = payload["deceptive_values"]
         is_deception = self.predict_deception(payload, [scores] + deceptive_values)
-        deception_commentary = f"""detect possible deception in {payload['sender']} if they promise to do followings: /n
-                            {payload['d_proposed_action']} /n
-                            or ask you to do followings: /n
-                            {payload['v_proposed_action']} /n
-                            we recommend you to be cautious and proceed with your best move in this situation:
-                            {payload['V_best']}"""
+        
+        if payload['d_proposed_action'] == 'None':
+            deception_commentary = f"""We detect possible deception in {payload['sender']}'s message saying \"{payload['message']}\", we recommend you to be cautious!"""
+        else:
+            deception_commentary = f"""We detect possible deception in {payload['sender']}'s message saying \"{payload['message']}\". If they promise to do the following:
+                                {payload['d_proposed_action']}
+                                or ask you to do the following: 
+                                {payload['v_proposed_action']}
+                                we recommend you to be cautious and proceed with your best move in this situation:
+                                {payload['V_best']}"""
         self.last_predict_deception = copy.deepcopy(payload)
         logger.info(f"Deception prediction a message {payload}: {is_deception}")
         
