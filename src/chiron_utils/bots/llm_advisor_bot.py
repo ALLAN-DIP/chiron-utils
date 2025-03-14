@@ -46,7 +46,7 @@ class LlmAdvisor(BaselineBot):
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
 
-    async def read_suggestions_from_advisor(self) -> List[str]:
+    def read_suggestions_from_advisor(self) -> List[str]:
         """Read suggestions from RandomProposerAdvisor.
 
         Returns:
@@ -348,7 +348,7 @@ Now let's see the question:"""
         """
         await asyncio.sleep(random.uniform(5, 10))
 
-        filtered_orders = await self.read_suggestions_from_advisor()
+        filtered_orders = self.read_suggestions_from_advisor()
         if not filtered_orders:
             return []
 
@@ -429,7 +429,7 @@ Now let's see the question:"""
         Returns:
             List of orders to carry out.
         """
-        filtered_orders = await self.read_suggestions_from_advisor()
+        filtered_orders = self.read_suggestions_from_advisor()
         orders: List[str] = []
         if not filtered_orders:
             return orders
