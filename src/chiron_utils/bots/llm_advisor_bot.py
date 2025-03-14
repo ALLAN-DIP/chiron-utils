@@ -56,7 +56,7 @@ class LlmAdvisor(BaselineBot):
         logger.info("%s received suggested message: %s", self.display_name, suggestions)
         return suggestions if suggestions else []
 
-    def get_relevant_messages(self, own: str, oppo: str) -> List[str]:
+    def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
         """Return all messages sent between 'own' and 'oppo'."""
         return [
             msg
