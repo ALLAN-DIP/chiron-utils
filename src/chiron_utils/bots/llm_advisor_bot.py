@@ -53,8 +53,14 @@ class LlmAdvisor(BaselineBot):
         """
         received_messages = self.read_messages()
         suggestions = [msg.message for msg in received_messages]
-        logger.info("%s received suggested message: %s", self.display_name, suggestions)
-        return suggestions if suggestions else []
+        filtered_orders = [
+            order
+            for order in suggestions
+            if f'"advisor":"{self.power_name} (CiceroAdvisor)"' in order
+            and '"predicted_orders"' in order
+        ]
+        logger.info("%s received suggested message: %s", self.display_name, filtered_orders)
+        return filtered_orders
 
     def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
         """Return all messages sent between 'own' and 'oppo'."""
@@ -343,13 +349,7 @@ Now let's see the question:"""
         """
         await asyncio.sleep(random.uniform(5, 10))
 
-        suggested_orders = await self.read_suggestions_from_advisor()
-        filtered_orders = [
-            order
-            for order in suggested_orders
-            if f'"advisor":"{self.power_name} (CiceroAdvisor)"' in order
-            and '"predicted_orders"' in order
-        ]
+        filtered_orders = await self.read_suggestions_from_advisor()
         if not filtered_orders:
             pass
 
@@ -430,13 +430,7 @@ Now let's see the question:"""
         Returns:
             List of orders to carry out.
         """
-        suggested_orders = await self.read_suggestions_from_advisor()
-        filtered_orders = [
-            order
-            for order in suggested_orders
-            if f'"advisor":"{self.power_name} (CiceroAdvisor)"' in order
-            and '"predicted_orders"' in order
-        ]
+        filtered_orders = await self.read_suggestions_from_advisor()
         orders: List[str] = []
         if not filtered_orders:
             return orders
