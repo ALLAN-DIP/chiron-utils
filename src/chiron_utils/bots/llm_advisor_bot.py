@@ -8,6 +8,7 @@ from typing import Dict, List, Optional, Sequence, Tuple, Union
 
 import diplomacy
 from diplomacy import Message
+from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 import torch
 from torch.nn import DataParallel
@@ -52,15 +53,13 @@ class LlmAdvisor(BaselineBot):
             List of suggested orders.
         """
         received_messages = self.read_messages()
-        suggestions = [msg.message for msg in received_messages]
-        filtered_orders = [
-            order
-            for order in suggestions
-            if f'"advisor":"{self.power_name} (CiceroAdvisor)"' in order
-            and '"predicted_orders"' in order
+        suggestion_messages = [
+            msg.message
+            for msg in received_messages
+            if msg.type == diplomacy_strings.SUGGESTED_MOVE_OPPONENTS
         ]
-        logger.info("%s received suggested message: %s", self.display_name, filtered_orders)
-        return filtered_orders
+        logger.info("%s received suggested message: %s", self.display_name, suggestion_messages)
+        return suggestion_messages
 
     def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
         """Return all messages sent between 'own' and 'oppo'."""
