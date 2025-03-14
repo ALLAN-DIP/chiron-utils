@@ -61,6 +61,7 @@ Both the bot and game running commands support a `--help` argument to list avail
     ```shell
     python -m chiron_utils.scripts.run_bot --host [host_address] --port [port_address] --game_id [game_id] --power [power_name] --bot_type LlmAdvisor
     ```
+  - In addition, one needs to run the [Cicero advisor](https://github.com/ALLAN-DIP/diplomacy_cicero) with it providing opponent move advice to the same power (`--advice_levels 8`).
 
 ## Contributing
 
