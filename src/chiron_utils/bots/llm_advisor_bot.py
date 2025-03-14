@@ -418,6 +418,7 @@ Now let's see the question:"""
                 else:
                     pass
 
+            # After handling new (or first-time) messages, update the record
             self.previous_newest_messages[other_power] = all_relevant
 
         self.is_first_messaging_round = False
