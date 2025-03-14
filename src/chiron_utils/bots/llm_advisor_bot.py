@@ -58,7 +58,9 @@ class LlmAdvisor(BaselineBot):
             for msg in received_messages
             if msg.type == diplomacy_strings.SUGGESTED_MOVE_OPPONENTS
         ]
-        logger.info("%s received suggested message: %s", self.display_name, suggestion_messages)
+        logger.info(
+            "%s received opponent move suggestions: %s", self.display_name, suggestion_messages
+        )
         return suggestion_messages
 
     def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
@@ -220,7 +222,6 @@ Now let's see the question:"""
         message_history = ""
         for msg in recent_msgs:
             message_history += f"Message from {msg.sender}:'{msg.message}' "
-        logger.info(suggest_orders)
         parsed_data = json.loads(suggest_orders[0])
         predicted_orders = parsed_data["payload"]["predicted_orders"][oppo]
 
@@ -366,9 +367,9 @@ Now let's see the question:"""
                 if prompt is None:
                     continue
                 processed_prompt = self.map_words_in_sentence(prompt, mapping)
-                logger.info("Prompt is :%s", processed_prompt)
+                logger.info("Phase1 prompt for %s: %s", other_power, processed_prompt)
                 output_phase1 = self.generate_and_parse_response(processed_prompt)
-                logger.info("Output of phase1 is : %s", output_phase1)
+                logger.info("Phase1 output for %s: %s", other_power, output_phase1)
 
                 alignment_count = output_phase1.count("Alignment")
                 misalignment_count = output_phase1.count("Misalignment")
@@ -377,12 +378,12 @@ Now let's see the question:"""
                     if prompt2 is None:
                         continue
                     output_phase2 = self.generate_and_parse_response(prompt2)
-                    logger.info("Output of phase2 is : %s", output_phase2)
+                    logger.info("Phase2 output for %s: %s", other_power, output_phase2)
                     if output_phase2 and output_phase2.lstrip().startswith("I think"):
                         try:
                             await self.suggest_commentary(other_power, f"{output_phase2.lstrip()}")
                         except diplomacy.utils.exceptions.GamePhaseException as exc:
-                            logger.info("Ignoring GamePhaseException:, %s", exc)
+                            logger.exception("Ignoring %s", exc.__class__.__name__)
                     else:
                         pass
                 else:
@@ -395,9 +396,9 @@ Now let's see the question:"""
                 if prompt is None:
                     continue
                 processed_prompt = self.map_words_in_sentence(prompt, mapping)
-                logger.info("Prompt is :%s", processed_prompt)
+                logger.info("Phase1 prompt for %s: %s", other_power, processed_prompt)
                 output_phase1 = self.generate_and_parse_response(processed_prompt)
-                logger.info("Output of phase1 is : %s", output_phase1)
+                logger.info("Phase1 output for %s: %s", other_power, output_phase1)
 
                 alignment_count = output_phase1.count("Alignment")
                 misalignment_count = output_phase1.count("Misalignment")
@@ -406,12 +407,12 @@ Now let's see the question:"""
                     if prompt2 is None:
                         continue
                     output_phase2 = self.generate_and_parse_response(prompt2)
-                    logger.info("Output of phase2 is : %s", output_phase2)
+                    logger.info("Phase2 output for %s: %s", other_power, output_phase2)
                     if output_phase2 and output_phase2.lstrip().startswith("I think"):
                         try:
                             await self.suggest_commentary(other_power, f"{output_phase2.lstrip()}")
                         except diplomacy.utils.exceptions.GamePhaseException as exc:
-                            logger.info("Ignoring GamePhaseException:, %s", exc)
+                            logger.exception("Ignoring %s", exc.__class__.__name__)
                     else:
                         pass
                 else:
