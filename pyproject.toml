@@ -39,6 +39,7 @@ all = [
   "chiron_utils[base]",
   "chiron_utils[baseline-lr]",
   "chiron_utils[dev]",
+  "chiron_utils[llm-advisor]",
 ]
 # Default extra to make OCI image builds easier
 base = []
@@ -52,6 +53,11 @@ dev = [
   "pylint",
   # `pytest` `6.0` introduced `--strict-config` argument and `pyproject.toml` support
   "pytest>=6.0",
+]
+llm-advisor = [
+  "torch",
+  # Recommended minimum version for Llama 3.1 support
+  "transformers>=4.43.2",
 ]
 
 [project.urls]
@@ -77,8 +83,11 @@ strict = true
 warn_unreachable = true
 
 [[tool.mypy.overrides]]
-# Needed to prevent `.../site-packages/_pytest/mark/__init__.py:187: error: Positional-only parameters are only supported in Python 3.8 and greater  [syntax]`
-module = "pytest"
+# Needed to prevent a large number of errors related to Python 3.8 syntax being used
+module = [
+  "pytest",
+  "torch.*",
+]
 follow_imports = "skip"
 
 [tool.ruff]
