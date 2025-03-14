@@ -27,8 +27,10 @@ dependencies = [
   "daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e",
   # Pinned `diplomacy` to `main`
   "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@f600344158c85fb933b6c1d0fff61e80bd529648",
-  'importlib-metadata ; python_version < "3.10"',
-  "tornado",
+  # `importlib-metadata` `3.7.0` introduced `packages_distributions()`
+  'importlib-metadata>=3.7.0 ; python_version < "3.10"',
+  # `tornado` `3.1` introduced `ASYNC_TEST_TIMEOUT` environment variable
+  "tornado>=3.1",
 ]
 
 [project.optional-dependencies]
