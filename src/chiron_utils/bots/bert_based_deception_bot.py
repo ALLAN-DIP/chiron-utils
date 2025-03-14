@@ -64,8 +64,6 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
     default_suggestion_type = SuggestionType.COMMENTARY
     suggestion_type = SuggestionType.COMMENTARY
 
-    scaler = joblib.load("src/chiron_utils/models/bert_based_deception/scaler.pkl")
-
     def __post_init__(self) -> None:
         """Initialize models."""
 
@@ -74,6 +72,7 @@ class DeceptionBertAdvisor(BaselineBot, ABC):
             self.suggestion_type = self.default_suggestion_type
 
         print(f"DEBUG: DeceptionBertAdvisor initialized with suggestion_type = {self.suggestion_type}")
+        self.scaler = joblib.load("src/chiron_utils/models/bert_based_deception/scaler.pkl")
         self.tokenizer, self.model = self.load_model(self.model_path, self.tokenizer_path, self.device)
         self.last_predict_deception = dict()
 
