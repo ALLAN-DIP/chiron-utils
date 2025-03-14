@@ -114,7 +114,7 @@ def main() -> None:
     output_dir: Path = args.output_dir
     extra_bot_args: Optional[str] = args.bot_args
     if runner == DOCKER:  # For local development
-        runner_command = "docker run --rm"
+        runner_command = "docker run --platform=linux/amd64 --rm"
     else:
         # Should never happen
         raise ValueError(f"Provided container runtime {runner!r} not recognized.")
