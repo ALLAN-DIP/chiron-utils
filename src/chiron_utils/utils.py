@@ -4,7 +4,7 @@ import asyncio
 import json
 import logging
 import os
-from typing import Any, List, Mapping, Optional, Set
+from typing import Any, List, Mapping, Optional
 
 from daidepp import AnyDAIDEToken, DAIDEGrammar, create_daide_grammar, daide_visitor
 from daidepp.grammar.grammar import MAX_DAIDE_LEVEL
@@ -130,7 +130,7 @@ def get_order_tokens(order: str) -> List[str]:
     return order_tokens
 
 
-def get_other_powers(powers: List[str], game: Game) -> Set[str]:
+def get_other_powers(powers: List[str], game: Game) -> List[str]:
     """Get all powers not provided in input.
 
     Args:
@@ -140,7 +140,7 @@ def get_other_powers(powers: List[str], game: Game) -> Set[str]:
     Returns:
         Powers in the game other than those given.
     """
-    return set(game.get_map_power_names()) - set(powers)
+    return sorted(set(game.get_map_power_names()) - set(powers))
 
 
 def neighboring_opps(
