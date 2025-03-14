@@ -438,7 +438,6 @@ Now let's see the question:"""
         predicted_orders: List[str] = parsed_data["payload"]["suggested_orders"]
         orders = predicted_orders
 
-        if self.bot_type == BotType.ADVISOR:
-            await self.suggest_orders(orders)
+        await self.suggest_orders(orders)
 
         return orders
