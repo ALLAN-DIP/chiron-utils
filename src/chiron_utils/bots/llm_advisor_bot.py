@@ -351,7 +351,7 @@ Now let's see the question:"""
 
         filtered_orders = await self.read_suggestions_from_advisor()
         if not filtered_orders:
-            pass
+            return []
 
         for other_power in get_other_powers([self.power_name], self.game):
             all_relevant = self.get_relevant_messages(self.power_name, other_power)
