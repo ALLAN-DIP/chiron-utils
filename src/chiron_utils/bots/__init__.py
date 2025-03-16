@@ -8,9 +8,6 @@ except ImportError:
     import importlib_metadata
 
 from chiron_utils.bots.baseline_bot import BaselineBot as BaselineBot
-from chiron_utils.bots.elastic_bot import (
-    ElasticAdvisor as ElasticAdvisor,
-)
 from chiron_utils.bots.random_proposer_bot import (
     RandomProposerAdvisor as RandomProposerAdvisor,
     RandomProposerPlayer as RandomProposerPlayer,
@@ -19,13 +16,15 @@ from chiron_utils.bots.random_proposer_bot import (
 BOTS: List[Type[BaselineBot]] = [
     RandomProposerAdvisor,
     RandomProposerPlayer,
-    ElasticAdvisor
 ]
 # Import bots only if their direct third-party dependencies are satisfied
 # This unfortunately requires hardcoding the list of required modules,
 # but there currently isn't a way to check if a given extra was used during installation.
 importable_modules = set(importlib_metadata.packages_distributions())
 if {"baseline_models"} < importable_modules:
+    from chiron_utils.bots.elastic_bot import (
+        ElasticAdvisor as ElasticAdvisor,
+    )
     from chiron_utils.bots.lr_bot import (
         LrAdvisor as LrAdvisor,
         LrPlayer as LrPlayer,
@@ -35,6 +34,7 @@ if {"baseline_models"} < importable_modules:
         [
             LrAdvisor,
             LrPlayer,
+            ElasticAdvisor,
         ]
     )
 # Alphabetize list of classes

@@ -17,13 +17,10 @@ logger = return_logger(__name__)
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
-CERT_PATH = Path() / "http_ca.crt"
 MODEL_PATH = Path() / "ae_256"
 
-ELASTIC_USERNAME = "elastic"
-ELASTIC_PASSWORD = ""
-ELASTIC_HOST = "https://localhost:9200"
-ELASTIC_INDEX = "tagged_documents_encoded"
+ELASTIC_HOST = "http://localhost:9200"
+ELASTIC_INDEX = "tagged_documents_encoded_256"
 
 MESSAGE_ADVICE_COUNT = 10
 
@@ -34,9 +31,7 @@ class ElasticBot(BaselineBot, ABC):
 
     is_first_messaging_round = False
     player_type = diplomacy_strings.NO_PRESS_BOT
-    elastic_client = AutoencoderClient(
-        ELASTIC_HOST, ELASTIC_USERNAME, ELASTIC_PASSWORD, CERT_PATH, MODEL_PATH
-    )
+    elastic_client = AutoencoderClient(ELASTIC_HOST, MODEL_PATH)
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
@@ -80,4 +75,4 @@ class ElasticAdvisor(ElasticBot):
     """Advisor form of `LrBot`."""
 
     bot_type = BotType.ADVISOR
-    suggestion_type = SuggestionType.MESSAGE
+    default_suggestion_type = SuggestionType.MESSAGE
