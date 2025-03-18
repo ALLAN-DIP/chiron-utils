@@ -22,10 +22,10 @@ logger = return_logger(__name__)
 
 @dataclass
 class LlmAdvisor(BaselineBot):
-    """Bot that carries out random orders and sends random order proposals to other bots.
-
-    Because of the similarity between the advisor and player versions of this bot,
-    both of their behaviors are abstracted into this single abstract base class.
+    """Bot that provides commentary advise using LLM as base model.
+    
+    We use Llama3.1-8B-Instruct as the base model and use alignment judgement,
+    to measure the alignment between Cicero predicted orders and message history.
     """
 
     is_first_messaging_round = False
@@ -98,14 +98,14 @@ class LlmAdvisor(BaselineBot):
         return """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 You are an expert assistant specializing in the Diplomacy board game. Your role is to assist a novice player by analyzing:
 1. The current board state.
-2. The message history exchanged between the novice player and the counterplayer.
-3. The predicted orders for the counterplayer.
+2. The message history exchanged between the novice player and the opponent.
+3. The predicted orders for the opponent.
 
-Your primary objective is to evaluate whether the counterplayer's predicted orders align with the message history and the board state.
+Your primary objective is to evaluate whether the opponent's predicted orders align with the message history and the board state.
 
 Key Evaluation Guidelines:
 
-1. Consider an order aligned if its purpose or intent is consistent with the counterplayer's stated goals or the tactical/strategic needs implied by the board state.
+1. Consider an order aligned if its purpose or intent is consistent with the opponent's stated goals or the tactical/strategic needs implied by the board state.
 2. Redundancy in orders (e.g., several supporting moves) can still be aligned if it serves to ensure the success of a critical move or maintains flexibility in uncertain situations.
 3. Misalignment occurs only if the order:
     Contradicts the stated strategy or creates unnecessary risks.
