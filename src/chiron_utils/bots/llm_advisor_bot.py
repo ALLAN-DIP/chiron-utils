@@ -1,4 +1,4 @@
-"""Bots that carry out random orders and make random order proposals."""
+"""Bot that provides commentary advise using LLM as base model."""
 
 import asyncio
 from dataclasses import dataclass, field
