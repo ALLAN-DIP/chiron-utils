@@ -26,11 +26,17 @@ if {"baseline_models"} < importable_modules:
         LrAdvisor as LrAdvisor,
         LrPlayer as LrPlayer,
     )
+    from chiron_utils.bots.lr_probs_bot import (
+        LrProbsTextAdvisor as LrProbsTextAdvisor,
+        LrProbsVisualAdvisor as LrProbsVisualAdvisor,
+    )
 
     BOTS.extend(
         [
             LrAdvisor,
             LrPlayer,
+            LrProbsTextAdvisor,
+            LrProbsVisualAdvisor,
         ]
     )
 # Alphabetize list of classes
