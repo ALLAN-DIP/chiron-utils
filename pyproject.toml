@@ -125,10 +125,10 @@ ignore = [
   # Ternary expressions are often less readable than `if`-`else` blocks,
   # so they should not be required
   "SIM108", # if-else-block-instead-of-if-exp (from flake8-simplify)
-  # Not all `raise` statements inside `try` blocks are redundant
-  "TRY301", # raise-within-try (from tryceratops)
   # Factoring messages out of `raise` calls can make the code less readable
   "TRY003", # raise-vanilla-args (from tryceratops)
+  # Not all `raise` statements inside `try` blocks are redundant
+  "TRY301", # raise-within-try (from tryceratops)
   # TODO: Deal with these later
   "ANN201",
   "ANN401",
