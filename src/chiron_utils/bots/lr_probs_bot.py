@@ -66,8 +66,12 @@ class LrProbsBot(BaselineBot, ABC):
         game_state = self.game.get_state()
         for province in self.game.map.locs:
             model = BaselineAdvice(str(MODEL_PATH), game_state, province)
-            preds = model.predict(top_k=10)
-            logger.info("Predictions about %s: %s", province, preds)
+            results = model.predict(top_k=10)
+            # `power` is `None` when there are not units at a location
+            if results["power"] is None:
+                continue
+            predictions = results["preds"]
+            logger.info("Predictions about %s: %s", province, predictions)
 
         self.is_first_messaging_round = False
 
