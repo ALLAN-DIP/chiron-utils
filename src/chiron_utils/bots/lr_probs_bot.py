@@ -71,7 +71,7 @@ class LrProbsBot(BaselineBot, ABC):
             if results["power"] is None:
                 continue
             predictions = results["preds"]
-            logger.info("Predictions about %s: %s", province, predictions)
+            await self.suggest_orders_probabilities(province, predictions)
 
         self.is_first_messaging_round = False
 
