@@ -221,6 +221,37 @@ class BaselineBot(ABC):
             suggestion_type=diplomacy_strings.SUGGESTED_MOVE_OPPONENTS,
         )
 
+    async def suggest_orders_probabilities(
+        self, province: str, orders_probabilities: Mapping[str, Mapping[str, Any]]
+    ) -> None:
+        """Send probabilities for suggested orders to the server.
+
+        Args:
+            province: Province orders apply to.
+            orders_probabilities: Mapping from possible orders to their probabilities.
+        """
+        if self.bot_type != BotType.ADVISOR:
+            raise TypeError(
+                f"{self.suggest_opponent_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
+                f"because it is not a {BotType.ADVISOR}"
+            )
+        if not (
+            self.suggestion_type & SuggestionType.MOVE_DISTRIBUTION_TEXTUAL
+            or self.suggestion_type & SuggestionType.MOVE_DISTRIBUTION_VISUAL
+        ):
+            raise ValueError(
+                f"{self.suggest_orders_probabilities.__name__!r} cannot be called because "
+                f"it does not provide {SuggestionType.MOVE_DISTRIBUTION_TEXTUAL.name} or "
+                f"{SuggestionType.MOVE_DISTRIBUTION_VISUAL.name} suggestions"
+            )
+
+        payload = {"province": province, "predicted_orders": orders_probabilities}
+
+        await self.send_suggestion(
+            payload=payload,
+            suggestion_type=diplomacy_strings.SUGGESTED_MOVE_DISTRIBUTION,
+        )
+
     async def suggest_message(self, recipient: str, message: str) -> None:
         """Send suggested messages for power to the server.
 
