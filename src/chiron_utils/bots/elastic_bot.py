@@ -1,7 +1,6 @@
 """Message advisor bot using elastic search vector database."""
 
-from abc import ABC
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import os
 from pathlib import Path
 from typing import List, Sequence
@@ -26,12 +25,16 @@ MESSAGE_ADVICE_COUNT = 10
 
 
 @dataclass
-class ElasticBot(BaselineBot, ABC):
+class ElasticAdvisor(BaselineBot):
     """Elastic search message advisor."""
 
+    bot_type = BotType.ADVISOR
+    default_suggestion_type = SuggestionType.MESSAGE
     is_first_messaging_round = False
     player_type = diplomacy_strings.NO_PRESS_BOT
-    elastic_client = AutoencoderClient(ELASTIC_HOST, MODEL_PATH)
+    elastic_client: AutoencoderClient = field(
+        default_factory=lambda: AutoencoderClient(ELASTIC_HOST, MODEL_PATH)
+    )
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
@@ -69,10 +72,3 @@ class ElasticBot(BaselineBot, ABC):
 
         self.is_first_messaging_round = False
         return list(orders)
-
-
-class ElasticAdvisor(ElasticBot):
-    """Advisor form of `LrBot`."""
-
-    bot_type = BotType.ADVISOR
-    default_suggestion_type = SuggestionType.MESSAGE
