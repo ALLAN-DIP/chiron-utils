@@ -32,9 +32,9 @@ if {"baseline_models"} < importable_modules:
 
     BOTS.extend(
         [
+            ElasticAdvisor,
             LrAdvisor,
             LrPlayer,
-            ElasticAdvisor,
         ]
     )
 # Alphabetize list of classes
