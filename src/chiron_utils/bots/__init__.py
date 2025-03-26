@@ -40,6 +40,7 @@ if {"baseline_models"} < importable_modules:
 
     BOTS.extend(
         [
+            ElasticAdvisor,
             LrAdvisor,
             LrPlayer,
             LrProbsSelfTextAdvisor,
@@ -48,7 +49,6 @@ if {"baseline_models"} < importable_modules:
             LrProbsTextAdvisor,
             LrProbsTextVisualAdvisor,
             LrProbsVisualAdvisor,
-            ElasticAdvisor,
         ]
     )
 if {"torch", "transformers"} < importable_modules:
