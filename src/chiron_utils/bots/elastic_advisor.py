@@ -2,10 +2,9 @@
 
 from dataclasses import dataclass, field
 import os
-from pathlib import Path
 from typing import List, Sequence
 
-from baseline_models.message_advisor_code.elastic.autoencoder_client import AutoencoderClient
+from baseline_models.message_advisor_code.elastic.masked_client import MaskedClient
 from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
@@ -16,10 +15,9 @@ logger = return_logger(__name__)
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
-MODEL_PATH = Path() / "ae_256"
 
 ELASTIC_HOST = "http://localhost:9200"
-ELASTIC_INDEX = "tagged_documents_encoded_256"
+ELASTIC_INDEX = "tagged_documents_masked_scaled_center"
 
 MESSAGE_ADVICE_COUNT = 10
 
@@ -32,9 +30,7 @@ class ElasticAdvisor(BaselineBot):
     default_suggestion_type = SuggestionType.MESSAGE
     is_first_messaging_round = False
     player_type = diplomacy_strings.NO_PRESS_BOT
-    elastic_client: AutoencoderClient = field(
-        default_factory=lambda: AutoencoderClient(ELASTIC_HOST, MODEL_PATH)
-    )
+    elastic_client: MaskedClient = field(default_factory=lambda: MaskedClient(ELASTIC_HOST))
 
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
