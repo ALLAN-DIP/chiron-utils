@@ -120,44 +120,19 @@ show-fixes = true
 
 [tool.ruff.lint]
 select = [
-  "A", # flake8-builtins
-  "ASYNC", # flake8-async
-  "B", # flake8-bugbear
-  "BLE", # flake8-blind-except
-  "C4", # flake8-comprehensions
-  "D", # pydocstyle
-  "DTZ", # flake8-datetimez
-  "E", # pycodestyle error
-  "F", # pyflakes
-  "FBT", # flake8-boolean-trap
-  "FLY", # flynt
-  "FURB", # refurb
-  "G", # flake8-logging-format
-  "I", # isort
-  "ICN", # flake8-import-conventions
-  "INP", # flake8-no-pep420
-  "INT", # flake8-gettext
-  "ISC", # flake8-implicit-str-concat
-  "LOG", # flake8-logging
-  "N", # pep8-naming
-  "NPY", # NumPy-specific rules
-  "PIE", # flake8-pie
-  "PT", # flake8-pytest-style
-  "PTH", # flake8-use-pathlib
-  "PYI", # flake8-pyi
-  "RSE", # flake8-raise
-  "RUF", # Ruff-specific rules
-  "S", # flake8-bandit
-  "SIM", # flake8-simplify
-  "SLF", # flake8-self
-  "SLOT", # flake8-slots
-  "T10", # flake8-debugger
-  "TID", # flake8-tidy-imports
-  "UP", # pyupgrade
-  "W", # pycodestyle warning
-  "YTT", # flake8-2020
+  "ALL", # Enable all rules so new ones are automatically enabled
 ]
 ignore = [
+  # Ignore complexity warnings
+  "C90", # from mccabe
+  # Commas are automatically handled by Black/the Ruff formatter
+  "COM812", # missing-trailing-comma (from flake8-commas)
+  "COM819", # prohibited-trailing-comma (from flake8-commas)
+  # Factoring messages out of `raise` calls can make the code less readable
+  "EM101", # raw-string-in-exception (from flake8-errmsg)
+  "EM102", # f-string-in-exception (from flake8-errmsg)
+  # TODO: Explain deprecated syntax
+  "FA100", # future-rewritable-type-annotation (from flake8-future-annotations)
   # Do not prohibit f-strings in logging messages
   # The documentation describes two motivations, but I (@aphedges) disagree with both:
   # - Using f-strings means that string formatting is carried out eagerly, but
@@ -170,6 +145,10 @@ ignore = [
   # so it cannot express some formats that f-strings can. In all, I believe that enforcing the use
   # of the `logging` module's default formatter is not worth the inconveniences it causes.
   "G004", # logging-f-string (from flake8-logging-format)
+  # "Useless" import aliases are used by mypy
+  "PLC0414", # useless-import-alias (from Pylint)
+  # Ignore complexity warnings
+  "PLR09", # from Pylint
   # Do not switch to `Path.open()` because `open()` is easier to test with
   # e.g., `open(data_dir / "file_a.txt")` -> `open("test/file_b.txt")`
   "PTH123", # builtin-open (from flake8-use-pathlib)
@@ -188,6 +167,27 @@ ignore = [
   # Ternary expressions are often less readable than `if`-`else` blocks,
   # so they should not be required
   "SIM108", # if-else-block-instead-of-if-exp (from flake8-simplify)
+  # Factoring messages out of `raise` calls can make the code less readable
+  "TRY003", # raise-vanilla-args (from tryceratops)
+  # Not all `raise` statements inside `try` blocks are redundant
+  "TRY301", # raise-within-try (from tryceratops)
+  # TODO: Deal with these later
+  "ANN201",
+  "ANN401",
+  "ERA001",
+  "FIX002",
+  "PERF203",
+  "PLR2004",
+  "PLW2901",
+  "RET504",
+  "RET505",
+  "T201",
+  "TC002",
+  "TC006",
+  "TD002",
+  "TD003",
+  "TRY201",
+  "TRY300",
 ]
 
 [tool.ruff.lint.per-file-ignores]
