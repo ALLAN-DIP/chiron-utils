@@ -145,6 +145,11 @@ def main() -> None:
         container_name = f"--name {power}-{game_id} " if runner == DOCKER else ""
         # `localhost` doesn't work when running an agent with Docker Desktop
         host_from_container = "host.docker.internal" if host == "localhost" else host
+        power_bot_args = bot_args
+        if ((config.get("agents") or {}).get(power) or {}).get("agent_params") is not None:
+            power_bot_args += (
+                f'{((config.get("agents") or {}).get(power) or {}).get("agent_params")} '
+            )
         log_file = str(log_dir / f"{power}.txt")
         run_cmds.append(
             f"{runner_command} "
@@ -155,7 +160,7 @@ def main() -> None:
             f"{'--use-ssl ' if use_ssl else ''}"
             f"--game_id {quote(game_id)} "
             f"--power {power} "
-            f"{bot_args}"
+            f"{power_bot_args}"
             f"|& tee {quote(log_file)}"
         )
     print(run_cmds)
