@@ -55,6 +55,21 @@ Both the bot and game running commands support a `--help` argument to list avail
     - When running the bot outside of a container, download the latest model file from [lr_models - Google Drive](https://drive.google.com/drive/folders/1FuG3qY51wRkR8RgEBVY49-loln06W-Ro). The filename includes the model release date in `YYYYMMDD` format).
     - Edit the `MODEL_PATH` constant in `lr_bot.py` to point to the unzipped model folder.
   - Code for model training can be found at <https://github.com/ALLAN-DIP/baseline-models>
+- [`LlmAdvisorBot`](src/chiron_utils/bots/llm_advisor_bot.py):
+  - A large language model using Llama-3.1-8B-Instruct to provide commentary advice given board states, message history, and predicted orders from Cicero.
+  - To set up the bot:
+    - When the bot is first run, it will attempt to download the used model from the Hugging Face Hub. Preparing for this requires multiple steps:
+      - Create a Hugging Face account
+      - Request access on the page for the following model:
+        - [Llama3.1-8b-instruct](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)
+      - Once your request has been approved, authenticate on your local machine using a user access token, using the official [User access tokens](https://huggingface.co/docs/hub/security-tokens) documentation as a guide.
+    - One needs to run another advisor to provide `OPPONENT_MOVE` advice to the same power. For example, one can run the [Cicero advisor](https://github.com/ALLAN-DIP/diplomacy_cicero) with the argument `--advice_levels 8`.
+  - To use the bot, run the following command from the repository root:
+    ```shell
+    # Set communication stage to 10 minutes (in seconds) to give enough time
+    export COMM_STAGE_LENGTH=600
+    python -m chiron_utils.scripts.run_bot --host [host_address] --port [port_address] --game_id [game_id] --power [power_name] --bot_type LlmAdvisor
+    ```
 
 ## Contributing
 
