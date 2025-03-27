@@ -118,7 +118,12 @@ def main() -> None:
     config_str: str = args.config
     config = json.loads(config_str)
     if runner == DOCKER:  # For local development
-        runner_command = "docker run --platform=linux/amd64 --rm"
+        runner_command = "docker run --platform=linux/amd64 --rm "
+        extra_runner_args = ((config.get("agents") or {}).get("all") or {}).get(
+            "runner_params"
+        ) or None
+        if extra_runner_args is not None:
+            runner_command += f"{extra_runner_args} "
     else:
         # Should never happen
         raise ValueError(f"Provided container runtime {runner!r} not recognized.")
@@ -148,6 +153,11 @@ def main() -> None:
             and (config.get("agents") or {}).get(power) is None
         ):
             continue
+        power_runner_command = runner_command
+        if ((config.get("agents") or {}).get(power) or {}).get("runner_params") is not None:
+            power_runner_command += (
+                f'{((config.get("agents") or {}).get(power) or {}).get("runner_params")} '
+            )
         container_name = f"--name {power}-{game_id} " if runner == DOCKER else ""
         # `localhost` doesn't work when running an agent with Docker Desktop
         host_from_container = "host.docker.internal" if host == "localhost" else host
@@ -158,7 +168,7 @@ def main() -> None:
             )
         log_file = str(log_dir / f"{power}.txt")
         run_cmds.append(
-            f"{runner_command} "
+            f"{power_runner_command}"
             f"{container_name}"
             f"{quote(agent)} "
             f"--host {quote(host_from_container)} "
