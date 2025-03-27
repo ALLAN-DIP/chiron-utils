@@ -80,7 +80,6 @@ def main() -> None:
         "Defaults to `$USER_$(date -u +'%%Y_%%m_%%d_%%H_%%M_%%S_%%f')`.",
     )
     parser.add_argument("--agent", type=str, help="Bot to run.")
-    parser.add_argument("--bot_args", type=str, help="Extra arguments to pass to bot.")
     parser.add_argument(
         "--host",
         default=DEFAULT_HOST,
@@ -104,6 +103,10 @@ def main() -> None:
         type=Path,
         help="Directory to store run output. (default: %(default)s)",
     )
+    parser.add_argument(
+        "--config",
+        help="Optional JSON string to provide configuration overrides.",
+    )
     args = parser.parse_args()
     runner: str = args.runner
     game_id: Optional[str] = args.game_id
@@ -112,7 +115,8 @@ def main() -> None:
     port: int = args.port
     use_ssl: bool = args.use_ssl
     output_dir: Path = args.output_dir
-    extra_bot_args: Optional[str] = args.bot_args
+    config_str: str = args.config
+    config = json.loads(config_str)
     if runner == DOCKER:  # For local development
         runner_command = "docker run --platform=linux/amd64 --rm"
     else:
@@ -126,6 +130,7 @@ def main() -> None:
             create_game(game_id, hostname=host, port=port, use_ssl=use_ssl)
         )
         print(json.dumps(create_game_data, ensure_ascii=False, indent=2))
+    extra_bot_args = ((config.get("agents") or {}).get("all") or {}).get("agent_params") or None
     bot_args = ""
     if bot_args:
         bot_args += " "
