@@ -68,7 +68,7 @@ run_diplomacy_bot = "chiron_utils.scripts.run_bot:main"
 run_diplomacy_game = "chiron_utils.scripts.run_game:main"
 
 [project.urls]
-Homepage = "https://github.com/ALLAN-DIP/chiron-utils"
+homepage = "https://github.com/ALLAN-DIP/chiron-utils"
 
 [tool.black]
 line-length = 100
