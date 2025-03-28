@@ -37,7 +37,7 @@ docker run --platform=linux/amd64 --rm ghcr.io/allan-dip/chiron-utils [ARGUMENTS
 To run a complete game, run the following command:
 
 ```shell
-python -m chiron_utils.scripts.run_games [ARGUMENTS]
+python -m chiron_utils.scripts.run_game [ARGUMENTS]
 ```
 
 Both the bot and game running commands support a `--help` argument to list available options.
