@@ -26,11 +26,19 @@ if {"baseline_models"} < importable_modules:
         LrAdvisor as LrAdvisor,
         LrPlayer as LrPlayer,
     )
+    from chiron_utils.bots.lr_probs_bot import (
+        LrProbsTextAdvisor as LrProbsTextAdvisor,
+        LrProbsTextVisualAdvisor as LrProbsTextVisualAdvisor,
+        LrProbsVisualAdvisor as LrProbsVisualAdvisor,
+    )
 
     BOTS.extend(
         [
             LrAdvisor,
             LrPlayer,
+            LrProbsTextAdvisor,
+            LrProbsTextVisualAdvisor,
+            LrProbsVisualAdvisor,
         ]
     )
 if {"torch", "transformers"} < importable_modules:
