@@ -10,7 +10,7 @@ There should also be some documentation in the README on how to build each bot a
 
 I (Alex) will have to make some changes to the bot runner scripts to pass in different types of bots for each power. That can be a relatively simple list with a default value, though.
 
-If your code base is particularly complex (e.g., CICERO), you should import `chiron_utils` as a package. Otherwise, the bot should be developed right in this repository. Keeping as much as possible in a single place will make refactoring easier.
+If your code base is particularly complex (e.g., Cicero), you should import `chiron_utils` as a package. Otherwise, the bot should be developed right in this repository. Keeping as much as possible in a single place will make refactoring easier.
 
 You generally should not be interfacing directly with game communications yourself and instead should be doing all such interactions through methods in `BaselineBot`. This will allow us to make changes to the _Diplomacy_ engine without individual bots needing to be changed.
 

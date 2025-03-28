@@ -53,7 +53,7 @@ jobs:
         run: |
           SKIP=no-commit-to-branch make check
 
-  # Run tests for Python 3.7 to limit any version-related breakages in CICERO
+  # Run tests for Python 3.7 to limit any version-related breakages in Cicero
   checks-py37:
     runs-on: ubuntu-22.04 # Pinned version of `ubuntu-latest`
     name: Run Python 3.7 checks
