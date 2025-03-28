@@ -61,6 +61,12 @@ llm-advisor = [
   "transformers>=4.43.2",
 ]
 
+[project.scripts]
+create_diplomacy_game = "chiron_utils.scripts.create_game:main"
+download_diplomacy_game = "chiron_utils.scripts.download_game:main"
+run_diplomacy_bot = "chiron_utils.scripts.run_bot:main"
+run_diplomacy_game = "chiron_utils.scripts.run_game:main"
+
 [project.urls]
 Homepage = "https://github.com/ALLAN-DIP/chiron-utils"
 
