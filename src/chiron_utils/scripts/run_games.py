@@ -10,6 +10,7 @@ from shlex import quote
 import sys
 from typing import Any, Dict, Optional, Sequence, Tuple
 
+from chiron_utils.bots import RandomProposerAdvisor
 from chiron_utils.game_utils import DEFAULT_HOST, DEFAULT_PORT, create_game, download_game
 from chiron_utils.utils import POWER_NAMES_DICT
 
@@ -66,7 +67,10 @@ async def run_all_cmds(
 
 def main() -> None:
     """Runs a single game."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
     parser.add_argument(
         "--runner",
         default=DEFAULT_RUNNER,
@@ -103,9 +107,31 @@ def main() -> None:
         type=Path,
         help="Directory to store run output. (default: %(default)s)",
     )
+    config_example = {
+        "agents": {
+            "all": {
+                "runner_params": "--env=COMM_STAGE_LENGTH=30",
+            },
+            "AUSTRIA": {
+                "agent_params": f"--bot_type {RandomProposerAdvisor.__name__}",
+            },
+            "ENGLAND": None,
+        }
+    }
     parser.add_argument(
         "--config",
-        help="Optional JSON string to provide configuration overrides.",
+        help=(
+            "Optional JSON configuration string to override default values.\n"
+            "\n"
+            "The following example demonstrates all features of the configuration format:\n"
+            "\n" + json.dumps(config_example, ensure_ascii=False, indent=2) + "\n"
+            "\n"
+            'The "agents" field is an object containing configuration for each power.\n'
+            'The "all" agent is special in that its values apply to every agent.\n'
+            'The "agent_params" field of an agent object is a string that will be appended to the default agent arguments.\n'
+            'The "runner_params" field of an agent object is a string that will be appended to the default `docker run` arguments.\n'
+            "Setting the value of an agent to `null` prevents an agent from being started for that power."
+        ),
     )
     args = parser.parse_args()
     runner: str = args.runner
