@@ -10,6 +10,7 @@ from shlex import quote
 import sys
 from typing import Any, Dict, Optional, Sequence, Tuple
 
+from chiron_utils.bots import RandomProposerAdvisor
 from chiron_utils.game_utils import DEFAULT_HOST, DEFAULT_PORT, create_game, download_game
 from chiron_utils.utils import POWER_NAMES_DICT
 
@@ -66,7 +67,10 @@ async def run_all_cmds(
 
 def main() -> None:
     """Runs a single game."""
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
     parser.add_argument(
         "--runner",
         default=DEFAULT_RUNNER,
@@ -80,7 +84,6 @@ def main() -> None:
         "Defaults to `$USER_$(date -u +'%%Y_%%m_%%d_%%H_%%M_%%S_%%f')`.",
     )
     parser.add_argument("--agent", type=str, help="Bot to run.")
-    parser.add_argument("--bot_args", type=str, help="Extra arguments to pass to bot.")
     parser.add_argument(
         "--host",
         default=DEFAULT_HOST,
@@ -104,6 +107,32 @@ def main() -> None:
         type=Path,
         help="Directory to store run output. (default: %(default)s)",
     )
+    config_example = {
+        "agents": {
+            "all": {
+                "runner_params": "--env=COMM_STAGE_LENGTH=30",
+            },
+            "AUSTRIA": {
+                "agent_params": f"--bot_type {RandomProposerAdvisor.__name__}",
+            },
+            "ENGLAND": None,
+        }
+    }
+    parser.add_argument(
+        "--config",
+        help=(
+            "Optional JSON configuration string to override default values.\n"
+            "\n"
+            "The following example demonstrates all features of the configuration format:\n"
+            "\n" + json.dumps(config_example, ensure_ascii=False, indent=2) + "\n"
+            "\n"
+            'The "agents" field is an object containing configuration for each power.\n'
+            'The "all" agent is special in that its values apply to every agent.\n'
+            'The "agent_params" field of an agent object is a string that will be appended to the default agent arguments.\n'
+            'The "runner_params" field of an agent object is a string that will be appended to the default `docker run` arguments.\n'
+            "Setting the value of an agent to `null` prevents an agent from being started for that power."
+        ),
+    )
     args = parser.parse_args()
     runner: str = args.runner
     game_id: Optional[str] = args.game_id
@@ -112,9 +141,15 @@ def main() -> None:
     port: int = args.port
     use_ssl: bool = args.use_ssl
     output_dir: Path = args.output_dir
-    extra_bot_args: Optional[str] = args.bot_args
+    config_str: str = args.config
+    config = json.loads(config_str)
     if runner == DOCKER:  # For local development
-        runner_command = "docker run --platform=linux/amd64 --rm"
+        runner_command = "docker run --platform=linux/amd64 --rm "
+        extra_runner_args = ((config.get("agents") or {}).get("all") or {}).get(
+            "runner_params"
+        ) or None
+        if extra_runner_args is not None:
+            runner_command += f"{extra_runner_args} "
     else:
         # Should never happen
         raise ValueError(f"Provided container runtime {runner!r} not recognized.")
@@ -126,6 +161,7 @@ def main() -> None:
             create_game(game_id, hostname=host, port=port, use_ssl=use_ssl)
         )
         print(json.dumps(create_game_data, ensure_ascii=False, indent=2))
+    extra_bot_args = ((config.get("agents") or {}).get("all") or {}).get("agent_params") or None
     bot_args = ""
     if bot_args:
         bot_args += " "
@@ -137,12 +173,28 @@ def main() -> None:
     powers = sorted(POWER_NAMES_DICT.values())
     run_cmds = []
     for power in powers:
+        # Skip power by setting to `null` in JSON
+        if (
+            power in (config.get("agents") or {})
+            and (config.get("agents") or {}).get(power) is None
+        ):
+            continue
+        power_runner_command = runner_command
+        if ((config.get("agents") or {}).get(power) or {}).get("runner_params") is not None:
+            power_runner_command += (
+                f'{((config.get("agents") or {}).get(power) or {}).get("runner_params")} '
+            )
         container_name = f"--name {power}-{game_id} " if runner == DOCKER else ""
         # `localhost` doesn't work when running an agent with Docker Desktop
         host_from_container = "host.docker.internal" if host == "localhost" else host
+        power_bot_args = bot_args
+        if ((config.get("agents") or {}).get(power) or {}).get("agent_params") is not None:
+            power_bot_args += (
+                f'{((config.get("agents") or {}).get(power) or {}).get("agent_params")} '
+            )
         log_file = str(log_dir / f"{power}.txt")
         run_cmds.append(
-            f"{runner_command} "
+            f"{power_runner_command}"
             f"{container_name}"
             f"{quote(agent)} "
             f"--host {quote(host_from_container)} "
@@ -150,7 +202,7 @@ def main() -> None:
             f"{'--use-ssl ' if use_ssl else ''}"
             f"--game_id {quote(game_id)} "
             f"--power {power} "
-            f"{bot_args}"
+            f"{power_bot_args}"
             f"|& tee {quote(log_file)}"
         )
     print(run_cmds)
