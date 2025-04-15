@@ -1,5 +1,8 @@
 [build-system]
-requires = ["setuptools>=66.1"] # Minimum version that properly bundles `file:`s in sdists
+requires = [
+  # Minimum version that supports `pyproject.toml`
+  "setuptools>=61.0.0",
+]
 build-backend = "setuptools.build_meta"
 
 [project]
