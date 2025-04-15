@@ -27,6 +27,7 @@ classifiers = [
 requires-python = ">=3.7"
 license = { text = "MIT" }
 dependencies = [
+  # Pinned `daidepp` to `main`
   "daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e",
   # Pinned `diplomacy` to `main`
   "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@aa6055fe9b933bd393a0339568e102534bb2009c",
