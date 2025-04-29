@@ -1,6 +1,6 @@
 """Test functions from the `parsing_utils` and `utils` modules."""
 
-from typing import List
+from typing import List, Tuple, Union
 
 from diplomacy import Game
 import pytest
@@ -50,7 +50,7 @@ class TestUtils:
     )  # type: ignore[misc]
     def test_dipnet_to_daide_parsing(
         self,
-        test_input: List[str],
+        test_input: List[Union[str, Tuple[str, str]]],
         expected: List[str],
         *,
         unit_power_tuples_included: bool,
