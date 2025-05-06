@@ -45,9 +45,7 @@ async def run_cmd(cmd: str) -> Dict[str, Any]:
     }
 
 
-async def run_all_cmds(
-    cmds: Sequence[str], *, delay_seconds: Optional[int] = None
-) -> Tuple[Dict[str, Any]]:
+async def run_all_cmds(cmds: Sequence[str], *, delay_seconds: int = 0) -> Tuple[Dict[str, Any]]:
     """Runs multiple commands, capturing their output.
 
     Args:
@@ -60,7 +58,7 @@ async def run_all_cmds(
     coroutines = []
     for cmd in cmds:
         coroutines.append(run_cmd(cmd))
-        if delay_seconds is not None:
+        if delay_seconds:
             await asyncio.sleep(delay_seconds)
     return await asyncio.gather(*coroutines)  # type: ignore[return-value]
 
@@ -102,6 +100,12 @@ def main() -> None:
         help="Whether to use SSL to connect to the game server. (default: %(default)s)",
     )
     parser.add_argument(
+        "--delay-seconds",
+        default=1,
+        type=int,
+        help="Number of seconds to wait between starting each agent. (default: %(default)s)",
+    )
+    parser.add_argument(
         "--output-dir",
         default=REPO_DIR,
         type=Path,
@@ -140,6 +144,7 @@ def main() -> None:
     host: str = args.host
     port: int = args.port
     use_ssl: bool = args.use_ssl
+    delay_seconds: int = args.delay_seconds
     output_dir: Path = args.output_dir
     config_str: str = args.config
     config = json.loads(config_str)
@@ -207,7 +212,7 @@ def main() -> None:
         )
     print(run_cmds)
 
-    results = asyncio.run(run_all_cmds(run_cmds, delay_seconds=4))
+    results = asyncio.run(run_all_cmds(run_cmds, delay_seconds=delay_seconds))
     run_output = {}
     for power, cmd, result in zip(powers, run_cmds, results):
         run_output[power] = {
