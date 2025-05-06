@@ -6,14 +6,14 @@ cfgv==3.4.0
 charset-normalizer==3.4.1
 coloredlogs==15.0.1
 daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e
-dill==0.3.9
+dill==0.4.0
 diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@aa6055fe9b933bd393a0339568e102534bb2009c
 distlib==0.3.9
 filelock==3.17.0
 fsspec==2024.12.0
 huggingface-hub==0.27.1
 humanfriendly==10.0
-identify==2.6.6
+identify==2.6.10
 idna==3.10
 iniconfig==2.0.0
 isort==6.0.0
@@ -23,7 +23,7 @@ MarkupSafe==3.0.2
 mccabe==0.7.0
 mpmath==1.3.0
 mypy==1.8.0
-mypy-extensions==1.0.0
+mypy_extensions==1.1.0
 networkx==3.4.2
 nodeenv==1.9.1
 numpy==1.26.4
@@ -55,4 +55,4 @@ transformers==4.48.0
 typing_extensions==4.12.2
 ujson==5.10.0
 urllib3==2.3.0
-virtualenv==20.29.1
+virtualenv==20.30.0

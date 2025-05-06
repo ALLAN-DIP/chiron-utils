@@ -51,7 +51,9 @@ dev = [
   "mypy<1.9",
   # `pre-commit` `1.15.0` introduced `minimum_pre_commit_version` top-level key
   "pre-commit>=1.15.0",
-  "pylint",
+  # Set a minimum version (released 2023-10-02, first to support `3.12`)
+  # to prevent possible resolution problems
+  "pylint>=3",
   # `pytest` `6.0` introduced `--strict-config` argument and `pyproject.toml` support
   "pytest>=6.0",
 ]
@@ -83,7 +85,11 @@ check-filenames = ""
 check-hidden = ""
 
 [tool.mypy]
-show_error_codes = true
+enable_error_code = [
+  "ignore-without-code",
+  "redundant-expr",
+  "truthy-bool",
+]
 ignore_missing_imports = true
 python_version = "3.7"
 strict = true
