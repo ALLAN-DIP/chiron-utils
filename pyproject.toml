@@ -1,5 +1,8 @@
 [build-system]
-requires = ["setuptools>=66.1"] # Minimum version that properly bundles `file:`s in sdists
+requires = [
+  # Minimum version that supports `pyproject.toml`
+  "setuptools>=61.0.0",
+]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -24,6 +27,7 @@ classifiers = [
 requires-python = ">=3.7"
 license = { text = "MIT" }
 dependencies = [
+  # Pinned `daidepp` to `main`
   "daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e",
   # Pinned `diplomacy` to `main`
   "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@aa6055fe9b933bd393a0339568e102534bb2009c",
@@ -51,7 +55,9 @@ dev = [
   "mypy<1.9",
   # `pre-commit` `1.15.0` introduced `minimum_pre_commit_version` top-level key
   "pre-commit>=1.15.0",
-  "pylint",
+  # Set a minimum version (released 2023-10-02, first to support `3.12`)
+  # to prevent possible resolution problems
+  "pylint>=3",
   # `pytest` `6.0` introduced `--strict-config` argument and `pyproject.toml` support
   "pytest>=6.0",
 ]
@@ -83,7 +89,11 @@ check-filenames = ""
 check-hidden = ""
 
 [tool.mypy]
-show_error_codes = true
+enable_error_code = [
+  "ignore-without-code",
+  "redundant-expr",
+  "truthy-bool",
+]
 ignore_missing_imports = true
 python_version = "3.7"
 strict = true
@@ -224,7 +234,7 @@ broad-exception-caught
 score = false
 
 [tool.pytest.ini_options]
-addopts = "-m 'not server' --strict-config --strict-markers --verbosity=2"
+addopts = "-m 'not server' -ra --strict-config --strict-markers --verbosity=2"
 filterwarnings = [
   "ignore::DeprecationWarning",
 ]
@@ -232,3 +242,4 @@ markers = [
   "server: Marks tests as requiring `diplomacy` server (deselect with `-m 'not server'`)",
 ]
 minversion = "6.0"
+xfail_strict = true

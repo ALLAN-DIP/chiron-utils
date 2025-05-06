@@ -131,6 +131,8 @@ class RandomProposerAdvisor(RandomProposerBot):
         | SuggestionType.MOVE
         | SuggestionType.COMMENTARY
         | SuggestionType.OPPONENT_MOVE
+        | SuggestionType.MOVE_DISTRIBUTION_TEXTUAL
+        | SuggestionType.MOVE_DISTRIBUTION_VISUAL
     )
 
 
