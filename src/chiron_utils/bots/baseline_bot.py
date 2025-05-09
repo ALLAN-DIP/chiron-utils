@@ -8,6 +8,11 @@ import os
 import random
 from typing import Any, ClassVar, List, Mapping, Optional, Sequence
 
+try:
+    from typing import TypedDict  # type: ignore[attr-defined]
+except ImportError:
+    from typing_extensions import TypedDict
+
 from diplomacy import Game, Message
 from diplomacy.client.network_game import NetworkGame
 from diplomacy.utils import strings as diplomacy_strings
@@ -23,6 +28,20 @@ class BotType(str, Enum):
 
     ADVISOR = auto()
     PLAYER = auto()
+
+
+class OrderProbability(TypedDict):  # type: ignore[misc]
+    """Probability information for a single order.
+
+    Attributes:
+        pred_prob: Predicted probability of order.
+        rank: Determined by predicted probability sorted in decreasing order.
+        opacity: Normalized probability, used for rendering opacity.
+    """
+
+    pred_prob: float
+    rank: int
+    opacity: float
 
 
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
@@ -222,7 +241,7 @@ class BaselineBot(ABC):
         )
 
     async def suggest_orders_probabilities(
-        self, province: str, orders_probabilities: Mapping[str, Mapping[str, Any]]
+        self, province: str, orders_probabilities: Mapping[str, OrderProbability]
     ) -> None:
         """Send probabilities for suggested orders to the server.
 
