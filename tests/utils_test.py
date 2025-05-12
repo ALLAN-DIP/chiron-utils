@@ -5,7 +5,7 @@ from typing import List, Tuple, Union
 from diplomacy import Game
 import pytest
 
-from chiron_utils.parsing_utils import daide_to_dipnet_parsing, dipnet_to_daide_parsing
+from chiron_utils.parsing_utils import parse_daide_to_dipnet, parse_dipnet_to_daide
 from chiron_utils.utils import get_order_tokens, parse_daide
 
 
@@ -67,7 +67,7 @@ class TestUtils:
 
         assert [
             str(c)
-            for c in dipnet_to_daide_parsing(
+            for c in parse_dipnet_to_daide(
                 test_input,
                 game_tc,
                 unit_power_tuples_included=unit_power_tuples_included,
@@ -75,7 +75,7 @@ class TestUtils:
         ] == expected, (
             [
                 str(c)
-                for c in dipnet_to_daide_parsing(
+                for c in parse_dipnet_to_daide(
                     test_input,
                     game_tc,
                     unit_power_tuples_included=unit_power_tuples_included,
@@ -96,7 +96,7 @@ class TestUtils:
             "/WC",
         }:
             comparison_tc_op = comparison_tc_op.rsplit("/", maxsplit=1)[0]
-        dipnet_order = daide_to_dipnet_parsing(parse_daide(expected[0]))
+        dipnet_order = parse_daide_to_dipnet(parse_daide(expected[0]))
         assert dipnet_order is not None
         assert dipnet_order[0] == comparison_tc_op, (dipnet_order, comparison_tc_op)
 
@@ -132,12 +132,12 @@ class TestUtils:
         game_tc = Game()
         game_tc.set_units("ITALY", ["A TUN", "F ION", "F EAS", "F AEG"])
 
-        assert [str(c) for c in dipnet_to_daide_parsing(test_input, game_tc)] == expected, (
-            [str(c) for c in dipnet_to_daide_parsing(test_input, game_tc)],
+        assert [str(c) for c in parse_dipnet_to_daide(test_input, game_tc)] == expected, (
+            [str(c) for c in parse_dipnet_to_daide(test_input, game_tc)],
             expected,
         )
         for tc_ip_ord, tc_op_ord in zip(test_input, expected):
-            dipnet_order = daide_to_dipnet_parsing(parse_daide(tc_op_ord))
+            dipnet_order = parse_daide_to_dipnet(parse_daide(tc_op_ord))
             assert dipnet_order is not None
             assert dipnet_order[0] == tc_ip_ord.replace(" R ", " - "), (
                 dipnet_order,

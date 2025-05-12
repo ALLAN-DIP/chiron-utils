@@ -11,7 +11,7 @@ from diplomacy.utils.constants import SuggestionType
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
 from chiron_utils.daide2eng import gen_english
-from chiron_utils.parsing_utils import dipnet_to_daide_parsing
+from chiron_utils.parsing_utils import parse_dipnet_to_daide
 from chiron_utils.utils import get_other_powers
 
 
@@ -48,7 +48,7 @@ class RandomProposerBot(BaselineBot, ABC):
                 )
             )
             if len(suggested_random_orders) > 0:
-                commands = dipnet_to_daide_parsing(suggested_random_orders, self.game)
+                commands = parse_dipnet_to_daide(suggested_random_orders, self.game)
                 random_orders = [XDO(command) for command in commands]
                 if len(random_orders) > 1:
                     suggested_random_orders = PRP(AND(*random_orders))
