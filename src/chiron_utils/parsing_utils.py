@@ -91,7 +91,7 @@ def daidefy_unit(dipnet_unit: str, unit_game_mapping: Mapping[str, str]) -> Unit
     return unit
 
 
-def dipnet_to_daide_parsing(
+def parse_dipnet_to_daide(
     dipnet_style_order_strs: Sequence[Union[str, Tuple[str, str]]],
     game: Game,
     *,
@@ -228,7 +228,7 @@ def dipnet_to_daide_parsing(
             logger.exception(
                 "ALLAN: error from %s.%s()\n\tOrder with error: %r\n\tSet of orders: %s",
                 __name__,
-                dipnet_to_daide_parsing.__name__,
+                parse_dipnet_to_daide.__name__,
                 " ".join(dipnet_order_tokens),
                 dipnet_style_order_strs,
             )
@@ -273,7 +273,7 @@ def dipnetify_unit(unit: Unit) -> str:
     return f"{unit_type} {location}"
 
 
-def daide_to_dipnet_parsing(daide_order: Command) -> Optional[Tuple[str, str]]:
+def parse_daide_to_dipnet(daide_order: Command) -> Optional[Tuple[str, str]]:
     """Convert single DAIDE-style order to DipNet-style order.
 
     Args:
@@ -321,7 +321,7 @@ def daide_to_dipnet_parsing(daide_order: Command) -> Optional[Tuple[str, str]]:
         logger.exception(
             "ALLAN: error from %s.%s\n\tCould not convert DAIDE command %r to DipNet format",
             __name__,
-            daide_to_dipnet_parsing.__name__,
+            parse_daide_to_dipnet.__name__,
             str(daide_order),
         )
         if DEBUG_MODE:
