@@ -1,10 +1,11 @@
 """A collection of various utilities useful for building bots."""
 
 import asyncio
+import itertools
 import json
 import logging
 import os
-from typing import Any, List, Mapping, Optional
+from typing import Any, List, Mapping, Optional, Sequence
 
 from daidepp import AnyDAIDEToken, DAIDEGrammar, create_daide_grammar, daide_visitor
 from daidepp.grammar.grammar import MAX_DAIDE_LEVEL
@@ -189,6 +190,20 @@ def serialize_message_dict(message_dict: Mapping[str, Any]) -> str:
     """Serialize suggestion message in a consistent format."""
     # `separators` is used here to write JSON compactly
     return json.dumps(message_dict, ensure_ascii=False, separators=(",", ":"))
+
+
+def remove_invalid_orders(orders: Sequence[str], game: Game) -> List[str]:
+    """Remove invalid orders from a list of orders.
+
+    This shouldn't be required, but some bots will attempt to make invalid orders
+    or include invalid orders in advice if we don't filter them out.
+    """
+    possible_orders = set(itertools.chain.from_iterable(game.get_all_possible_orders().values()))
+    invalid_orders = sorted(set(orders) - possible_orders)
+    if invalid_orders:
+        logger.info(f"Removing invalid orders: {invalid_orders}")
+        orders = [order for order in orders if order not in invalid_orders]
+    return list(orders)
 
 
 def get_order_tokens(order: str) -> List[str]:

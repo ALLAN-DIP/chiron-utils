@@ -18,7 +18,7 @@ from diplomacy.client.network_game import NetworkGame
 from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
-from chiron_utils.utils import return_logger, serialize_message_dict
+from chiron_utils.utils import remove_invalid_orders, return_logger, serialize_message_dict
 
 logger = return_logger(__name__)
 
@@ -204,8 +204,10 @@ class BaselineBot(ABC):
                 f"it does not provide {SuggestionType.MOVE.name} suggestions"
             )
 
+        orders = remove_invalid_orders(orders, self.game)
         payload = {"suggested_orders": orders}
         if partial_orders:
+            partial_orders = remove_invalid_orders(partial_orders, self.game)
             payload["player_orders"] = partial_orders
             suggestion_type = diplomacy_strings.SUGGESTED_MOVE_PARTIAL
         else:
@@ -232,6 +234,12 @@ class BaselineBot(ABC):
                 f"{self.suggest_opponent_orders.__name__!r} cannot be called because "
                 f"it does not provide {SuggestionType.OPPONENT_MOVE.name} suggestions"
             )
+
+        # Delete invalid orders
+        opponent_orders = {
+            power: remove_invalid_orders(orders, self.game)
+            for power, orders in opponent_orders.items()
+        }
 
         payload = {"predicted_orders": opponent_orders}
 
@@ -263,6 +271,24 @@ class BaselineBot(ABC):
                 f"it does not provide {SuggestionType.MOVE_DISTRIBUTION_TEXTUAL.name} or "
                 f"{SuggestionType.MOVE_DISTRIBUTION_VISUAL.name} suggestions"
             )
+
+        # Delete invalid orders and recalculate some fields
+        # `baseline-models` often includes orders that do not match the board state
+        valid_orders = remove_invalid_orders(list(orders_probabilities), self.game)
+        if set(valid_orders) != set(orders_probabilities):
+            total_probs = sum(
+                pred_prob["pred_prob"]
+                for order, pred_prob in orders_probabilities.items()
+                if order in valid_orders
+            )
+            orders_probabilities = {
+                order: {  # type: ignore[misc]
+                    "pred_prob": pred_prob["pred_prob"],
+                    "rank": rank,
+                    "opacity": pred_prob["pred_prob"] / total_probs,
+                }
+                for rank, (order, pred_prob) in enumerate(orders_probabilities.items())
+            }
 
         payload = {"province": province, "predicted_orders": orders_probabilities}
 
@@ -346,6 +372,8 @@ class BaselineBot(ABC):
                 f"{self.send_orders.__name__!r} cannot be called by {self.__class__.__name__!r} "
                 f"because it is not a {BotType.PLAYER}"
             )
+
+        orders = remove_invalid_orders(orders, self.game)
 
         logger.info("Sent orders: %s", orders)
 
