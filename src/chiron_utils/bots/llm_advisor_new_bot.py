@@ -41,7 +41,7 @@ class LlmNewAdvisor(BaselineBot):
         """Initialize models."""
         super().__post_init__()
         # used to avoid repeated generation
-        self.previous_prompt = None
+        self.previous_prompt: Optional[str] = None
         self.tokenizer, self.model = self.load_model(self.base_model_name, None, self.device)
 
     async def start_phase(self) -> None:
@@ -252,7 +252,7 @@ A MUN - BUR:
         return prompt
 
     def format_prompt_phase2(
-        self, own: str, suggest_orders: List[str], own_orders: List[str], rationales: List[str]
+        self, own: str, suggest_orders: List[str], own_orders: List[str], rationales: Optional[str]
     ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
@@ -325,7 +325,7 @@ A MUN - BUR:
 
     def generate_text(
         self,
-        prompt: str,
+        prompt: Optional[str],
         tokenizer: PreTrainedTokenizer,
         model: Union[PreTrainedModel, DataParallel],
         device: str = "cpu",
@@ -365,9 +365,11 @@ A MUN - BUR:
                 )
             )
 
-        return tokenizer.decode(output_ids[0], skip_special_tokens=True)  # type: ignore[no-any-return]
+        generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
 
-    def generate_and_parse_response(self, prompt: str) -> str:
+        return generated_text  # type: ignore[no-any-return]
+
+    def generate_and_parse_response(self, prompt: Optional[str]) -> Optional[str]:
         """Generate text from the model given 'prompt'.
 
         Returns:
@@ -407,7 +409,7 @@ A MUN - BUR:
             logger.info("Phase2 output for %s: %s", self.power_name, output_phase2)
             try:
                 for i in other_power:
-                    await self.suggest_commentary(i, f"{output_phase2.lstrip()}")
+                    await self.suggest_commentary(i, f"{output_phase2}")
             except diplomacy.utils.exceptions.GamePhaseException as exc:
                 logger.exception("Ignoring %s", exc.__class__.__name__)
 
