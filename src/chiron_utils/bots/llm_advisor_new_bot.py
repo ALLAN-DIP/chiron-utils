@@ -15,7 +15,7 @@ from torch.nn import DataParallel
 from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedModel, PreTrainedTokenizer
 
 from chiron_utils.bots.baseline_bot import BaselineBot, BotType
-from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers, mapping, return_logger
+from chiron_utils.utils import POWER_NAMES_DICT, get_other_powers, return_logger
 
 logger = return_logger(__name__)
 
@@ -64,7 +64,7 @@ class LlmNewAdvisor(BaselineBot):
             "%s received opponent move suggestions: %s", self.display_name, suggestion_messages
         )
         return suggestion_messages
-    
+
     def read_own_suggestions_from_advisor(self) -> List[str]:
         """Read recommended orders from CiceroAdvisor.
 
@@ -77,9 +77,7 @@ class LlmNewAdvisor(BaselineBot):
             for msg in received_messages
             if msg.type == diplomacy_strings.SUGGESTED_MOVE_FULL
         ]
-        logger.info(
-            "%s received own move suggestions: %s", self.display_name, suggestion_messages
-        )
+        logger.info("%s received own move suggestions: %s", self.display_name, suggestion_messages)
         return suggestion_messages
 
     def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
@@ -119,31 +117,31 @@ class LlmNewAdvisor(BaselineBot):
                 1. The current board state.
                 2. The recommended orders for the novice player.
                 3. The potential orders for every power.
-                
-                Your goal is to provide rationale for each recommended orders based on the board state and potential orders as following: 
+
+                Your goal is to provide rationale for each recommended orders based on the board state and potential orders as following:
                 1. Order Interpretation: Briefly summarize what the specific order intends tactically or strategically.
                 2. Consistency Check (Board): Assess if the order aligns logically with tactical or strategic needs suggested by the current board state.
                 3. Risk Assessment: Identify if the order introduces unnecessary risks or contradicts earlier expressed intentions.
-                
+
                 Avoid long explanations or generic commentary — be precise and practical.
                 <|eot_id|><|start_header_id|>user<|end_header_id|>
                 Below is an example:
-                **Board State:**   
+                **Board State:**
                 AUSTRIA: F GRE, A VIE, A BUD, A BUL, A SER
 ENGLAND: F ENG, F NWG, F NTH, F IRI, A PIC
 FRANCE: A BRE, A MAR, F SPA, A PAR
 GERMANY: F DEN, A BUR, A MUN, F BAL, A KIE
-ITALY: A TUN, A PIE, F EAS, F ION 
+ITALY: A TUN, A PIE, F EAS, F ION
 RUSSIA: F BOT, F BLA, A RUM, A SEV, A LVN
 TURKEY: F ANK, A CON, A SMY
-                 
-                **Recommended Orders for GERMANY:**  
+
+                **Recommended Orders for GERMANY:**
                 F DEN S A KIE - SWE,
 A BUR - PAR,
 F BAL C A KIE - SWE,
 A KIE - SWE VIA,
 A MUN - BUR
-                 
+
                 **Potential Orders for other powers:**
                 AUSTRIA: A VIE - GAL, F GRE S A BUL, A BUD - RUM, A SER S A BUD - RUM, A BUL S A BUD - RUM
 ENGLAND: F NTH H, F NWG - NAO, F ENG S A PIC - BRE, F IRI - MAO, A PIC - BRE
@@ -151,7 +149,7 @@ FRANCE: A BRE S A PAR, A PAR S A BRE, F SPA/SC - POR, A MAR - BUR
 ITALY: A TUN - SYR VIA, A PIE S A BUR - MAR, F ION C A TUN - SYR, F EAS C A TUN - SYR
 RUSSIA: F BOT C A LVN - FIN, A LVN - FIN VIA, A SEV - ARM, F BLA C A RUM - CON, A RUM - CON VIA
 TURKEY: F ANK - BLA, A SMY S A CON, A CON H
-                 
+
                 **Advice:**
                 You are advising the player controlling GERMANY. What is a rationale to explain each recommended move?
 
@@ -208,7 +206,9 @@ A MUN - BUR:
 
         return " ".join(mapped_words)
 
-    def format_prompt_phase1(self, own: str, oppo: str, suggest_orders: List[str], own_orders) -> Optional[str]:
+    def format_prompt_phase1(
+        self, own: str, suggest_orders: List[str], own_orders: List[str]
+    ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
         Returns:
@@ -228,33 +228,32 @@ A MUN - BUR:
         predicted_orders = parsed_data["payload"]["predicted_orders"]
         formatted_opponent_orders = predicted_orders
         formatted_opponent_orders = "\n".join(
-            f"{power}: " + ", ".join(predicted_orders[power])
-            for power in predicted_orders
+            f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
         )
         # own recommended order format
         parsed_data_own = json.loads(own_orders[0])
-        formatted_recommended_orders = ", ".join(parsed_data_own["payload"]['suggested_orders'])
-        
-        prompt = (
-            f"""{system_prompt}
+        formatted_recommended_orders = ", ".join(parsed_data_own["payload"]["suggested_orders"])
+
+        prompt = f"""{system_prompt}
 
             Now below is the real question:
-                **Board State:**  
+                **Board State:**
                 {formated_board_states}
-                
-                **Recommended Orders for {own}:**  
+
+                **Recommended Orders for {own}:**
                 {formatted_recommended_orders}
-                
+
                 **Potential Orders for other powers:**
                 {formatted_opponent_orders}
-                
+
                 **Advice:**
                 You are advising the player controlling {own}. What is a rationale to explain each recommended move?
                 <|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
-        )
         return prompt
 
-    def format_prompt_phase2(self, own: str, oppo: str, suggest_orders: List[str], own_orders: List[str], rationales: List[str] ) -> Optional[str]:
+    def format_prompt_phase2(
+        self, own: str, suggest_orders: List[str], own_orders: List[str], rationales: List[str]
+    ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
         Returns:
@@ -272,11 +271,10 @@ A MUN - BUR:
         formatted_opponent_orders = predicted_orders
 
         formatted_opponent_orders = "\n".join(
-            f"{power}: " + ", ".join(predicted_orders[power])
-            for power in predicted_orders
+            f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
         )
         parsed_data_own = json.loads(own_orders[0])
-        formatted_recommended_orders = ", ".join(parsed_data_own["payload"]['suggested_orders'])
+        formatted_recommended_orders = ", ".join(parsed_data_own["payload"]["suggested_orders"])
 
         prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
     You are an expert assistant specializing in the Diplomacy board game. Your role is to assist a novice player by analyzing:
@@ -289,10 +287,10 @@ A MUN - BUR:
 
     Avoid long explanations or generic commentary — be precise and practical.
     <|eot_id|><|start_header_id|>user<|end_header_id|>
-    **Board State:**  
+    **Board State:**
     {formated_board_states}
 
-    **Recommended Orders for {own}:**  
+    **Recommended Orders for {own}:**
     {formatted_recommended_orders}
 
     **Potential Orders for other powers:**
@@ -301,7 +299,7 @@ A MUN - BUR:
     **Rationale for Recommended Orders*:*
     {rationales}
 
-    **Advice:**  
+    **Advice:**
     You are advising the player controlling {own}. Give a summary rationale for this set of orders given the rationale for each order. When providing advise, use 'you' or 'your' instead of using the power name.
     <|eot_id|><|start_header_id|>assistant<|end_header_id|>
     """
@@ -351,21 +349,24 @@ A MUN - BUR:
 
         model.eval()
         with torch.no_grad():
-            output_ids = model.module.generate(
-                input_ids,
-                attention_mask=attention_mask,
-                max_new_tokens=max_new_tokens,
-                pad_token_id=tokenizer.pad_token_id,
-            ) if isinstance(model, DataParallel) else model.generate(
-                input_ids,
-                attention_mask=attention_mask,
-                max_new_tokens=max_new_tokens,
-                pad_token_id=tokenizer.pad_token_id,
+            output_ids = (
+                model.module.generate(
+                    input_ids,
+                    attention_mask=attention_mask,
+                    max_new_tokens=max_new_tokens,
+                    pad_token_id=tokenizer.pad_token_id,
+                )
+                if isinstance(model, DataParallel)
+                else model.generate(
+                    input_ids,
+                    attention_mask=attention_mask,
+                    max_new_tokens=max_new_tokens,
+                    pad_token_id=tokenizer.pad_token_id,
+                )
             )
 
-        generated_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
-        
-        return generated_text
+        return tokenizer.decode(output_ids[0], skip_special_tokens=True)  # type: ignore[no-any-return]
+
     def generate_and_parse_response(self, prompt: str) -> str:
         """Generate text from the model given 'prompt'.
 
@@ -391,12 +392,16 @@ A MUN - BUR:
         if not filtered_own_orders:
             return []
         other_power = get_other_powers([self.power_name], self.game)
-        prompt = self.format_prompt_phase1(self.power_name, other_power, filtered_opponent_orders, filtered_own_orders)
+        prompt = self.format_prompt_phase1(
+            self.power_name, filtered_opponent_orders, filtered_own_orders
+        )
         if self.previous_prompt != prompt:
-            logger.info("Phase1 prompt for %s: %s",self.power_name, prompt)
+            logger.info("Phase1 prompt for %s: %s", self.power_name, prompt)
             output_phase1 = self.generate_and_parse_response(prompt)
             logger.info("Phase1 output for %s: %s", self.power_name, output_phase1)
-            prompt2 = self.format_prompt_phase2(self.power_name, other_power, filtered_opponent_orders, filtered_own_orders, output_phase1)
+            prompt2 = self.format_prompt_phase2(
+                self.power_name, filtered_opponent_orders, filtered_own_orders, output_phase1
+            )
             logger.info("Phase2 prompt for %s: %s", self.power_name, prompt2)
             output_phase2 = self.generate_and_parse_response(prompt2)
             logger.info("Phase2 output for %s: %s", self.power_name, output_phase2)
