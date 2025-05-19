@@ -101,7 +101,6 @@ Both the bot and game running commands support a `--help` argument to list avail
     export COMM_STAGE_LENGTH=600
     python -m chiron_utils.scripts.run_bot --host [host_address] --port [port_address] --game_id [game_id] --power [power_name] --bot_type FaafAdvisorBot
     ```
-    
 
 ## Contributing
 
