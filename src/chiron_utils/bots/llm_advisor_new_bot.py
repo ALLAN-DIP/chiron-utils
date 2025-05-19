@@ -21,7 +21,7 @@ logger = return_logger(__name__)
 
 
 @dataclass
-class LlmNewAdvisor(BaselineBot):
+class LlmNewAdvisorBot(BaselineBot):
     """Bot that provides commentary advise using Llama3.1 as base model.
 
     We use Llama3.1-8B-Instruct as the base model and generate commentary 

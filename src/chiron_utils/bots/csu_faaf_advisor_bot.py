@@ -22,7 +22,7 @@ logger = return_logger(__name__)
 
 
 @dataclass
-class FaafAdvisor(BaselineBot):
+class FaafAdvisorBot(BaselineBot):
     """Bot that provides commentary advise using FAAF as base model.
 
     We use FAAF model from CSU and generate friction to players.
