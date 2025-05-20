@@ -2,6 +2,7 @@
 
 from abc import ABC
 from dataclasses import dataclass
+import datetime
 import random
 from typing import Dict, List, Optional, Sequence
 
@@ -65,6 +66,13 @@ class RandomProposerBot(BaselineBot, ABC):
         Returns:
             List of orders to carry out.
         """
+        if self.bot_type == BotType.ADVISOR:
+            for other_power in get_other_powers([self.power_name], self.game):
+                now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y_%m_%d_%H_%M_%S_%f")
+                await self.suggest_commentary(
+                    other_power, f"I have advice about {other_power}: {now}!"
+                )
+
         if not self.is_first_messaging_round:
             return list(orders)
 
@@ -73,7 +81,6 @@ class RandomProposerBot(BaselineBot, ABC):
         for other_power, suggested_random_orders in random_order_proposals.items():
             if self.bot_type == BotType.ADVISOR:
                 await self.suggest_message(other_power, suggested_random_orders)
-                await self.suggest_commentary(other_power, f"I have advice about {other_power}!")
             elif self.bot_type == BotType.PLAYER:
                 await self.send_message(other_power, suggested_random_orders)
 
