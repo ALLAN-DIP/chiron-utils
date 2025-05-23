@@ -1,9 +1,9 @@
 astroid==3.3.8
 baseline_models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@af298c65ed6972e2d5c02143a13c020b16d168f5
-bcrypt==4.2.1
-certifi==2024.12.14
+bcrypt==4.3.0
+certifi==2025.4.26
 cfgv==3.4.0
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
 coloredlogs==15.0.1
 daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e
 dill==0.4.0
@@ -49,10 +49,10 @@ threadpoolctl==3.5.0
 tokenizers==0.21.0
 tomlkit==0.13.2
 torch==2.5.1
-tornado==6.4.2
+tornado==6.5.1
 tqdm==4.67.1
 transformers==4.48.0
 typing_extensions==4.12.2
 ujson==5.10.0
-urllib3==2.3.0
+urllib3==2.4.0
 virtualenv==20.30.0
