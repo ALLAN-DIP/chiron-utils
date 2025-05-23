@@ -20,7 +20,8 @@ RUN apt-get -y update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --upgrade pip==25.1.1
+RUN pip install --no-cache-dir --upgrade pip==25.1.1 \
+    && pip uninstall --yes setuptools wheel
 
 # Install required packages
 COPY requirements-lock.txt .
