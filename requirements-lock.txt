@@ -1,4 +1,4 @@
-astroid==3.3.8
+astroid==3.3.9
 baseline_models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@af298c65ed6972e2d5c02143a13c020b16d168f5
 bcrypt==4.3.0
 certifi==2025.4.26
@@ -9,14 +9,14 @@ daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4
 dill==0.4.0
 diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@99e84d694aef37106617d5de7a212b61454f1eef
 distlib==0.3.9
-filelock==3.17.0
+filelock==3.18.0
 fsspec==2024.12.0
 huggingface-hub==0.27.1
 humanfriendly==10.0
-identify==2.6.10
+identify==2.6.12
 idna==3.10
 iniconfig==2.0.0
-isort==6.0.0
+isort==6.0.1
 Jinja2==3.1.5
 joblib==1.4.2
 MarkupSafe==3.0.2
@@ -29,11 +29,11 @@ nodeenv==1.9.1
 numpy==1.26.4
 packaging==24.2
 parsimonious==0.9.0
-platformdirs==4.3.6
+platformdirs==4.3.8
 pluggy==1.5.0
-pre_commit==4.1.0
-pylint==3.3.4
-pytest==8.3.4
+pre_commit==4.2.0
+pylint==3.3.7
+pytest==8.3.5
 python-dateutil==2.9.0.post0
 pytz==2024.2
 PyYAML==6.0.2
@@ -52,7 +52,7 @@ torch==2.5.1
 tornado==6.5.1
 tqdm==4.67.1
 transformers==4.48.0
-typing_extensions==4.12.2
+typing_extensions==4.13.2
 ujson==5.10.0
 urllib3==2.4.0
-virtualenv==20.30.0
+virtualenv==20.31.2
