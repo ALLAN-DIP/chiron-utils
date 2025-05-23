@@ -6,7 +6,7 @@
 
 FROM ghcr.io/allan-dip/chiron-utils:baseline-lr-model-2025-01-14 AS baseline-lr-model
 
-FROM python:3.11.11-slim-bookworm AS base
+FROM python:3.11.12-slim-bookworm AS base
 
 WORKDIR /bot
 
@@ -16,7 +16,7 @@ RUN apt-get -y update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --upgrade pip==25.0.1
+RUN pip install --no-cache-dir --upgrade pip==25.1.1
 
 # Install required packages
 COPY requirements-lock.txt .
