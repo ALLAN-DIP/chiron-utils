@@ -4,7 +4,6 @@ bcrypt==4.3.0
 certifi==2025.4.26
 cfgv==3.4.0
 charset-normalizer==3.4.2
-coloredlogs==15.0.1
 daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e
 dill==0.4.0
 diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@99e84d694aef37106617d5de7a212b61454f1eef
@@ -12,7 +11,6 @@ distlib==0.3.9
 filelock==3.18.0
 fsspec==2024.12.0
 huggingface-hub==0.27.1
-humanfriendly==10.0
 identify==2.6.12
 idna==3.10
 iniconfig==2.1.0
@@ -34,16 +32,12 @@ pluggy==1.6.0
 pre_commit==4.2.0
 pylint==3.3.7
 pytest==8.3.5
-python-dateutil==2.9.0.post0
-pytz==2024.2
 PyYAML==6.0.2
 regex==2024.11.6
 requests==2.32.3
 safetensors==0.5.2
 scikit-learn==1.4.1.post1
 scipy==1.15.3
-setuptools==75.8.0
-six==1.17.0
 sympy==1.13.1
 threadpoolctl==3.6.0
 tokenizers==0.21.0
