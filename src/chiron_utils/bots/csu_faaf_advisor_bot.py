@@ -370,7 +370,14 @@ class FaafAdvisorBot(BaselineBot):
             message or None if something fails.
         """
         generated_text = self.generate_text(prompt, self.tokenizer, self.model, self.device, 2048)
-        assistant_output = generated_text.split("assistant")[2]
+
+        try:
+            assistant_output = generated_text.split("assistant", 2)[2]
+        except IndexError:
+            return None
+
+        assistant_output = " ".join(assistant_output.split())
+
         return assistant_output
 
     async def do_messaging_round(self, orders: Sequence[str]) -> List[str]:
@@ -435,11 +442,13 @@ class FaafAdvisorBot(BaselineBot):
             logger.warning("%s: max retries reached; skipping messaging round", self.power_name)
             return []
         try:
-            for p in other_power:
-                await self.suggest_commentary(
-                    p,
-                    f"Commentary for the current move suggestions ({formatted_recommended_orders}): {output_phase2}",
-                )
+            for i in other_power:
+                if i:
+                    await self.suggest_commentary(
+                        i,
+                        f"Commentary for the current move suggestions ({formatted_recommended_orders}): {output_phase2}",
+                    )
+                    break
         except diplomacy.utils.exceptions.GamePhaseException as exc:
             logger.exception("Ignoring %s", exc.__class__.__name__)
 

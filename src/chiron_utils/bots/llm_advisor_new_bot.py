@@ -435,10 +435,12 @@ A MUN - BUR:
             logger.info("Phase2 output for %s: %s", self.power_name, output_phase2)
             try:
                 for i in other_power:
-                    await self.suggest_commentary(
-                        i,
-                        f"Commentary for the current move suggestions ({formatted_recommended_orders}): {output_phase2}",
-                    )
+                    if i:
+                        await self.suggest_commentary(
+                            i,
+                            f"Commentary for the current move suggestions ({formatted_recommended_orders}): {output_phase2}",
+                        )
+                        break
             except diplomacy.utils.exceptions.GamePhaseException as exc:
                 logger.exception("Ignoring %s", exc.__class__.__name__)
 
