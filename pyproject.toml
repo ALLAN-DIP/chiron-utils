@@ -105,6 +105,7 @@ warn_unreachable = true
 [[tool.mypy.overrides]]
 # Needed to prevent a large number of errors related to Python 3.8 syntax being used
 module = [
+  "peft",
   "pytest",
   "torch.*",
 ]
