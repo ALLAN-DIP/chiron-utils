@@ -10,6 +10,8 @@ daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4
 dill==0.4.0
 diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@aa6055fe9b933bd393a0339568e102534bb2009c
 distlib==0.3.9
+elastic-transport==8.17.1
+elasticsearch==8.15.1
 filelock==3.17.0
 fsspec==2024.12.0
 huggingface-hub==0.27.1
