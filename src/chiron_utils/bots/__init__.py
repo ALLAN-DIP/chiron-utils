@@ -47,10 +47,18 @@ if {"baseline_models"} < importable_modules:
             LrProbsVisualAdvisor,
         ]
     )
-if {"torch", "transformers"} < importable_modules:
+if {"peft", "torch", "transformers"} < importable_modules:
+    from chiron_utils.bots.csu_faaf_advisor_bot import FaafAdvisor as FaafAdvisor
     from chiron_utils.bots.llm_advisor_bot import LlmAdvisor as LlmAdvisor
+    from chiron_utils.bots.llm_advisor_new_bot import LlmNewAdvisor as LlmNewAdvisor
 
-    BOTS.extend([LlmAdvisor])
+    BOTS.extend(
+        [
+            FaafAdvisor,
+            LlmAdvisor,
+            LlmNewAdvisor,
+        ]
+    )
 # Alphabetize list of classes
 BOTS.sort(key=lambda t: t.__name__)
 

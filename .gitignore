@@ -3,6 +3,8 @@
 
 ### Project files
 /data/
+# CMU FAAF advisor model directory
+/src/chiron_utils/models/
 
 ### Programming language files
 ## Java files

@@ -1,3 +1,4 @@
+accelerate==1.7.0
 astroid==3.3.8
 baseline_models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@0d70413c437358eed8c90e7eebc74f306fd1db11
 bcrypt==4.2.1
@@ -29,9 +30,11 @@ nodeenv==1.9.1
 numpy==1.26.4
 packaging==24.2
 parsimonious==0.9.0
+peft==0.15.2
 platformdirs==4.3.6
 pluggy==1.5.0
 pre_commit==4.1.0
+psutil==7.0.0
 pylint==3.3.4
 pytest==8.3.4
 python-dateutil==2.9.0.post0
