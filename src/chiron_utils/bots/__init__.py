@@ -47,7 +47,7 @@ if {"baseline_models"} < importable_modules:
             LrProbsVisualAdvisor,
         ]
     )
-if {"torch", "transformers"} < importable_modules:
+if {"peft", "torch", "transformers"} < importable_modules:
     from chiron_utils.bots.llm_advisor_bot import LlmAdvisor as LlmAdvisor
 
     BOTS.extend([LlmAdvisor])

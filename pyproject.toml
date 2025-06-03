@@ -64,6 +64,7 @@ dev = [
   "pytest>=6.0",
 ]
 llm-advisor = [
+  "peft",
   "torch",
   # Recommended minimum version for Llama 3.1 support
   "transformers>=4.43.2",
