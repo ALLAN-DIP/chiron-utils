@@ -8,6 +8,10 @@ FROM ghcr.io/allan-dip/chiron-utils:baseline-lr-model-2025-01-14 AS baseline-lr-
 
 FROM python:3.11.11-slim-bookworm AS base
 
+# Allow bot to detect whether running in a container
+# Using ID from https://www.freedesktop.org/software/systemd/man/257/systemd-detect-virt.html
+ENV VIRT=docker
+
 WORKDIR /bot
 
 RUN apt-get -y update \
