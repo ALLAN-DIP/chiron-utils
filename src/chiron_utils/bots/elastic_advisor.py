@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass, field
 import os
+import re
 from typing import List, Sequence
 
 from baseline_models.message_advisor_code.elastic.masked_client import MaskedClient
@@ -17,6 +18,9 @@ DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
 
 ELASTIC_HOST = "http://localhost:9200"
+# `localhost` doesn't work when running an agent with Docker Desktop
+if os.environ.get("VIRT") == "docker":
+    ELASTIC_HOST = re.sub(r"\blocalhost\b", "host.docker.internal", ELASTIC_HOST)
 ELASTIC_INDEX = "tagged_documents_masked_scaled_center"
 
 MESSAGE_ADVICE_COUNT = 10
