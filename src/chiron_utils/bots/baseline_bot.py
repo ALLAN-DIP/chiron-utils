@@ -107,7 +107,10 @@ class BaselineBot(ABC):
         """
         messages = self.game.filter_messages(messages=self.game.messages, game_role=self.power_name)
         received_messages = sorted(
-            msg for msg in messages.values() if msg.sender != self.power_name and (msg.type is None or json.loads(msg.message).get("recipient") == self.power_name)
+            msg
+            for msg in messages.values()
+            if msg.sender != self.power_name
+            and (msg.type is None or json.loads(msg.message).get("recipient") == self.power_name)
         )
         for msg_obj in received_messages:
             logger.info("%s received message: %s", self.display_name, msg_obj)
