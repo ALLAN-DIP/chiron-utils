@@ -396,7 +396,7 @@ class FaafAdvisor(BaselineBot):
         other_power = get_other_powers([self.power_name], self.game)
 
         formatted_recommended_orders = ""
-        for orders in filtered_own_orders:
+        for orders in filtered_own_orders:  # noqa: PLR1704
             parsed_data_own = json.loads(orders)
             if parsed_data_own["recipient"] == own:
                 formatted_recommended_orders = ", ".join(

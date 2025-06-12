@@ -415,7 +415,7 @@ A MUN - BUR:
             self.power_name, filtered_opponent_orders, filtered_own_orders
         )
         formatted_recommended_orders = ""
-        for orders in filtered_own_orders:
+        for orders in filtered_own_orders:  # noqa: PLR1704
             parsed_data_own = json.loads(orders)
             if parsed_data_own["recipient"] == own:
                 formatted_recommended_orders = ", ".join(
