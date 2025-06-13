@@ -48,22 +48,6 @@ class LlmNewAdvisor(BaselineBot):
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
 
-    def read_opponent_move_suggestions_from_advisor(self) -> List[str]:
-        """Read opponent move predictions from advisor.
-
-        Returns:
-            List of predicted orders.
-        """
-        received_messages = self.read_messages()
-        suggestion_messages = [
-            msg.message
-            for msg in received_messages
-            if msg.type == diplomacy_strings.SUGGESTED_MOVE_OPPONENTS
-        ]
-        logger.info(
-            "%s received opponent move suggestions: %s", self.display_name, suggestion_messages
-        )
-        return suggestion_messages
 
     def create_system_prompt(self) -> str:
         """Return the system prompt string (static text)."""
