@@ -99,7 +99,7 @@ class BaselineBot(ABC):
             logger.info("Still waiting")
 
     def read_messages(self) -> List[Message]:
-        """Retrieves all valid messages for the current phase sent to the bot.
+        """Retrieves all messages for the current phase sent by or to the bot.
 
         Returns:
             List of messages.
