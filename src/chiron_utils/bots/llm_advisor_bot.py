@@ -2,7 +2,6 @@
 
 import asyncio
 from dataclasses import dataclass, field
-import json
 import random
 from typing import Dict, List, Optional, Sequence, Tuple, Union
 
@@ -175,7 +174,9 @@ Now let's see the question:"""
 
         return " ".join(mapped_words)
 
-    def format_prompt_phase1(self, own: str, oppo: str, suggest_orders: List[str]) -> Optional[str]:
+    def format_prompt_phase1(
+        self, own: str, oppo: str, suggest_orders: Dict[str, List[str]]
+    ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
         Returns:
@@ -204,8 +205,7 @@ Now let's see the question:"""
         message_history = ""
         for msg in recent_msgs:
             message_history += f"Message from {msg.sender}:'{msg.message}' "
-        parsed_data = json.loads(suggest_orders[0])
-        predicted_orders = parsed_data["payload"]["predicted_orders"][oppo]
+        predicted_orders = suggest_orders[oppo]
 
         orders_string = ", ".join(predicted_orders)
 
