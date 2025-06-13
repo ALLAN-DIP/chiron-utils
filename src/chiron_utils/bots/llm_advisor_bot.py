@@ -331,7 +331,7 @@ Now let's see the question:"""
         """
         await asyncio.sleep(random.uniform(5, 10))
 
-        filtered_orders = self.read_suggestions_from_advisor()
+        filtered_orders = self.read_suggested_opponent_orders()
         if not filtered_orders:
             return []
 
