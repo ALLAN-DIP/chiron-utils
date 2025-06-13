@@ -87,7 +87,7 @@ class FaafAdvisor(BaselineBot):
         return "\n".join(lines)
 
     def format_prompt_phase1(
-        self, own: str, suggest_orders: List[str], own_orders: List[str]
+        self, own: str, suggest_orders: Dict[str, List[str]], own_orders: List[str]
     ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
@@ -104,11 +104,8 @@ class FaafAdvisor(BaselineBot):
         sorted_board_states = {key: sorted(value) for key, value in board_states.items()}
         formated_board_states = self.format_boardstates(sorted_board_states)
         # opponent order prediction
-        parsed_data = json.loads(suggest_orders[0])
-        predicted_orders = parsed_data["payload"]["predicted_orders"]
-        formatted_opponent_orders = predicted_orders
         formatted_opponent_orders = "\n".join(
-            f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
+            f"{power}: " + ", ".join(suggest_orders[power]) for power in suggest_orders
         )
         # own recommended order format
         formatted_recommended_orders = ", ".join(own_orders)
@@ -150,7 +147,7 @@ class FaafAdvisor(BaselineBot):
         return prompt
 
     def format_prompt_phase2(
-        self, own: str, suggest_orders: List[str], own_orders: List[str], rationales: Optional[str]
+        self, own: str, suggest_orders: Dict[str, List[str]], own_orders: List[str], rationales: Optional[str]
     ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
@@ -164,12 +161,8 @@ class FaafAdvisor(BaselineBot):
         sorted_board_states = {key: sorted(value) for key, value in board_states.items()}
         formated_board_states = self.format_boardstates(sorted_board_states)
 
-        parsed_data = json.loads(suggest_orders[0])
-        predicted_orders = parsed_data["payload"]["predicted_orders"]
-        formatted_opponent_orders = predicted_orders
-
         formatted_opponent_orders = "\n".join(
-            f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
+            f"{power}: " + ", ".join(suggest_orders[power]) for power in suggest_orders
         )
         formatted_recommended_orders = ", ".join(own_orders)
         if formatted_recommended_orders == "":
