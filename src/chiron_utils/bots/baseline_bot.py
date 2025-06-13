@@ -225,7 +225,7 @@ class BaselineBot(ABC):
         )
 
     def read_suggested_orders(self) -> List[str]:
-        """Read suggested orders from advisor.
+        """Read suggested orders for power from advisor.
 
         Returns:
             List of suggested orders.
