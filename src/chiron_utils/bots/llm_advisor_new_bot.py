@@ -168,9 +168,7 @@ A MUN - BUR:
             f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
         )
         # own recommended order format
-        formatted_recommended_orders = ", ".join(
-                    own_orders
-                )
+        formatted_recommended_orders = ", ".join(own_orders)
         if formatted_recommended_orders == "":
             return None
 
@@ -213,9 +211,7 @@ A MUN - BUR:
         formatted_opponent_orders = "\n".join(
             f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
         )
-        formatted_recommended_orders = ", ".join(
-                    own_orders
-                )
+        formatted_recommended_orders = ", ".join(own_orders)
         if formatted_recommended_orders == "":
             return None
 
@@ -343,9 +339,7 @@ A MUN - BUR:
         prompt = self.format_prompt_phase1(
             self.power_name, filtered_opponent_orders, filtered_own_orders
         )
-        formatted_recommended_orders = ", ".join(
-                    filtered_own_orders
-                )
+        formatted_recommended_orders = ", ".join(filtered_own_orders)
         if prompt is None:
             return []
         if self.previous_prompt != prompt:

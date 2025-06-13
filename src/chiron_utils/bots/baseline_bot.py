@@ -237,7 +237,9 @@ class BaselineBot(ABC):
             if msg.type == diplomacy_strings.SUGGESTED_MOVE_FULL
         ]
         # Shouldn't be needed, but verify only processing advice we're the recipient of
-        parsed_messages = [message for message in parsed_messages if message["recipient"] == self.power_name]
+        parsed_messages = [
+            message for message in parsed_messages if message["recipient"] == self.power_name
+        ]
         if not parsed_messages:
             return []
         latest_message = parsed_messages[-1]
