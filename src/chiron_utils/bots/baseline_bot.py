@@ -278,10 +278,10 @@ class BaselineBot(ABC):
         )
 
     def read_suggested_opponent_orders(self) -> List[str]:
-        """Read opponent move predictions from advisor.
+        """Read predicted orders for opponent powers from advisor.
 
         Returns:
-            List of predicted orders.
+            Mapping from opponent powers to their predicted orders.
         """
         received_messages = self.read_messages()
         suggestion_messages = [
