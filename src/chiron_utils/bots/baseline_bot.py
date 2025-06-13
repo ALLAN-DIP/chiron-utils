@@ -7,7 +7,7 @@ from enum import Enum, auto
 import json
 import os
 import random
-from typing import Any, ClassVar, List, Mapping, Optional, Sequence
+from typing import Any, ClassVar, List, Mapping, Optional, Sequence, cast
 
 try:
     from typing import TypedDict  # type: ignore[attr-defined]
@@ -244,7 +244,7 @@ class BaselineBot(ABC):
             return []
         latest_message = parsed_messages[-1]
         logger.info("%s received order suggestions: %s", self.display_name, latest_message)
-        suggested_orders = latest_message["payload"]["suggested_orders"]
+        suggested_orders = cast(List[str], latest_message["payload"]["suggested_orders"])
         return suggested_orders
 
     async def suggest_opponent_orders(self, opponent_orders: Mapping[str, Sequence[str]]) -> None:
