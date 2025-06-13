@@ -127,9 +127,7 @@ class FaafAdvisor(BaselineBot):
             f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
         )
         # own recommended order format
-        formatted_recommended_orders = ", ".join(
-                    own_orders
-                )
+        formatted_recommended_orders = ", ".join(own_orders)
         if formatted_recommended_orders == "":
             return None
 
@@ -189,9 +187,7 @@ class FaafAdvisor(BaselineBot):
         formatted_opponent_orders = "\n".join(
             f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
         )
-        formatted_recommended_orders = ", ".join(
-                    own_orders
-                )
+        formatted_recommended_orders = ", ".join(own_orders)
         if formatted_recommended_orders == "":
             return None
 
@@ -324,9 +320,7 @@ class FaafAdvisor(BaselineBot):
             own = POWER_NAMES_DICT[own]
         other_power = get_other_powers([self.power_name], self.game)
 
-        formatted_recommended_orders = ", ".join(
-                    filtered_own_orders
-                )
+        formatted_recommended_orders = ", ".join(filtered_own_orders)
 
         prompt = self.format_prompt_phase1(
             self.power_name, filtered_opponent_orders, filtered_own_orders
