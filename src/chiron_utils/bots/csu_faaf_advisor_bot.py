@@ -293,7 +293,7 @@ class FaafAdvisor(BaselineBot):
         """Carry out one round of messaging, along with related tasks."""
         await asyncio.sleep(random.uniform(5, 10))
 
-        filtered_opponent_orders = self.read_opponent_move_suggestions_from_advisor()
+        filtered_opponent_orders = self.read_suggested_opponent_orders()
         if not filtered_opponent_orders:
             return []
         filtered_own_orders = self.read_suggested_orders()
