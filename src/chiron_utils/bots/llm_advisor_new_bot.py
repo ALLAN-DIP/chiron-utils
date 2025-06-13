@@ -344,7 +344,7 @@ A MUN - BUR:
         filtered_opponent_orders = self.read_opponent_move_suggestions_from_advisor()
         if not filtered_opponent_orders:
             return []
-        filtered_own_orders = self.read_own_suggestions_from_advisor()
+        filtered_own_orders = self.read_suggested_orders()
         if not filtered_own_orders:
             return []
         other_power = get_other_powers([self.power_name], self.game)

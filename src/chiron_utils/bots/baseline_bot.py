@@ -223,7 +223,7 @@ class BaselineBot(ABC):
             suggestion_type=suggestion_type,
         )
 
-    def read_own_suggestions_from_advisor(self) -> List[str]:
+    def read_suggested_orders(self) -> List[str]:
         """Read recommended orders from advisor.
 
         Returns:
