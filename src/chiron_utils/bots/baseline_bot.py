@@ -223,6 +223,21 @@ class BaselineBot(ABC):
             suggestion_type=suggestion_type,
         )
 
+    def read_own_suggestions_from_advisor(self) -> List[str]:
+        """Read recommended orders from advisor.
+
+        Returns:
+            List of recommended orders.
+        """
+        received_messages = self.read_messages()
+        suggestion_messages = [
+            msg.message
+            for msg in received_messages
+            if msg.type == diplomacy_strings.SUGGESTED_MOVE_FULL
+        ]
+        logger.info("%s received own move suggestions: %s", self.display_name, suggestion_messages)
+        return suggestion_messages
+
     async def suggest_opponent_orders(self, opponent_orders: Mapping[str, Sequence[str]]) -> None:
         """Send predicted orders for opponent powers to the server.
 
