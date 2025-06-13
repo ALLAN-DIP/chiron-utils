@@ -8,7 +8,6 @@ from typing import Dict, List, Optional, Sequence, Tuple, Union
 
 import diplomacy
 from diplomacy import Message
-from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 import torch
 from torch.nn import DataParallel
@@ -45,23 +44,6 @@ class LlmAdvisor(BaselineBot):
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
-
-    def read_suggestions_from_advisor(self) -> List[str]:
-        """Read suggestions from RandomProposerAdvisor.
-
-        Returns:
-            List of suggested orders.
-        """
-        received_messages = self.read_messages()
-        suggestion_messages = [
-            msg.message
-            for msg in received_messages
-            if msg.type == diplomacy_strings.SUGGESTED_MOVE_OPPONENTS
-        ]
-        logger.info(
-            "%s received opponent move suggestions: %s", self.display_name, suggestion_messages
-        )
-        return suggestion_messages
 
     def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
         """Return all messages sent between 'own' and 'oppo'."""
