@@ -48,7 +48,6 @@ class LlmNewAdvisor(BaselineBot):
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
 
-
     def create_system_prompt(self) -> str:
         """Return the system prompt string (static text)."""
         return """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
@@ -171,7 +170,11 @@ A MUN - BUR:
         return prompt
 
     def format_prompt_phase2(
-        self, own: str, suggest_orders: Dict[str, List[str]], own_orders: List[str], rationales: Optional[str]
+        self,
+        own: str,
+        suggest_orders: Dict[str, List[str]],
+        own_orders: List[str],
+        rationales: Optional[str],
     ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 

@@ -297,7 +297,9 @@ class BaselineBot(ABC):
             return {}
         latest_message = parsed_messages[-1]
         logger.info("%s received opponent order suggestions: %s", self.display_name, latest_message)
-        suggested_opponent_orders = cast(Dict[str, List[str]], latest_message["payload"]["predicted_orders"])
+        suggested_opponent_orders = cast(
+            Dict[str, List[str]], latest_message["payload"]["predicted_orders"]
+        )
         return suggested_opponent_orders
 
     async def suggest_orders_probabilities(
