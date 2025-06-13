@@ -4,9 +4,10 @@ from abc import ABC, abstractmethod
 import asyncio
 from dataclasses import dataclass
 from enum import Enum, auto
+import json
 import os
 import random
-from typing import Any, ClassVar, List, Mapping, Optional, Sequence
+from typing import Any, ClassVar, List, Mapping, Optional, Sequence, cast
 
 try:
     from typing import TypedDict  # type: ignore[attr-defined]
@@ -219,19 +220,27 @@ class BaselineBot(ABC):
         )
 
     def read_suggested_orders(self) -> List[str]:
-        """Read recommended orders from advisor.
+        """Read suggested orders for power from advisor.
 
         Returns:
-            List of recommended orders.
+            List of suggested orders.
         """
         received_messages = self.read_messages()
-        suggestion_messages = [
-            msg.message
+        parsed_messages = [
+            json.loads(msg.message)
             for msg in received_messages
             if msg.type == diplomacy_strings.SUGGESTED_MOVE_FULL
         ]
-        logger.info("%s received own move suggestions: %s", self.display_name, suggestion_messages)
-        return suggestion_messages
+        # Shouldn't be needed, but verify only processing advice we're the recipient of
+        parsed_messages = [
+            message for message in parsed_messages if message["recipient"] == self.power_name
+        ]
+        if not parsed_messages:
+            return []
+        latest_message = parsed_messages[-1]
+        logger.info("%s received order suggestions: %s", self.display_name, latest_message)
+        suggested_orders = cast(List[str], latest_message["payload"]["suggested_orders"])
+        return suggested_orders
 
     async def suggest_opponent_orders(self, opponent_orders: Mapping[str, Sequence[str]]) -> None:
         """Send predicted orders for opponent powers to the server.
