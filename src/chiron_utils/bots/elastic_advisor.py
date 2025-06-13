@@ -5,8 +5,8 @@ import os
 import re
 from typing import List, Sequence
 
-from baseline_models.message_advisor_code.elastic.masked_client import MaskedClient
 from baseline_models.message_advisor_code.constants import DEFAULT_HOST, DEFAULT_INDEX
+from baseline_models.message_advisor_code.elastic.masked_client import MaskedClient
 from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
@@ -64,9 +64,8 @@ class ElasticAdvisor(BaselineBot):
         )
         for other_power in get_other_powers([self.power_name], self.game):
             if other_power in messages:
-                if self.bot_type == BotType.ADVISOR:
-                    for message in messages[other_power][:MESSAGE_ADVICE_COUNT]:
-                        await self.suggest_message(other_power, message)
+                for message in messages[other_power][:MESSAGE_ADVICE_COUNT]:
+                    await self.suggest_message(other_power, message)
 
         self.is_first_messaging_round = False
         return list(orders)
