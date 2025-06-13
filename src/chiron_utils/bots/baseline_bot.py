@@ -105,12 +105,15 @@ class BaselineBot(ABC):
             List of messages.
         """
         messages = self.game.filter_messages(messages=self.game.messages, game_role=self.power_name)
+
+        # Log only received messages because we log sent messages elsewhere
         received_messages = sorted(
             msg for msg in messages.values() if msg.sender != self.power_name
         )
         for msg_obj in received_messages:
             logger.info("%s received message: %s", self.display_name, msg_obj)
-        return received_messages
+
+        return messages
 
     async def send_message(
         self,
