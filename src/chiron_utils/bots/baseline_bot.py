@@ -218,7 +218,7 @@ class BaselineBot(ABC):
             suggestion_type=suggestion_type,
         )
 
-    def read_own_suggestions_from_advisor(self) -> List[str]:
+    def read_suggested_orders(self) -> List[str]:
         """Read recommended orders from advisor.
 
         Returns:
@@ -263,7 +263,7 @@ class BaselineBot(ABC):
             suggestion_type=diplomacy_strings.SUGGESTED_MOVE_OPPONENTS,
         )
 
-    def read_opponent_move_suggestions_from_advisor(self) -> List[str]:
+    def read_suggested_opponent_orders(self) -> List[str]:
         """Read opponent move predictions from advisor.
 
         Returns:
@@ -279,8 +279,6 @@ class BaselineBot(ABC):
             "%s received opponent move suggestions: %s", self.display_name, suggestion_messages
         )
         return suggestion_messages
-
-    read_suggestions_from_advisor = read_opponent_move_suggestions_from_advisor
 
     async def suggest_orders_probabilities(
         self, province: str, orders_probabilities: Mapping[str, OrderProbability]
