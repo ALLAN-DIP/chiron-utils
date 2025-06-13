@@ -83,36 +83,6 @@ class FaafAdvisor(BaselineBot):
         logger.info("%s received own move suggestions: %s", self.display_name, suggestion_messages)
         return suggestion_messages
 
-    def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
-        """Return all messages sent between 'own' and 'oppo'."""
-        return [
-            msg
-            for msg in self.game.messages.values()
-            if (msg.sender == own and msg.recipient == oppo)
-            or (msg.sender == oppo and msg.recipient == own)
-        ]
-
-    def get_recent_message_history(
-        self, messages: List[Message], max_count: int = 8
-    ) -> List[Message]:
-        """Sort a list of messages by `time_sent` descending and return up to max_count most recent.
-
-        Also ensures the very last message is from the opponent (if available).
-        """
-        if not messages:
-            return []
-
-        # Sort descending by time_sent
-        sorted_msgs = sorted(messages, key=lambda x: x.time_sent, reverse=True)
-        recent_msgs = sorted_msgs[:max_count]
-        reversed_msgs = list(reversed(recent_msgs))
-
-        # Make sure the last message is from opponent, if possible
-        if reversed_msgs and reversed_msgs[-1].sender == self.power_name:
-            return []
-
-        return reversed_msgs
-
     def create_system_prompt(self) -> str:
         """Return the system prompt string (static text)."""
         return """<|begin_of_text|><|start_header_id|>system<|end_header_id|>
@@ -146,24 +116,6 @@ class FaafAdvisor(BaselineBot):
             line = f"{power}: {units_str}"
             lines.append(line)
         return "\n".join(lines)
-
-    def map_words_in_sentence(self, sentence: str, data: Dict[str, List[str]]) -> str:
-        """Return abbreviation conversed words in sentences."""
-        words = sentence.split()
-        mapped_words = []
-
-        for word in words:
-            clean_word = word.strip(",.!?")
-            word_lower = clean_word.lower()
-
-            if word_lower in data:
-                mapped_value = data[word_lower][0]
-                mapped_word = word.replace(clean_word, mapped_value)
-                mapped_words.append(mapped_word)
-            else:
-                mapped_words.append(word)
-
-        return " ".join(mapped_words)
 
     def format_prompt_phase1(
         self, own: str, suggest_orders: List[str], own_orders: List[str]
