@@ -6,6 +6,7 @@ import re
 from typing import List, Sequence
 
 from baseline_models.message_advisor_code.elastic.masked_client import MaskedClient
+from baseline_models.message_advisor_code.constants import DEFAULT_HOST, DEFAULT_INDEX
 from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 
@@ -17,11 +18,10 @@ logger = return_logger(__name__)
 DEFAULT_COMM_STAGE_LENGTH = 300  # 5 minutes in seconds
 COMM_STAGE_LENGTH = int(os.environ.get("COMM_STAGE_LENGTH", DEFAULT_COMM_STAGE_LENGTH))
 
-ELASTIC_HOST = "http://localhost:9200"
+ELASTIC_HOST = DEFAULT_HOST
 # `localhost` doesn't work when running an agent with Docker Desktop
 if os.environ.get("VIRT") == "docker":
     ELASTIC_HOST = re.sub(r"\blocalhost\b", "host.docker.internal", ELASTIC_HOST)
-ELASTIC_INDEX = "tagged_documents_masked_scaled_center"
 
 MESSAGE_ADVICE_COUNT = 10
 
@@ -60,15 +60,13 @@ class ElasticAdvisor(BaselineBot):
         state = self.game.get_state()
 
         messages = self.elastic_client.get_messages_from_sender(
-            ELASTIC_INDEX, state, self.power_name
+            DEFAULT_INDEX, state, self.power_name
         )
         for other_power in get_other_powers([self.power_name], self.game):
             if other_power in messages:
                 if self.bot_type == BotType.ADVISOR:
-                    for i in range(min(MESSAGE_ADVICE_COUNT, len(messages[other_power]))):
-                        await self.suggest_message(other_power, messages[other_power][i])
-                elif self.bot_type == BotType.PLAYER:
-                    await self.send_message(other_power, messages[other_power][0])
+                    for message in messages[other_power][:MESSAGE_ADVICE_COUNT]:
+                        await self.suggest_message(other_power, message)
 
         self.is_first_messaging_round = False
         return list(orders)
