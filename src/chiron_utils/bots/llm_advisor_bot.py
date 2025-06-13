@@ -176,7 +176,9 @@ Now let's see the question:"""
 
         return " ".join(mapped_words)
 
-    def format_prompt_phase1(self, own: str, oppo: str, suggest_orders: Dict[str, List[str]]) -> Optional[str]:
+    def format_prompt_phase1(
+        self, own: str, oppo: str, suggest_orders: Dict[str, List[str]]
+    ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
         Returns:
