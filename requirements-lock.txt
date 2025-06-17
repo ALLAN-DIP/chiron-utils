@@ -1,6 +1,6 @@
 accelerate==1.7.0
 astroid==3.3.8
-baseline_models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@0d70413c437358eed8c90e7eebc74f306fd1db11
+baseline_models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@0ad18dfebc39ff79dc65ee61ab993701363dc081
 bcrypt==4.2.1
 certifi==2024.12.14
 cfgv==3.4.0
@@ -10,6 +10,8 @@ daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4
 dill==0.4.0
 diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@aa6055fe9b933bd393a0339568e102534bb2009c
 distlib==0.3.9
+elastic-transport==8.17.1
+elasticsearch==8.15.1
 filelock==3.17.0
 fsspec==2024.12.0
 huggingface-hub==0.27.1

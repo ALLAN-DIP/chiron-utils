@@ -50,7 +50,7 @@ all = [
 # Default extra to make OCI image builds easier
 base = []
 baseline-lr = [
-  "baseline-models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@0d70413c437358eed8c90e7eebc74f306fd1db11",
+  "baseline-models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@0ad18dfebc39ff79dc65ee61ab993701363dc081",
 ]
 dev = [
   # Use older `mypy` version to keep code compatible with Python 3.7

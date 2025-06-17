@@ -75,6 +75,10 @@ Both the bot and game running commands support a `--help` argument to list avail
     export COMM_STAGE_LENGTH=600
     python -m chiron_utils.scripts.run_bot --host [host_address] --port [port_address] --game_id [game_id] --power [power_name] --bot_type [bot_type]
     ```
+- [`ElasticAdvisor`](src/chiron_utils/bots/elastic_advisor.py):
+  - This bot does not return orders, and is only intended to be a message advisor.
+  - Messages are retrieved from an Elasticsearch database using similarity search based on game state.
+  - Running the bot requires a populated Elasticsearch instance. See [`baseline-models`](https://github.com/ALLAN-DIP/baseline-models/blob/main/README.md#message_advisor_coderestore_snapshotpy) on how to run a Dockerized Elasticsearch instance locally.
 
 ## Contributing
 
