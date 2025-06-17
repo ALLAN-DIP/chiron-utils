@@ -30,7 +30,7 @@ dependencies = [
   # Pinned `daidepp` to `main`
   "daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e",
   # Pinned `diplomacy` to `main`
-  "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@aa6055fe9b933bd393a0339568e102534bb2009c",
+  "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@396192354f182751c6492de519ec3fd8b393d6aa",
   # `importlib-metadata` `3.7.0` introduced `packages_distributions()`
   'importlib-metadata>=3.7.0 ; python_version < "3.10"',
   # `tornado` `3.1` introduced `ASYNC_TEST_TIMEOUT` environment variable
@@ -50,7 +50,7 @@ all = [
 # Default extra to make OCI image builds easier
 base = []
 baseline-lr = [
-  "baseline-models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@0ad18dfebc39ff79dc65ee61ab993701363dc081",
+  "baseline-models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@447d8d7f3e04676afb3a4f2adcc59733433da073",
 ]
 dev = [
   # Use older `mypy` version to keep code compatible with Python 3.7
