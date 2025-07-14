@@ -2,13 +2,11 @@
 
 import asyncio
 from dataclasses import dataclass, field
-import json
 import random
 from typing import Dict, List, Optional, Sequence, Tuple, Union
 
 import diplomacy
 from diplomacy import Message
-from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 import torch
 from torch.nn import DataParallel
@@ -46,28 +44,11 @@ class LlmAdvisor(BaselineBot):
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
 
-    def read_suggestions_from_advisor(self) -> List[str]:
-        """Read suggestions from RandomProposerAdvisor.
-
-        Returns:
-            List of suggested orders.
-        """
-        received_messages = self.read_messages()
-        suggestion_messages = [
-            msg.message
-            for msg in received_messages
-            if msg.type == diplomacy_strings.SUGGESTED_MOVE_OPPONENTS
-        ]
-        logger.info(
-            "%s received opponent move suggestions: %s", self.display_name, suggestion_messages
-        )
-        return suggestion_messages
-
     def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
         """Return all messages sent between 'own' and 'oppo'."""
         return [
             msg
-            for msg in self.game.messages.values()
+            for msg in self.game.get_messages(game_role=self.power_name)
             if (msg.sender == own and msg.recipient == oppo)
             or (msg.sender == oppo and msg.recipient == own)
         ]
@@ -193,7 +174,9 @@ Now let's see the question:"""
 
         return " ".join(mapped_words)
 
-    def format_prompt_phase1(self, own: str, oppo: str, suggest_orders: List[str]) -> Optional[str]:
+    def format_prompt_phase1(
+        self, own: str, oppo: str, suggest_orders: Dict[str, List[str]]
+    ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
         Returns:
@@ -222,8 +205,7 @@ Now let's see the question:"""
         message_history = ""
         for msg in recent_msgs:
             message_history += f"Message from {msg.sender}:'{msg.message}' "
-        parsed_data = json.loads(suggest_orders[0])
-        predicted_orders = parsed_data["payload"]["predicted_orders"][oppo]
+        predicted_orders = suggest_orders[oppo]
 
         orders_string = ", ".join(predicted_orders)
 
@@ -349,7 +331,7 @@ Now let's see the question:"""
         """
         await asyncio.sleep(random.uniform(5, 10))
 
-        filtered_orders = self.read_suggestions_from_advisor()
+        filtered_orders = self.read_suggested_opponent_orders()
         if not filtered_orders:
             return []
 

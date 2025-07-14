@@ -2,13 +2,11 @@
 
 import asyncio
 from dataclasses import dataclass, field
-import json
 import random
 from typing import Dict, List, Optional, Sequence, Tuple, Union
 
 import diplomacy
 from diplomacy import Message
-from diplomacy.utils import strings as diplomacy_strings
 from diplomacy.utils.constants import SuggestionType
 import torch
 from torch.nn import DataParallel
@@ -47,68 +45,6 @@ class LlmNewAdvisor(BaselineBot):
     async def start_phase(self) -> None:
         """Execute actions at the start of the phase."""
         self.is_first_messaging_round = True
-
-    def read_opponent_move_suggestions_from_advisor(self) -> List[str]:
-        """Read opponent move predictions from advisor.
-
-        Returns:
-            List of predicted orders.
-        """
-        received_messages = self.read_messages()
-        suggestion_messages = [
-            msg.message
-            for msg in received_messages
-            if msg.type == diplomacy_strings.SUGGESTED_MOVE_OPPONENTS
-        ]
-        logger.info(
-            "%s received opponent move suggestions: %s", self.display_name, suggestion_messages
-        )
-        return suggestion_messages
-
-    def read_own_suggestions_from_advisor(self) -> List[str]:
-        """Read recommended orders from advisor.
-
-        Returns:
-            List of recommended orders.
-        """
-        received_messages = self.read_messages()
-        suggestion_messages = [
-            msg.message
-            for msg in received_messages
-            if msg.type == diplomacy_strings.SUGGESTED_MOVE_FULL
-        ]
-        logger.info("%s received own move suggestions: %s", self.display_name, suggestion_messages)
-        return suggestion_messages
-
-    def get_relevant_messages(self, own: str, oppo: str) -> List[Message]:
-        """Return all messages sent between 'own' and 'oppo'."""
-        return [
-            msg
-            for msg in self.game.messages.values()
-            if (msg.sender == own and msg.recipient == oppo)
-            or (msg.sender == oppo and msg.recipient == own)
-        ]
-
-    def get_recent_message_history(
-        self, messages: List[Message], max_count: int = 8
-    ) -> List[Message]:
-        """Sort a list of messages by `time_sent` descending and return up to max_count most recent.
-
-        Also ensures the very last message is from the opponent (if available).
-        """
-        if not messages:
-            return []
-
-        # Sort descending by time_sent
-        sorted_msgs = sorted(messages, key=lambda x: x.time_sent, reverse=True)
-        recent_msgs = sorted_msgs[:max_count]
-        reversed_msgs = list(reversed(recent_msgs))
-
-        # Make sure the last message is from opponent, if possible
-        if reversed_msgs and reversed_msgs[-1].sender == self.power_name:
-            return []
-
-        return reversed_msgs
 
     def create_system_prompt(self) -> str:
         """Return the system prompt string (static text)."""
@@ -188,26 +124,8 @@ A MUN - BUR:
             lines.append(line)
         return "\n".join(lines)
 
-    def map_words_in_sentence(self, sentence: str, data: Dict[str, List[str]]) -> str:
-        """Return abbreviation conversed words in sentences."""
-        words = sentence.split()
-        mapped_words = []
-
-        for word in words:
-            clean_word = word.strip(",.!?")
-            word_lower = clean_word.lower()
-
-            if word_lower in data:
-                mapped_value = data[word_lower][0]
-                mapped_word = word.replace(clean_word, mapped_value)
-                mapped_words.append(mapped_word)
-            else:
-                mapped_words.append(word)
-
-        return " ".join(mapped_words)
-
     def format_prompt_phase1(
-        self, own: str, suggest_orders: List[str], own_orders: List[str]
+        self, own: str, suggest_orders: Dict[str, List[str]], own_orders: List[str]
     ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
@@ -224,20 +142,11 @@ A MUN - BUR:
         sorted_board_states = {key: sorted(value) for key, value in board_states.items()}
         formated_board_states = self.format_boardstates(sorted_board_states)
         # opponent order prediction
-        parsed_data = json.loads(suggest_orders[0])
-        predicted_orders = parsed_data["payload"]["predicted_orders"]
-        formatted_opponent_orders = predicted_orders
         formatted_opponent_orders = "\n".join(
-            f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
+            f"{power}: " + ", ".join(suggest_orders[power]) for power in suggest_orders
         )
         # own recommended order format
-        formatted_recommended_orders = ""
-        for orders in own_orders:
-            parsed_data_own = json.loads(orders)
-            if parsed_data_own["recipient"] == own:
-                formatted_recommended_orders = ", ".join(
-                    parsed_data_own["payload"]["suggested_orders"]
-                )
+        formatted_recommended_orders = ", ".join(own_orders)
         if formatted_recommended_orders == "":
             return None
 
@@ -259,7 +168,11 @@ A MUN - BUR:
         return prompt
 
     def format_prompt_phase2(
-        self, own: str, suggest_orders: List[str], own_orders: List[str], rationales: Optional[str]
+        self,
+        own: str,
+        suggest_orders: Dict[str, List[str]],
+        own_orders: List[str],
+        rationales: Optional[str],
     ) -> Optional[str]:
         """Create prompt used as input to the LLM.
 
@@ -273,20 +186,10 @@ A MUN - BUR:
         sorted_board_states = {key: sorted(value) for key, value in board_states.items()}
         formated_board_states = self.format_boardstates(sorted_board_states)
 
-        parsed_data = json.loads(suggest_orders[0])
-        predicted_orders = parsed_data["payload"]["predicted_orders"]
-        formatted_opponent_orders = predicted_orders
-
         formatted_opponent_orders = "\n".join(
-            f"{power}: " + ", ".join(predicted_orders[power]) for power in predicted_orders
+            f"{power}: " + ", ".join(suggest_orders[power]) for power in suggest_orders
         )
-        formatted_recommended_orders = ""
-        for orders in own_orders:
-            parsed_data_own = json.loads(orders)
-            if parsed_data_own["recipient"] == own:
-                formatted_recommended_orders = ", ".join(
-                    parsed_data_own["payload"]["suggested_orders"]
-                )
+        formatted_recommended_orders = ", ".join(own_orders)
         if formatted_recommended_orders == "":
             return None
 
@@ -404,23 +307,17 @@ A MUN - BUR:
         if own in POWER_NAMES_DICT:
             own = POWER_NAMES_DICT[own]
 
-        filtered_opponent_orders = self.read_opponent_move_suggestions_from_advisor()
+        filtered_opponent_orders = self.read_suggested_opponent_orders()
         if not filtered_opponent_orders:
             return []
-        filtered_own_orders = self.read_own_suggestions_from_advisor()
+        filtered_own_orders = self.read_suggested_orders()
         if not filtered_own_orders:
             return []
         other_power = get_other_powers([self.power_name], self.game)
         prompt = self.format_prompt_phase1(
             self.power_name, filtered_opponent_orders, filtered_own_orders
         )
-        formatted_recommended_orders = ""
-        for orders in filtered_own_orders:
-            parsed_data_own = json.loads(orders)
-            if parsed_data_own["recipient"] == own:
-                formatted_recommended_orders = ", ".join(
-                    parsed_data_own["payload"]["suggested_orders"]
-                )
+        formatted_recommended_orders = ", ".join(filtered_own_orders)
         if prompt is None:
             return []
         if self.previous_prompt != prompt:
