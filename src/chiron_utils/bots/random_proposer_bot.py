@@ -72,7 +72,8 @@ class RandomProposerBot(BaselineBot, ABC):
 
         for other_power, suggested_random_orders in random_order_proposals.items():
             if self.bot_type == BotType.ADVISOR:
-                pass
+                await self.suggest_message(other_power, suggested_random_orders)
+                await self.suggest_commentary(other_power, f"I have advice about {other_power}!")
             elif self.bot_type == BotType.PLAYER:
                 await self.send_message(other_power, suggested_random_orders)
 
