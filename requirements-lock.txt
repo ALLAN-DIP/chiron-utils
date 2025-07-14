@@ -7,7 +7,7 @@ cfgv==3.4.0
 charset-normalizer==3.4.2
 daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e
 dill==0.4.0
-diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@21b21102622347d7d64ea4b83c4149018a1cdd89
+diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@236c72f4d5451e9787956ebfd33b05e16cf4bb8a
 distlib==0.3.9
 elastic-transport==8.17.1
 elasticsearch==8.15.1
