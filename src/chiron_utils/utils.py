@@ -22,6 +22,7 @@ def return_logger(name: str, log_level: int = logging.INFO) -> logging.Logger:
     Returns:
         An initialized logger.
     """
+    # Initialize root logger
     logging.basicConfig(
         format="[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s",
         # Fall back to `WARNING`, the default level of the root logger, if `log_level` is `NOTSET`
@@ -29,6 +30,7 @@ def return_logger(name: str, log_level: int = logging.INFO) -> logging.Logger:
     )
     logging.root.handlers[0].formatter.default_msec_format = "%s.%03d"  # type: ignore[union-attr]
 
+    # Create local logger
     new_logger = logging.getLogger(name)
     new_logger.setLevel(log_level)
     return new_logger
