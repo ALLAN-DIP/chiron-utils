@@ -104,7 +104,7 @@ class BaselineBot(ABC):
         Returns:
             List of messages.
         """
-        messages = self.game.filter_messages(messages=self.game.messages, game_role=self.power_name)
+        messages = self.game.get_messages(game_role=self.power_name)
         received_messages = sorted(
             msg for msg in messages.values() if msg.sender != self.power_name
         )

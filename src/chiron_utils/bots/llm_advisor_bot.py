@@ -67,7 +67,7 @@ class LlmAdvisor(BaselineBot):
         """Return all messages sent between 'own' and 'oppo'."""
         return [
             msg
-            for msg in self.game.messages.values()
+            for msg in self.game.get_messages(game_role=self.power_name)
             if (msg.sender == own and msg.recipient == oppo)
             or (msg.sender == oppo and msg.recipient == own)
         ]
