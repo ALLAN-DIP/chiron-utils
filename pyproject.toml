@@ -242,7 +242,6 @@ score = false
 addopts = "-ra --strict-config --strict-markers --verbosity=2"
 filterwarnings = [
   "error",
-  "ignore::DeprecationWarning",
 ]
 minversion = "6.0"
 xfail_strict = true
