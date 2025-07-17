@@ -118,7 +118,7 @@ class LlmNewAdvisor(BaselineBot):
                 2. The recommended orders for the novice player.
                 3. The potential orders for every power.
 
-                Your goal is to provide rationale for each recommended orders based on the board state and potential orders as following:
+                Your goal is to provide rationale for each recommended order based on the board state and potential orders as following:
                 1. Order Interpretation: Briefly summarize what the specific order intends tactically or strategically.
                 2. Consistency Check (Board): Assess if the order aligns logically with tactical or strategic needs suggested by the current board state.
                 3. Risk Assessment: Identify if the order introduces unnecessary risks or contradicts earlier expressed intentions.
