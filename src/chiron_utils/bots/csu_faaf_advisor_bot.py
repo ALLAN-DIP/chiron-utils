@@ -201,7 +201,7 @@ class FaafAdvisor(BaselineBot):
             return None
 
         prompt = f"""{system_prompt}
-        Your goal is to provide a detailed explanation for each of recommended orders:
+        Your goal is to provide a detailed explanation for each recommended order:
 
         <belief_state>
         {own} STRATEGIC CONTEXT: Analyze the current board position specifically from {own}'s perspective.
@@ -209,7 +209,7 @@ class FaafAdvisor(BaselineBot):
 
         <rationale>
         ORDER-SPECIFIC ANALYSIS: Provide a thorough tactical explanation of why each specific order shown under \"Recommended Order for {own}\" makes strategic sense.
-        Explain what those order accomplishes, how it counters threats from other powers' potential orders, and why it's optimal compared to alternatives {own} could make with this unit.
+        Explain what each order accomplishes, how it counters threats from other powers' potential orders, and why it's optimal compared to alternatives {own} could make with this unit.
         Reference the board state and other powers' potential orders to justify your explanation.\n</rationale>
 
         <friction>
@@ -271,7 +271,7 @@ class FaafAdvisor(BaselineBot):
     1. The current board state.
     2. The recommended orders for the novice player.
     3. The potential orders for every power.
-    4. The rationales for recommended orders
+    4. The rationales for recommended orders.
 
     Your goal is to give a summarized detailed explanation for the set of recommended orders based on the given information:
     <friction>\nKEY INSIGHT: Provide the single most important strategic insight about the recommended orders that {own} must understand.
@@ -293,7 +293,7 @@ class FaafAdvisor(BaselineBot):
     {rationales}
 
     **Advice:**
-    You are advising the player controlling {own}. Explain the summary friction behind this set of recommended orders using less than three sentences.
+    You are advising the player controlling {own}. Provide a summary of justification for this set of recommended orders using fewer than three sentences.
     <|eot_id|><|start_header_id|>assistant<|end_header_id|>"""
         return prompt
 
