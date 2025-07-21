@@ -493,7 +493,7 @@ class BaselineBot(ABC):
 
                 while True:
                     # sleep for a random amount of time before retrieving new messages for the power
-                    await asyncio.sleep(random.uniform(0.5, 1.5))
+                    await asyncio.sleep(random.uniform(0.5, 1.5) * 10)
 
                     orders = await self.do_messaging_round(orders)
 
