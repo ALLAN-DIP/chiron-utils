@@ -30,7 +30,7 @@ dependencies = [
   # Pinned `daidepp` to `main`
   "daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@f84f7279fb4a31083ad8e4b5fcf6d1ed290bae0e",
   # Pinned `diplomacy` to `main`
-  "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@aa6055fe9b933bd393a0339568e102534bb2009c",
+  "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@b9b95e51d5dad1b977c16e832a9c81152bc8a4fa",
   # `importlib-metadata` `3.7.0` introduced `packages_distributions()`
   'importlib-metadata>=3.7.0 ; python_version < "3.10"',
   # `tornado` `3.1` introduced `ASYNC_TEST_TIMEOUT` environment variable
@@ -50,7 +50,7 @@ all = [
 # Default extra to make OCI image builds easier
 base = []
 baseline-lr = [
-  "baseline-models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@0ad18dfebc39ff79dc65ee61ab993701363dc081",
+  "baseline-models @ git+https://git@github.com/ALLAN-DIP/baseline-models.git@aa21a999cc98308bf3bc3527fd1f6794accf5e2b",
 ]
 dev = [
   # Use older `mypy` version to keep code compatible with Python 3.7
@@ -108,6 +108,7 @@ module = [
   "peft",
   "pytest",
   "torch.*",
+  "tornado.httputil",
 ]
 follow_imports = "skip"
 
@@ -238,12 +239,9 @@ broad-exception-caught
 score = false
 
 [tool.pytest.ini_options]
-addopts = "-m 'not server' -ra --strict-config --strict-markers --verbosity=2"
+addopts = "-ra --strict-config --strict-markers --verbosity=2"
 filterwarnings = [
   "ignore::DeprecationWarning",
-]
-markers = [
-  "server: Marks tests as requiring `diplomacy` server (deselect with `-m 'not server'`)",
 ]
 minversion = "6.0"
 xfail_strict = true

@@ -58,7 +58,7 @@ pylint:
 
 .PHONY: ruff
 ruff:
-	pre-commit run --all-files ruff
+	pre-commit run --all-files ruff-check
 
 .PHONY: shellcheck
 shellcheck:
@@ -71,6 +71,10 @@ shfmt:
 .PHONY: yamllint
 yamllint:
 	pre-commit run --all-files yamllint
+
+.PHONY: zizmor
+zizmor:
+	pre-commit run --all-files zizmor
 
 .PHONY: precommit
 precommit:

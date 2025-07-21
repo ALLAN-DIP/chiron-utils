@@ -6,7 +6,7 @@
 
 FROM ghcr.io/allan-dip/chiron-utils:baseline-lr-model-2025-01-14 AS baseline-lr-model
 
-FROM python:3.11.11-slim-bookworm AS base
+FROM python:3.11.13-slim-bookworm AS base
 
 # Allow bot to detect whether running in a container
 # Using ID from https://www.freedesktop.org/software/systemd/man/257/systemd-detect-virt.html
@@ -20,7 +20,8 @@ RUN apt-get -y update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir --upgrade pip==25.0.1
+RUN pip install --no-cache-dir --upgrade pip==25.1.1 \
+    && pip uninstall --yes setuptools wheel
 
 # Install required packages
 COPY requirements-lock.txt .
