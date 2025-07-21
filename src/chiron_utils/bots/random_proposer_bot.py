@@ -65,8 +65,7 @@ class RandomProposerBot(BaselineBot, ABC):
         Returns:
             List of orders to carry out.
         """
-        if not self.is_first_messaging_round:
-            return list(orders)
+        orders = await self.gen_orders()
 
         random_order_proposals = self.get_random_proposal_orders()
 
