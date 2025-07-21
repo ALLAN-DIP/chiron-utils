@@ -4,9 +4,10 @@ from abc import ABC, abstractmethod
 import asyncio
 from dataclasses import dataclass
 from enum import Enum, auto
+import json
 import os
 import random
-from typing import Any, ClassVar, List, Mapping, Optional, Sequence
+from typing import Any, ClassVar, Dict, List, Mapping, Optional, Sequence, cast
 
 try:
     from typing import TypedDict  # type: ignore[attr-defined]
@@ -104,7 +105,7 @@ class BaselineBot(ABC):
         Returns:
             List of messages.
         """
-        messages = self.game.filter_messages(messages=self.game.messages, game_role=self.power_name)
+        messages = self.game.get_messages(game_role=self.power_name)
         received_messages = sorted(
             msg for msg in messages.values() if msg.sender != self.power_name
         )
@@ -218,6 +219,29 @@ class BaselineBot(ABC):
             suggestion_type=suggestion_type,
         )
 
+    def read_suggested_orders(self) -> List[str]:
+        """Read suggested orders for power from advisor.
+
+        Returns:
+            List of suggested orders.
+        """
+        received_messages = self.read_messages()
+        parsed_messages = [
+            json.loads(msg.message)
+            for msg in received_messages
+            if msg.type == diplomacy_strings.SUGGESTED_MOVE_FULL
+        ]
+        # Shouldn't be needed, but verify only processing advice we're the recipient of
+        parsed_messages = [
+            message for message in parsed_messages if message["recipient"] == self.power_name
+        ]
+        if not parsed_messages:
+            return []
+        latest_message = parsed_messages[-1]
+        logger.info("%s received order suggestions: %s", self.display_name, latest_message)
+        suggested_orders = cast(List[str], latest_message["payload"]["suggested_orders"])
+        return suggested_orders
+
     async def suggest_opponent_orders(self, opponent_orders: Mapping[str, Sequence[str]]) -> None:
         """Send predicted orders for opponent powers to the server.
 
@@ -247,6 +271,31 @@ class BaselineBot(ABC):
             payload=payload,
             suggestion_type=diplomacy_strings.SUGGESTED_MOVE_OPPONENTS,
         )
+
+    def read_suggested_opponent_orders(self) -> Dict[str, List[str]]:
+        """Read predicted orders for opponent powers from advisor.
+
+        Returns:
+            Mapping from opponent powers to their predicted orders.
+        """
+        received_messages = self.read_messages()
+        parsed_messages = [
+            json.loads(msg.message)
+            for msg in received_messages
+            if msg.type == diplomacy_strings.SUGGESTED_MOVE_OPPONENTS
+        ]
+        # Shouldn't be needed, but verify only processing advice we're the recipient of
+        parsed_messages = [
+            message for message in parsed_messages if message["recipient"] == self.power_name
+        ]
+        if not parsed_messages:
+            return {}
+        latest_message = parsed_messages[-1]
+        logger.info("%s received opponent order suggestions: %s", self.display_name, latest_message)
+        suggested_opponent_orders = cast(
+            Dict[str, List[str]], latest_message["payload"]["predicted_orders"]
+        )
+        return suggested_opponent_orders
 
     async def suggest_orders_probabilities(
         self, province: str, orders_probabilities: Mapping[str, OrderProbability]
