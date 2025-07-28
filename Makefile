@@ -83,7 +83,7 @@ precommit:
 .PHONY: test
 test:
 	export ASYNC_TEST_TIMEOUT=180 && \
-	pytest
+	python -X dev -bb -m pytest
 
 .PHONY: check
 check: precommit test
