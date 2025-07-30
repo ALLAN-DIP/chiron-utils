@@ -124,6 +124,34 @@ class RandomProposerBot(BaselineBot, ABC):
                 ]
                 await self.suggest_orders(partial_orders, partial_orders=submitted_orders)
 
+            # Generate (random) order probabilities
+            possible_orders = self.game.get_all_possible_orders()
+            for province in self.game.map.locs:
+                # `locs` uses lowercase for provinces with two coasts
+                province = province.upper()
+
+                if not possible_orders[province]:
+                    continue
+
+                orders = possible_orders[province]
+                orders = random.sample(orders, min(len(orders), 10))
+                # Sample probabilities from exponential distribution with default lambda
+                # to more closely resemble `LrProbsBot` output
+                orders_probabilities = {order: random.expovariate(1) for order in orders}
+                orders_probabilities = dict(
+                    sorted(orders_probabilities.items(), key=lambda x: (-x[1], x))
+                )
+                total_probs = sum(prob for prob in orders_probabilities.values())
+                predictions = {
+                    order: {
+                        "pred_prob": prob / total_probs,
+                        "rank": rank,
+                        "opacity": prob / total_probs,
+                    }
+                    for rank, (order, prob) in enumerate(orders_probabilities.items())
+                }
+                await self.suggest_orders_probabilities(province, predictions)  # type: ignore[arg-type]
+
             random_predicted_orders = {}
             for other_power in get_other_powers([self.power_name], self.game):
                 random_predicted_orders[other_power] = self.get_random_orders(other_power)
