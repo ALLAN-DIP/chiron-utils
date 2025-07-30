@@ -112,6 +112,18 @@ class RandomProposerBot(BaselineBot, ABC):
         if self.bot_type == BotType.ADVISOR:
             await self.suggest_orders(orders)
 
+            # Generate (random) partial order suggestions
+            submitted_orders = self.game.get_orders(self.power_name)
+            orderable_locs = self.game.get_orderable_locations(self.power_name)
+            if 0 < len(submitted_orders) < len(orderable_locs):
+                locs_with_orders = {order.split()[1] for order in submitted_orders}
+                partial_orders = [
+                    order
+                    for order in self.get_random_orders()
+                    if order.split()[1] not in locs_with_orders
+                ]
+                await self.suggest_orders(partial_orders, partial_orders=submitted_orders)
+
             random_predicted_orders = {}
             for other_power in get_other_powers([self.power_name], self.game):
                 random_predicted_orders[other_power] = self.get_random_orders(other_power)
