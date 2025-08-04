@@ -121,9 +121,9 @@ def and_items(items: Sequence[DaideObject]) -> str:
         return daide_to_en(items[0]) + " and " + daide_to_en(items[1]) + " "
     else:
         return (
-            ", ".join([daide_to_en(item) for item in items[:-1]])
+            ", ".join([daide_to_en(item).strip() for item in items[:-1]])
             + ", and "
-            + daide_to_en(items[-1])
+            + daide_to_en(items[-1]).strip()
             + " "
         )
 
@@ -136,9 +136,9 @@ def or_items(items: Sequence[DaideObject]) -> str:
         return daide_to_en(items[0]) + " or " + daide_to_en(items[1]) + " "
     else:
         return (
-            ", ".join([daide_to_en(item) for item in items[:-1]])
+            ", ".join([daide_to_en(item).strip() for item in items[:-1]])
             + ", or "
-            + daide_to_en(items[-1])
+            + daide_to_en(items[-1]).strip()
             + " "
         )
 
