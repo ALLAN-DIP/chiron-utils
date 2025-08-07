@@ -30,7 +30,7 @@ dependencies = [
   # Pinned `daidepp` to `main`
   "daidepp @ git+https://git@github.com/SHADE-AI/daidepp.git@fd027bcbcf7fa3956adcae2ea12493051c8e279e",
   # Pinned `diplomacy` to `main`
-  "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@18064d20c56957b00621af9b65d66c81369af9d2",
+  "diplomacy @ git+https://git@github.com/ALLAN-DIP/diplomacy.git@f8e4093e9a8a6190d85555ec621f6fbf2ac3c916",
   # `importlib-metadata` `3.7.0` introduced `packages_distributions()`
   'importlib-metadata>=3.7.0 ; python_version < "3.10"',
   # `tornado` `3.1` introduced `ASYNC_TEST_TIMEOUT` environment variable
