@@ -17,7 +17,7 @@ If your code base is particularly complex (e.g., [Cicero](https://github.com/ALL
 
 You generally should not be interfacing directly with game communications yourself and instead should be doing all such interactions through methods in `BaselineBot`. This will allow us to make changes to the _Diplomacy_ engine without individual bots needing to be changed.
 
-I (Alex) will require all code meets the various standards set for the repository, which will involve code review. It is useful to add tests as well. They don't need to be comprehensive, but they should at least be a 1v1 against a `RandomProposalBot` to catch any obvious crashes.
+I (Alex) will require all code meets the various standards set for the repository, which will involve code review.
 
 If you want to share code between an advisor and a player, it's up to your how you structure it. You can factor out code into functions, or you can make a class your advisor and player both inherit from. It's up to you. Regardless, you _do_ need to declare the `bot_type` field as either `BotType.ADVISOR` or `BotType.PLAYER`.
 
