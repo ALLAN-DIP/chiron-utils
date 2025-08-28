@@ -11,7 +11,7 @@ Once you've created your own bot, you need to manually add it to [`__init__.py`]
 
 If there are dependencies that cannot be installed as Python packages, you will likely need to make some changes to the [`Dockerfile`](Dockerfile) so the bot can be built. Some refactoring might be needed, and if the changes are large, it might be worth making separate targets for specific bots.
 
-There should also be some documentation in the README on how to build each bot and the basics of how it works.
+You should add documentation to the README on how to build the bot and the basics of how it works. Anyone who uses the library should be able to run any of the bots.
 
 I (Alex) will have to make some changes to the bot runner scripts to pass in different types of bots for each power. That can be a relatively simple list with a default value, though.
 
