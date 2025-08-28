@@ -9,7 +9,7 @@ For example usage of the methods from `BaselineBot`, see the following bots:
 
 Once you've created your own bot, you need to manually add it to [`__init__.py`](src/chiron_utils/bots/__init__.py) so it can be exported. All bots should be imported from `chiron_utils.bots` instead of their individual modules to make imports less verbose and to make refactoring more self-contained. The bot class also needs to be added to the `BOTS` list in the file so it can be called as an argument. If the bot relies on specific packages that are not installed by default, make their inclusion conditional, following the same technique as the existing code.
 
-If there are dependencies that are not purely Python, you will likely need to make some changes to the [`Dockerfile`](Dockerfile) so the bot can be built. Some refactoring might be needed, and if the changes are large, it might be worth making separate targets for specific bots.
+If there are dependencies that cannot be installed as Python packages, you will likely need to make some changes to the [`Dockerfile`](Dockerfile) so the bot can be built. Some refactoring might be needed, and if the changes are large, it might be worth making separate targets for specific bots.
 
 There should also be some documentation in the README on how to build each bot and the basics of how it works.
 
