@@ -2,6 +2,11 @@
 
 The `BaselineBot` class (in [`baseline_bot.py`](src/chiron_utils/bots/baseline_bot.py)) contains many utility methods that are useful for bots in general. All one needs to do is subclass `BaselineBot` and implement the abstract methods. There are some methods left entirely empty to serve as places to implement "hooks", while others you need to implement entirely from scratch. There is a method to use for the general game flow, but that can also be overwritten if needed.
 
+For example usage of the methods from `BaselineBot`, see the following bots:
+
+- [`RandomProposerBot`](src/chiron_utils/bots/random_proposer_bot.py): It should exercise as much general logic as possible, which should be sufficient for most bots.
+- [`mila_api_advisor.py`](https://github.com/ALLAN-DIP/diplomacy_cicero/blob/main/fairdiplomacy_external/mila_api_advisor.py) and [`mila_api_player.py`](https://github.com/ALLAN-DIP/diplomacy_cicero/blob/main/fairdiplomacy_external/mila_api_player.py): If your bot requires a substantial amount of existing code that lives in another repository, then you might want to use these files as a model for using `chiron_utils` from that repository.
+
 Once you've created your own bot, you need to manually add it to [`__init__.py`](src/chiron_utils/bots/__init__.py) so it can be exported. All bots should be imported from `chiron_utils.bots` instead of their individual modules to make imports less verbose and to make refactoring more self-contained. The bot class also needs to be added to the list at the top of [`scripts/run_bot.py`](src/chiron_utils/scripts/run_bot.py) so it can be called as an argument.
 
 If there are dependencies that are not purely Python, you will likely need to make some changes to the [`Dockerfile`](Dockerfile) so the bot can be built. Some refactoring might be needed, and if the changes are large, it might be worth making separate targets for specific bots.
