@@ -44,6 +44,8 @@ Both the bot and game running commands support a `--help` argument to list avail
 
 ## Bots
 
+Most bots require specific instructions to build and run them properly:
+
 - [`RandomProposerBot`](src/chiron_utils/bots/random_proposer_bot.py) (`RandomProposerAdvisor` and `RandomProposerPlayer`):
   - Orders are randomly selected from the space of valid moves.
   - Messages are proposals to carry out a set of valid moves, which is also randomly selected. One such proposal is sent to each opponent.
