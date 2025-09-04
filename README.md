@@ -44,13 +44,26 @@ Both the bot and game running commands support a `--help` argument to list avail
 
 ## Bots
 
+Most bots require specific instructions to build and run them properly:
+
 - [`RandomProposerBot`](src/chiron_utils/bots/random_proposer_bot.py) (`RandomProposerAdvisor` and `RandomProposerPlayer`):
   - Orders are randomly selected from the space of valid moves.
   - Messages are proposals to carry out a set of valid moves, which is also randomly selected. One such proposal is sent to each opponent.
   - Due to the random nature of play, a game consisting entirely of `RandomProposerPlayer`s can last for a very long time. I (Alex) have observed multiple games lasting past 1950 without a clear winner.
   - `RandomProposerPlayer` uses very few resources, so it is useful as stand-ins for other players.
-- [`LrBot`](src/chiron_utils/bots/lr_bot.py) (`LrAdvisor` and `LrPlayer`):
-  - A logistic regression model is used to predict orders for each available unit, given current game state.
+- Logistic regression (LR) bots:
+  - An LR model is used to predict orders for each available unit, given the current game state.
+  - A family of bots containing the following types:
+    - [`LrBot`](src/chiron_utils/bots/lr_bot.py): Uses LR model to determine best orders for the current power
+      - `LrAdvisor`: Provides order advice
+      - `LrPlayer`: Plays no-press game
+    - [`LrProbsBot`](src/chiron_utils/bots/lr_probs_bot.py): Uses LR model to determine distribution of possible moves for each order
+      - `LrProbsSelfTextAdvisor`: Provides textual advice about the current power
+      - `LrProbsSelfTextVisualAdvisor`: Provides textual and visual advice about the current power
+      - `LrProbsSelfVisualAdvisor`: Provides visual advice about the current power
+      - `LrProbsTextAdvisor`: Provides textual advice about all powers
+      - `LrProbsTextVisualAdvisor`: Provides textual and visual advice about all powers
+      - `LrProbsVisualAdvisor`: Provides visual advice about all powers
   - To build the bot, run `make build-baseline-lr` to generate the OCI image to run with Docker
     - When running the bot outside of a container, download the latest model file from [lr_models - Google Drive](https://drive.google.com/drive/folders/1FuG3qY51wRkR8RgEBVY49-loln06W-Ro). The filename includes the model release date in `YYYYMMDD` format).
     - Edit the `MODEL_PATH` constant in `lr_bot.py` to point to the unzipped model folder.
