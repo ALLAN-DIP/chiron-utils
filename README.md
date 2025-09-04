@@ -79,7 +79,6 @@ Most bots require specific instructions to build and run them properly:
       - Request access on the page for the following model:
         - [Llama3.1-8b-instruct](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)
       - Once your request has been approved, authenticate on your local machine using a user access token, using the official [User access tokens](https://huggingface.co/docs/hub/security-tokens) documentation as a guide.
-    - When using `FaafAdvisor`, download the [FAAF model checkpoint](https://drive.google.com/file/d/15qGrovFkkOAJd42l1yFtfzzhOCytIbC-/view) and unzip it into the directory [`src/chiron_utils/models/`](src/chiron_utils/models/).
     - When using `LlmAdvisor`, one needs to run another advisor to provide `OPPONENT_MOVE` advice to the same power. For example, one can run the [Cicero advisor](https://github.com/ALLAN-DIP/diplomacy_cicero) with the argument `--advice_levels OPPONENT_MOVE`.
     - When using `FaafAdvisor` or `LlmNewAdvisor`, one needs to run another advisor to provide `MOVE|OPPONENT_MOVE` advice to the same power. For example, one can run the [Cicero advisor](https://github.com/ALLAN-DIP/diplomacy_cicero) with the argument `--advice_levels 'MOVE|OPPONENT_MOVE'`.
   - To use the bot, run the following command from the repository root, replacing `[bot_type]` with the bot's name:

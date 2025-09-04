@@ -31,7 +31,7 @@ class FaafAdvisor(BaselineBot):
         default_factory=lambda: dict.fromkeys(POWER_NAMES_DICT)
     )
     base_model_name = "meta-llama/Llama-3.1-8B-Instruct"
-    adapter_path = "src/chiron_utils/models/DELI_faaf_weights/checkpoint-2000"
+    adapter_name = "Abhijnan/Delidata_friction_agent"
     device = "cuda" if torch.cuda.is_available() else "cpu"
     bot_type = BotType.ADVISOR
     default_suggestion_type = SuggestionType.COMMENTARY
@@ -42,7 +42,7 @@ class FaafAdvisor(BaselineBot):
         # used to avoid repeated generation
         self.previous_prompt: Optional[str] = None
         self.tokenizer, self.model = self.load_model(
-            self.base_model_name, self.adapter_path, self.adapter_path, self.device
+            self.base_model_name, self.adapter_name, self.adapter_name, self.device
         )
 
     async def start_phase(self) -> None:
@@ -203,17 +203,17 @@ class FaafAdvisor(BaselineBot):
     def load_model(
         self,
         base_model_name: str,
-        adapter_path: str,
-        tokenizer_path: Optional[str] = None,
+        adapter_name: str,
+        tokenizer_name: Optional[str] = None,
         device: str = "cpu",
     ) -> Tuple[PreTrainedTokenizer, Union[PreTrainedModel, DataParallel]]:
         """Loads and returns a tokenizer and model on the requested device."""
-        if tokenizer_path is None:
-            tokenizer_path = base_model_name
+        if tokenizer_name is None:
+            tokenizer_name = base_model_name
 
-        tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
         model = AutoModelForCausalLM.from_pretrained(base_model_name)
-        model = PeftModel.from_pretrained(model, adapter_path)
+        model = PeftModel.from_pretrained(model, adapter_name)
         if torch.cuda.device_count() > 1:
             model = DataParallel(model)
         model.to(device)
