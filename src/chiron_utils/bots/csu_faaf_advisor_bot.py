@@ -289,7 +289,9 @@ class FaafAdvisor(BaselineBot):
 
         filtered_opponent_orders = self.read_suggested_opponent_orders()
         if not filtered_opponent_orders:
-            logger.error(f"No opponent orders given, run an {SuggestionType.OPPONENT_MOVE!r} advisor")
+            logger.error(
+                f"No opponent orders given, run an {SuggestionType.OPPONENT_MOVE!r} advisor"
+            )
             return []
         filtered_own_orders = self.read_suggested_orders()
         if not filtered_own_orders:
