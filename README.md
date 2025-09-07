@@ -65,7 +65,7 @@ Most bots require specific instructions to build and run them properly:
       - `LrProbsTextVisualAdvisor`: Provides textual and visual advice about all powers
       - `LrProbsVisualAdvisor`: Provides visual advice about all powers
   - To build the bot, run `make build-baseline-lr` to generate the OCI image to run with Docker
-    - When running the bot outside of a container, download the latest model file from [lr_models - Google Drive](https://drive.google.com/drive/folders/1FuG3qY51wRkR8RgEBVY49-loln06W-Ro). The filename includes the model release date in `YYYYMMDD` format).
+    - When running the bot outside of a container, download the latest model file from [`large-file-storage/lr_models/`](https://github.com/ALLAN-DIP/large-file-storage/tree/main/lr_models). The filename includes the model release date in `YYYYMMDD` format).
     - Edit the `MODEL_PATH` constant in `lr_bot.py` to point to the unzipped model folder.
   - Code for model training can be found at <https://github.com/ALLAN-DIP/baseline-models>
 - LLM advisor bots:
