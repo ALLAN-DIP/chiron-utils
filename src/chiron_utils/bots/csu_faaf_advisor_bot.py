@@ -289,9 +289,16 @@ class FaafAdvisor(BaselineBot):
 
         filtered_opponent_orders = self.read_suggested_opponent_orders()
         if not filtered_opponent_orders:
+            logger.error(
+                f"No opponent orders given, run "
+                f"an {SuggestionType.OPPONENT_MOVE.to_parsable()!r} advisor"
+            )
             return []
         filtered_own_orders = self.read_suggested_orders()
         if not filtered_own_orders:
+            logger.error(
+                f"No self orders given, run a {SuggestionType.MOVE.to_parsable()!r} advisor"
+            )
             return []
         own = self.power_name
         if own in POWER_NAMES_DICT:
